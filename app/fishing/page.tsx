@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { LakeImage } from "@/app/components/LakeImage";
 import { SpotMap } from "@/app/components/SpotMap";
 import { spots, spotsAsGeoJson } from "@/lib/spots";
 
@@ -49,9 +50,9 @@ export default function FishingIndexPage() {
         <div className="spot-list" aria-label="Scrollable waterbody carousel">
           {spots.map((spot) => (
             <a key={spot.id} className="lake-card spot-card" href={`/${spot.id}/fishing`}>
-              <div className="lake-image">
+              <LakeImage spotId={spot.id}>
                 <span className="tag">{spot.launch.trailer ? "Ramp" : "Carry-in"}</span>
-              </div>
+              </LakeImage>
               <div className="lake-body">
                 <h3>{spot.name}</h3>
                 <p className="muted">

@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { LakeImage } from "@/app/components/LakeImage";
 import { RatingBadge } from "@/app/components/RatingBadge";
-import { SpeciesCards } from "@/app/components/SpeciesCards";
+import { getSpeciesCard, SpeciesCards, speciesPathSegment } from "@/app/components/SpeciesCards";
 import { buildConditionsDashboard } from "@/lib/conditions";
 import { craftLabels, formatDate, formatHour } from "@/lib/format";
+import { getLakeProfile } from "@/lib/lakeProfiles";
+import type { LakeProfile } from "@/lib/lakeProfiles/types";
 import { getOrCreateSnapshot } from "@/lib/snapshot";
 import { getSpot, spots } from "@/lib/spots";
 import type { Craft, ForecastHour } from "@/lib/types";
@@ -26,10 +29,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!spot) {
     return {};
   }
+  const profile = getLakeProfile(spot.id);
 
   return {
     title: `${spot.name} Fishing Conditions`,
-    description: `Powerboat, kayak, and canoe fishing condition verdicts for ${spot.name}, including temperature, UV, wind, pressure, sun, moon, fetch, and launch constraints.`
+    description: profile
+      ? `${profile.overview.slice(0, 152)}...`
+      : `Powerboat, kayak, and canoe fishing condition verdicts for ${spot.name}, including temperature, UV, wind, pressure, sun, moon, fetch, and launch constraints.`
   };
 }
 
@@ -38,6 +44,7 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
   const spot = getSpot(waterbody);
   if (!spot) notFound();
 
+  const profile = getLakeProfile(spot.id);
   const { forecast, pressureTrend, verdict } = await getOrCreateSnapshot(spot);
   const conditionRows = forecast
     .filter((hour) => {
@@ -74,20 +81,24 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
   return (
     <>
       <main className="screen">
-        <section className="hero poster-hero">
-          <span className="alert">Forecast Alert</span>
-          <div className="eyebrow">Fishing conditions for {formatDate(verdict.validFor)}</div>
-          <h1>{spot.name} craft split</h1>
-          <p className="summary">{verdict.summaryMd}</p>
-          <div className="burst">
-            Fish<br />Now?
-          </div>
-          <div className="slashes">
-            <i />
-            <i />
-            <i />
-          </div>
-        </section>
+        {profile ? (
+          <LakeProfileIntro profile={profile} />
+        ) : (
+          <section className="hero poster-hero">
+            <span className="alert">Forecast Alert</span>
+            <div className="eyebrow">Fishing conditions for {formatDate(verdict.validFor)}</div>
+            <h1>{spot.name} craft split</h1>
+            <p className="summary">{verdict.summaryMd}</p>
+            <div className="burst">
+              Fish<br />Now?
+            </div>
+            <div className="slashes">
+              <i />
+              <i />
+              <i />
+            </div>
+          </section>
+        )}
 
         <section className="conditions-dashboard poster-dashboard" aria-label="Fishing conditions dashboard">
           <div className="conditions-top">
@@ -173,29 +184,33 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
           </div>
         </section>
 
-        <section className="section lake-card detail-card">
-          <div className="lake-image">
-            <span className="tag">Access</span>
-          </div>
-          <div className="lake-body">
-            <h2>Fish Cards and access context</h2>
-            <SpeciesCards species={spot.species} />
-            <p>
-              Fisheries Management Zone: {spot.fmz ?? "not set"}. Dominant fetch bearings:{" "}
-              {spot.shorelineFetch.join("°, ")}°.
-            </p>
-          </div>
-          {verdict.caveats.length ? (
-            <div className="caveat-box">
-              <h3>Caveats</h3>
-              <ul>
-                {verdict.caveats.map((caveat) => (
-                  <li key={caveat}>{caveat}</li>
-                ))}
-              </ul>
+        {profile ? (
+          <LakeProfileSections profile={profile} caveats={verdict.caveats} />
+        ) : (
+          <section className="section lake-card detail-card">
+            <LakeImage spotId={spot.id}>
+              <span className="tag">Access</span>
+            </LakeImage>
+            <div className="lake-body">
+              <h2>Fish Cards and access context</h2>
+              <SpeciesCards species={spot.species} />
+              <p>
+                Fisheries Management Zone: {spot.fmz ?? "not set"}. Dominant fetch bearings:{" "}
+                {spot.shorelineFetch.join("°, ")}°.
+              </p>
             </div>
-          ) : null}
-        </section>
+            {verdict.caveats.length ? (
+              <div className="caveat-box">
+                <h3>Caveats</h3>
+                <ul>
+                  {verdict.caveats.map((caveat) => (
+                    <li key={caveat}>{caveat}</li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+          </section>
+        )}
       </main>
 
       <section className="methodology" id="methodology">
@@ -276,6 +291,173 @@ function HourlyConditionCard({ hour }: { hour: ForecastHour }) {
   );
 }
 
+function LakeProfileIntro({ profile }: { profile: LakeProfile }) {
+  const cardedSpecies = profile.species.filter((species) => species.tier === "destination" || species.tier === "strong");
+  const presentSpecies = profile.species.filter((species) => species.tier === "present");
+
+  return (
+    <section className="lake-profile profile-front" aria-label={`${profile.lake} fishing profile`}>
+      <div className="profile-hero profile-hero-front">
+        <div>
+          <span className="profile-kicker">
+            {profile.waterbodyType} / FMZ {profile.fmz}
+          </span>
+          <div className="eyebrow">{profile.lake}</div>
+          <h1>Lake Profile</h1>
+          <p>{firstSentences(profile.overview, 2)}</p>
+        </div>
+        <aside className="profile-facts" aria-label="Lake facts">
+          <FactPill label="Best Season" value={profile.bestSeason} />
+          <FactPill label="Surface Area" value={profile.morphology.surfaceArea ?? "Not published"} />
+          <FactPill label="Water" value={profile.morphology.clarity ?? "Unknown"} />
+          <FactPill label="Verified" value={profile.lastVerified} />
+        </aside>
+      </div>
+
+      <div className="profile-strip profile-strip-large">
+        <div>
+          <h3>Species at a glance</h3>
+          <p>{[...cardedSpecies, ...presentSpecies].map((species) => species.displayName).join(", ")}</p>
+        </div>
+        <ProfileSpeciesCards profile={profile} />
+      </div>
+    </section>
+  );
+}
+
+function LakeProfileSections({ profile, caveats }: { profile: LakeProfile; caveats: string[] }) {
+  return (
+    <section className="lake-profile" aria-label={`${profile.lake} supporting profile details`}>
+      <section className="profile-panel">
+        <div className="profile-section-title">
+          <span>01</span>
+          <h3>How it fishes</h3>
+        </div>
+        <div className="notable-grid">
+          {profile.notableFacts.map((fact) => (
+            <a key={fact.fact} className="notable-card" href={fact.sourceUrl} target="_blank" rel="noreferrer">
+              <p>{fact.fact}</p>
+              <span>Source</span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section className="profile-panel regulation-panel">
+        <div className="profile-section-title">
+          <span>02</span>
+          <h3>Regulations snapshot</h3>
+        </div>
+        <p className="profile-disclaimer">{profile.regsDisclaimer}</p>
+        <div className="reg-grid">
+          {profile.regulations.map((regulation) => (
+            <article key={regulation.species} className="reg-card">
+              <h4>{regulation.species}</h4>
+              {regulation.verified ? (
+                <>
+                  <p>
+                    <strong>Season:</strong> {regulation.season}
+                  </p>
+                  <p>
+                    <strong>Limit:</strong> {regulation.limit}
+                  </p>
+                  {regulation.sizeLimit ? (
+                    <p>
+                      <strong>Size:</strong> {regulation.sizeLimit}
+                    </p>
+                  ) : null}
+                </>
+              ) : (
+                <p>Check the official FMZ page before fishing this species.</p>
+              )}
+              <a href={regulation.sourceUrl} target="_blank" rel="noreferrer">
+                Official source
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="profile-panel access-panel">
+        <div className="profile-section-title">
+          <span>03</span>
+          <h3>Access notes</h3>
+        </div>
+        <div className="access-grid">
+          {profile.launches.map((launch) => (
+            <article key={launch.name} className="access-card">
+              <span>{launch.type.replaceAll("-", " ")}</span>
+              <h4>{launch.name}</h4>
+              {launch.notes ? <p>{launch.notes}</p> : null}
+              <a href={launch.sourceUrl} target="_blank" rel="noreferrer">
+                Access source
+              </a>
+            </article>
+          ))}
+        </div>
+        {profile.morphology.thermalBehaviour ? (
+          <p className="profile-note">{profile.morphology.thermalBehaviour}</p>
+        ) : null}
+        {caveats.length ? (
+          <div className="caveat-box profile-caveats">
+            <h3>Caveats</h3>
+            <ul>
+              {caveats.map((caveat) => (
+                <li key={caveat}>{caveat}</li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+      </section>
+
+      <section className="profile-panel resource-panel">
+        <div className="profile-section-title">
+          <span>04</span>
+          <h3>Key resources</h3>
+        </div>
+        <div className="resource-list">
+          {profile.keyResources.map((resource) => (
+            <a key={resource.url} href={resource.url} target="_blank" rel="noreferrer">
+              {resource.label}
+            </a>
+          ))}
+        </div>
+      </section>
+    </section>
+  );
+}
+
+function ProfileSpeciesCards({ profile }: { profile: LakeProfile }) {
+  const visibleSpecies = profile.species.filter((species) => species.tier !== "absent");
+
+  return (
+    <div className="profile-species-grid" aria-label={`${profile.lake} species pages`}>
+      {visibleSpecies.map((species) => {
+        const card = getSpeciesCard(species.displayName);
+        const href = `/${profile.slug}/fishing/${speciesPathSegment(species.displayName)}`;
+        return (
+          <a key={species.parentSlug} className="profile-species-card" href={href}>
+            {card ? (
+              <img src={card.image} alt={`${card.label} species card`} loading="lazy" />
+            ) : (
+              <span>{species.displayName}</span>
+            )}
+          </a>
+        );
+      })}
+    </div>
+  );
+}
+
+function FactPill({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <span>{label}</span>
+      <strong>{value}</strong>
+    </div>
+  );
+}
+
 function bitePotential(hour: ForecastHour) {
   const uv = hour.uvIndex ?? 0;
   const windScore = hour.windKmh <= 20 ? 2 : hour.windKmh <= 28 ? 1 : 0;
@@ -296,4 +478,10 @@ function firstSentence(text: string) {
   const periodIndex = trimmed.indexOf(".");
   const sentence = periodIndex === -1 ? trimmed : trimmed.slice(0, periodIndex + 1);
   return sentence.length > 130 ? `${sentence.slice(0, 127).trim()}...` : sentence;
+}
+
+function firstSentences(text: string, count: number) {
+  const matches = text.match(/[^.!?]+[.!?]+/g);
+  const sentences = matches?.slice(0, count).join(" ").trim() ?? text.trim();
+  return sentences || text;
 }

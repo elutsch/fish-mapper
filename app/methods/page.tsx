@@ -10,7 +10,7 @@ const dataSources = [
   {
     title: "Lake and launch profiles",
     body:
-      "The current MVP uses a curated local profile for each waterbody. Each profile stores the lake name, launch coordinate, launch type, rough open-water fetch, Fisheries Management Zone, seed species, and review notes. Some launch coordinates are tied to Ontario Fishing Access Points, conservation-area pages, OpenStreetMap/Nominatim, or manual review notes. When a launch coordinate still needs field checking, the lake page says so in its caveats."
+      "The current MVP uses a curated local profile for each waterbody. Each profile stores the lake name, launch coordinate, launch type, rough open-water fetch, Fisheries Management Zone, seed species, and review notes. Researched lake pages add a separate evergreen profile with lake morphology, access notes, species guidance, source links, and verified regulation snapshots. Some launch coordinates are tied to Ontario Fishing Access Points, conservation-area pages, OpenStreetMap/Nominatim, or manual review notes. When a launch coordinate still needs field checking, the lake page says so in its caveats."
   },
   {
     title: "Open-Meteo forecast data",
@@ -26,13 +26,17 @@ const dataSources = [
     title: "Generated fishing note",
     body:
       "If an Anthropic API key is configured, the site asks an LLM to turn the structured inputs into a short craft-aware fishing note that must match a JSON schema. If the model is unavailable or returns invalid JSON, deterministic fallback rules generate the verdict and note instead."
+  },
+  {
+    title: "Research profile sources",
+    body:
+      "For lakes with a completed research profile, evergreen copy is built from cited public sources such as conservation authority access pages, Ontario FMZ regulation pages, Fish ON-Line stocking data, and lake-specific research notes. These sources inform the descriptive lake guide only; live condition scoring still comes from the forecast layer."
   }
 ];
 
 const notYetUsed = [
   "Live water temperature sensors or modelled water temperature history.",
-  "Ontario fishing regulation tables, size limits, sanctuary rules, or waterbody-specific exceptions.",
-  "Fish stocking records, lake survey catch rates, or broad-scale monitoring data.",
+  "Broad-scale monitoring catch rates as a quantitative scoring input.",
   "ERA5 or other two-week air-mass history beyond the pressure trend available from the current forecast request.",
   "Solunar major/minor feeding periods. The current site shows moon phase only."
 ];
@@ -59,8 +63,8 @@ export default function MethodsPage() {
             <h3>Lake Profile</h3>
             <p>
               The lake profile is the stable layer: waterbody name, launch coordinate, access type,
-              rough fetch geometry, species seeds, FMZ, and caveats. This is stored locally today so
-              the pages can prerender and stay fast.
+              rough fetch geometry, species seeds, FMZ, caveats, and optional researched lake-guide
+              copy. This is stored locally today so the pages can prerender and stay fast.
             </p>
           </article>
           <article>

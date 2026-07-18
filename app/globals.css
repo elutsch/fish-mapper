@@ -35,6 +35,26 @@ body {
   line-height: 1.25;
 }
 
+body,
+button,
+input,
+textarea,
+select {
+  -webkit-font-smoothing: antialiased;
+}
+
+p,
+li,
+a,
+span,
+strong,
+h1,
+h2,
+h3,
+h4 {
+  overflow-wrap: break-word;
+}
+
 a {
   color: inherit;
 }
@@ -72,7 +92,7 @@ a {
   font-size: 22px;
   font-style: italic;
   text-transform: uppercase;
-  letter-spacing: -1px;
+  letter-spacing: 0;
   text-decoration: none;
   text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.18);
   transform: skewX(-10deg);
@@ -189,7 +209,7 @@ a {
   background: var(--ink);
   color: #fff;
   font-size: 14px;
-  letter-spacing: 0.4px;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -207,7 +227,7 @@ h2,
 h3 {
   margin: 0;
   text-transform: uppercase;
-  letter-spacing: -1px;
+  letter-spacing: 0;
 }
 
 h1 {
@@ -215,7 +235,7 @@ h1 {
   color: var(--teal);
   font-size: clamp(48px, 16vw, 72px);
   line-height: 0.82;
-  letter-spacing: -2px;
+  letter-spacing: 0;
   max-width: 340px;
   text-shadow: 3px 3px 0 rgba(255, 255, 255, 0.35);
 }
@@ -541,7 +561,7 @@ h3 {
   margin-bottom: 14px;
   color: #a34d0d;
   font-size: clamp(26px, 3vw, 42px);
-  letter-spacing: 0.06em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -593,7 +613,7 @@ h3 {
 }
 
 .grade-actions a {
-  min-width: 160px;
+  min-width: min(160px, 100%);
   padding: 18px 22px;
   color: var(--ink);
   background: #fff;
@@ -1247,9 +1267,11 @@ a.lake-card:active {
 
 .lake-image {
   height: 152px;
-  background:
+  background-image:
     linear-gradient(rgba(0, 217, 232, 0.08), rgba(0, 0, 0, 0.18)),
-    url("https://picsum.photos/seed/aer-production-lake/800/460") center/cover;
+    var(--lake-image, url("https://picsum.photos/seed/aer-production-lake/800/460"));
+  background-position: center;
+  background-size: cover;
   border-bottom: 4px solid var(--ink);
   position: relative;
 }
@@ -1360,6 +1382,632 @@ a.lake-card:active {
 
 .species-strip-compact .species-poster-fallback span {
   font-size: 13px;
+}
+
+.lake-profile {
+  display: grid;
+  gap: clamp(18px, 2.6vw, 34px);
+}
+
+.profile-hero,
+.profile-panel,
+.profile-strip {
+  border: 4px solid var(--ink);
+  box-shadow: 7px 8px 0 var(--ink);
+  background:
+    radial-gradient(circle, rgba(23, 23, 23, 0.11) 1px, transparent 1.35px),
+    #f4f0ec;
+  background-size: 9px 9px;
+}
+
+.profile-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 0.32fr);
+  gap: clamp(22px, 3vw, 36px);
+  padding: clamp(24px, 4vw, 48px);
+  background:
+    radial-gradient(circle, rgba(23, 23, 23, 0.12) 1px, transparent 1.35px),
+    var(--cyan);
+  background-size: 9px 9px;
+}
+
+.profile-hero-front {
+  min-height: 430px;
+  align-items: center;
+}
+
+.profile-kicker {
+  display: inline-block;
+  width: max-content;
+  max-width: 100%;
+  margin-bottom: 16px;
+  padding: 9px 12px;
+  color: #fff;
+  background: var(--rust);
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.profile-hero h1,
+.profile-hero h2 {
+  margin: 0;
+  max-width: 900px;
+  font-size: clamp(44px, 6.5vw, 96px);
+  line-height: 0.88;
+}
+
+.profile-hero .eyebrow {
+  margin: 0 0 14px;
+}
+
+.profile-hero p,
+.profile-panel p,
+.profile-panel li,
+.profile-strip p {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: clamp(15px, 1.45vw, 19px);
+  font-weight: 900;
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+
+.profile-hero p {
+  margin-top: 18px;
+  max-width: 980px;
+}
+
+.profile-facts {
+  align-self: start;
+  display: grid;
+  gap: 10px;
+}
+
+.profile-facts div {
+  padding: 14px;
+  border: 3px solid var(--ink);
+  background: #fff;
+  box-shadow: 4px 4px 0 var(--ink);
+  display: grid;
+  gap: 7px;
+}
+
+.profile-facts span,
+.profile-section-title span,
+.guide-card-top span,
+.access-card span {
+  color: #596361;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.profile-facts strong {
+  font-size: clamp(18px, 2vw, 27px);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.profile-strip {
+  padding: clamp(18px, 2.5vw, 28px);
+  display: grid;
+  grid-template-columns: minmax(220px, 0.28fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  background: #fff;
+}
+
+.profile-strip-large {
+  min-height: 280px;
+  grid-template-columns: minmax(230px, 0.26fr) minmax(0, 1fr);
+  padding: clamp(24px, 3.6vw, 44px);
+}
+
+.profile-strip h3 {
+  margin-bottom: 8px;
+  font-size: clamp(26px, 3.4vw, 44px);
+}
+
+.profile-strip-large h3 {
+  max-width: 300px;
+  font-size: clamp(38px, 5vw, 68px);
+  line-height: 0.9;
+}
+
+.profile-species-grid {
+  display: flex;
+  gap: clamp(14px, 2vw, 24px);
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 8px 8px 18px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.profile-species-card {
+  flex: 0 0 clamp(150px, 15vw, 210px);
+  width: clamp(150px, 15vw, 210px);
+  aspect-ratio: 1 / 1;
+  color: #fff;
+  background: #111;
+  border: 4px solid var(--ink);
+  box-shadow: 6px 7px 0 var(--ink);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  text-decoration: none;
+  scroll-snap-align: start;
+  transition: transform 120ms ease;
+}
+
+.profile-species-card:hover,
+.profile-species-card:focus-visible {
+  transform: translateY(-5px);
+  outline: 0;
+}
+
+.profile-species-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-species-card span {
+  padding: 12px;
+  font-size: 24px;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.profile-panel {
+  padding: clamp(22px, 3.6vw, 44px);
+  display: grid;
+  gap: clamp(18px, 2.4vw, 28px);
+}
+
+.profile-section-title {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: end;
+}
+
+.profile-section-title span {
+  padding: 8px 10px;
+  color: #fff;
+  background: var(--teal);
+  border: 3px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.profile-section-title h3 {
+  font-size: clamp(34px, 5vw, 70px);
+  line-height: 0.88;
+}
+
+.notable-grid,
+.guide-grid,
+.reg-grid,
+.access-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.guide-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.notable-card,
+.guide-card,
+.reg-card,
+.access-card {
+  border: 3px solid var(--ink);
+  background: #fff;
+  box-shadow: 5px 6px 0 var(--ink);
+  padding: clamp(18px, 2.2vw, 26px);
+}
+
+.notable-card {
+  min-height: 180px;
+  color: inherit;
+  text-decoration: none;
+  display: grid;
+  align-content: space-between;
+  gap: 18px;
+}
+
+.notable-card:nth-child(2n),
+.guide-card:nth-child(2n),
+.access-card:nth-child(2n) {
+  background: #d9f7f9;
+}
+
+.notable-card:nth-child(3n),
+.guide-card:nth-child(3n),
+.reg-card:nth-child(3n) {
+  background: #eaffbd;
+}
+
+.notable-card span,
+.reg-card a,
+.access-card a,
+.resource-list a,
+.species-rules a {
+  color: var(--rust);
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
+
+.guide-card {
+  display: grid;
+  align-content: start;
+  gap: 18px;
+}
+
+.guide-card-top {
+  display: grid;
+  gap: 8px;
+}
+
+.guide-card-top span {
+  width: max-content;
+  padding: 6px 9px;
+  color: #fff;
+  background: var(--teal);
+  border: 2px solid var(--ink);
+}
+
+.guide-card h4,
+.reg-card h4,
+.access-card h4 {
+  margin: 0;
+  font-size: clamp(25px, 3vw, 38px);
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.guide-lede {
+  padding-bottom: 16px;
+  border-bottom: 4px solid var(--ink);
+}
+
+.structure-list,
+.species-rules {
+  display: grid;
+  gap: 12px;
+}
+
+.structure-list div {
+  padding: 13px;
+  border-left: 7px solid var(--teal);
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.structure-list strong,
+.reg-card strong {
+  display: block;
+  margin-bottom: 5px;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.species-rules a {
+  display: block;
+  padding: 12px;
+  color: var(--ink);
+  background: #fff;
+  border: 2px solid var(--ink);
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.35;
+  text-transform: none;
+}
+
+.species-footnote,
+.profile-disclaimer,
+.profile-note {
+  padding: 16px 18px;
+  border: 3px solid var(--ink);
+  background: var(--lime);
+}
+
+.profile-disclaimer {
+  background: #fff;
+}
+
+.reg-card,
+.access-card {
+  display: grid;
+  gap: 13px;
+}
+
+.resource-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.resource-list a {
+  display: grid;
+  align-items: center;
+  min-height: 74px;
+  padding: 15px 18px;
+  color: var(--ink);
+  background: #fff;
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.profile-caveats {
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.species-page {
+  justify-items: center;
+}
+
+.species-dossier {
+  width: min(520px, 100%);
+  border: 4px solid var(--ink);
+  box-shadow: 8px 9px 0 var(--ink);
+  background:
+    radial-gradient(circle, rgba(23, 23, 23, 0.18) 1px, transparent 1.35px),
+    #fffdf8;
+  background-size: 9px 9px;
+  display: grid;
+  gap: 22px;
+  padding: clamp(16px, 3vw, 28px);
+}
+
+.species-dossier-top {
+  margin: calc(clamp(16px, 3vw, 28px) * -1) calc(clamp(16px, 3vw, 28px) * -1) 0;
+  min-height: 62px;
+  padding: 12px 16px;
+  border-bottom: 4px solid var(--ink);
+  background:
+    radial-gradient(circle, rgba(23, 23, 23, 0.42) 1.4px, transparent 1.6px),
+    var(--gray);
+  background-size: 8px 8px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.species-dossier-top > span {
+  color: var(--teal);
+  font-size: 20px;
+  font-style: italic;
+  text-transform: uppercase;
+  transform: skewX(-10deg);
+}
+
+.species-back {
+  color: var(--ink);
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
+
+.species-back:last-child {
+  justify-self: end;
+}
+
+.species-cover-card,
+.species-detail-panel,
+.tactical-log {
+  border: 3px solid var(--ink);
+  box-shadow: 5px 6px 0 var(--ink);
+  background: #fff;
+  padding: clamp(18px, 3vw, 28px);
+}
+
+.species-cover-card {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+}
+
+.species-cover-media {
+  width: min(100%, 370px);
+  aspect-ratio: 1 / 1;
+  border: 4px solid var(--ink);
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.11) 1px, transparent 1.45px),
+    #2f3332;
+  background-size: 9px 9px;
+  box-shadow: 8px 8px 0 rgba(23, 23, 23, 0.72);
+  position: relative;
+  overflow: hidden;
+}
+
+.species-cover-media > span {
+  position: absolute;
+  right: 12px;
+  top: 14px;
+  z-index: 1;
+  padding: 10px 12px;
+  color: #fff;
+  background: var(--rust);
+  border: 3px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  font-size: 13px;
+  text-transform: uppercase;
+  transform: rotate(-1deg);
+}
+
+.species-cover-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.species-cover-media div {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: end start;
+  padding: 20px;
+  color: #fff;
+  font-size: 42px;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.species-cover-card h1 {
+  margin: 0;
+  max-width: 100%;
+  color: var(--ink);
+  font-size: clamp(36px, 8vw, 52px);
+  line-height: 0.9;
+  text-align: center;
+}
+
+.species-tier {
+  padding: 7px 14px;
+  color: var(--ink);
+  background: var(--lime);
+  border: 3px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.species-quick-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.species-quick-card {
+  min-height: 150px;
+  padding: 18px;
+  border: 3px solid var(--ink);
+  box-shadow: 5px 6px 0 var(--ink);
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+
+.habitat-card {
+  background: var(--cyan);
+}
+
+.rank-card {
+  background: var(--orange);
+}
+
+.species-quick-card span,
+.tactical-row span {
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.species-quick-card span {
+  font-size: 24px;
+}
+
+.species-quick-card p,
+.species-detail-panel p,
+.tactical-log blockquote {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: clamp(15px, 2vw, 18px);
+  font-weight: 900;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+.rank-card strong {
+  font-size: 24px;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.tactical-log {
+  display: grid;
+  gap: 18px;
+}
+
+.tactical-log h2,
+.species-detail-panel h2 {
+  font-size: clamp(28px, 6vw, 40px);
+  line-height: 0.9;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 5px;
+}
+
+.tactical-row {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 14px;
+  align-items: center;
+}
+
+.tactical-row b {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  color: #fff;
+  background: var(--ink);
+  font-size: 21px;
+}
+
+.tactical-row div {
+  display: grid;
+  gap: 4px;
+}
+
+.tactical-row span {
+  color: var(--rust);
+}
+
+.tactical-row strong {
+  font-size: 20px;
+  line-height: 1.1;
+}
+
+.tactical-log blockquote {
+  margin-top: 8px;
+  padding: 22px;
+  border: 3px solid var(--ink);
+  background: #fff;
+  font-style: italic;
+}
+
+.species-detail-panel {
+  display: grid;
+  gap: 16px;
+}
+
+.species-sources a {
+  overflow-wrap: anywhere;
+  color: var(--rust);
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1.35;
 }
 
 .detail-card {
@@ -1521,15 +2169,16 @@ a.lake-card:active {
 }
 
 .bottomnav {
-  position: fixed;
-  left: 50%;
-  bottom: 18px;
-  width: min(1280px, calc(100% - 22px));
-  transform: translateX(-50%);
+  position: sticky;
+  left: auto;
+  bottom: 0;
+  width: 100%;
+  transform: none;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   background: #f5f1ef;
-  border: 3px solid var(--ink);
+  border: 0;
+  border-top: 3px solid var(--ink);
   border-radius: 0 0 14px 14px;
   padding: 10px 14px;
   gap: 8px;
@@ -1575,7 +2224,17 @@ a.lake-card:active {
   }
 
   .method-split,
-  .source-grid {
+  .source-grid,
+  .profile-hero,
+  .profile-strip,
+  .guide-grid,
+  .resource-list {
+    grid-template-columns: 1fr;
+  }
+
+  .notable-grid,
+  .reg-grid,
+  .access-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1609,19 +2268,128 @@ a.lake-card:active {
   }
 }
 
+@media (max-width: 720px) {
+  .screen {
+    padding-bottom: 38px;
+  }
+
+  .poster-hero {
+    min-height: 420px;
+  }
+
+  .poster-hero .burst {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    width: 170px;
+    height: 190px;
+    margin: 24px auto 0;
+    transform: rotate(8deg);
+    animation: none;
+  }
+
+  .conditions-heading {
+    min-height: auto;
+  }
+
+  .conditions-heading h2,
+  .profile-hero h1,
+  .profile-hero h2 {
+    font-size: clamp(44px, 14vw, 64px);
+  }
+
+  .quick-summary {
+    margin-top: 28px;
+  }
+
+  .fishing-grade {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .fishing-grade > strong {
+    width: max-content;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .grade-callout,
+  .grade-actions {
+    grid-column: auto;
+    justify-self: stretch;
+  }
+
+  .grade-callout {
+    width: 100%;
+  }
+
+  .grade-callout span {
+    position: static;
+    width: max-content;
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .grade-actions {
+    flex-wrap: wrap;
+  }
+
+  .profile-strip-large {
+    min-height: auto;
+  }
+
+  .profile-species-card {
+    flex-basis: clamp(138px, 42vw, 180px);
+    width: clamp(138px, 42vw, 180px);
+  }
+
+  .index-hero-copy {
+    min-height: auto;
+    align-content: start;
+    padding-bottom: clamp(26px, 4vw, 48px);
+  }
+
+  .index-hero-copy .burst {
+    justify-self: center;
+  }
+
+  .notable-card,
+  .reg-card,
+  .access-card,
+  .species-detail-panel,
+  .tactical-log {
+    padding: 16px;
+  }
+
+  .method-panel p,
+  .method-panel li,
+  .profile-hero p,
+  .profile-panel p,
+  .profile-panel li,
+  .profile-strip p {
+    font-size: 16px;
+    line-height: 1.45;
+  }
+}
+
 @media (max-width: 410px) {
   .app-shell,
   .bottomnav {
     width: calc(100% - 12px);
   }
 
+  .app-shell {
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
+
   .screen {
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   h1 {
-    font-size: 54px;
+    font-size: clamp(44px, 13vw, 54px);
   }
 
   .weather-report,
@@ -1645,7 +2413,7 @@ a.lake-card:active {
   }
 
   .conditions-heading h2 {
-    font-size: 52px;
+    font-size: clamp(40px, 13vw, 52px);
   }
 
   .quick-summary {
@@ -1663,6 +2431,14 @@ a.lake-card:active {
 
   .condition-cell:last-child {
     border-bottom: 0;
+  }
+
+  .condition-cell {
+    min-height: 190px;
+  }
+
+  .condition-cell strong {
+    font-size: clamp(38px, 12vw, 48px);
   }
 
   .fishing-grade {
@@ -1709,22 +2485,56 @@ a.lake-card:active {
   }
 
   .method-panel {
-    padding: 20px;
+    padding: 18px;
   }
 
   .method-panel h2 {
-    font-size: 40px;
+    font-size: clamp(32px, 10vw, 40px);
   }
 
   .index-hero-copy {
-    min-height: 440px;
+    min-height: auto;
     align-content: start;
-    padding-bottom: 230px;
+    padding-bottom: 26px;
   }
 
   .index-hero-copy h1,
   .index-hero-copy .summary {
     max-width: 100%;
+  }
+
+  .profile-hero {
+    padding: 22px;
+  }
+
+  .profile-section-title {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .profile-section-title span {
+    width: max-content;
+  }
+
+  .profile-panel {
+    padding: 18px;
+  }
+
+  .profile-strip-large {
+    padding: 18px;
+  }
+
+  .species-quick-grid,
+  .species-dossier-top {
+    grid-template-columns: 1fr;
+  }
+
+  .species-dossier-top,
+  .species-dossier-top > span,
+  .species-back:last-child {
+    justify-items: start;
+    justify-self: start;
+    text-align: left;
   }
 }
 

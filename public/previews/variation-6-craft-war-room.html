@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AER Fishing Preview 6 - Craft War Room</title>
+    <style>
+      :root {
+        --ink: #101715;
+        --bg: #ecefed;
+        --panel: #fbfcfa;
+        --line: rgba(16, 23, 21, 0.15);
+        --muted: #62706a;
+        --accent: #276f61;
+        --amber: #a36d17;
+        --red: #a3413a;
+        --slate: #425967;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100dvh;
+        color: var(--ink);
+        background:
+          linear-gradient(135deg, rgba(66,89,103,0.08), transparent 38%),
+          linear-gradient(315deg, rgba(39,111,97,0.09), transparent 42%),
+          var(--bg);
+        font-family: "Satoshi", "Geist", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 330px minmax(0, 1fr) 290px;
+        min-height: 100dvh;
+      }
+
+      .sidebar,
+      .rightbar {
+        border-right: 1px solid var(--line);
+        padding: 18px;
+        display: grid;
+        align-content: start;
+        gap: 18px;
+      }
+
+      .rightbar {
+        border-right: 0;
+        border-left: 1px solid var(--line);
+      }
+
+      .brand {
+        font-weight: 840;
+        font-size: 18px;
+      }
+
+      .small {
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.35;
+      }
+
+      .dense-list {
+        border-top: 1px solid var(--line);
+      }
+
+      .dense-list div {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--line);
+        font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 12px;
+      }
+
+      .main {
+        padding: 18px;
+        display: grid;
+        grid-template-rows: auto minmax(480px, 1fr) auto;
+        gap: 18px;
+      }
+
+      .top {
+        display: grid;
+        grid-template-columns: 1.25fr 0.75fr;
+        gap: 18px;
+      }
+
+      .headline {
+        border: 1px solid var(--line);
+        background: rgba(251,252,250,0.68);
+        padding: clamp(24px, 5vw, 54px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .headline::before {
+        content: "";
+        position: absolute;
+        inset: 14px;
+        border: 1px solid rgba(39,111,97,0.24);
+        transform: skewX(-11deg) translateX(24%);
+        animation: frame 6s cubic-bezier(0.16, 1, 0.3, 1) infinite alternate;
+      }
+
+      @keyframes frame { to { transform: skewX(-11deg) translateX(-18%); } }
+
+      .kicker {
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 840;
+        text-transform: uppercase;
+        position: relative;
+      }
+
+      h1 {
+        margin: 10px 0 12px;
+        max-width: 860px;
+        font-size: clamp(44px, 8vw, 118px);
+        line-height: 0.83;
+        letter-spacing: 0;
+        position: relative;
+      }
+
+      .summary {
+        margin: 0;
+        max-width: 720px;
+        color: #2f3b36;
+        font-size: 18px;
+        line-height: 1.38;
+        position: relative;
+      }
+
+      .photo {
+        border: 1px solid var(--line);
+        min-height: 320px;
+        background:
+          linear-gradient(180deg, rgba(16,23,21,0.02), rgba(16,23,21,0.48)),
+          url("https://picsum.photos/seed/aer-craft-war-room/900/1000") center/cover;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .photo::after {
+        content: "SOUTHEAST LEE";
+        position: absolute;
+        left: -18px;
+        bottom: 22px;
+        color: rgba(255,255,255,0.72);
+        font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 44px;
+        white-space: nowrap;
+        animation: nudge 4s cubic-bezier(0.16, 1, 0.3, 1) infinite alternate;
+      }
+
+      @keyframes nudge { to { transform: translateX(34px); } }
+
+      .decision-grid {
+        display: grid;
+        grid-template-columns: 1.35fr 0.85fr 1fr;
+        gap: 18px;
+      }
+
+      .lane {
+        border: 1px solid var(--line);
+        background: rgba(251,252,250,0.78);
+        min-height: 430px;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        animation: lane 850ms cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+      .lane:nth-child(2) { animation-delay: 140ms; margin-top: 52px; }
+      .lane:nth-child(3) { animation-delay: 280ms; margin-top: -26px; }
+      @keyframes lane { from { opacity: 0; transform: translateY(34px) scale(0.98); } }
+
+      .lane-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 18px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .lane h2 { margin: 0; font-size: 26px; }
+
+      .rating {
+        align-self: start;
+        padding: 5px 9px;
+        border-radius: 999px;
+        color: #fff;
+        font-size: 11px;
+        font-weight: 840;
+        text-transform: uppercase;
+      }
+      .marginal { background: var(--amber); }
+      .no-go { background: var(--red); }
+
+      .lane-body {
+        padding: 18px;
+        display: grid;
+        gap: 16px;
+        align-content: start;
+      }
+
+      .lane-body p {
+        margin: 0;
+        color: #2f3a35;
+        line-height: 1.42;
+      }
+
+      .mini-bars {
+        display: grid;
+        gap: 8px;
+      }
+
+      .mini-bars span {
+        height: 8px;
+        background: rgba(16,23,21,0.08);
+        overflow: hidden;
+      }
+
+      .mini-bars i {
+        display: block;
+        height: 100%;
+        background: var(--accent);
+        animation: pulsebar 1.8s cubic-bezier(0.16, 1, 0.3, 1) infinite alternate;
+      }
+
+      .lane:nth-child(2) .mini-bars i { background: var(--red); }
+      .lane:nth-child(3) .mini-bars i { background: var(--amber); }
+      @keyframes pulsebar { from { transform: scaleX(0.72); transform-origin: left; } }
+
+      .lane-foot {
+        border-top: 1px solid var(--line);
+        padding: 14px 18px;
+        color: var(--muted);
+        font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 12px;
+      }
+
+      .author {
+        border: 1px solid var(--line);
+        background: rgba(251,252,250,0.7);
+        padding: 16px;
+      }
+
+      @media (max-width: 1080px) {
+        .layout,
+        .top,
+        .decision-grid {
+          grid-template-columns: 1fr;
+        }
+        .sidebar, .rightbar {
+          border-right: 0;
+          border-left: 0;
+          border-bottom: 1px solid var(--line);
+        }
+        .rightbar { border-top: 1px solid var(--line); }
+        .lane:nth-child(2),
+        .lane:nth-child(3) {
+          margin-top: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">AER Craft War Room</div>
+        <p class="small">The densest option: a control-room page where each craft has its own lane and the forecast inputs stay visible at all times.</p>
+        <div class="dense-list">
+          <div><span>VALID</span><strong>2026-07-18</strong></div>
+          <div><span>WATERBODY</span><strong>CONESTOGO</strong></div>
+          <div><span>FETCH</span><strong>5.7 KM</strong></div>
+          <div><span>BEARING</span><strong>35 / 215</strong></div>
+          <div><span>FMZ</span><strong>16</strong></div>
+          <div><span>AUTHOR</span><strong>E. LUTSCH</strong></div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <section class="top">
+          <div class="headline">
+            <div class="kicker">All knobs at 10</div>
+            <h1>Three craft enter the same weather. Only one has a plan.</h1>
+            <p class="summary">This version makes contrast the whole interface. It is intentionally intense: dense readings, offset lanes, active motion, and a first viewport that behaves like a fishing decision room.</p>
+          </div>
+          <div class="photo"></div>
+        </section>
+
+        <section class="decision-grid" aria-label="Craft verdicts">
+          <article class="lane">
+            <div class="lane-head"><h2>Powerboat</h2><span class="rating marginal">Marginal</span></div>
+            <div class="lane-body">
+              <p>Still launchable, but not broadly good. Crossings need to be short and the southeast shore is the plan, not a suggestion.</p>
+              <div class="mini-bars"><span><i style="width: 62%"></i></span><span><i style="width: 78%"></i></span><span><i style="width: 54%"></i></span></div>
+            </div>
+            <div class="lane-foot">05:00-07:00 / LEE SHORE</div>
+          </article>
+          <article class="lane">
+            <div class="lane-head"><h2>Kayak</h2><span class="rating no-go">No-go</span></div>
+            <div class="lane-body">
+              <p>The boat control problem arrives before the bite window is worth it. Gust spread and fetch make holding position unreliable.</p>
+              <div class="mini-bars"><span><i style="width: 92%"></i></span><span><i style="width: 86%"></i></span><span><i style="width: 71%"></i></span></div>
+            </div>
+            <div class="lane-foot">POSITION-HOLD FAILURE</div>
+          </article>
+          <article class="lane">
+            <div class="lane-head"><h2>Canoe</h2><span class="rating no-go">No-go</span></div>
+            <div class="lane-body">
+              <p>Open canoe margin is gone. The health gate is already high, and any whitecaps close the decision completely.</p>
+              <div class="mini-bars"><span><i style="width: 100%"></i></span><span><i style="width: 90%"></i></span><span><i style="width: 96%"></i></span></div>
+            </div>
+            <div class="lane-foot">NO OPEN-WATER PLAN</div>
+          </article>
+        </section>
+      </main>
+
+      <aside class="rightbar">
+        <div class="author">
+          <strong>Methodology</strong>
+          <p class="small">Structured forecast inputs, fetch geometry, launch constraints, pressure tendency, and ECCC AQHI. Server-rendered for citation.</p>
+        </div>
+        <div class="dense-list">
+          <div><span>WIND</span><strong>23</strong></div>
+          <div><span>GUST</span><strong>58</strong></div>
+          <div><span>AQHI</span><strong>10</strong></div>
+          <div><span>PRESS</span><strong>-0.9</strong></div>
+          <div><span>LEE</span><strong>SE</strong></div>
+          <div><span>CONF</span><strong>MED</strong></div>
+        </div>
+      </aside>
+    </div>
+  </body>
+</html>

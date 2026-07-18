@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AER Fishing Preview 2 - Lake Sheet</title>
+    <style>
+      :root {
+        --ink: #18211d;
+        --muted: #65726c;
+        --line: #d7dfda;
+        --soft: #eef3ef;
+        --accent: #2e7464;
+        --amber: #9f6f19;
+        --red: #a9473d;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #fbfcfa;
+        color: var(--ink);
+        font-family:
+          "Cabinet Grotesk", "Outfit", ui-sans-serif, system-ui, -apple-system,
+          BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      .shell {
+        display: grid;
+        grid-template-columns: 82px minmax(0, 1fr);
+        min-height: 100dvh;
+      }
+
+      aside.rail {
+        border-right: 1px solid var(--line);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        writing-mode: vertical-rl;
+        text-transform: uppercase;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        font-size: 12px;
+        position: sticky;
+        top: 0;
+        height: 100dvh;
+      }
+
+      main {
+        overflow: hidden;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 0.95fr) minmax(420px, 1.05fr);
+        min-height: 640px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .copy {
+        padding: 52px clamp(28px, 5vw, 82px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .topline {
+        display: flex;
+        justify-content: space-between;
+        gap: 22px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      h1 {
+        margin: 70px 0 24px;
+        max-width: 680px;
+        font-size: clamp(46px, 6vw, 86px);
+        line-height: 0.96;
+        letter-spacing: 0;
+      }
+
+      .summary {
+        max-width: 620px;
+        font-size: 21px;
+        line-height: 1.4;
+        color: #33413b;
+      }
+
+      .byline {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        gap: 14px;
+        align-items: center;
+        max-width: 430px;
+      }
+
+      .mark {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background:
+          linear-gradient(135deg, rgba(46, 116, 100, 0.24), transparent),
+          #ffffff;
+        border: 1px solid var(--line);
+      }
+
+      .visual {
+        min-height: 640px;
+        background:
+          linear-gradient(90deg, rgba(251, 252, 250, 0.92), rgba(251, 252, 250, 0.18) 44%, rgba(24, 33, 29, 0.42)),
+          url("https://picsum.photos/seed/aer-lake-sheet/1400/1200") center/cover;
+        position: relative;
+      }
+
+      .floating {
+        position: absolute;
+        right: 34px;
+        bottom: 34px;
+        width: min(430px, calc(100% - 68px));
+        background: rgba(255, 255, 255, 0.74);
+        backdrop-filter: blur(18px);
+        border: 1px solid rgba(255, 255, 255, 0.72);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.56),
+          0 22px 48px -28px rgba(28, 43, 36, 0.42);
+        border-radius: 8px;
+        padding: 18px;
+      }
+
+      .micro-map {
+        height: 180px;
+        border-radius: 6px;
+        background:
+          radial-gradient(ellipse at 50% 48%, rgba(46, 116, 100, 0.72) 0 26%, transparent 27%),
+          linear-gradient(145deg, #e8f0ea, #cad9d0);
+        border: 1px solid rgba(24, 33, 29, 0.12);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .micro-map::after {
+        content: "";
+        position: absolute;
+        inset: 22px 28px;
+        border: 1px dashed rgba(24, 33, 29, 0.32);
+        transform: rotate(35deg);
+      }
+
+      .verdicts {
+        width: min(1280px, calc(100% - 44px));
+        margin: 0 auto;
+        padding: 44px 0;
+        display: grid;
+        grid-template-columns: minmax(280px, 0.6fr) minmax(0, 1.4fr);
+        gap: 44px;
+      }
+
+      .section-title {
+        position: sticky;
+        top: 28px;
+        align-self: start;
+      }
+
+      h2 {
+        margin: 0 0 14px;
+        font-size: 34px;
+        letter-spacing: 0;
+      }
+
+      .craft-stack {
+        display: grid;
+        gap: 14px;
+      }
+
+      .craft {
+        display: grid;
+        grid-template-columns: 150px 120px 1fr;
+        gap: 18px;
+        align-items: start;
+        padding: 22px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .craft:last-child {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .label {
+        font-size: 24px;
+        font-weight: 760;
+      }
+
+      .rating {
+        display: inline-flex;
+        width: max-content;
+        padding: 5px 10px;
+        border-radius: 999px;
+        color: white;
+        font-size: 12px;
+        font-weight: 760;
+        text-transform: uppercase;
+      }
+
+      .marginal {
+        background: var(--amber);
+      }
+
+      .no-go {
+        background: var(--red);
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      .table-panel {
+        background: var(--soft);
+        border-top: 1px solid var(--line);
+        padding: 42px 0 70px;
+      }
+
+      .table-inner {
+        width: min(1280px, calc(100% - 44px));
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 44px;
+      }
+
+      .numbers {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        border: 1px solid var(--line);
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .num {
+        padding: 20px;
+        border-right: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .num:nth-child(even) {
+        border-right: 0;
+      }
+
+      .num span {
+        display: block;
+        color: var(--muted);
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+
+      .num strong {
+        display: block;
+        margin-top: 8px;
+        font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 28px;
+      }
+
+      @media (max-width: 900px) {
+        .shell,
+        .hero,
+        .verdicts,
+        .table-inner {
+          grid-template-columns: 1fr;
+        }
+
+        aside.rail {
+          display: none;
+        }
+
+        .visual {
+          min-height: 380px;
+        }
+
+        .craft {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="rail">AER fishing conditions</aside>
+      <main>
+        <section class="hero">
+          <div class="copy">
+            <div class="topline">
+              <span>Conestogo Lake</span>
+              <span>FMZ 16 / 5.7 km fetch</span>
+            </div>
+            <div>
+              <h1>The lake sheet for people launching today.</h1>
+              <p class="summary">
+                A single waterbody page carries the whole decision: powerboat, kayak, and canoe
+                diverge under the same wind, gust, pressure, and smoke inputs.
+              </p>
+            </div>
+            <div class="byline">
+              <div class="mark"></div>
+              <div>
+                <strong>Erik Lutsch</strong>
+                <div class="muted">Atmospheric scientist / AER</div>
+              </div>
+            </div>
+          </div>
+          <div class="visual">
+            <div class="floating">
+              <div class="micro-map"></div>
+              <p>
+                Wind from the west-northwest pushes the workable water toward the southeast shore.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="verdicts">
+          <div class="section-title">
+            <h2>Craft contrast</h2>
+            <p class="muted">
+              More editorial and atmospheric. Best if the page should feel like a premium field
+              report instead of a utility dashboard.
+            </p>
+          </div>
+          <div class="craft-stack">
+            <article class="craft">
+              <div class="label">Powerboat</div>
+              <span class="rating marginal">Marginal</span>
+              <p>
+                Workable only with conservative crossings. Fish protected southeast water early
+                and avoid long open-fetch runs once gusts fill in.
+              </p>
+            </article>
+            <article class="craft">
+              <div class="label">Kayak</div>
+              <span class="rating no-go">No-go</span>
+              <p>
+                Position-holding is the problem. The lee is too narrow once gusts and AQHI are
+                both part of the call.
+              </p>
+            </article>
+            <article class="craft">
+              <div class="label">Canoe</div>
+              <span class="rating no-go">No-go</span>
+              <p>
+                An open canoe has the least margin. Today reads as a shore-watching day, not a
+                launch day.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="table-panel">
+          <div class="table-inner">
+            <div>
+              <h2>Method first, numbers second</h2>
+              <p class="muted">
+                The prose is still the product, but the raw inputs stay close enough for citation,
+                trust, and source inspection.
+              </p>
+            </div>
+            <div class="numbers">
+              <div class="num"><span>Peak wind</span><strong>23</strong></div>
+              <div class="num"><span>Peak gust</span><strong>58</strong></div>
+              <div class="num"><span>AQHI</span><strong>10</strong></div>
+              <div class="num"><span>Pressure</span><strong>-0.9</strong></div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

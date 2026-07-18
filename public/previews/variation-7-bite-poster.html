@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AER Preview 7 - Bite Poster</title>
+    <style>
+      :root {
+        --ink: #171717;
+        --paper: #fffdf8;
+        --cyan: #00d9e8;
+        --orange: #f87500;
+        --gold: #ffc21a;
+        --lime: #9cff13;
+        --teal: #007d8b;
+        --rust: #a94c00;
+        --gray: #d8d8d8;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100dvh;
+        background:
+          radial-gradient(circle, rgba(255,255,255,0.18) 1px, transparent 1.5px),
+          #202124;
+        background-size: 18px 18px;
+        color: var(--ink);
+        font-family: Impact, "Arial Black", "Franklin Gothic Heavy", system-ui, sans-serif;
+      }
+
+      .phone {
+        width: min(430px, calc(100% - 22px));
+        margin: 18px auto;
+        border: 3px solid var(--ink);
+        border-radius: 14px;
+        overflow: hidden;
+        background: var(--paper);
+        box-shadow: 10px 10px 0 rgba(0,0,0,0.34);
+      }
+
+      .topbar {
+        height: 64px;
+        display: grid;
+        grid-template-columns: 42px 1fr 42px;
+        align-items: center;
+        padding: 0 16px;
+        background:
+          radial-gradient(circle, rgba(0,0,0,0.55) 1.2px, transparent 1.4px),
+          var(--gray);
+        background-size: 9px 9px;
+        border-bottom: 5px solid var(--ink);
+      }
+
+      .hamburger span,
+      .target span {
+        display: block;
+        height: 4px;
+        width: 22px;
+        background: var(--teal);
+        margin: 4px 0;
+        border: 1px solid var(--ink);
+      }
+
+      .target {
+        width: 28px;
+        height: 28px;
+        border: 3px solid var(--teal);
+        border-radius: 50%;
+        justify-self: end;
+        position: relative;
+      }
+
+      .target::after {
+        content: "";
+        position: absolute;
+        inset: 8px;
+        background: var(--teal);
+        border-radius: 50%;
+      }
+
+      .logo {
+        color: var(--teal);
+        font-size: 22px;
+        font-style: italic;
+        text-transform: uppercase;
+        letter-spacing: -1px;
+        text-shadow: 2px 2px 0 rgba(0,0,0,0.18);
+      }
+
+      .screen {
+        padding: 22px 15px 92px;
+        display: grid;
+        gap: 18px;
+      }
+
+      .hero {
+        min-height: 560px;
+        padding: 34px 20px;
+        border: 4px solid var(--ink);
+        box-shadow: 5px 6px 0 var(--ink);
+        background:
+          radial-gradient(circle, rgba(0,0,0,0.13) 1px, transparent 1.5px),
+          var(--cyan);
+        background-size: 8px 8px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .alert {
+        display: inline-block;
+        padding: 7px 16px;
+        background: var(--ink);
+        color: white;
+        font-size: 14px;
+        letter-spacing: 0.4px;
+      }
+
+      h1 {
+        margin: 22px auto 14px;
+        color: var(--teal);
+        font-size: 64px;
+        line-height: 0.82;
+        letter-spacing: -2px;
+        text-transform: uppercase;
+        max-width: 320px;
+        text-shadow: 3px 3px 0 rgba(255,255,255,0.35);
+      }
+
+      .hero p {
+        margin: 0 auto;
+        max-width: 310px;
+        color: var(--teal);
+        font-family: "Arial Narrow", Arial, sans-serif;
+        font-weight: 900;
+        font-size: 18px;
+        line-height: 1.35;
+      }
+
+      .burst {
+        position: absolute;
+        left: 50%;
+        bottom: 30px;
+        width: 210px;
+        height: 230px;
+        transform: translateX(-50%) rotate(12deg);
+        display: grid;
+        place-items: center;
+        color: var(--ink);
+        font-size: 34px;
+        line-height: 0.92;
+        text-transform: uppercase;
+        text-align: center;
+        text-shadow: 2px 2px 0 rgba(255,255,255,0.22);
+        animation: hook-pop 1.2s steps(2, end) infinite;
+        z-index: 1;
+      }
+
+      .burst::before {
+        content: "";
+        position: absolute;
+        inset: 6px 18px 0;
+        background: var(--orange);
+        clip-path: polygon(52% 0, 68% 22%, 65% 38%, 86% 28%, 96% 50%, 88% 74%, 70% 94%, 49% 100%, 27% 93%, 10% 74%, 4% 52%, 16% 31%, 31% 39%, 32% 20%);
+        filter: drop-shadow(5px 6px 0 var(--ink));
+        z-index: -1;
+      }
+
+      .burst::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 22px;
+        width: 92px;
+        height: 120px;
+        background: var(--gold);
+        clip-path: polygon(50% 0, 65% 27%, 61% 46%, 78% 39%, 88% 61%, 78% 84%, 58% 100%, 39% 96%, 22% 81%, 14% 60%, 28% 42%, 40% 48%, 38% 24%);
+        transform: translateX(-50%);
+        z-index: -1;
+      }
+
+      @keyframes hook-pop {
+        50% { transform: translateX(-50%) rotate(4deg) scale(1.04); }
+      }
+
+      .slashes {
+        display: none;
+      }
+
+      .slashes i {
+        position: absolute;
+        width: 48px;
+        height: 5px;
+        background: var(--ink);
+      }
+
+      .slashes i:nth-child(1) { right: 62px; top: 312px; }
+      .slashes i:nth-child(2) { left: 62px; bottom: 18px; }
+      .slashes i:nth-child(3) { left: 34px; top: 84px; }
+
+      .weather {
+        border: 4px solid var(--ink);
+        box-shadow: 5px 6px 0 var(--ink);
+        padding: 22px;
+        background: white;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 16px;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: 30px;
+        text-transform: uppercase;
+      }
+
+      .temp {
+        font-size: 70px;
+        line-height: 0.9;
+      }
+
+      .mini {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+        margin-top: 14px;
+        font-family: Impact, "Arial Black", sans-serif;
+      }
+
+      .mini div {
+        border-right: 2px solid #ccd2d0;
+      }
+
+      .mini div:last-child { border-right: 0; padding-left: 15px; }
+      .mini span {
+        display: block;
+        color: #6d7773;
+        font-size: 12px;
+      }
+      .mini strong {
+        display: block;
+        color: var(--rust);
+        font-size: 25px;
+        line-height: 0.9;
+      }
+      .mini div:last-child strong { color: var(--teal); }
+
+      .sun {
+        width: 116px;
+        height: 116px;
+        border: 4px solid var(--ink);
+        border-radius: 50%;
+        align-self: center;
+        justify-self: end;
+        background:
+          radial-gradient(circle at center, white 0 16px, transparent 17px),
+          radial-gradient(circle, rgba(0,0,0,0.16) 1px, transparent 1.5px),
+          #547d0d;
+        background-size: auto, 9px 9px, auto;
+        box-shadow: 4px 4px 0 var(--ink);
+        animation: spin 14s linear infinite;
+      }
+
+      @keyframes spin { to { transform: rotate(360deg); } }
+
+      .craft {
+        border: 4px solid var(--ink);
+        box-shadow: 5px 6px 0 var(--ink);
+        background: #f0eceb;
+        padding: 20px;
+      }
+
+      .craft-grid {
+        margin-top: 14px;
+        display: grid;
+        grid-template-columns: 1.2fr 0.95fr 0.95fr;
+        gap: 8px;
+      }
+
+      .card {
+        min-height: 164px;
+        padding: 12px;
+        background: white;
+        border: 3px solid var(--ink);
+        display: grid;
+        align-content: space-between;
+      }
+
+      .card b {
+        font-size: 21px;
+      }
+
+      .rating {
+        display: inline-block;
+        width: max-content;
+        padding: 5px 8px;
+        color: white;
+        background: var(--red);
+        font-size: 11px;
+      }
+
+      .rating.marginal { background: var(--rust); }
+
+      .card p {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-weight: 800;
+        font-size: 12px;
+        line-height: 1.25;
+      }
+
+      .lakes {
+        display: grid;
+        gap: 12px;
+      }
+
+      .title-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+        align-items: center;
+        border-bottom: 4px solid var(--ink);
+        padding-bottom: 8px;
+      }
+
+      .button {
+        border: 3px solid var(--ink);
+        box-shadow: 3px 3px 0 var(--ink);
+        padding: 8px 13px;
+        background: white;
+        font-size: 12px;
+      }
+
+      .lake-card {
+        border: 4px solid var(--ink);
+        background: white;
+        box-shadow: 5px 6px 0 var(--ink);
+        overflow: hidden;
+      }
+
+      .lake-image {
+        height: 152px;
+        background:
+          linear-gradient(rgba(0,217,232,0.08), rgba(0,0,0,0.18)),
+          url("https://picsum.photos/seed/biting-poster-lake/800/460") center/cover;
+        border-bottom: 4px solid var(--ink);
+        position: relative;
+      }
+
+      .tag {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        padding: 7px 12px;
+        border: 3px solid var(--ink);
+        background: var(--lime);
+        font-size: 12px;
+      }
+
+      .lake-body {
+        padding: 16px;
+      }
+
+      .lake-body h3 {
+        margin: 0 0 6px;
+        font-size: 28px;
+      }
+
+      .bottomnav {
+        position: fixed;
+        left: 50%;
+        bottom: 18px;
+        width: min(430px, calc(100% - 22px));
+        transform: translateX(-50%);
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        background: #f5f1ef;
+        border: 3px solid var(--ink);
+        border-radius: 0 0 14px 14px;
+        padding: 10px 14px;
+        gap: 8px;
+      }
+
+      .navitem {
+        text-align: center;
+        color: #596361;
+        font-size: 12px;
+      }
+
+      .navitem.active {
+        background: var(--lime);
+        color: var(--ink);
+        border: 3px solid var(--ink);
+        padding: 7px 0;
+      }
+
+      @media (max-width: 410px) {
+        h1 { font-size: 55px; }
+        .weather, .craft-grid { grid-template-columns: 1fr; }
+        .sun { justify-self: start; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="phone">
+      <div class="topbar">
+        <div class="hamburger"><span></span><span></span><span></span></div>
+        <div class="logo">Reel Action</div>
+        <div class="target"></div>
+      </div>
+      <main class="screen">
+        <section class="hero">
+          <span class="alert">Forecast Alert</span>
+          <h1>Prime Bite Conditions?</h1>
+          <p>Find the cleanest bite window. Temperature, wind, fetch, and pressure decide which shore fishes best and when to wait.</p>
+          <div class="burst">Fish<br />Now</div>
+          <div class="slashes"><i></i><i></i><i></i></div>
+        </section>
+
+        <section class="weather">
+          <div>
+            <h2>Weather Report</h2>
+            <div class="temp">74&deg;F</div>
+            <div class="mini">
+              <div><span>Wind</span><strong>23<br />KMH</strong></div>
+              <div><span>Pressure</span><strong>Steady<br />-0.9</strong></div>
+            </div>
+          </div>
+          <div class="sun"></div>
+        </section>
+
+        <section class="craft">
+          <h2>Craft Verdicts</h2>
+          <div class="craft-grid">
+            <article class="card"><b>Boat</b><span class="rating marginal">Marginal</span><p>Southeast lee shore, short crossings, early window only.</p></article>
+            <article class="card"><b>Kayak</b><span class="rating">No-go</span><p>Position-holding fails once gusts fill in.</p></article>
+            <article class="card"><b>Canoe</b><span class="rating">No-go</span><p>Open-canoe margin is gone today.</p></article>
+          </div>
+        </section>
+
+        <section class="lakes">
+          <div class="title-row"><h2>Hot Lakes This Week</h2><div class="button">View Map</div></div>
+          <article class="lake-card">
+            <div class="lake-image"><span class="tag">Booming</span></div>
+            <div class="lake-body">
+              <h3>Conestogo Lake</h3>
+              <div class="mini"><div><span>Species</span><strong>Bass Pike</strong></div><div><span>Status</span><strong>42 Active</strong></div></div>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+    <nav class="bottomnav" aria-label="Bottom navigation">
+      <div class="navitem active">Home</div><div class="navitem">Maps</div><div class="navitem">Details</div><div class="navitem">Journal</div>
+    </nav>
+  </body>
+</html>

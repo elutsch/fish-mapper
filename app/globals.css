@@ -135,6 +135,52 @@ a {
 
 .index-hero {
   min-height: 480px;
+  background: url("/hero/k-pow-bass.webp") center/cover;
+  background-size: cover;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.index-hero-copy {
+  min-height: 360px;
+  padding: clamp(26px, 4vw, 48px);
+  border: 4px solid var(--ink);
+  box-shadow: 5px 6px 0 var(--ink);
+  background:
+    radial-gradient(circle, rgba(0, 0, 0, 0.14) 1px, transparent 1.45px),
+    var(--lime);
+  background-size: 8px 8px;
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  position: relative;
+  overflow: hidden;
+}
+
+.index-hero-copy h1 {
+  margin-left: 0;
+  margin-right: 0;
+  max-width: min(760px, calc(100% - 240px));
+  color: var(--ink);
+  font-size: clamp(54px, 8vw, 112px);
+  text-shadow: 4px 4px 0 rgba(255, 255, 255, 0.46);
+}
+
+.index-hero-copy .summary {
+  margin: 0;
+  max-width: min(660px, calc(100% - 240px));
+  color: var(--ink);
+  font-size: clamp(18px, 2.2vw, 26px);
 }
 
 .alert {
@@ -949,7 +995,10 @@ h3 {
   display: block;
   width: 44px;
   height: 52px;
+  padding: 0;
   color: var(--ink);
+  background: transparent;
+  border: 0;
   cursor: pointer;
   transform-origin: 50% 100%;
   transition: transform 120ms ease;
@@ -998,6 +1047,10 @@ h3 {
   border-radius: 0;
 }
 
+.launch-popup {
+  pointer-events: auto;
+}
+
 .launch-popup .maplibregl-popup-tip {
   display: none;
 }
@@ -1007,6 +1060,16 @@ h3 {
   padding: 13px;
   display: grid;
   gap: 7px;
+}
+
+.launch-card-link {
+  cursor: pointer;
+}
+
+.launch-card-link:hover,
+.launch-card-link:focus-visible {
+  background: #f7ffcf;
+  outline: 0;
 }
 
 .launch-card strong {
@@ -1048,6 +1111,67 @@ h3 {
 .maplibregl-ctrl-group button {
   width: 34px;
   height: 34px;
+}
+
+.current-location-button {
+  display: grid;
+  place-items: center;
+  background: #fff;
+}
+
+.current-location-button span {
+  width: 19px;
+  height: 19px;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  position: relative;
+}
+
+.current-location-button span::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+}
+
+.current-location-button span::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  background: var(--ink);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.current-location-button[data-state="loading"] span {
+  animation: spin-location 900ms linear infinite;
+}
+
+.current-location-button[data-state="found"] {
+  background: var(--lime);
+}
+
+.current-location-button[data-state="error"] {
+  background: var(--orange);
+}
+
+.current-location-dot {
+  width: 18px;
+  height: 18px;
+  border: 4px solid #fff;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 0 4px var(--ink), 0 0 0 12px rgba(0, 125, 139, 0.18);
+}
+
+@keyframes spin-location {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .lakes {
@@ -1153,6 +1277,16 @@ a.lake-card:active {
 
 .spot-card .facts {
   padding: 0 16px 16px;
+}
+
+.species-list {
+  margin: -4px 16px 18px;
+  color: #596361;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1.3;
+  text-transform: uppercase;
 }
 
 .species-strip {
@@ -1581,6 +1715,17 @@ a.lake-card:active {
   .method-panel h2 {
     font-size: 40px;
   }
+
+  .index-hero-copy {
+    min-height: 440px;
+    align-content: start;
+    padding-bottom: 230px;
+  }
+
+  .index-hero-copy h1,
+  .index-hero-copy .summary {
+    max-width: 100%;
+  }
 }
 
 @media (min-width: 720px) {
@@ -1591,7 +1736,9 @@ a.lake-card:active {
   }
 
   .index-hero {
-    min-height: 500px;
+    min-height: min(58vw, 640px);
+    aspect-ratio: 1376 / 768;
+    background-position: center;
   }
 
   .alert {

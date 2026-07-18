@@ -1,11 +1,11 @@
 const speciesCards: Record<string, { label: string; image: string }> = {
-  "largemouth bass": { label: "Largemouth Bass", image: "/species/largemouth-bass.png" },
-  "smallmouth bass": { label: "Smallmouth Bass", image: "/species/smallmouth-bass.png" },
-  "northern pike": { label: "Northern Pike", image: "/species/northern-pike.png" },
-  pike: { label: "Northern Pike", image: "/species/northern-pike.png" },
-  walleye: { label: "Walleye", image: "/species/walleye.png" },
-  "black crappie": { label: "Black Crappie", image: "/species/black-crappie.png" },
-  "yellow perch": { label: "Yellow Perch", image: "/species/yellow-perch.png" }
+  "largemouth bass": { label: "Largemouth Bass", image: "/species/largemouth-bass.webp" },
+  "smallmouth bass": { label: "Smallmouth Bass", image: "/species/smallmouth-bass.webp" },
+  "northern pike": { label: "Northern Pike", image: "/species/northern-pike.webp" },
+  pike: { label: "Northern Pike", image: "/species/northern-pike.webp" },
+  walleye: { label: "Walleye", image: "/species/walleye.webp" },
+  "black crappie": { label: "Black Crappie", image: "/species/black-crappie.webp" },
+  "yellow perch": { label: "Yellow Perch", image: "/species/yellow-perch.webp" }
 };
 
 export function SpeciesCards({

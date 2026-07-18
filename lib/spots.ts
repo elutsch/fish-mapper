@@ -13,6 +13,7 @@ type SpotGeoJson = GeoJSON.FeatureCollection<
     launchName: string;
     maxFetchKm: number | null;
     sourceAccessPointId: string | null;
+    species: string[];
   }
 >;
 
@@ -36,7 +37,8 @@ export function spotsAsGeoJson(): SpotGeoJson {
         carryIn: spot.launch.carryIn,
         launchName: spot.launch.name ?? (spot.launch.trailer ? "Boat launch" : "Carry-in launch"),
         maxFetchKm: spot.maxFetchKm ?? null,
-        sourceAccessPointId: spot.sourceAccessPointId ?? null
+        sourceAccessPointId: spot.sourceAccessPointId ?? null,
+        species: spot.species
       }
     }))
   };

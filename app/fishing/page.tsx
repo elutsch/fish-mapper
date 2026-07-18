@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { SpeciesCards } from "@/app/components/SpeciesCards";
 import { SpotMap } from "@/app/components/SpotMap";
 import { spots, spotsAsGeoJson } from "@/lib/spots";
 
@@ -15,6 +14,10 @@ export default function FishingIndexPage() {
   return (
     <main className="screen">
       <section className="hero poster-hero index-hero">
+        <span className="sr-only">Forecast Map</span>
+      </section>
+
+      <section className="index-hero-copy" aria-label="Homepage forecast introduction">
         <span className="alert">Forecast Map</span>
         <h1>Hot Lakes This Week</h1>
         <p className="summary">
@@ -59,7 +62,7 @@ export default function FishingIndexPage() {
                 <span className="pill">{spot.maxFetchKm?.toFixed(1)} km fetch</span>
                 {spot.fmz ? <span className="pill">FMZ {spot.fmz}</span> : null}
               </div>
-              <SpeciesCards species={spot.species} compact />
+              <p className="species-list">{spot.species.join(", ")}</p>
             </a>
           ))}
         </div>

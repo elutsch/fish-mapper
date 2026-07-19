@@ -23,7 +23,7 @@ export default async function FishingIndexPage() {
     <main className="screen">
       <section className="hero poster-hero index-hero" aria-labelledby="fishing-index-title">
         <div className="index-hero-copy" aria-label="Homepage forecast introduction">
-          <span className="alert">Forecast Map</span>
+          <span className="alert">Lake Map</span>
           <h1 id="fishing-index-title">Hot Lakes Today</h1>
           <div className="slashes">
             <i />
@@ -62,10 +62,10 @@ export default async function FishingIndexPage() {
         </div>
       </section>
 
-      <section className="map-card" aria-label="Forecast map">
+      <section className="map-card" aria-label="Lake map">
         <div className="title-row">
           <div>
-            <h2>Forecast Map</h2>
+            <h2>Lake Map</h2>
             <p className="section-subcopy">Today&apos;s on-water outlook for each launch. Clusters expand as you zoom.</p>
           </div>
           <span className="button">Ontario</span>

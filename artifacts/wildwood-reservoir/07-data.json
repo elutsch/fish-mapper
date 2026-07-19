@@ -1,0 +1,236 @@
+{
+  "slug": "wildwood-reservoir",
+  "lake": "Wildwood Reservoir",
+  "province": "Ontario",
+  "fmz": 16,
+  "waterbodyType": "reservoir",
+  "coordinates": { "lat": 43.2519, "lng": -81.0376 },
+  "morphology": {
+    "surfaceArea": "385 ha (950 acres)",
+    "maxDepth": null,
+    "meanDepth": null,
+    "clarity": null,
+    "trophicStatus": null,
+    "thermalBehaviour": null
+  },
+  "bestSeason": "Late spring through summer, plus a winter ice fishery for perch and pike",
+  "overview": "Wildwood is flood control first, fishery second — and the flood control runs the fishing. It's nine kilometres of drowned Trout Creek valley, S-shaped and mostly shallow, impounded behind the Wildwood Dam between Stratford and St. Marys by the Upper Thames River Conservation Authority. One rhythm governs everything: the reservoir fills to summer pool by late spring, then draws down all season — a 3.5-metre swing that strands the upper arms and, by fall, the launch itself. The deep water sits at the dam end, and that's where fish stack as the reservoir shrinks. Pike prowl the basin and the flooded spring shallows; yellow perch school the same deep dam water through the ice. Smallmouth and largemouth swim here too, harder to pin down. Your way in is the Wildwood Conservation Area launch off Line 9 near St. Marys — motorboats allowed, no personal watercraft, boating May through October.",
+  "notableFacts": [
+    {
+      "fact": "Wildwood Dam (built 1962–1965) was among the UTRCA's first major flood-control works; during the February 2018 flood its operations cut Trout Creek's peak flow from 65 m³/s to 21 m³/s (a 68% reduction), helping keep the North Thames below the St. Marys floodwall.",
+      "sourceUrl": "https://thamesriver.on.ca/wp-content/uploads/WildwoodDam_QA-June2019.pdf"
+    },
+    {
+      "fact": "In dry summers, releases from Wildwood Reservoir supply 25–50% (or more) of the flow in the North Thames River.",
+      "sourceUrl": "https://thamesriver.on.ca/water-management/flood-control-structures/wildwood-dam/"
+    },
+    {
+      "fact": "Wildwood is one of only three large boatable UTRCA reservoirs (with Fanshawe and Pittock), all promoted as perch, bass, and pike fisheries.",
+      "sourceUrl": "https://thamesriver.on.ca/parks-recreation-natural-areas/fishing/"
+    },
+    {
+      "fact": "No stocking record exists for Wildwood Lake/Reservoir or Trout Creek in the official MNR Fish ON-Line FMZ 16 dataset; the fishery is self-sustaining.",
+      "sourceUrl": "https://www.lioapplications.lrc.gov.on.ca/services/FishONLine/StockingList.aspx?json=true&fmz=16&stock=AllSpecies&diagnostics=false&lang=en"
+    }
+  ],
+  "regulations": [
+    {
+      "species": "Northern Pike",
+      "season": "Jan 1–Mar 31 and second Saturday in May to Dec 31 (2026: May 9–Dec 31)",
+      "limit": "S-6 / C-2",
+      "sizeLimit": "no size limit",
+      "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      "effectiveDate": "2026-01-01",
+      "verified": true
+    },
+    {
+      "species": "Yellow Perch",
+      "season": "open all year",
+      "limit": "S-50 / C-25",
+      "sizeLimit": null,
+      "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      "effectiveDate": "2026-01-01",
+      "verified": true
+    }
+  ],
+  "regsDisclaimer": "Regulations effective 2026-01-01, FMZ 16. This is a summary, not the legal regulation — confirm current rules with the official source before fishing.",
+  "launches": [
+    {
+      "name": "Wildwood Conservation Area boat launch — 3995 Line 9, St. Marys",
+      "type": "trailer",
+      "notes": "Trailer launch inside the conservation area; paid conservation-area admission. Boating season May–October; motor boats, water skiing, and sailing permitted (no horsepower limit documented for Wildwood); no personal watercraft. A boat pass does not guarantee reservoir access all season — the late-summer/fall drawdown can close arms and eventually the launch itself.",
+      "sourceUrl": "https://thamesriver.on.ca/parks-recreation-natural-areas/boating/"
+    },
+    {
+      "name": "Wildwood Conservation Area — carry-in / non-motorized access",
+      "type": "carry-in",
+      "notes": "Canoe/kayak rentals on site; shore access within the conservation area. Winter ice anglers park roadside near the dam for the dam-basin fishery.",
+      "sourceUrl": "https://thamesriver.on.ca/parks-recreation-natural-areas/boating/"
+    }
+  ],
+  "species": [
+    {
+      "parentSlug": "smallmouth-bass",
+      "displayName": "Smallmouth Bass",
+      "tier": "present",
+      "structure": [],
+      "bestSeason": null,
+      "bodyCopy": null,
+      "qualitySignal": null,
+      "lede": null,
+      "howItFishes": null,
+      "structureDetails": null,
+      "speciesRules": null,
+      "sources": []
+    },
+    {
+      "parentSlug": "largemouth-bass",
+      "displayName": "Largemouth Bass",
+      "tier": "present",
+      "structure": [],
+      "bestSeason": null,
+      "bodyCopy": null,
+      "qualitySignal": null,
+      "lede": null,
+      "howItFishes": null,
+      "structureDetails": null,
+      "speciesRules": null,
+      "sources": []
+    },
+    {
+      "parentSlug": "northern-pike",
+      "displayName": "Northern Pike",
+      "tier": "strong",
+      "structure": [
+        "dam basin (deepest water, west end near Wildwood Dam)",
+        "spring-refill drawdown-zone shallows up the S-shaped upper reaches"
+      ],
+      "bestSeason": "Open water from the second-Saturday-in-May opener; also a winter ice fishery",
+      "bodyCopy": "Pike own the deep end. When the spring refill floods the sandy banks up the S-shaped arms, they slide into the fresh-drowned vegetation to spawn, then spend the open-water season working the weed and flat edges. Come winter the whole game shifts to the dam basin — the deepest water left after drawdown, where ice anglers pull them from the lowest holes, around 15 feet down. They're the most-logged fish on the reservoir, so start where the water stays deep: the west end, hard against the dam.",
+      "qualitySignal": null,
+      "lede": "Follow the water up the arms in spring. As the reservoir climbs toward its 6.55-metre summer pool, it re-floods the sandy, drawn-down banks of the S-shaped upper valley, and pike push into that fresh vegetation to spawn — the reservoir's calendar and the pike's run on the same clock. By the second-Saturday-of-May opener they've settled onto the new weed edges, working out from the flooded shallows toward open water.",
+      "howItFishes": "The season is a migration between the two ends of the reservoir. Spring belongs to the upper arms: the refill floods vegetated banks, pike spawn there, then hold the weed and flat edges while the water is high, with yellow perch and other forage packed into the same cover. Then the drawdown starts in late June and doesn't quit until winter, pulling water off the arms and concentrating everything downstream toward the dam. By ice season the fishery has collapsed onto the dam basin at the west end — the deepest water left — where anglers take pike from the lowest holes, around 15 feet down, often while working perch. Treat any shallow spot as temporary; the reservoir can strand it in weeks. Follow the deep water toward the dam as the season drains the arms.",
+      "structureDetails": [
+        {
+          "name": "Dam basin (deepest water, west end near Wildwood Dam)",
+          "detail": "The lowest-lying water holds through the winter drawdown, so it becomes the pike's cold-season address — ice anglers pull them from the deepest holes, around 15 feet, while targeting perch. (Angler-documented; no bathymetric chart exists for the reservoir.)"
+        },
+        {
+          "name": "Spring-refill drawdown-zone shallows (upper/eastern reaches of the S-shaped valley)",
+          "detail": "Sandy and muddy flooded banks that re-inundate each spring as the reservoir climbs to summer pool — fresh drowned vegetation that lines up with the pike spawn. Specific bays aren't named in the sources; this is the reservoir-cycle pattern, not a mapped spot."
+        }
+      ],
+      "speciesRules": [
+        {
+          "rule": "Season: Jan 1–Mar 31 and second Saturday in May to Dec 31 (2026: May 9–Dec 31) — Limit: S-6 / C-2 — Size: no size limit",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2026-01-01"
+        },
+        {
+          "rule": "Waterbody exceptions: none — Wildwood Lake/Reservoir and Trout Creek appear in neither the FMZ 16 exceptions nor sanctuaries lists; zone-wide regulations apply",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2026-01-01"
+        },
+        {
+          "rule": "Bait: FMZ 16 is within the Southern Bait Management Zone, which restricts transporting live or dead baitfish and leeches into or out of the zone",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2026-01-01"
+        }
+      ],
+      "sources": [
+        "https://thamesriver.on.ca/parks-recreation-natural-areas/fishing/",
+        "https://thescientificfisherman.com/wildwood-lake-ice-fishing-perch/",
+        "https://fishbrain.com/fishing-waters/dW0o2uVF/wildwood-lake"
+      ]
+    },
+    {
+      "parentSlug": "walleye",
+      "displayName": "Walleye",
+      "tier": "absent",
+      "structure": [],
+      "bestSeason": null,
+      "bodyCopy": null,
+      "qualitySignal": null,
+      "lede": null,
+      "howItFishes": null,
+      "structureDetails": null,
+      "speciesRules": null,
+      "sources": []
+    },
+    {
+      "parentSlug": "black-crappie",
+      "displayName": "Black Crappie",
+      "tier": "absent",
+      "structure": [],
+      "bestSeason": null,
+      "bodyCopy": null,
+      "qualitySignal": null,
+      "lede": null,
+      "howItFishes": null,
+      "structureDetails": null,
+      "speciesRules": null,
+      "sources": []
+    },
+    {
+      "parentSlug": "yellow-perch",
+      "displayName": "Yellow Perch",
+      "tier": "strong",
+      "structure": ["dam-wall basin, 12–15 ft"],
+      "bestSeason": "Open all year; the standout is the winter ice fishery in the dam basin",
+      "bodyCopy": "Winter is perch time. As the reservoir drops to its holding level, the perch stack into the dam-wall basin and hold over 12 to 15 feet — a school you can practically walk to, since anglers park roadside by the dam and drill a line of holes straight out from the wall. Minnows worked just off bottom do it. They're also the pike's grocery store, which is why both species crowd the same deep basin once the shallows drain away.",
+      "qualitySignal": null,
+      "lede": "The dam wall is the winter address. When the reservoir sits at its low holding level, perch bunch into the basin right off the wall and hold over 12 to 15 feet — the same deep water that keeps the pike fed. It's a roadside fishery: park near the dam, walk out, and drill a line of holes from about 8 feet out to 15 to find the band the school has settled on.",
+      "howItFishes": "Perch are catchable year-round, but the documented fishery here is the winter one, and it turns on the deepest water left after drawdown. As the reservoir falls toward its roughly 3-metre holding level through fall, the perch retreat to the dam-wall basin and stack over 12 to 15 feet. Work minnows just off bottom — the schools hold a foot or two up, and a line of holes from 8 out to 15 feet lets you pin the exact depth they've settled on. That same basin doubles as the pike's pantry, so expect the odd northern from the deepest holes on the same rig. Open water spreads the perch back across the reservoir's flats and weed edges, but no named warm-season structure is documented — winter, on the dam basin, is where the pattern lives.",
+      "structureDetails": [
+        {
+          "name": "Dam-wall basin, 12–15 ft",
+          "detail": "The deep water directly off the dam is the documented winter schooling area — a line of ice holes from 8 feet out to 15 found perch concentrated over 12 to 15 feet on minnow rigs, with roadside parking near the dam. (Angler-documented; no bathymetric chart exists for the reservoir.)"
+        }
+      ],
+      "speciesRules": [
+        {
+          "rule": "Season: open all year — Limit: S-50 / C-25",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2026-01-01"
+        },
+        {
+          "rule": "Waterbody exceptions: none — Wildwood Lake/Reservoir and Trout Creek appear in neither the FMZ 16 exceptions nor sanctuaries lists; zone-wide regulations apply",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2026-01-01"
+        },
+        {
+          "rule": "Bait: FMZ 16 is within the Southern Bait Management Zone, which restricts transporting live or dead baitfish and leeches into or out of the zone",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2026-01-01"
+        }
+      ],
+      "sources": [
+        "https://thamesriver.on.ca/parks-recreation-natural-areas/fishing/",
+        "https://www.anglersatlas.com/place/728791/wildwood-lake",
+        "https://thescientificfisherman.com/wildwood-lake-ice-fishing-perch/"
+      ]
+    }
+  ],
+  "keyResources": [
+    {
+      "label": "The actual regs, straight from the source — FMZ 16, Government of Ontario",
+      "url": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16"
+    },
+    {
+      "label": "Launch, boating rules, and reservoir access — Wildwood Conservation Area, Upper Thames River Conservation Authority",
+      "url": "https://thamesriver.on.ca/parks-recreation-natural-areas/boating/"
+    },
+    {
+      "label": "Admission and boat-pass fees — UTRCA conservation-area fees",
+      "url": "https://thamesriver.on.ca/parks-recreation-natural-areas/fees/"
+    },
+    {
+      "label": "Stocking record, FMZ 16 — Ontario Fish ON-Line",
+      "url": "https://www.lioapplications.lrc.gov.on.ca/services/FishONLine/StockingList.aspx?json=true&fmz=16&stock=AllSpecies&diagnostics=false&lang=en"
+    }
+  ],
+  "speciesCount": 2,
+  "lastVerified": "2026-07-19",
+  "factCheckStatus": "passed",
+  "regsGate": "passed"
+}

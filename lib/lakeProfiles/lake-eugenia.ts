@@ -1,0 +1,325 @@
+import type { LakeProfile } from "./types";
+
+// Stage 7 output — generated 2026-07-19 from the Bite Club-register copy
+// (04-lake-copy.md / 04b-species-subguides.md, Stage 5 passed). All rendered
+// content is carried verbatim from the verified substrate.
+const lakeEugenia: LakeProfile = {
+  slug: "lake-eugenia",
+  lake: "Lake Eugenia",
+  province: "Ontario",
+  fmz: 16,
+  waterbodyType: "reservoir",
+  coordinates: { lat: 44.313609, lng: -80.5127808 },
+  morphology: {
+    surfaceArea: "~680–720 ha (sources vary; no official figure)",
+    maxDepth: "~40 ft (12 m)",
+    meanDepth: "~4.6 ft (1.4 m)",
+    clarity: null,
+    trophicStatus: null,
+    thermalBehaviour: null,
+  },
+  bestSeason:
+    "Late-June bass opener through fall; yellow perch year-round with a strong winter ice bite",
+  overview:
+    "Lake Eugenia is drowned farmland with a hydro dam bolted on the end. The Beaver River valley above Flesherton was dammed in 1912 and the fields went under soon after — nobody cleared them first, so the whole basin is stubbled with submerged stumps, logs, and standing timber. It's a shallow bowl: about 40 feet at its deepest against a mean under five, ringed with cabbage, reed, and lily-pad beds, and still run today as a reservoir for Ontario Power Generation's Eugenia Falls station. That timber-and-weed character is the fishery. Largemouth bury in the stump beds and pad edges; smallmouth work the same wood plus the lone deep zone; yellow perch stack the 7-to-10-foot weedlines and light up through the ice. Your only way in is the Canrobert Street public launch on the southwest shore — the rest is private cottage frontage, gated behind a seasonal pass from May.",
+  notableFacts: [
+    {
+      fact: "One of Ontario's older hydro reservoirs: the dam on the Beaver River was built in 1912, and about 1,900 acres of farmland were bought and flooded after 1913.",
+      sourceUrl: "https://en.wikipedia.org/wiki/Lake_Eugenia",
+    },
+    {
+      fact: "Extreme shallow-bowl morphology — roughly 40 ft at its deepest against a mean of about 4.6 ft — over flooded farmland full of stumps and standing timber.",
+      sourceUrl:
+        "https://adventurefishing.ca/shop/sso/eugenia-lake-southwestern-southern-ontario/",
+    },
+    {
+      fact: "The only lake in Grey Highlands with municipal public access that allows motorized boats.",
+      sourceUrl:
+        "https://www.greyhighlands.ca/our-community/parks-lakes-and-trails/lakes/",
+    },
+  ],
+  regulations: [
+    {
+      species: "Largemouth & Smallmouth Bass",
+      season: "Fourth Saturday in June to November 30",
+      limit: "S-6 / C-2",
+      sizeLimit: "no size limit",
+      sourceUrl:
+        "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      effectiveDate: "2026-01-01",
+      verified: true,
+    },
+    {
+      species: "Yellow Perch",
+      season: "Open all year",
+      limit: "S-50 / C-25",
+      sizeLimit: "no size limit",
+      sourceUrl:
+        "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      effectiveDate: "2026-01-01",
+      verified: true,
+    },
+  ],
+  regsDisclaimer:
+    "Regulations effective 2026-01-01, FMZ 16. This is a summary, not the legal regulation — confirm current rules with the official source before fishing.",
+  launches: [
+    {
+      name: "Lake Eugenia Public Boat Launch & Beach — Canrobert Street (251 Canrobert St, Eugenia/Flesherton), southwest shore",
+      type: "trailer-and-carry-in",
+      notes:
+        "The only municipal public access; all other shoreline is private. Operated by the Eugenia & District Community Improvement Association under MOU with the Municipality of Grey Highlands; 2026 season opens May 8. Motorboat launch fee (~$17/day incl. parking per association info sheet; rates change yearly); canoes/kayaks launch free. Submerged stumps and timber are a basin-wide navigation hazard, worsened by the OPG reservoir's winter drawdown.",
+      sourceUrl:
+        "https://www.greyhighlands.ca/our-community/parks-lakes-and-trails/lakes/",
+    },
+  ],
+  species: [
+    {
+      parentSlug: "smallmouth-bass",
+      displayName: "Smallmouth Bass",
+      tier: "strong",
+      structure: [
+        "submerged logs, stumps and weedline edges",
+        "the limited deeper zone (to ~40 ft)",
+      ],
+      bestSeason: "Late-June opener through fall",
+      bodyCopy:
+        "Smallmouth are the most-logged fish on the lake, which is a little backwards for a bowl this shallow and weedy. They make it work off the wood — the drowned logs and stump edges — and off the one deep spot, the roughly 40-foot hole that stands out against a basin averaging under five. From the late-June opener through fall they hunt the timber and the deeper weedline breaks, running down crayfish and perch. When the water's up in the stumps, so are they.",
+      qualitySignal: null,
+      lede:
+        "The one deep hole is the smallmouth's ace. On a reservoir that averages under five feet, the roughly 40-foot zone is the only real vertical structure Eugenia offers, and it anchors the bass against a basin of soft-bottomed weed and flooded wood. Off that deep edge they slide onto the drowned logs and stump lines, working the hard cover a warm, weedy lake mostly denies them.",
+      howItFishes:
+        "From the fourth-Saturday-of-June opener through fall, smallmouth hold the flooded timber and the weedline breaks, running down crayfish and yellow perch along the harder edges. The lake's shape does the sorting: with a mean depth near 4.6 feet against a max near 40, the single deep zone concentrates fish that want cooler, harder water, while the stumps and logs give ambush cover lake-wide. Water level is the wildcard — this is an Ontario Power Generation hydro reservoir on an annual winter drawdown and spring fill, so cover that held fish in summer can sit high and dry by freeze-up. Fish the wood while the water's up in it, and lean on the deep zone when the reservoir pulls down.",
+      structureDetails: [
+        {
+          name: "Submerged logs, stumps and weedline edges",
+          detail:
+            "Flooded-timber cover lake-wide from the drowned farmland — the ambush structure smallmouth relate to on a lake short on rock. Smallmouth is the most-logged species on the lake's angler catch record.",
+        },
+        {
+          name: "The limited deeper zone (to ~40 ft)",
+          detail:
+            "The lone deep-water option against a ~4.6 ft mean — cooler, harder-bottomed water that concentrates fish, especially as the reservoir draws down. No specific named deep hole is publicly documented.",
+        },
+      ],
+      speciesRules: [
+        {
+          rule: "Largemouth & Smallmouth Bass (combined) — Season: fourth Saturday in June to November 30 — Limit: S-6 / C-2 — Size: no size limit",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2026-01-01",
+        },
+        {
+          rule: "Waterbody exceptions: none — Lake Eugenia appears in neither the FMZ 16 exceptions nor sanctuaries lists; zone-wide regulations apply",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2026-01-01",
+        },
+        {
+          rule: "Bait: FMZ 16 is within the Southern Bait Management Zone, which restricts transport of live/dead baitfish and leeches",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2026-01-01",
+        },
+        {
+          rule: "Access: the only public way in is the Canrobert Street launch on the southwest shore — all other shoreline is private, and the motorboat launch runs on a seasonal fee pass (2026 season from May 8)",
+          sourceUrl:
+            "https://www.greyhighlands.ca/our-community/parks-lakes-and-trails/lakes/",
+          effectiveDate: "2026-05-08",
+        },
+      ],
+      sources: [
+        "https://fishbrain.com/fishing-waters/0EAXs1RS/eugenia-lake",
+        "https://adventurefishing.ca/shop/sso/eugenia-lake-southwestern-southern-ontario/",
+      ],
+    },
+    {
+      parentSlug: "largemouth-bass",
+      displayName: "Largemouth Bass",
+      tier: "strong",
+      structure: [
+        "stump beds",
+        "cabbage/reed/lily-pad beds",
+        "weedy back bays",
+      ],
+      bestSeason: "Late-June opener through fall; buried deep in weeds through summer",
+      bodyCopy:
+        "This is largemouth's kind of mess. The old stump beds hold the biggest fish in the lake — worked slow with a plastic worm or a jig — and the cabbage, reeds, and lily pads spread bass cover across the whole flooded flat. Through summer the fish wedge into the densest bay weeds; slide a spinnerbait past them on a gray, windy afternoon, or throw topwater after dark around a full moon. The season runs from the late-June opener into fall, and the thicker the salad, the better it fishes.",
+      qualitySignal: null,
+      lede:
+        "The stump beds are where the biggest largemouth live. Flooded farmland left standing timber across the basin, and the old stumps hold the lake's heaviest bass — but the cover doesn't stop there. Cabbage, reeds, and lily pads sprawl over the shallow flats, and dense back bays give summer fish somewhere to bury. On a lake built for largemouth, the trick is picking which mess to fish.",
+      howItFishes:
+        "This is prime largemouth habitat — shallow, warm, weedy, wall-to-wall wood — and the fish use all of it. The stump beds fish best slow, a plastic worm or a jig picked through the timber for the bigger fish. As summer heats the shallows, largemouth wedge into the thickest cabbage, reed, and lily cover; a spinnerbait pulled past the weed edges on a gray, windy afternoon draws them out, and topwater after dark around a full moon works the same water. The season opens the fourth Saturday of June and runs to November 30, with the shallow flooded flats staying productive through the warm months. Watch the submerged stumps and standing timber as a navigation hazard, especially when the OPG reservoir shifts level.",
+      structureDetails: [
+        {
+          name: "Stump beds (flooded farmland timber)",
+          detail:
+            "The submerged stumps hold the largest bass in the lake; fished slow with a worm or jig. Core big-fish structure across the flooded basin.",
+        },
+        {
+          name: "Cabbage weed, reed and lily-pad beds",
+          detail:
+            "Primary bass cover spread across the shallow flats — the green that defines a flooded-farmland reservoir this shallow.",
+        },
+        {
+          name: "Small bays with dense summer weeds",
+          detail:
+            "Where largemouth bury as the shallows heat up — worked with spinnerbaits on cloudy, windy days and topwater after dark around full moons.",
+        },
+      ],
+      speciesRules: [
+        {
+          rule: "Largemouth & Smallmouth Bass (combined) — Season: fourth Saturday in June to November 30 — Limit: S-6 / C-2 — Size: no size limit",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2026-01-01",
+        },
+        {
+          rule: "Waterbody exceptions: none — Lake Eugenia appears in neither the FMZ 16 exceptions nor sanctuaries lists; zone-wide regulations apply",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2026-01-01",
+        },
+        {
+          rule: "Bait: FMZ 16 is within the Southern Bait Management Zone, which restricts transport of live/dead baitfish and leeches",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2026-01-01",
+        },
+        {
+          rule: "Access: the only public way in is the Canrobert Street launch on the southwest shore — all other shoreline is private, and the motorboat launch runs on a seasonal fee pass (2026 season from May 8)",
+          sourceUrl:
+            "https://www.greyhighlands.ca/our-community/parks-lakes-and-trails/lakes/",
+          effectiveDate: "2026-05-08",
+        },
+      ],
+      sources: [
+        "https://www.thefishinguide.com/lake-eugenia.php",
+        "https://adventurefishing.ca/shop/sso/eugenia-lake-southwestern-southern-ontario/",
+      ],
+    },
+    {
+      parentSlug: "northern-pike",
+      displayName: "Northern Pike",
+      tier: "absent",
+      structure: [],
+      bestSeason: null,
+      bodyCopy: null,
+      qualitySignal: null,
+      lede: null,
+      howItFishes: null,
+      structureDetails: null,
+      speciesRules: null,
+      sources: [],
+    },
+    {
+      parentSlug: "walleye",
+      displayName: "Walleye",
+      tier: "absent",
+      structure: [],
+      bestSeason: null,
+      bodyCopy: null,
+      qualitySignal: null,
+      lede: null,
+      howItFishes: null,
+      structureDetails: null,
+      speciesRules: null,
+      sources: [],
+    },
+    {
+      parentSlug: "black-crappie",
+      displayName: "Black Crappie",
+      tier: "absent",
+      structure: [],
+      bestSeason: null,
+      bodyCopy: null,
+      qualitySignal: null,
+      lede: null,
+      howItFishes: null,
+      structureDetails: null,
+      speciesRules: null,
+      sources: [],
+    },
+    {
+      parentSlug: "yellow-perch",
+      displayName: "Yellow Perch",
+      tier: "strong",
+      structure: ["weed beds in 7–10 ft", "basin-wide through the ice"],
+      bestSeason: "Year-round, best through the ice",
+      bodyCopy:
+        "Cold water is when this fishery turns on. Perch feed year-round on Eugenia — the one bite that never really shuts off — but the winter is the draw. In open water they school the weed beds in 7 to 10 feet, taken on a bobber rig or a small jig worked through the pockets. Come ice-up they spread across the basin in good numbers, so drill, hop, and keep moving until you're standing over a school. They run small but they run thick. Mind the reservoir's winter drawdown near the dam when you're picking ice.",
+      qualitySignal: null,
+      lede:
+        "Seven to ten feet of weed is the perch address in open water. Eugenia's yellow perch stack the mid-depth weed beds through the warm months, then scatter across the whole basin once the lake locks up. They run small but they run in numbers, and the winter ice is when the fishery earns its reputation — a bite that holds up when the bass have long since shut down for the year.",
+      howItFishes:
+        "Open-water perch relate to the weed beds in 7 to 10 feet, taken on a bobber rig or a small jig worked through the pockets and edges. The fishery is year-round, but ice is the draw: come freeze-up the schools spread basin-wide in good numbers, so the game is mobile — drill, hole-hop, and keep moving until you find a pod, then work it. Fish run on the small side here, a numbers fishery rather than a size one. Two cautions on the ice, both about the reservoir: OPG runs Eugenia on an annual winter drawdown, so ice near the dam can be unreliable, and the submerged stumps and timber sit just under the surface across much of the flooded basin.",
+      structureDetails: [
+        {
+          name: "Weed beds in 7–10 ft",
+          detail:
+            "The most productive open-water perch zone — mid-depth weedlines and pockets fished with bobber rigs and small jigs.",
+        },
+        {
+          name: "Basin-wide through the ice",
+          detail:
+            "Winter schools spread across the whole shallow bowl in good numbers; located by hole-hopping. (Angler-reported ice pattern; watch drawdown ice near the dam.)",
+        },
+      ],
+      speciesRules: [
+        {
+          rule: "Yellow Perch — Season: open all year — Limit: S-50 / C-25 — Size: no size limit",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2026-01-01",
+        },
+        {
+          rule: "Waterbody exceptions: none — Lake Eugenia appears in neither the FMZ 16 exceptions nor sanctuaries lists; zone-wide regulations apply",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2026-01-01",
+        },
+        {
+          rule: "Bait: FMZ 16 is within the Southern Bait Management Zone, which restricts transport of live/dead baitfish and leeches",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2026-01-01",
+        },
+        {
+          rule: "Access: the only public way in is the Canrobert Street launch on the southwest shore — all other shoreline is private, and the motorboat launch runs on a seasonal fee pass (2026 season from May 8)",
+          sourceUrl:
+            "https://www.greyhighlands.ca/our-community/parks-lakes-and-trails/lakes/",
+          effectiveDate: "2026-05-08",
+        },
+      ],
+      sources: [
+        "https://www.thefishinguide.com/lake-eugenia.php",
+        "https://adventurefishing.ca/shop/sso/eugenia-lake-southwestern-southern-ontario/",
+      ],
+    },
+  ],
+  keyResources: [
+    {
+      label:
+        "The actual regs, straight from the source — FMZ 16, Government of Ontario",
+      url: "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+    },
+    {
+      label: "Launch, beach, and lake access — Municipality of Grey Highlands",
+      url: "https://www.greyhighlands.ca/our-community/parks-lakes-and-trails/lakes/",
+    },
+    {
+      label:
+        "Boat launch operator, season, and fees — Eugenia & District Community Improvement Association",
+      url: "https://www.eugeniagoldrush.com/boat-launch",
+    },
+    {
+      label: "Free depth/contour maps — Angler's Atlas, Eugenia Lake",
+      url: "https://www.anglersatlas.com/place/102213/eugenia-lake",
+    },
+  ],
+  speciesCount: 3,
+  lastVerified: "2026-07-19",
+  factCheckStatus: "passed",
+  regsGate: "passed",
+};
+
+export default lakeEugenia;

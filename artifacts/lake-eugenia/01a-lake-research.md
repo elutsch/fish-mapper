@@ -103,7 +103,7 @@ Source (official, the ONLY regs source used): Ontario Fishing Regulations Summar
 - Crappie — Season: open all year — Limits: S-30 / C-10 — effective 2026 — same source
 - Yellow Perch — Season: open all year — Limits: S-50 / C-25 — effective 2026 — same source
 - Sunfish — Season: open all year — Limits: S-50 / C-25 — effective 2026 — same source
-- Rainbow Trout (secondary interest, put-and-take claim) — Season: fourth Saturday in April to September 30 — Limits: [CONFLICTING EXTRACTIONS — one fetch returned S-5/C-2 aggregate, another S-2/C-1; Stage 2 must re-verify the exact row before publishing any rainbow limit] — same source
+- Rainbow Trout (secondary interest, put-and-take claim) — Season: fourth Saturday in April to September 30 — Limits: S-2 / C-1 — no size limit — effective 2026 — same source [RESOLVED by Stage 2 re-fetch 2026-07-19: official FMZ 16 row is S-2 and C-1. NOTE: rainbow stocking itself remains UNVERIFIED — do not promote a trout fishery]
 - Waterbody exceptions for Lake Eugenia: NONE found — the FMZ 16 exceptions tables contain no entry for "Eugenia" or "Lake Eugenia"; zone-wide FMZ 16 rules apply — same source
 - Nearby exceptions (do NOT apply to the lake itself): Beaver River from Thornbury Dam to Georgian Bay (Grey County) has its own exception entry; a Beaver River sanctuary entry exists but is in Thorah Township (Beaverton — a DIFFERENT Beaver River, near Lake Simcoe) — same source
 - Sanctuary / closure on Lake Eugenia: none found — same source

@@ -32,9 +32,9 @@ data_richness: MEDIUM
 ## Morphology
 - Surface area — ~26 ha per Halton Hills water-quality study; 27.2 ha (67 ac) per Angler's Atlas; ~69 ac cited on Halton Hills heritage page (figures vary by source) — https://letstalkhaltonhills.ca/fairy-lake / https://www.anglersatlas.com/place/158223/fairy-lake
 - Perimeter — ~4.6 km — https://www.haltonhills.ca/en/explore-and-play/resources/Documents/FairLakeWaterQualityStudy.pdf (PDF; figures surfaced via search — direct fetch returned 404)
-- Max depth / mean depth — Very shallow: average depth ~1 m; south end <2 m; deeper water restricted to small areas of the main and Prospect Park basins — https://www.haltonhills.ca/en/explore-and-play/resources/Documents/FairLakeWaterQualityStudy.pdf (via search; direct fetch 404)
+- Max depth / mean depth — Very shallow: average depth ~1 m; south end <2 m; deeper water restricted to small areas of the main and Prospect Park basins — https://www.haltonhills.ca/en/explore-and-play/resources/Documents/FairLakeWaterQualityStudy.pdf (WQ Study; "The average lake depth is 1 m" corroborated via search 2026-07-19; direct PDF fetch 404s)
 - Water clarity / colour — Described as a "clear, shallow-water ecosite" — https://www.haltonhills.ca/en/explore-and-play/fairy-lake.aspx
-- Trophic status — Not explicitly stated; nutrient-loading concern is the focus of the water-quality studies (nutrient model, phragmites/waterfowl management) — likely eutrophic/mesotrophic but [NOT FOUND] as an explicit designation — https://letstalkhaltonhills.ca/fairy-lake
+- Trophic status — Halton Hills WQ Study characterizes it as a "shallow, alkaline, and productive system dominated by aquatic plants" with nutrient concentrations "elevated at all of the sampling locations … indicative of productive conditions" — i.e. a nutrient-rich, productive (eutrophic-leaning) pond; no single-word trophic classification is stated — https://www.haltonhills.ca/en/explore-and-play/resources/Documents/FairLakeWaterQualityStudy.pdf (corroborated via search 2026-07-19) / https://letstalkhaltonhills.ca/fairy-lake
 - Thermal behaviour — Too shallow (mean ~1 m) to stratify meaningfully; warm-water pond, potential winterkill risk in a shallow impoundment [inferred from morphology, not documented] — [NOT FOUND explicit]
 - Reservoir dynamics — Dammed impoundment on Black Creek since 1830; dam maintains levels. No documented seasonal drawdown schedule found — https://letstalkhaltonhills.ca/fairy-lake
 - Named basins — "Main basin" and "Prospect Park basin" (Prospect Park sits on a 14-ac peninsula dividing the lake) — https://www.haltonhills.ca/en/explore-and-play/fairy-lake.aspx
@@ -51,7 +51,7 @@ data_richness: MEDIUM
 - Rock Bass — forage/panfish — Angler's Atlas species list — https://www.anglersatlas.com/place/158223/fairy-lake (angler report)
 - Brown Bullhead (catfish) — forage — Angler's Atlas species list — https://www.anglersatlas.com/place/158223/fairy-lake (angler report)
 - Common Carp — rough fish — Angler's Atlas species list — https://www.anglersatlas.com/place/158223/fairy-lake (angler report)
-- **Round Goby (INVASIVE)** — invasive forage — first identified in Fairy Lake Aug 2024; CVC-confirmed — https://cvc.ca/conversations/small-fish-big-effect-invasive-round-goby/ (see Gotchas)
+- **Round Goby (INVASIVE)** — invasive forage — confirmed present in Fairy Lake by CVC (reported Oct 2024); a specific first-identification month is not confirmed by the CVC source — https://cvc.ca/conversations/small-fish-big-effect-invasive-round-goby/ (see Gotchas)
 
 ## In-lake structure (by species)
 [Structure is generic and angler-sourced; no detailed bathymetric structure map was located for this small pond. Named leads below.]
@@ -105,7 +105,7 @@ Source: https://www.ontario.ca/document/ontario-fishing-regulations-summary/fish
 - Subject of a Fairy Lake Revival project / 2023 Water Quality Study Update and 2025 Implementation Plan (nutrient model, phragmites & waterfowl management, Bovis Creek restoration study) — https://letstalkhaltonhills.ca/fairy-lake
 
 ## Gotchas & disambiguation
-- **INVASIVE — Round Goby:** first identified in Fairy Lake August 2024, CVC-confirmed. The Mayor's Fishing Derby ("Go for the Goby") targets goby removal/awareness. Gobies prey on eggs/young of sport fish; do NOT possess live goby or use as bait (illegal in Canada) — https://cvc.ca/conversations/small-fish-big-effect-invasive-round-goby/
+- **INVASIVE — Round Goby:** confirmed present in Fairy Lake by CVC (reported October 2024); the CVC source does not state a first-identification month (an "Aug 2024" date circulated via the Town's "Go for the Goby" derby news page, which 404s on direct fetch). The Mayor's Fishing Derby ("Go for the Goby") targets goby removal/awareness. Gobies prey on eggs/young of sport fish; do NOT possess live goby or use as bait (illegal in Canada) — https://cvc.ca/conversations/small-fish-big-effect-invasive-round-goby/
 - **Bait Management Zone:** FMZ 16 southern BMZ — no transport of baitfish/leeches in or out — https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16
 - **Invasive vegetation:** aquatic macrophytes dominated by Eurasian Water Milfoil (plus stonewort, hornwort, pondweeds); phragmites management underway — https://www.haltonhills.ca/en/explore-and-play/fairy-lake.aspx
 - **Name confusion:** at least three Ontario "Fairy Lakes" (Acton, Huntsville, Newmarket) plus a Fairy Lake in Parry Sound District — Parry Sound survey data is a DIFFERENT lake and must not be attributed here.

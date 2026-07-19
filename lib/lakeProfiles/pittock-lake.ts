@@ -1,0 +1,390 @@
+import type { LakeProfile } from "./types";
+
+// Stage 7 output — generated 2026-07-19 from the Bite Club-register copy
+// (04-lake-copy.md / 04b-species-subguides.md, Stage 5 passed). All rendered
+// content is carried verbatim from the verified substrate.
+const pittockLake: LakeProfile = {
+  slug: "pittock-lake",
+  lake: "Pittock Lake",
+  province: "Ontario",
+  fmz: 16,
+  waterbodyType: "reservoir",
+  coordinates: { lat: 43.1606, lng: -80.7295 },
+  morphology: {
+    surfaceArea: "~452 ha (summer pool)",
+    maxDepth: null,
+    meanDepth: null,
+    clarity: "turbid",
+    trophicStatus:
+      "Nutrient-rich, eutrophic-leaning warm-water reservoir (phosphorus/nitrogen surplus; May–September algal-bloom monitoring, including blue-green algae)",
+    thermalBehaviour:
+      "Shallow and warm overall; the dam can discharge cooler water from reservoir depths in summer, implying some thermal layering near the dam. No formal stratification study found.",
+  },
+  bestSeason: "Late spring through fall; yellow perch year-round",
+  overview:
+    "Pittock Lake is the Thames River backed up behind a flood-control dam on the edge of Woodstock — 10 km of long, narrow, green water run by the Upper Thames River Conservation Authority. It runs shallow and warm, nutrient-rich enough to bloom in a hot summer, and deepens only toward the Pittock Dam at the west end. A 50-hectare cattail marsh fills the east end; the rest is soft bottom, which is why UTRCA sank 300 tonnes of river stone and 125 metres of wood cover here in 2016 to build the hard structure the reservoir lacked. That habitat plus the marsh runs the fishery: pike first, then bass and perch. Then the reservoir draws down from mid-June through fall, and fish that spread out in June stack toward the main basin as the mudflats show. Motorized launching is north-shore only inside Pittock Conservation Area; Roth Park across the water is carry-in and shore fishing.",
+  notableFacts: [
+    {
+      fact: "In 2016 UTRCA and partners built a purpose-made fish-habitat complex in the reservoir: 300 tonnes of river stone for shoals and gravel spawning beds, 125 metres of wooden cover structures, plus shoreline and aquatic plantings — targeting bass, pike, perch, walleye and pumpkinseed.",
+      sourceUrl:
+        "https://www.heartfm.ca/news/local-news/pittock-conservation-area-fish-habitat/",
+    },
+    {
+      fact: "Pittock Dam was built 1964–1967 (about $6M) for flood control and summer low-flow augmentation of the Thames through Woodstock and downstream to London.",
+      sourceUrl: "https://en.wikipedia.org/wiki/Pittock_Dam",
+    },
+    {
+      fact: "The reservoir is 10.3 km long with about 452 ha of summer surface area and a 50 ha cattail marsh at its upstream end; it is a designated Important Bird Area (ON027) known for fall waterbird concentrations on the drawdown mudflats.",
+      sourceUrl: "https://www.ibacanada.org/site.jsp?siteID=ON027",
+    },
+    {
+      fact: "No stocking record exists for Gordon Pittock Reservoir in the Ontario Fish ON-Line FMZ 16 dataset; the warm-water fishery is self-sustaining, and the 2016 project added spawning habitat rather than fish.",
+      sourceUrl:
+        "https://www.lioapplications.lrc.gov.on.ca/services/FishONLine/StockingList.aspx?json=true&fmz=16&stock=AllSpecies&diagnostics=false&lang=en",
+    },
+  ],
+  regulations: [
+    {
+      species: "Largemouth & Smallmouth Bass (combined)",
+      season: "Fourth Saturday in June to November 30 (2026: Jun 27–Nov 30)",
+      limit: "S-6 / C-2 (Largemouth and Smallmouth Bass combined)",
+      sizeLimit: "no size limit",
+      sourceUrl:
+        "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      effectiveDate: "2025-12-08",
+      verified: true,
+    },
+    {
+      species: "Northern Pike",
+      season:
+        "January 1 to March 31 and second Saturday in May to December 31 (2026: May 9–Dec 31)",
+      limit: "S-6 / C-2",
+      sizeLimit: "no size limit",
+      sourceUrl:
+        "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      effectiveDate: "2025-12-08",
+      verified: true,
+    },
+    {
+      species: "Yellow Perch",
+      season: "Open all year",
+      limit: "S-50 / C-25",
+      sizeLimit: null,
+      sourceUrl:
+        "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      effectiveDate: "2025-12-08",
+      verified: true,
+    },
+  ],
+  regsDisclaimer:
+    "Regulations effective 2025-12-08, FMZ 16. This is a summary, not the legal regulation — confirm current rules with the official source before fishing.",
+  launches: [
+    {
+      name: "Pittock Conservation Area — 1st Launch (north shore, west basin near the Day Use area / Oxford Yacht Club)",
+      type: "trailer",
+      notes:
+        "Motorized trailer launch; permit and fee required. Motorized launching is north-shore only, dawn to dusk during the May–October operating season; no personal watercraft. A boat pass does not guarantee season-long access — drawdown can close the launch.",
+      sourceUrl: "https://www.pittockconservationarea.ca/day-use-activities",
+    },
+    {
+      name: "Pittock Conservation Area — 2nd Launch (north shore, near the campground, mid-reservoir)",
+      type: "trailer",
+      notes:
+        "Second motorized launch shown on the CA boating map; north-shore only, same operating rules and drawdown caveat.",
+      sourceUrl:
+        "https://www.pittockconservationarea.ca/_files/ugd/5600a4_4a52661f11b84c61bc3952d10a9a03c3.pdf",
+    },
+    {
+      name: "Roth Park (south shore, City of Woodstock / UTRCA)",
+      type: "carry-in",
+      notes:
+        "Shore fishing and non-motorized / carry-in launch (Woodstock Dragon Boat Club); paved South Shore / Pittock trail network reaches the dam.",
+      sourceUrl: "https://www.tourismoxford.ca/listing/roth-park/369/",
+    },
+  ],
+  species: [
+    {
+      parentSlug: "smallmouth-bass",
+      displayName: "Smallmouth Bass",
+      tier: "strong",
+      structure: [
+        "2016 constructed river-stone shoals and gravel spawning beds",
+        "125 m of wooden cover structures (2016)",
+        "the deeper dam-end basin (west end)",
+      ],
+      bestSeason: "Late-June opener through fall",
+      bodyCopy:
+        "Pittock is soft bottom almost everywhere, so smallmouth crowd what little hard structure there is — and the 2016 UTRCA build handed them a lot of it, dropping rock shoals and wood cover into a mud-bottomed lake. The bass took to it fast. The cooler, clearer water down at the dam end suits them too. When the summer drawdown pulls the reservoir off the flats, that hard structure only fishes better: fewer spots, more fish stacked on each. Work the stone from the late-June opener into fall.",
+      qualitySignal: null,
+      lede:
+        "Start at the dam. The west-end basin behind Pittock Dam is the reservoir's deepest, coolest, clearest water — exactly what smallmouth want in a lake that otherwise runs shallow and green. From there, work the 2016 stone shoals and gravel beds, the manufactured hard bottom in a mud-floored impoundment. These fish live on rock and rubble, and Pittock only has it where UTRCA put it or where the dam made it.",
+      howItFishes:
+        "Bass season opens the fourth Saturday of June, and from that first weekend the pattern is hard-structure-first. Smallmouth key on the 2016 river-stone shoals and gravel beds and the wooden cover, chasing crayfish and small perch across the rock. The dam-end basin holds the coolest, clearest water through summer, so it stays in play when the shallow arms heat and green up. Then the reservoir draws down from mid-June through fall — the defining move on this lake — pulling water off the flats and concentrating fish onto whatever hard structure stays wet. Fewer productive spots, but each stacks more fish. The season runs to November 30, well past the summer peak, and cooling water pulls bass back toward the shoals before freeze-up.",
+      structureDetails: [
+        {
+          name: "Constructed river-stone shoals and gravel spawning beds (2016)",
+          detail:
+            "300 tonnes of river stone placed by UTRCA in October 2016 — purpose-built spawning and refuge structure, and rare hard bottom in an otherwise soft-bottomed reservoir.",
+        },
+        {
+          name: "125 m of wooden cover structures (2016)",
+          detail:
+            "Engineered underwater wood cover from the same UTRCA project — cavity and shelf cover that holds bass.",
+        },
+        {
+          name: "Pittock Dam basin (west end)",
+          detail:
+            "The dam-end pool is the reservoir's deep water — the dam can discharge cooler water from depth in summer — and a heavily fished feature.",
+        },
+      ],
+      speciesRules: [
+        {
+          rule: "Season: fourth Saturday in June to November 30 (2026: Jun 27–Nov 30) — Limit: S-6 / C-2 (Largemouth and Smallmouth Bass combined) — Size: no size limit",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Waterbody exceptions: none apply to the reservoir itself; the only FMZ 16 exception nearby is on the Thames River between the dam at Gordon Pittock Reservoir and the Highway 59 bridge — a fish sanctuary, no fishing March 15 to the Friday before the second Saturday in May — which is the downstream tailwater, not the lake",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Access/bait: VHS (viral hemorrhagic septicemia) is present in the Thames River system, so baitfish movement rules apply; motorized launching is north-shore only inside Pittock Conservation Area, and mid-June-to-fall drawdown can limit launch access late season",
+          sourceUrl: "https://www.pittockconservationarea.ca/day-use-activities",
+          effectiveDate: "2026-07-19",
+        },
+      ],
+      sources: [
+        "https://www.heartfm.ca/news/local-news/pittock-conservation-area-fish-habitat/",
+        "https://fishbrain.com/fishing-waters/k_ja9BgJ/pittock-reservoir",
+        "https://www.anglersatlas.com/place/728882/gordon-pittock-reservoir",
+      ],
+    },
+    {
+      parentSlug: "largemouth-bass",
+      displayName: "Largemouth Bass",
+      tier: "strong",
+      structure: [
+        "the 50 ha east-end cattail marsh",
+        "2016 shoreline plantings and wooden cover structures",
+        "the shallow arm above the campground",
+      ],
+      bestSeason: "Late-June opener through the warm months",
+      bodyCopy:
+        "Head the other way for largemouth. That east-end cattail marsh is the one big slab of vegetated shallow on an otherwise open impoundment, and textbook bucketmouth country. They bury in the cattails, the 2016 shoreline plantings, and the wood cover, ambushing sunfish and shiners in the warm, stained water they handle better than smallmouth do. The shallow arm above the campground fishes the same way. Run the marsh edges and pads from the late-June opener through the warm months, before the drawdown drains the skinny water.",
+      qualitySignal: null,
+      lede:
+        "The east-end cattail marsh is where largemouth live on Pittock. Fifty hectares of flooded cattail — the only large vegetated shallow on a reservoir that's otherwise open, soft-bottomed water. It's the warm, weedy, stained cover largemouth thrive in and smallmouth avoid, backed up by the 2016 shoreline plantings and wood cover and the shallow riverine arm above the campground. Skinny water, thick cover, warm and green.",
+      howItFishes:
+        "Largemouth want warm, shallow, weedy water, and Pittock keeps it all at the upstream end. The cattail marsh, the 2016 shoreline plantings and wood cover, and the shallow arm above the campground form a continuous band of skinny vegetated cover where bass ambush sunfish, shiners, and young panfish. This end warms first in spring and stays productive through the warm months while the main basin runs open and less fishy for them. The eutrophic, stained water suits them — they tolerate the summer green and heat better than smallmouth. The catch is the drawdown: the reservoir drops from mid-June through fall, and the skinny water goes first, so the marsh and arm that hold fish in early summer can be mud by autumn. Fish the cover early and follow the receding weed edge as levels fall.",
+      structureDetails: [
+        {
+          name: "50 ha cattail marsh (upstream / east end)",
+          detail:
+            "The reservoir's only large vegetated shallow — classic warm-water largemouth cover, and the water that warms first in spring.",
+        },
+        {
+          name: "2016 shoreline plantings and wooden cover structures",
+          detail:
+            "Engineered shallow cover and native shoreline plantings from the UTRCA habitat project — added ambush cover in the shallows.",
+        },
+        {
+          name: "Shallow arm above the campground (upstream, 20 km/h restricted zone toward Oxford Road 4)",
+          detail:
+            "The riverine upper end — shallow, quiet water by boating rule, fishing much like the marsh.",
+        },
+      ],
+      speciesRules: [
+        {
+          rule: "Season: fourth Saturday in June to November 30 (2026: Jun 27–Nov 30) — Limit: S-6 / C-2 (Largemouth and Smallmouth Bass combined) — Size: no size limit",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Waterbody exceptions: none apply to the reservoir itself; the FMZ 16 fish sanctuary (no fishing March 15 to the Friday before the second Saturday in May) covers the Thames River between the Gordon Pittock dam and the Highway 59 bridge — the downstream tailwater, not the lake",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Access/bait: VHS is present in the Thames River system, so baitfish movement rules apply; motorized launching is north-shore only inside Pittock Conservation Area, and drawdown can limit launch access late season",
+          sourceUrl: "https://www.pittockconservationarea.ca/day-use-activities",
+          effectiveDate: "2026-07-19",
+        },
+      ],
+      sources: [
+        "https://www.ibacanada.org/site.jsp?siteID=ON027",
+        "https://www.heartfm.ca/news/local-news/pittock-conservation-area-fish-habitat/",
+        "https://fishbrain.com/fishing-waters/k_ja9BgJ/pittock-reservoir",
+      ],
+    },
+    {
+      parentSlug: "northern-pike",
+      displayName: "Northern Pike",
+      tier: "strong",
+      structure: [
+        "the east-end cattail marsh and adjoining shallow flats",
+        "the main west basin between the dam and the campground narrows",
+      ],
+      bestSeason: "Spring and again through fall",
+      bodyCopy:
+        "More anglers log pike here than any other fish. They spawn in the east-end cattail marsh as the ice goes out, then fan across the main west basin between the dam and the campground narrows — the broadest open water on the reservoir. In a lake this fertile, perch and panfish keep them fed. Hunt the marsh and weed edges through spring, then the open basin in summer and again as fall cools the water. One thing to mind: the Thames reach below the dam is a spring fish sanctuary — the reservoir stays open, but that tailwater doesn't.",
+      qualitySignal: null,
+      lede:
+        "Pike run the two ends of Pittock and the water between. They spawn in the flooded east-end cattail marsh as soon as the ice pulls out, then push out to hunt the main west basin — the wide, open water between the dam and the campground narrows. Spring cover, summer open water. In a reservoir this fertile they never go hungry: perch and panfish stack the same edges the pike patrol.",
+      howItFishes:
+        "Pike are the first gamefish moving each year on Pittock. They spawn in the flooded vegetation of the east-end cattail marsh as spring water pushes in, and by the second-Saturday-of-May opener they're keyed on the new weed growth and the panfish it holds. Through summer they spread into the main west basin, the broadest open water on the reservoir, working weed edges and the transition into deeper water. A fertile, warm system feeds them well — yellow perch and panfish are everywhere. Come fall, cooling water fires them up again before freeze-up. Two lake-specific cautions: the reservoir draws down from mid-June, so any weed edge you find is temporary — follow it as it recedes; and if you fish the dam area in spring, the Thames tailwater below the dam is a fish sanctuary closed March 15 to the Friday before the second Saturday in May, though the reservoir itself stays open.",
+      structureDetails: [
+        {
+          name: "East-end cattail marsh and adjoining shallow flats",
+          detail:
+            "Flooded vegetation at the upstream end — the reservoir's documented spring pike spawning habitat.",
+        },
+        {
+          name: "Main west basin between the dam and the campground narrows",
+          detail:
+            "The broadest open water on the reservoir and the most-reported pike water; summer hunting ground on weed edges and open-water transitions.",
+        },
+      ],
+      speciesRules: [
+        {
+          rule: "Season: January 1 to March 31 and second Saturday in May to December 31 (2026: May 9–Dec 31) — Limit: S-6 / C-2 — Size: no size limit",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Waterbody exceptions: the FMZ 16 spring fish sanctuary covers the Thames River between the Gordon Pittock dam and the Highway 59 bridge — no fishing March 15 to the Friday before the second Saturday in May. This is the tailwater below the dam; the reservoir carries no in-lake exception, but anglers fishing \"the dam\" in spring can be offside on the river side",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Access/bait: VHS is present in the Thames River system, so baitfish movement rules apply; motorized launching is north-shore only inside Pittock Conservation Area, and drawdown can limit launch access late season",
+          sourceUrl: "https://www.pittockconservationarea.ca/day-use-activities",
+          effectiveDate: "2026-07-19",
+        },
+      ],
+      sources: [
+        "https://www.ibacanada.org/site.jsp?siteID=ON027",
+        "https://fishbrain.com/fishing-waters/k_ja9BgJ/pittock-reservoir",
+        "https://www.heartfm.ca/news/local-news/pittock-conservation-area-fish-habitat/",
+      ],
+    },
+    {
+      parentSlug: "walleye",
+      displayName: "Walleye",
+      tier: "present",
+      structure: [],
+      bestSeason: null,
+      bodyCopy: null,
+      qualitySignal: null,
+      lede: null,
+      howItFishes: null,
+      structureDetails: null,
+      speciesRules: null,
+      sources: [],
+    },
+    {
+      parentSlug: "black-crappie",
+      displayName: "Black Crappie",
+      tier: "present",
+      structure: [],
+      bestSeason: null,
+      bodyCopy: null,
+      qualitySignal: null,
+      lede: null,
+      howItFishes: null,
+      structureDetails: null,
+      speciesRules: null,
+      sources: [],
+    },
+    {
+      parentSlug: "yellow-perch",
+      displayName: "Yellow Perch",
+      tier: "strong",
+      structure: [
+        "2016 constructed stone shoals and gravel beds",
+        "weed edges",
+        "north-shore day-use waterfront and Roth Park shore access",
+      ],
+      bestSeason: "Year-round, including through the ice",
+      bodyCopy:
+        "Perch are the year-round play here — one of the three species UTRCA puts at the top of its fishing page, and the season never closes. They school the 2016 gravel shoals and cruise the weed edges, and you don't need a boat to reach them: the north-shore day-use waterfront and Roth Park across the water both put you on fish from the bank. Summer holds them shallow; come ice-up, jiggers work the same flats. In water this fertile they also feed the pike and bass — find the schools, and keep an eye on what's hunting them.",
+      qualitySignal: null,
+      lede:
+        "Perch are Pittock's most democratic fish — you can catch them without a boat. The 2016 gravel shoals and the reservoir's weed edges hold schools, and both the north-shore day-use waterfront and Roth Park across the water reach them from the bank. Open all year, they carry the fishery when everything else is closed, right through the ice. Where the schools are, the pike and bass aren't far behind.",
+      howItFishes:
+        "Yellow perch are one of the three species UTRCA leads with, and their season never closes — which makes them the reservoir's steady option. They school over the 2016 constructed stone shoals and gravel beds and along the weed edges, feeding on invertebrates, larvae, and small minnows. Summer keeps them shallow and reachable from the north-shore day-use waterfront and from Roth Park on the south shore; once the reservoir freezes, jiggers work the same flats through the ice — the CA's motorized boating season is closed then anyway, so shore and ice access carry the winter. Perch are also the forage engine here: in a fertile lake, they feed the pike and bass, so a school of perch marks water worth working for the predators hunting them. Follow the shoals and weed edges, and expect the drawdown to move the shallow schools as levels fall.",
+      structureDetails: [
+        {
+          name: "Constructed stone shoals and gravel beds (2016)",
+          detail:
+            "Purpose-built spawning habitat from the UTRCA project, with perch a named target species — hard structure the schools relate to.",
+        },
+        {
+          name: "North-shore day-use waterfront and Roth Park (south shore) shore access",
+          detail:
+            "The documented shore-fishing spots where a summer and winter perch fishery happens — no boat required.",
+        },
+      ],
+      speciesRules: [
+        {
+          rule: "Season: open all year — Limit: S-50 / C-25",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Waterbody exceptions: none apply to the reservoir itself; the FMZ 16 fish sanctuary (no fishing March 15 to the Friday before the second Saturday in May) covers the Thames River between the Gordon Pittock dam and the Highway 59 bridge — the downstream tailwater, not the lake",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Access/bait: VHS is present in the Thames River system, so baitfish movement rules apply; motorized launching is north-shore only inside Pittock Conservation Area, and the water is not health-unit tested for swimming",
+          sourceUrl: "https://www.pittockconservationarea.ca/day-use-activities",
+          effectiveDate: "2026-07-19",
+        },
+      ],
+      sources: [
+        "https://thamesriver.on.ca/parks-recreation-natural-areas/fishing/",
+        "https://www.heartfm.ca/news/local-news/pittock-conservation-area-fish-habitat/",
+        "https://www.tourismoxford.ca/listing/roth-park/369/",
+      ],
+    },
+  ],
+  keyResources: [
+    {
+      label:
+        "The actual regs, straight from the source — FMZ 16, Government of Ontario",
+      url: "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+    },
+    {
+      label: "Launch, permits, and gate hours — Pittock Conservation Area day use",
+      url: "https://www.pittockconservationarea.ca/day-use-activities",
+    },
+    {
+      label:
+        "Boat passes, season, and reservoir drawdown notes — Upper Thames River Conservation Authority boating",
+      url: "https://thamesriver.on.ca/parks-recreation-natural-areas/boating/",
+    },
+    {
+      label: "Reservoir water levels before you launch — UTRCA Pittock level gauge",
+      url: "https://thamesriver.on.ca/water-management/thames-river-flows-disclaimer/thames-river-levels/pittockres-levels-startpage/",
+    },
+    {
+      label: "Stocking record, FMZ 16 — Ontario Fish ON-Line",
+      url: "https://www.lioapplications.lrc.gov.on.ca/services/FishONLine/StockingList.aspx?json=true&fmz=16&stock=AllSpecies&diagnostics=false&lang=en",
+    },
+  ],
+  speciesCount: 4,
+  lastVerified: "2026-07-19",
+  factCheckStatus: "passed",
+  regsGate: "passed",
+};
+
+export default pittockLake;

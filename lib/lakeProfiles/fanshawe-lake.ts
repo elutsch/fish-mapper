@@ -1,0 +1,344 @@
+import type { LakeProfile } from "./types";
+
+// Stage 7 output — generated 2026-07-19 from the Bite Club-register copy
+// (04-lake-copy.md / 04b-species-subguides.md, Stage 5 passed). All rendered
+// content is carried verbatim from the verified substrate.
+const fanshaweLake: LakeProfile = {
+  slug: "fanshawe-lake",
+  lake: "Fanshawe Lake",
+  province: "Ontario",
+  fmz: 16,
+  waterbodyType: "reservoir",
+  coordinates: { lat: 43.0406, lng: -81.1848 },
+  morphology: {
+    surfaceArea: "228.6 ha (~565 acres)",
+    maxDepth: "~40 ft (~12 m)",
+    meanDepth: "~11.7 ft (~3.6 m)",
+    clarity: "stained",
+    trophicStatus: "eutrophic (nutrient-rich)",
+    thermalBehaviour: null,
+  },
+  bestSeason: "Late spring through fall",
+  overview:
+    "Fanshawe Lake is the North Thames River backed up behind a flood-control dam on London's northeast edge — 228 hectares of drowned river valley the conservation authority opened in 1953. The water runs brown and nutrient-rich, stained by the river feeding in from the north, and it shallows to a mean near 12 feet before dropping toward 40 down at the Fanshawe Dam. That gradient sorts the whole fishery. Smallmouth work the rock and the deeper, clearer water at the dam end; largemouth and pike bury into the weedy shallows and vegetated bays up the north arm; walleye ride the old river channel and the inflow. One catch: the launch inside Fanshawe Conservation Area is electric or sub-10-horsepower motors only, fishing craft only, and the lake shares its surface with a rowing course and a sailing club. Plan the boat accordingly.",
+  notableFacts: [
+    {
+      fact: "Flood-control reservoir behind Fanshawe Dam, officially opened by the Upper Thames River Conservation Authority in 1953 on the North Thames River.",
+      sourceUrl:
+        "https://www.fanshaweconservationarea.ca/_files/ugd/95bf18_da90df0efeda49ebbc3b06458b400238.pdf",
+    },
+    {
+      fact: "About 565 acres with a maximum depth near 40 feet — one of the larger managed reservoirs in the London area.",
+      sourceUrl: "https://www.anglersatlas.com/place/102220/fanshaw-lake",
+    },
+    {
+      fact: "A documented five-species gamefish reservoir — smallmouth bass, largemouth bass, northern pike, walleye, and yellow perch — plus panfish.",
+      sourceUrl:
+        "https://thamesriver.on.ca/parks-recreation-natural-areas/fishing/",
+    },
+    {
+      fact: "Home to Canada's women's national rowing training centre and host to multiple regattas, which zone parts of the lake for racing.",
+      sourceUrl: "https://en.wikipedia.org/wiki/Fanshawe_Lake",
+    },
+  ],
+  regulations: [
+    {
+      species: "Smallmouth & Largemouth Bass",
+      season: "fourth Saturday in June to November 30",
+      limit: "S-6 / C-2",
+      sizeLimit: "no size limit",
+      sourceUrl:
+        "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      effectiveDate: "2025-12-08",
+      verified: true,
+    },
+    {
+      species: "Northern Pike",
+      season:
+        "January 1 to March 31 and second Saturday in May to December 31",
+      limit: "S-6 / C-2",
+      sizeLimit: "no size limit",
+      sourceUrl:
+        "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      effectiveDate: "2025-12-08",
+      verified: true,
+    },
+    {
+      species: "Walleye",
+      season:
+        "January 1 to March 15 and second Saturday in May to December 31",
+      limit: "S-4 / C-2, not more than 1 greater than 46 cm (combined with Sauger)",
+      sizeLimit: "not more than 1 greater than 46 cm",
+      sourceUrl:
+        "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      effectiveDate: "2025-12-08",
+      verified: true,
+    },
+  ],
+  regsDisclaimer:
+    "Regulations effective 2025-12-08, FMZ 16. This is a summary, not the legal regulation — confirm current rules with the official source before fishing.",
+  launches: [
+    {
+      name: "Fanshawe Conservation Area boat launch — 1424 Clarke Road, London",
+      type: "trailer",
+      notes:
+        "Electric motors or combustion motors under 10 hp only, for fishing only (all other powered vessels prohibited); season boat-admission pass required. Fishing dock near the launch. Park season mid-April to mid-October; fishing dawn to dusk. On-water rowing racing course and Fanshawe Yacht Club sailing course occupy parts of the lake, with buoyed areas closed to all vessels.",
+      sourceUrl: "https://www.fanshaweconservationarea.ca/fishingandboating",
+    },
+    {
+      name: "Fanshawe Conservation Area — canoe/kayak carry-in",
+      type: "carry-in",
+      notes:
+        "Carry-in paddlecraft access; canoe/kayak rentals available at the Park Office.",
+      sourceUrl: "https://www.fanshaweconservationarea.ca/fishingandboating",
+    },
+  ],
+  species: [
+    {
+      parentSlug: "smallmouth-bass",
+      displayName: "Smallmouth Bass",
+      tier: "strong",
+      structure: [
+        "sand-clay-and-rock bottom areas",
+        "the deeper, clearer basin toward the Fanshawe Dam (southwest)",
+      ],
+      bestSeason: "Fourth-Saturday-in-June opener through fall",
+      bodyCopy:
+        "Smallmouth are the headliners — the most-logged catch on the lake, by a wide margin. They want the hard stuff: the rock and rubble on the bottom and the deeper, clearer water down toward the dam, where they run down crayfish and perch along the edges. Skip the muddy upper river and fish the rock. From the late-June opener they hold on that hard structure right through fall, and the clarity at the dam end keeps them catchable even when rain colours up the rest of the lake.",
+      qualitySignal: null,
+      lede:
+        "The rock is the whole story for Fanshawe smallmouth. While the river-fed water runs brown up the reservoir, the sand-clay-and-rock bottom and the deeper, clearer basin down toward the Fanshawe Dam give them the hard, clean structure they need — and it's why they top the lake's catch logs. Start at the dam end, on the rubble and the breaks, and work the hard bottom out from there.",
+      howItFishes:
+        "Season opens the fourth Saturday of June — a post-spawn opener under the zone-wide rule — and the smallmouth are already glued to hard bottom. Through summer they hold the rock, gravel, and rubble and the drop toward the deeper dam-end basin, running down crayfish and the perch and shiners that share the same edges. The stain works for you: when rain colours the upper reservoir, the clearer dam water concentrates fish that want to see their prey. This is a flood-control reservoir, so levels can climb after heavy rain and the productive edge shifts with them — scout the hard structure fresh rather than fishing last trip's spot. The season carries to November 30, well past the summer crowd, and the hard bottom keeps holding fish as the water cools.",
+      structureDetails: [
+        {
+          name: "Sand-clay-and-rock bottom areas",
+          detail:
+            "The lake's documented rock, gravel, and rubble substrate is the smallmouth's core habitat — hard bottom they relate to for feeding and cover. (Feature-type from the lake's documented substrate; no labelled bathymetric landmarks are publicly mapped.)",
+        },
+        {
+          name: "The deeper, clearer basin toward the Fanshawe Dam (southwest)",
+          detail:
+            "The reservoir deepens toward the dam, where the water clears relative to the stained upper end — the hard-structure, better-visibility water smallmouth favour, and the part of the lake that keeps producing when rain colours the rest.",
+        },
+      ],
+      speciesRules: [
+        {
+          rule: "Season: fourth Saturday in June to November 30 — Limit: S-6 / C-2 — Size: no size limit (Largemouth and Smallmouth Bass combined)",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Waterbody exceptions: none documented — no Fanshawe or North Thames exception appears in the FMZ 16 summary; zone-wide regulations apply",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+      ],
+      sources: [
+        "https://www.fanshaweconservationarea.ca/_files/ugd/95bf18_da90df0efeda49ebbc3b06458b400238.pdf",
+        "https://adventurefishing.ca/shop/fishing-map/southwestern-and-southern-ontario-fishing-maps/fanshawe-lake-southwestern-southern-ontario/",
+        "https://fishbrain.com/fishing-waters/JwdEDfuO/fanshawe-lake",
+      ],
+    },
+    {
+      parentSlug: "largemouth-bass",
+      displayName: "Largemouth Bass",
+      tier: "strong",
+      structure: [
+        "shallow, weedy upper (north) end",
+        "vegetated backwaters and bays off the drowned river valley",
+      ],
+      bestSeason: "Fourth-Saturday-in-June opener through fall",
+      bodyCopy:
+        "Now go the opposite direction. Largemouth pack into the shallow, weedy north end and the vegetated back bays off the flooded river valley — the warm, stained, cover-choked water they thrive in and smallmouth avoid. They ambush sunfish and perch out of the weed and wood. Work the vegetation edges and back bays from the late-June opener through fall; the shallow upper end warms ahead of the main basin, so that's where the season builds earliest.",
+      qualitySignal: null,
+      lede:
+        "Go up-lake for largemouth. The shallow, weedy north end and the vegetated back bays off the flooded river valley are warm, stained, and choked with cover — the eutrophic water largemouth thrive in and smallmouth won't touch. This is the green half of the reservoir, and it's the first water to wake up in spring. Fish the vegetation edges and the wood, and work into the backs of the bays.",
+      howItFishes:
+        "Largemouth share the bass calendar — fourth Saturday of June through November 30 — and the shallow upper end warms ahead of the main basin, so the northern bays turn on earliest. Through summer the fish hold tight to the weed and wood, ambushing sunfish and perch out of the cover the drowned valley left behind. The nutrient-rich, stained water suits them: it grows dense vegetation and keeps them shallow and shaded rather than pushing them deep. Because this is flood control, levels can rise after heavy rain and flood or strand the shallow cover, so treat any weed edge as movable and follow the vegetation. Late-season fish stay in the green until the water cools toward the November 30 close.",
+      structureDetails: [
+        {
+          name: "Shallow, weedy upper (north) end",
+          detail:
+            "The reservoir's shallow northern reaches, thick with vegetation near the North Thames inflow — the warm, cover-rich water largemouth hold in, and the first part of the lake to warm each spring.",
+        },
+        {
+          name: "Vegetated backwaters and bays off the drowned river valley",
+          detail:
+            "The flooded valley left back bays and margins that grow dense weed and hold wood — classic largemouth ambush cover away from the main flow.",
+        },
+      ],
+      speciesRules: [
+        {
+          rule: "Season: fourth Saturday in June to November 30 — Limit: S-6 / C-2 — Size: no size limit (Largemouth and Smallmouth Bass combined)",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Waterbody exceptions: none documented — no Fanshawe or North Thames exception appears in the FMZ 16 summary; zone-wide regulations apply",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+      ],
+      sources: [
+        "https://www.fanshaweconservationarea.ca/_files/ugd/95bf18_da90df0efeda49ebbc3b06458b400238.pdf",
+        "https://fishbrain.com/fishing-waters/JwdEDfuO/fanshawe-lake",
+      ],
+    },
+    {
+      parentSlug: "northern-pike",
+      displayName: "Northern Pike",
+      tier: "strong",
+      structure: [
+        "weedy shorelines and cool vegetated bays",
+        "the North Thames inflow (north end)",
+      ],
+      bestSeason: "May opener through fall, plus an early-winter window",
+      bodyCopy:
+        "Pike prowl the same green water largemouth like, only they range wider. They hang on the weedy shorelines and cool vegetated bays and stage near the North Thames inflow, where current, cover, and baitfish converge — ambush ground and spring spawning cover in one. Perch are the meal. The open-water season runs from the May opener to year's end, with an early-winter window on top; the vegetated margins fish best once the weeds are up and holding bait.",
+      qualitySignal: null,
+      lede:
+        "Pike own the weed. They spread wider than the largemouth — every weedy shoreline and cool vegetated bay on the reservoir is potential water — but the North Thames inflow at the north end is the anchor, where current, cover, and baitfish come together. It's ambush ground and spring spawning cover in one, and it's where pike move first as spring water pushes in. Start on the green edges and work the seams.",
+      howItFishes:
+        "Pike are the first fish moving each spring, dropping into the flooded weedy margins and the inflow to spawn as soon as the water warms. By the second-Saturday-of-May opener they're keyed on the fresh weed growth. From late spring through summer, weedy shorelines and vegetated bays carry the fishery — yellow perch school the green edges and the pike sit on the seams collecting them. The vegetated upper end and inflow stay productive through the warm months; pike have no need to chase the deeper, cooler water down by the dam. A winter season runs January through March, but the park's staffed gate closes mid-October and winter ice access isn't documented, so confirm before counting on it. Follow the weed — as levels shift after rain, the productive edge moves with the vegetation.",
+      structureDetails: [
+        {
+          name: "Weedy shorelines and cool vegetated bays",
+          detail:
+            "Vegetation-lined margins and bays around the reservoir — the ambush cover pike hold on and spawn in, productive from spring green-up through summer.",
+        },
+        {
+          name: "The North Thames inflow (north end)",
+          detail:
+            "Where the river enters the reservoir, current and cover concentrate baitfish — prime ambush water and early-season spawning habitat.",
+        },
+      ],
+      speciesRules: [
+        {
+          rule: "Season: January 1 to March 31 and second Saturday in May to December 31 — Limit: S-6 / C-2 — Size: no size limit",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Waterbody exceptions: none documented — no Fanshawe or North Thames exception appears in the FMZ 16 summary; zone-wide regulations apply",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+      ],
+      sources: [
+        "https://thamesriver.on.ca/parks-recreation-natural-areas/fishing/",
+        "https://www.fanshaweconservationarea.ca/_files/ugd/95bf18_da90df0efeda49ebbc3b06458b400238.pdf",
+      ],
+    },
+    {
+      parentSlug: "walleye",
+      displayName: "Walleye",
+      tier: "strong",
+      structure: [
+        "the North Thames inflow and the old river channel",
+        "the deeper basin toward the Fanshawe Dam",
+      ],
+      bestSeason: "Low light, spring through fall, plus a winter window",
+      bodyCopy:
+        "Low light is the whole game for walleye here. The stained, river-fed water suits a fish built to hunt in the murk, and anglers report them stacking along the old river channel and up near the North Thames inflow, with the deeper basin toward the dam holding fish through the bright hours. Perch and shiners feed them. Fish dawn, dusk, and the stained water in between — the season carries a winter walleye window too, ice access permitting.",
+      qualitySignal: null,
+      lede:
+        "Follow the old river. The North Thames inflow and the drowned river channel running through the reservoir are the walleye's highway — current, structure, and the stained water a low-light hunter is built for. Down toward the dam the basin deepens and holds fish through the bright hours. Anglers report walleye stacking on these spots, so when you find one, work it hard before you move.",
+      howItFishes:
+        "Walleye run on low light here. The lake's stained, nutrient-rich water lets them feed comfortably in daylight, but the pattern still tips toward dawn, dusk, and the murk — daytime fish hold the deeper basin toward the dam and the old river channel, then slide shallower to hunt as the light drops. Perch and shiners are the forage. Spring is an inflow story: current and gravel at the North Thames inflow draw spawners before the May opener, and the season is closed mid-March to the second Saturday of May to cover that window. A separate winter season runs January 1 to March 15, but with the park gate closed for the season and no documented ice access, confirm before planning a hard-water trip. As a flood-control reservoir, levels move after rain — let the channel and the inflow, not last week's spot, put you on fish.",
+      structureDetails: [
+        {
+          name: "The North Thames inflow and the old river channel",
+          detail:
+            "The river entering at the north end and the drowned channel winding through the reservoir supply current, structure, and spawning gravel — the spring staging water and a year-round travel route.",
+        },
+        {
+          name: "The deeper basin toward the Fanshawe Dam",
+          detail:
+            "The reservoir's deepest water, down by the dam, holds walleye through bright daylight hours before they move shallower to feed in low light.",
+        },
+      ],
+      speciesRules: [
+        {
+          rule: "Season: January 1 to March 15 and second Saturday in May to December 31 — Limit: S-4 / C-2, not more than 1 greater than 46 cm (Walleye and Sauger combined)",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Waterbody exceptions: none documented — no Fanshawe or North Thames exception appears in the FMZ 16 summary; zone-wide regulations apply",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+      ],
+      sources: [
+        "https://thamesriver.on.ca/parks-recreation-natural-areas/fishing/",
+        "https://www.fanshaweconservationarea.ca/_files/ugd/95bf18_da90df0efeda49ebbc3b06458b400238.pdf",
+        "https://www.tripadvisor.ca/ShowTopic-g154995-i1084-k3337782-Fanshaw_fishing-London_Ontario.html",
+        "https://fishbrain.com/fishing-waters/JwdEDfuO/fanshawe-lake",
+      ],
+    },
+    {
+      parentSlug: "black-crappie",
+      displayName: "Black Crappie",
+      tier: "present",
+      structure: [],
+      bestSeason: null,
+      bodyCopy: null,
+      qualitySignal: null,
+      lede: null,
+      howItFishes: null,
+      structureDetails: null,
+      speciesRules: null,
+      sources: [],
+    },
+    {
+      parentSlug: "yellow-perch",
+      displayName: "Yellow Perch",
+      tier: "present",
+      structure: [],
+      bestSeason: null,
+      bodyCopy: null,
+      qualitySignal: null,
+      lede: null,
+      howItFishes: null,
+      structureDetails: null,
+      speciesRules: null,
+      sources: [],
+    },
+  ],
+  keyResources: [
+    {
+      label:
+        "The actual regs, straight from the source — FMZ 16, Government of Ontario",
+      url: "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+    },
+    {
+      label:
+        "Launch, motor rules, gate hours, and fees — Fanshawe Conservation Area (UTRCA)",
+      url: "https://www.fanshaweconservationarea.ca/fishingandboating",
+    },
+    {
+      label: "Reservoir map and fishing brochure — Fanshawe Conservation Area",
+      url: "https://www.fanshaweconservationarea.ca/mapsanddownloads",
+    },
+    {
+      label:
+        "Watershed fishing overview and species list — Upper Thames River Conservation Authority",
+      url: "https://thamesriver.on.ca/parks-recreation-natural-areas/fishing/",
+    },
+  ],
+  speciesCount: 4,
+  lastVerified: "2026-07-19",
+  factCheckStatus: "passed",
+  regsGate: "passed",
+};
+
+export default fanshaweLake;

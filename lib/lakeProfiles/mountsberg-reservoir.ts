@@ -1,0 +1,276 @@
+import type { LakeProfile } from "./types";
+
+// Stage 7 output — generated 2026-07-19 from the Bite Club-register copy
+// (04-lake-copy.md / 04b-species-subguides.md, Stage 5 passed). All rendered
+// content is carried verbatim from the verified substrate.
+const mountsbergReservoir: LakeProfile = {
+  slug: "mountsberg-reservoir",
+  lake: "Mountsberg Reservoir",
+  province: "Ontario",
+  fmz: 16,
+  waterbodyType: "reservoir",
+  coordinates: { lat: 43.4535, lng: -80.1072 },
+  morphology: {
+    surfaceArea: "190.7 ha (~471 acres)",
+    maxDepth: null,
+    meanDepth: null,
+    clarity: null,
+    trophicStatus: null,
+    thermalBehaviour:
+      "Shallow marsh reservoir; no thermal stratification documented or expected. Reservoir discharge warms the downstream creek, with warmwater habitat extending below the dam to the Bronte Creek confluence.",
+  },
+  bestSeason: "Late-June bass opener through fall; pike in spring and fall",
+  overview:
+    "Mountsberg Reservoir is a shallow, weed-choked marsh with a flood-control dam bolted on one end. Bronte Creek backs up behind the Mountsberg Dam — 1967 vintage, one of Conservation Halton's four Hurricane Hazel dams — spreading into roughly 190 hectares of warmwater marsh inside Mountsberg Conservation Area at Campbellville. It's a waterfowl sanctuary that happens to hold fish, so expect posted no-fishing zones and honour them. Two species carry the water: largemouth bass and northern pike, both weed-oriented predators in a lake that's almost all weed. The reservoir drops through winter for flood storage and refills on spring runoff, so the margins move year to year. Your way in is a carry-in launch at the dam — electric trolling motors only, no gas — and the park bans live bait, so pack worms and artificials. Paid admission; the gate opens at 8:30.",
+  notableFacts: [
+    {
+      fact: 'The reservoir\'s marsh is a provincially significant waterfowl staging area and a regionally significant waterfowl breeding area, and "supports a vibrant warmwater fish community."',
+      sourceUrl:
+        "https://www.conservationhalton.ca/wp-content/uploads/2022/05/bronte_creek_watershed_study_-_a_-_final_-_2002.pdf",
+    },
+    {
+      fact: "Mountsberg Dam (1967) is one of Conservation Halton's four major flood-control dams built in the aftermath of Hurricane Hazel (1954).",
+      sourceUrl: "https://www.conservationhalton.ca/natural-hazards/",
+    },
+    {
+      fact: "Northern pike are prominent enough that the watershed study recommended a pike management strategy to limit their impact on the native fish community.",
+      sourceUrl:
+        "https://www.conservationhalton.ca/wp-content/uploads/2022/05/bronte_creek_watershed_study_-_a_-_final_-_2002.pdf",
+    },
+    {
+      fact: "Mountsberg is one of only a handful of Conservation Halton properties where recreational fishing is permitted (Kelso, Hilton Falls, Mountsberg, Robert Edmondson).",
+      sourceUrl: "https://www.conservationhalton.ca/activities/fishing/",
+    },
+  ],
+  regulations: [
+    {
+      species: "Largemouth Bass",
+      season: "fourth Saturday in June to November 30 (2026: Jun 27–Nov 30)",
+      limit: "S-6 / C-2 (combined with Smallmouth Bass)",
+      sizeLimit: "no size limit",
+      sourceUrl:
+        "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      effectiveDate: "2026-01-01",
+      verified: true,
+    },
+    {
+      species: "Northern Pike",
+      season:
+        "January 1 to March 31 and second Saturday in May to December 31 (2026: May 9–Dec 31)",
+      limit: "S-6 / C-2",
+      sizeLimit: "no size limit",
+      sourceUrl:
+        "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      effectiveDate: "2026-01-01",
+      verified: true,
+    },
+  ],
+  regsDisclaimer:
+    "Regulations effective 2026-01-01, FMZ 16. This is a summary, not the legal regulation — confirm current rules with the official source before fishing.",
+  launches: [
+    {
+      name: "Mountsberg Dam launch",
+      type: "carry-in",
+      notes:
+        "Hand-launch / carry-in for canoes, kayaks, and larger non-motorized vessels (larger craft launch only at the dam). No gas motors; electric trolling motors are the only motorized exception.",
+      sourceUrl: "https://www.conservationhalton.ca/activities/fishing/",
+    },
+    {
+      name: "Shoreline carry-in near the parking lot",
+      type: "carry-in",
+      notes:
+        "Smaller craft can be carried a short distance from the parking lot to shore.",
+      sourceUrl: "https://www.conservationhalton.ca/parks/mountsberg/",
+    },
+  ],
+  species: [
+    {
+      parentSlug: "smallmouth-bass",
+      displayName: "Smallmouth Bass",
+      tier: "present",
+      structure: [],
+      bestSeason: null,
+      bodyCopy: null,
+      qualitySignal: null,
+      lede: null,
+      howItFishes: null,
+      structureDetails: null,
+      speciesRules: null,
+      sources: [],
+    },
+    {
+      parentSlug: "largemouth-bass",
+      displayName: "Largemouth Bass",
+      tier: "strong",
+      structure: [
+        "dense weedbeds and weedless pockets on the overgrown marsh side",
+        "whole-lake shallow weed flats worked along the weed edges",
+      ],
+      bestSeason:
+        "Late-June opener through fall; early and late in the day through summer",
+      bodyCopy:
+        "Largemouth own this marsh. They bury in the dense weedbeds and slide into the little weedless pockets on the overgrown side of the reservoir, ambushing whatever swims into the salad. From the late-June opener through fall they're the headline fish, and in summer the bite stacks up early and late when the surface cools — throw spinnerbaits and surface baits over the weed tops. Once the vegetation thickens, shore fishing gets tough, so a canoe worked along the weed edges beats the bank. This is largemouth water, full stop.",
+      qualitySignal: null,
+      lede:
+        "The overgrown side of the reservoir is the honey hole. The weedbeds grow in so thick they leave only small weedless pockets, and that's where the better largemouth sit. This is a warmwater marsh built for them — shallow, vegetated, tolerant of the stain and heat that would push other bass out. From the late-June opener onward, largemouth are the fish that define Mountsberg, and they hold in the salad all season long.",
+      howItFishes:
+        "Largemouth here live and die by the weed. Right after the fourth-Saturday-of-June opener, fish the weedbeds and weedless pockets on the overgrown marsh side, where cover is thickest and the fish are densest. Through summer the whole reservoir turns into shallow weed flats, and the bite concentrates early and late in the day when the surface cools — spinnerbaits and surface baits worked over the weed tops draw the strikes. Shore access gets choked as the vegetation fills in, so a canoe or kayak working the weed edges reaches water the bank never will. As the reservoir drops through fall for flood storage, the margins pull back and the fish slide with the retreating weed line. Follow the green, not last month's spot.",
+      structureDetails: [
+        {
+          name: "Dense weedbeds and weedless pockets on the overgrown marsh side",
+          detail:
+            "The heavily vegetated side of the reservoir grows in thick enough to leave only small weedless openings — those pockets hold the better fish. (Angler-report detail; the whole-lake shallow-marsh character it sits in is officially documented in the watershed study.)",
+        },
+        {
+          name: "Whole-lake shallow weed flats",
+          detail:
+            "The reservoir is a large expanse of shallow, open marsh, so weed flats and their edges are the reservoir-wide pattern — best worked by boat along the weed lines once summer vegetation makes the bank tough to fish.",
+        },
+      ],
+      speciesRules: [
+        {
+          rule: "Season: fourth Saturday in June to November 30 (2026: Jun 27–Nov 30) — Limit: S-6 / C-2 (combined with Smallmouth Bass) — Size: no size limit",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2026-01-01",
+        },
+        {
+          rule: "Waterbody exceptions: none — Mountsberg Reservoir is not named in the FMZ 16 summary, and the zone's Bronte Creek fish sanctuary does not name it; zone-wide regulations apply",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2026-01-01",
+        },
+        {
+          rule: "Access / bait: FMZ 16 is within the Southern Bait Management Zone (no transport of live/dead baitfish or leeches in or out); on top of that, Conservation Halton bans live bait at the property — no live minnows, crayfish, or frogs, worms only from authorized suppliers or the park — and permits electric trolling motors only, no gas",
+          sourceUrl: "https://www.conservationhalton.ca/activities/fishing/",
+          effectiveDate: "2026-01-01",
+        },
+      ],
+      sources: [
+        "https://www.conservationhalton.ca/activities/fishing/",
+        "https://www.conservationhalton.ca/wp-content/uploads/2022/05/bronte_creek_watershed_study_-_a_-_final_-_2002.pdf",
+        "https://www.anglersatlas.com/place/119719/mountsberg-reservoir",
+      ],
+    },
+    {
+      parentSlug: "northern-pike",
+      displayName: "Northern Pike",
+      tier: "strong",
+      structure: [
+        "shallow marsh bays and weed edges throughout",
+        "open weed pockets navigable by canoe or kayak",
+      ],
+      bestSeason: "Spring after the May opener, and again in fall as the weed thins",
+      bodyCopy:
+        "There are enough pike here that Conservation Halton's own watershed study called for a management strategy to keep them off the native fish. They hunt the shallow marsh bays and weed edges all over the reservoir, and they're the most-logged catch on the lake. Spring after the May opener is prime, and fall fishes well again once the weed thins and the pockets reopen. Come mid-summer the vegetation chokes everything — work the open weed pockets you can still reach by paddle. Thick cover fouls even an electric motor here, so pick your lanes.",
+      qualitySignal: null,
+      lede:
+        "Pike own the shallow marsh bays and the weed edges that run the length of the reservoir — the most-logged fish on Mountsberg, hunting a warmwater system that suits them exactly. This is vegetated, shallow, ambush water, and northerns spawn in the flooded weedy shallows the marsh provides. Start where the weed meets open water and work the bays; that seam is where they wait to collect whatever swims past.",
+      howItFishes:
+        "The pike fishery tracks the weed and the water level. In spring, after the second-Saturday-of-May opener, fish are fresh off the flooded, weedy shallows where they spawn, and they hold the marsh bays and weed edges throughout the reservoir. Come mid-summer the vegetation chokes the whole system — even an electric motor fouls in it — so the game narrows to the open weed pockets you can still reach by paddle. Fall reopens the water as the weed thins, and the bite picks back up along the edges. Perch and the marsh's panfish forage feed them in the same cover they hunt. Two practical limits shape every trip: the winter drawdown that pulls the reservoir down, and the park's own rules — electric motors only, no gas, and a live-bait ban that leaves you worms and artificials.",
+      structureDetails: [
+        {
+          name: "Shallow marsh bays and weed edges throughout",
+          detail:
+            "The reservoir-wide vegetated shallows are classic pike ambush water and hold the lake's most-logged catch; the back bays warm first and fish early in the season.",
+        },
+        {
+          name: "Open weed pockets navigable by canoe or kayak",
+          detail:
+            "As summer weed fills in, the fishable water shrinks to the open pockets and edges a paddler can reach — thick vegetation limits even trolling motors in places.",
+        },
+      ],
+      speciesRules: [
+        {
+          rule: "Season: January 1 to March 31 and second Saturday in May to December 31 (2026: May 9–Dec 31) — Limit: S-6 / C-2 — Size: no size limit",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2026-01-01",
+        },
+        {
+          rule: "Waterbody exceptions: none — Mountsberg Reservoir is not named in the FMZ 16 summary, and the zone's Bronte Creek fish sanctuary does not name it; zone-wide regulations apply",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2026-01-01",
+        },
+        {
+          rule: "Access / bait: FMZ 16 is within the Southern Bait Management Zone (no transport of live/dead baitfish or leeches in or out); Conservation Halton additionally bans live bait at the property — no live minnows, crayfish, or frogs, worms only from authorized suppliers or the park — and permits electric trolling motors only, no gas",
+          sourceUrl: "https://www.conservationhalton.ca/activities/fishing/",
+          effectiveDate: "2026-01-01",
+        },
+      ],
+      sources: [
+        "https://www.conservationhalton.ca/wp-content/uploads/2022/05/bronte_creek_watershed_study_-_a_-_final_-_2002.pdf",
+        "https://www.anglersatlas.com/place/119719/mountsberg-reservoir",
+      ],
+    },
+    {
+      parentSlug: "walleye",
+      displayName: "Walleye",
+      tier: "absent",
+      structure: [],
+      bestSeason: null,
+      bodyCopy: null,
+      qualitySignal: null,
+      lede: null,
+      howItFishes: null,
+      structureDetails: null,
+      speciesRules: null,
+      sources: [],
+    },
+    {
+      parentSlug: "black-crappie",
+      displayName: "Black Crappie",
+      tier: "present",
+      structure: [],
+      bestSeason: null,
+      bodyCopy: null,
+      qualitySignal: null,
+      lede: null,
+      howItFishes: null,
+      structureDetails: null,
+      speciesRules: null,
+      sources: [],
+    },
+    {
+      parentSlug: "yellow-perch",
+      displayName: "Yellow Perch",
+      tier: "present",
+      structure: [],
+      bestSeason: null,
+      bodyCopy: null,
+      qualitySignal: null,
+      lede: null,
+      howItFishes: null,
+      structureDetails: null,
+      speciesRules: null,
+      sources: [],
+    },
+  ],
+  keyResources: [
+    {
+      label: "The actual regs, straight from the source — FMZ 16, Government of Ontario",
+      url: "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+    },
+    {
+      label: "Fishing rules, the live-bait ban, and where to launch — Conservation Halton",
+      url: "https://www.conservationhalton.ca/activities/fishing/",
+    },
+    {
+      label:
+        "Park hours, fees, and gate — Mountsberg Conservation Area, Conservation Halton",
+      url: "https://www.conservationhalton.ca/parks/mountsberg/",
+    },
+    {
+      label:
+        "The marsh and its warmwater fishery — Bronte Creek Watershed Study, Conservation Halton (2002)",
+      url: "https://www.conservationhalton.ca/wp-content/uploads/2022/05/bronte_creek_watershed_study_-_a_-_final_-_2002.pdf",
+    },
+  ],
+  speciesCount: 2,
+  lastVerified: "2026-07-19",
+  factCheckStatus: "passed",
+  regsGate: "passed",
+};
+
+export default mountsbergReservoir;

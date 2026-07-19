@@ -1,0 +1,209 @@
+{
+  "slug": "laurel-creek-reservoir",
+  "lake": "Laurel Creek Reservoir",
+  "province": "Ontario",
+  "fmz": 16,
+  "waterbodyType": "reservoir",
+  "coordinates": { "lat": 43.48642, "lng": -80.57513 },
+  "morphology": {
+    "surfaceArea": "101 ha",
+    "maxDepth": null,
+    "meanDepth": null,
+    "clarity": "turbid",
+    "trophicStatus": null,
+    "thermalBehaviour": "Warm thermal regime (official MNRF Aquatic Resource Area record); mostly ≤ 3 m deep, too shallow for stable summer stratification"
+  },
+  "bestSeason": "Late-June bass opener through fall",
+  "overview": "Laurel Creek Reservoir is a shallow, turbid urban impoundment — 101 hectares of flood-control water held behind a 1966 dam on Laurel Creek, tucked inside Laurel Creek Conservation Area in Waterloo. Sixty percent of the basin averages about a metre deep; the deepest water, toward the dam, only reaches a 1.5-to-3-metre band. Laurel Creek is a Grand River tributary, and this is a working GRCA flood reservoir — drawn down roughly 3.2 metres every winter, which dewaters most of the shallow cover until spring and is why GRCA rates the fishery limited. Largemouth bass are the fish that fit: warm, weedy, stump-filled shallows are exactly their water, and the basin is thick with submerged and emergent stumps, especially south of the island. Smallmouth are here too, but the turbid, rock-free shallows fight them. Your way in is the gravel carry-in launch off Westmount Road North — paddle or electric trolling motor only, no power boats, open May through mid-October.",
+  "notableFacts": [
+    {
+      "fact": "The dam was completed in 1966; the reservoir was built for flood control, low-flow augmentation, and pollution abatement on Laurel Creek, a Grand River tributary.",
+      "sourceUrl": "https://uwaterloo.ca/global-engagement-seminar/past-seminars/who-laurel-creek/case-study-laurel-creek-watershed"
+    },
+    {
+      "fact": "Laurel is one of only seven large multi-purpose flood-control reservoirs operated by the GRCA across the Grand River watershed.",
+      "sourceUrl": "https://www.grandriver.ca/our-watershed/river-data/reservoir-levels/"
+    },
+    {
+      "fact": "GRCA's own management plan assesses the fishery as under-producing due to water level fluctuations (winter drawdown).",
+      "sourceUrl": "https://www.grandriver.ca/media/aqohbnr1/managementplan_laurel.pdf"
+    },
+    {
+      "fact": "GRCA's public fishing page lists the fishery as \"Carp, bullhead\" and characterizes fishing as limited.",
+      "sourceUrl": "https://www.grandriver.ca/outdoor-recreation/fishing/fishing-grand-river-conservation-areas/"
+    },
+    {
+      "fact": "Not a stocked fishery — no records in either official MNRF stocking dataset; the warm-water community is self-sustaining.",
+      "sourceUrl": "https://services1.arcgis.com/TJH5KDher0W13Kgo/arcgis/rest/services/FishStockingDataForRecreationalPurposes/FeatureServer/0/query"
+    }
+  ],
+  "regulations": [
+    {
+      "species": "Largemouth & Smallmouth Bass (combined)",
+      "season": "fourth Saturday in June to November 30",
+      "limit": "S-6 / C-2",
+      "sizeLimit": null,
+      "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      "effectiveDate": "2025-12-08",
+      "verified": true
+    }
+  ],
+  "regsDisclaimer": "Regulations effective 2025-12-08, FMZ 16. This is a summary, not the legal regulation — confirm current rules with the official source before fishing.",
+  "launches": [
+    {
+      "name": "Laurel Creek Conservation Area launch — 625 Westmount Road North, Waterloo",
+      "type": "carry-in",
+      "notes": "Gravel carry-in / non-motorized launch just west of the beach; available May 1 to October 15. No power boats — sailing, windsurfing, and electric trolling motors only. Short-term parking for three vehicles with trailers near the launch. Day-use fee applies. Submerged tree stumps are a navigation hazard, worse during the winter drawdown.",
+      "sourceUrl": "https://www.grandriver.ca/outdoor-recreation/conservation-areas/laurel-creek/"
+    }
+  ],
+  "species": [
+    {
+      "parentSlug": "smallmouth-bass",
+      "displayName": "Smallmouth Bass",
+      "tier": "present",
+      "structure": [],
+      "bestSeason": null,
+      "bodyCopy": null,
+      "qualitySignal": null,
+      "lede": null,
+      "howItFishes": null,
+      "structureDetails": null,
+      "speciesRules": null,
+      "sources": []
+    },
+    {
+      "parentSlug": "largemouth-bass",
+      "displayName": "Largemouth Bass",
+      "tier": "strong",
+      "structure": [
+        "stump fields south of the island",
+        "southwest-corner reedy shallows",
+        "reservoir-wide submerged stumps",
+        "weed growth"
+      ],
+      "bestSeason": "Late-June opener through fall, at summer pool",
+      "bodyCopy": "Largemouth own the stump water. South of the island the reservoir turns into a flooded stump field under a metre of water, and the southwest corner piles on reedy shallows and more submerged wood — warm, turbid, weed-lined cover with a bass parked in it. Fish it once the basin fills to summer pool and the stumps are wetted, from the late-June opener through fall. In water this shallow and this uniform, the wood is the whole game: work the thickest emergent stumps and the reed edges, and skip the open flats.",
+      "qualitySignal": null,
+      "lede": "Timing is everything on a reservoir that empties every winter. From late fall the basin drops about 3.2 metres and most of the shallow stump-and-reed cover goes dry, and it doesn't refill to summer pool until spring. So the largemouth window is the wetted season: once the southwest corner's reedy shallows and the stump fields south of the island are underwater again, that flooded wood is where the fish live, straight through fall.",
+      "howItFishes": "This is a shallow, turbid, warm basin — sixty percent of it averages about a metre, and the deepest water only reaches a 1.5-to-3-metre band toward the dam. That plays to largemouth. They hold in the flooded cover: the emergent and submerged stumps south of the island, the reedy southwest corner, and the water weeds that fill the nutrient-rich basin. Forage is young panfish — pumpkinseed and rock bass — plus the minnows and dace that dominate the reservoir, all packed into the same weed and wood. Work it from the late-June bass opener through fall, while the reservoir sits at summer pool. Then respect the ceiling GRCA put on this water: the winter drawdown that dewaters the cover is why its management plan calls the fishery under-producing. No documented ice fishing exists here — the basin sits at its winter minimum, and the launch runs only May to mid-October.",
+      "structureDetails": [
+        {
+          "name": "Stump fields south of the island",
+          "detail": "Emergent and submerged stumps occupy most of the water south of the island, where depth is often under a metre — classic shallow wood cover, and prime largemouth water once it's wetted at summer pool."
+        },
+        {
+          "name": "Southwest-corner reedy shallows",
+          "detail": "The reservoir's southwest corner holds shallow, reedy boundaries and numerous tree stumps — emergent vegetation plus wood, another cover magnet through the warm months."
+        },
+        {
+          "name": "Reservoir-wide submerged stumps",
+          "detail": "GRCA warns paddlers of underwater tree stumps throughout the basin — scattered wood cover lake-wide, and a navigation hazard that worsens during drawdown."
+        },
+        {
+          "name": "Weed growth",
+          "detail": "Abundant water weeds fill the warm, nutrient-enriched basin, adding the weed-edge cover largemouth relate to alongside the wood."
+        }
+      ],
+      "speciesRules": [
+        {
+          "rule": "Season: fourth Saturday in June to November 30 — Limit: S-6 / C-2 — Size: none stated (Largemouth & Smallmouth Bass combined)",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2025-12-08"
+        },
+        {
+          "rule": "Waterbody exceptions: none — the FMZ 16 summary lists no exception or sanctuary for Laurel Creek or Waterloo; zone-wide regulations apply",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2025-12-08"
+        },
+        {
+          "rule": "Bait: FMZ 16 is within the Southern Bait Management Zone, which restricts transport of live/dead baitfish and leeches",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2025-12-08"
+        }
+      ],
+      "sources": [
+        "https://ws.lioservices.lrc.gov.on.ca/arcgis1071a/rest/services/LIO_OPEN_DATA/LIO_Open07/MapServer/2/query",
+        "https://www.grandriver.ca/media/aqohbnr1/managementplan_laurel.pdf"
+      ]
+    },
+    {
+      "parentSlug": "northern-pike",
+      "displayName": "Northern Pike",
+      "tier": "absent",
+      "structure": [],
+      "bestSeason": null,
+      "bodyCopy": null,
+      "qualitySignal": null,
+      "lede": null,
+      "howItFishes": null,
+      "structureDetails": null,
+      "speciesRules": null,
+      "sources": []
+    },
+    {
+      "parentSlug": "walleye",
+      "displayName": "Walleye",
+      "tier": "absent",
+      "structure": [],
+      "bestSeason": null,
+      "bodyCopy": null,
+      "qualitySignal": null,
+      "lede": null,
+      "howItFishes": null,
+      "structureDetails": null,
+      "speciesRules": null,
+      "sources": []
+    },
+    {
+      "parentSlug": "black-crappie",
+      "displayName": "Black Crappie",
+      "tier": "absent",
+      "structure": [],
+      "bestSeason": null,
+      "bodyCopy": null,
+      "qualitySignal": null,
+      "lede": null,
+      "howItFishes": null,
+      "structureDetails": null,
+      "speciesRules": null,
+      "sources": []
+    },
+    {
+      "parentSlug": "yellow-perch",
+      "displayName": "Yellow Perch",
+      "tier": "absent",
+      "structure": [],
+      "bestSeason": null,
+      "bodyCopy": null,
+      "qualitySignal": null,
+      "lede": null,
+      "howItFishes": null,
+      "structureDetails": null,
+      "speciesRules": null,
+      "sources": []
+    }
+  ],
+  "keyResources": [
+    {
+      "label": "The actual regs, straight from the source — FMZ 16, Government of Ontario",
+      "url": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16"
+    },
+    {
+      "label": "Launch, gate hours, fees, and camping — Laurel Creek Conservation Area, Grand River Conservation Authority",
+      "url": "https://www.grandriver.ca/outdoor-recreation/conservation-areas/laurel-creek/"
+    },
+    {
+      "label": "Boating rules (paddle and electric trolling motors only, no power boats) — GRCA",
+      "url": "https://www.grandriver.ca/outdoor-recreation/boating-and-paddling/"
+    },
+    {
+      "label": "Reservoir levels and seasonal drawdown — GRCA",
+      "url": "https://www.grandriver.ca/our-watershed/river-data/reservoir-levels/"
+    }
+  ],
+  "speciesCount": 1,
+  "lastVerified": "2026-07-19",
+  "factCheckStatus": "passed",
+  "regsGate": "passed"
+}

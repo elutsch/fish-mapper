@@ -1,0 +1,313 @@
+import type { LakeProfile } from "./types";
+
+// Stage 7 output — generated 2026-07-19 from the Bite Club-register copy
+// (04-lake-copy.md / 04b-species-subguides.md, Stage 5 passed). All rendered
+// content is carried verbatim from the verified substrate.
+const belwoodLake: LakeProfile = {
+  slug: "belwood-lake",
+  lake: "Belwood Lake",
+  province: "Ontario",
+  fmz: 16,
+  waterbodyType: "reservoir",
+  coordinates: { lat: 43.7351716, lng: -80.3329366 },
+  morphology: {
+    surfaceArea: "~593 ha (~1,466 acres)",
+    maxDepth: "20.7 m (~68 ft) at the dam",
+    meanDepth: null,
+    clarity: "stained",
+    trophicStatus:
+      "Mesotrophic (nutrient-enriched); hard/alkaline limestone water, pH ~8",
+    thermalBehaviour:
+      "Stratifies to a mild degree during summer despite bottom draw-off",
+  },
+  bestSeason:
+    "Spring through summer; hard-water perch, pike, and walleye in winter",
+  overview:
+    "Belwood is the upper Grand River backed up behind the Shand Dam and held there. The reservoir runs long and narrow up the old valley north of Fergus, murky and hard-limestone water the whole way — nutrient-rich, stained, mildly stratified in summer. Push up the river arm past the Belwood village bridge and it shallows to around 7 metres; slide back toward the earthfill dam and it drops to nearly 21. Pike own the weed edges and the drowned river channel; smallmouth work the islands, the rocky shorelines, and the bedrock-and-boulder bottom up top. Then flood control does its thing — levels draw down through the fall, exposing shoreline and pushing fish onto whatever stays wet. One way in that matters for trailers: the Grand River Conservation Authority launch at Belwood Lake Conservation Area, off Wellington County Road 18.",
+  notableFacts: [
+    {
+      fact: "Reservoir best known for northern pike and smallmouth bass; pike is the most-logged species by anglers, ahead of smallmouth and walleye.",
+      sourceUrl: "https://fishbrain.com/fishing-waters/91L2cSz5/lake-belwood",
+    },
+    {
+      fact: 'A long-running annual pike-and-walleye derby, run with the GRCA, requires all fish be caught "in Belwood Lake above the Shand Dam," with a 20-inch minimum on pike and a length-based catch-and-release format.',
+      sourceUrl: "https://www.pikederby.org/newpage",
+    },
+    {
+      fact: "The basin bottoms out near 20.7 m (about 68 ft) at the dam face — substantial depth for a southern-Ontario impoundment, holding cooler water through summer.",
+      sourceUrl:
+        "https://atrium.lib.uoguelph.ca/server/api/core/bitstreams/4477bcf8-110b-4083-877c-31092c557f5c/content",
+    },
+    {
+      fact: "No stocking record exists for the reservoir in the Fish ON-Line FMZ 16 dataset; the gamefish here are self-sustaining.",
+      sourceUrl:
+        "https://www.lioapplications.lrc.gov.on.ca/services/FishONLine/StockingList.aspx?json=true&fmz=16&stock=AllSpecies&diagnostics=false&lang=en",
+    },
+  ],
+  regulations: [
+    {
+      species: "Northern Pike",
+      season:
+        "Jan 1–Mar 31 and second Saturday in May to Dec 31 (2026: May 9–Dec 31)",
+      limit: "S-6 / C-2",
+      sizeLimit: "no size limit",
+      sourceUrl:
+        "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      effectiveDate: "2025-12-08",
+      verified: true,
+    },
+    {
+      species: "Smallmouth Bass",
+      season: "fourth Saturday in June to Nov 30 (2026: Jun 27–Nov 30)",
+      limit: "S-6 / C-2 (combined with Largemouth)",
+      sizeLimit: "no size limit",
+      sourceUrl:
+        "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      effectiveDate: "2025-12-08",
+      verified: true,
+    },
+  ],
+  regsDisclaimer:
+    "Regulations effective 2025-12-08, FMZ 16. This is a summary, not the legal regulation — confirm current rules with the official source before fishing.",
+  launches: [
+    {
+      name: "Belwood Lake Conservation Area — 8282 Wellington County Road 18, Fergus",
+      type: "trailer",
+      notes:
+        "Double-ramp concrete boat launch with docks; trailer-capable, motorized boats permitted. Day-use admission plus launch fee required; open year-round, full service May 1–Oct 15. Fluctuating reservoir levels (fall/maintenance drawdown) can affect access and expose hazards — GRCA posts hazard signage at the launch.",
+      sourceUrl:
+        "https://www.grandriver.ca/outdoor-recreation/conservation-areas/belwood-lake/",
+    },
+    {
+      name: "Belwood village launch (north end), near 5 George Street, Belwood",
+      type: "trailer-and-carry-in",
+      notes: "Public ramp at the reservoir's north end — secondary trailer/carry access.",
+      sourceUrl:
+        "https://www.grandriver.ca/outdoor-recreation/fishing/fishing-grand-river-conservation-areas/",
+    },
+    {
+      name: "Carry-in / canoe access along the main road near the village",
+      type: "carry-in",
+      notes: "Small-boat/canoe entry along the main road near the village.",
+      sourceUrl: "https://subarcticangling.com/wellington-county-index/",
+    },
+  ],
+  species: [
+    {
+      parentSlug: "smallmouth-bass",
+      displayName: "Smallmouth Bass",
+      tier: "strong",
+      structure: [
+        "islands and rocky main-body shorelines",
+        "the northern narrows into the Grand River channel",
+        "bedrock-and-boulder substrate in the upper reservoir",
+      ],
+      bestSeason: "Spring through summer, with a strong evening bite",
+      bodyCopy:
+        "Rock is the tell for Belwood smallmouth. They set up on the islands and the rocky shorelines through the main body, and up top where the 1977 survey mapped a bedrock-and-boulder bottom, that hard substrate grows the crayfish they hunt. The narrows where the lake tightens into the river channel fish especially well as the light drops — evenings are the window here. Murky, stained water is a mild drag on a fish that likes to see, so lean on the harder, cleaner rock edges. As fall drawdown pulls the reservoir down, the productive rock shrinks to fewer spots and the fish stack up on what's left.",
+      qualitySignal: null,
+      lede:
+        "The upper reservoir is where the rock story starts: a bedrock-and-boulder bottom the 1977 survey mapped where the Grand pours in. That hard substrate is a crayfish factory, and crayfish are what these bass hunt. Add the islands and rocky shorelines strung down the main body, and the smallmouth have hard cover most of the length of the lake — cleaner rock over the murk they'd rather avoid.",
+      howItFishes:
+        "The bass don't open until the fourth Saturday of June, a post-spawn harvest opener under the zone-wide rule, and from there it's a hard-bottom game through summer into fall. Work the rock: islands, rocky shorelines, and the boulder-strewn upper reaches where crayfish and perch stack up. The narrows where the lake tightens into the Grand River channel are the sleeper spot, and they fire best as the light fades — time the last hour before dark. Stained water is a mild handicap for a sight-feeder, so favour the harder, cleaner rock edges over the murkiest flats. Then fall drawdown changes the math: as the reservoir drops, the productive rock shrinks to fewer spots and the bass pile onto what stays wet — fewer places, more fish on each. The season runs to November 30.",
+      structureDetails: [
+        {
+          name: "Islands and rocky main-body shorelines",
+          detail:
+            "Classic smallmouth ambush structure through the main body, named as proven bass water — hard cover the bass hold on all summer.",
+        },
+        {
+          name: "The northern narrows into the Grand River channel",
+          detail:
+            "Where the lake pinches into the river channel up north; a productive stretch that fishes especially well on evenings through spring and summer.",
+        },
+        {
+          name: "Bedrock-and-boulder substrate in the upper reservoir",
+          detail:
+            "The hard rocky bottom at the Belwood/Concession VIII–IX inflow area, documented in the 1977 survey — prime crayfish habitat and the anchor of the upper-lake bass game.",
+        },
+      ],
+      speciesRules: [
+        {
+          rule: "Season: fourth Saturday in June to Nov 30 (2026: Jun 27–Nov 30) — Limit: S-6 / C-2 (combined with Largemouth Bass) — Size: no size limit",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Waterbody exceptions: none — the official FMZ 16 page lists no exception for the reservoir above the Shand Dam; zone-wide regulations apply",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Bait: FMZ 16 is within the Southern Bait Management Zone, which restricts transport of live/dead baitfish and leeches",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Season note: only the fourth-Saturday-in-June harvest season is verified for FMZ 16 bass; confirm any pre-opener catch-and-release bass provision directly with the official summary before fishing",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+      ],
+      sources: [
+        "https://www.thefishinguide.com/belwood-lake.php",
+        "https://lakebelwood.com/things-to-do/adventure/link-to-fishing-page/",
+        "https://atrium.lib.uoguelph.ca/server/api/core/bitstreams/4477bcf8-110b-4083-877c-31092c557f5c/content",
+        "https://www.grandriver.ca/outdoor-recreation/fishing/fishing-grand-river-conservation-areas/",
+      ],
+    },
+    {
+      parentSlug: "largemouth-bass",
+      displayName: "Largemouth Bass",
+      tier: "present",
+      structure: [],
+      bestSeason: null,
+      bodyCopy: null,
+      qualitySignal: null,
+      lede: null,
+      howItFishes: null,
+      structureDetails: null,
+      speciesRules: null,
+      sources: [],
+    },
+    {
+      parentSlug: "northern-pike",
+      displayName: "Northern Pike",
+      tier: "destination",
+      structure: [
+        "weed edges and flats",
+        "the deep former river channel and the northern narrows into the Grand",
+        "shoreline and island edges",
+      ],
+      bestSeason: "Spring through summer in open water; a winter ice target",
+      bodyCopy:
+        "Nothing on Belwood gets logged more than pike, and the lake's own derby — pike and walleye only, all fish caught above the Shand Dam — has run year after year on the strength of them. They bury into the weed edges and flats, then slide out to the drowned river channel and the northern narrows where the reservoir pinches back into the Grand. The stained water plays to their hand: flash and rattle get found where clear-water finesse won't. Work the vegetated bays and the channel edge spring through summer, and don't put the rod away at freeze-up — pike are a winter draw here too.",
+      qualitySignal:
+        "Long-running annual Belwood & District Lions Pike Derby (pike-and-walleye tournament, all fish caught above the Shand Dam, length-based catch-and-release, 20-inch pike minimum); pike is also the lake's most-logged species.",
+      lede:
+        "The old riverbed is the spine of the pike fishery. Belwood is drowned Grand River valley, and the deep former channel — plus the narrows where the reservoir pinches back into the river up north — gives pike a highway between the weedy flats they hunt and the deeper water they hold in. Stained water is the theme here, so loud, flashy presentations get found where subtlety disappears.",
+      howItFishes:
+        "Start where vegetation meets open water. Pike bury into the weed edges and flats — their primary ambush cover here — and pin the yellow perch and shiners that school the same green. Through spring and summer that shallow game carries the fishery, while the deep drowned river channel and the northern narrows into the Grand hold fish that slide off the flats. The murky, stained water shapes the approach: flash and rattle draw strikes that finesse won't. Then two things about water level. Fall drawdown drops the reservoir and shoves fish toward the deeper channel and basin — follow them off the emptying flats. And winter is a genuine second season: pike are an ice target once the lake locks up, with vehicles documented driving onto 10–12 inches of ice. Check the GRCA activity status first, and pull any hut off daily as required.",
+      structureDetails: [
+        {
+          name: "Weed edges and flats",
+          detail:
+            "The lake's primary pike ambush cover, holding fish through the open-water season where vegetation meets open water and forage stacks up.",
+        },
+        {
+          name: "The deep former river channel and the northern narrows into the Grand",
+          detail:
+            "The drowned riverbed cut and the pinch-point where the reservoir narrows back into the Grand; pike relate to this deeper structure, and the murky water there rewards flashy, rattling presentations.",
+        },
+        {
+          name: "Shoreline and island edges",
+          detail:
+            "General holding water around the shoreline and islands — transitional edges pike patrol between the flats and the channel.",
+        },
+      ],
+      speciesRules: [
+        {
+          rule: "Season: Jan 1–Mar 31 and second Saturday in May to Dec 31 (2026: May 9–Dec 31) — Limit: S-6 / C-2 — Size: no size limit",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Waterbody exceptions: none — the official FMZ 16 page lists no exception for the reservoir above the Shand Dam; zone-wide regulations apply",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Bait: FMZ 16 is within the Southern Bait Management Zone, which restricts transport of live/dead baitfish and leeches",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Lake-specific: the annual Belwood & District Lions Pike Derby is a length-based catch-and-release event with a 20-inch pike minimum, requiring all fish be caught in Belwood Lake above the Shand Dam — a tournament rule, not a regulation",
+          sourceUrl: "https://www.pikederby.org/newpage",
+          effectiveDate: "2025-12-08",
+        },
+      ],
+      sources: [
+        "https://www.pikederby.org/newpage",
+        "https://lakebelwood.com/things-to-do/adventure/link-to-fishing-page/",
+        "https://www.thefishinguide.com/belwood-lake.php",
+        "https://fishbrain.com/fishing-waters/91L2cSz5/lake-belwood",
+      ],
+    },
+    {
+      parentSlug: "walleye",
+      displayName: "Walleye",
+      tier: "present",
+      structure: [],
+      bestSeason: null,
+      bodyCopy: null,
+      qualitySignal: null,
+      lede: null,
+      howItFishes: null,
+      structureDetails: null,
+      speciesRules: null,
+      sources: [],
+    },
+    {
+      parentSlug: "black-crappie",
+      displayName: "Black Crappie",
+      tier: "present",
+      structure: [],
+      bestSeason: null,
+      bodyCopy: null,
+      qualitySignal: null,
+      lede: null,
+      howItFishes: null,
+      structureDetails: null,
+      speciesRules: null,
+      sources: [],
+    },
+    {
+      parentSlug: "yellow-perch",
+      displayName: "Yellow Perch",
+      tier: "present",
+      structure: [],
+      bestSeason: null,
+      bodyCopy: null,
+      qualitySignal: null,
+      lede: null,
+      howItFishes: null,
+      structureDetails: null,
+      speciesRules: null,
+      sources: [],
+    },
+  ],
+  keyResources: [
+    {
+      label:
+        "The actual regs, straight from the source — FMZ 16, Government of Ontario",
+      url: "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+    },
+    {
+      label:
+        "Launch, fees, ramps, and gate hours — Belwood Lake Conservation Area, Grand River Conservation Authority",
+      url: "https://www.grandriver.ca/outdoor-recreation/conservation-areas/belwood-lake/",
+    },
+    {
+      label: "Day-use and boat-launch fees — GRCA Belwood Lake fees",
+      url: "https://www.grandriver.ca/outdoor-recreation/conservation-areas/conservation-area-services-info-fees-and-more/conservation-area-fees/belwood-lake-fees/",
+    },
+    {
+      label: "Stocking record, FMZ 16 — Ontario Fish ON-Line",
+      url: "https://www.lioapplications.lrc.gov.on.ca/services/FishONLine/StockingList.aspx?json=true&fmz=16&stock=AllSpecies&diagnostics=false&lang=en",
+    },
+  ],
+  speciesCount: 2,
+  lastVerified: "2026-07-19",
+  factCheckStatus: "passed",
+  regsGate: "passed",
+};
+
+export default belwoodLake;

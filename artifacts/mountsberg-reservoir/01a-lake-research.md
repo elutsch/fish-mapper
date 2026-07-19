@@ -83,7 +83,7 @@ All from the official 2026 Ontario Fishing Regulations Summary, FMZ 16 page (upd
 - Black Crappie (Crappie) — Season: open all year — Limits: S-30 / C-10 — effective 2026-01-01 — same URL
 - Yellow Perch — Season: open all year — Limits: S-50 / C-25 — effective 2026-01-01 — same URL
 - Sunfish — Season: open all year — Limits: S-50 / C-25 — effective 2026-01-01 — same URL
-- Waterbody exceptions for Mountsberg Reservoir: NONE — "Mountsberg Reservoir is not mentioned in this FMZ 16 summary" (fetch confirmed). The Bronte Creek exceptions in FMZ 16 apply to downstream Oakville sections and do not cover the reservoir — same URL
+- Waterbody exceptions for Mountsberg Reservoir: NONE — Mountsberg Reservoir is not named anywhere in the FMZ 16 summary (fetch confirmed 2026-07-18; re-confirmed at Stage 2 on 2026-07-19). FMZ 16 does list a Bronte Creek fish sanctuary (no fishing January 1 to the Friday before the fourth Saturday in April, and October 1 to December 31), but it does not name Mountsberg Reservoir, so no waterbody-specific exception applies to the reservoir — same URL
 - Sanctuary / closure: none on the reservoir. A fish sanctuary exists on nearby Galt/Aberfoyle Creek (Puslinch) — does not apply to Mountsberg Reservoir — same URL
 - Bait: FMZ 16 is in the Southern Bait Management Zone — live or dead baitfish/leeches may not be transported into or out of the BMZ (dead-and-preserved exempt) — same URL. ADDITIONALLY, Conservation Halton (property rule, not MNRF) bans live bait at Mountsberg: live minnows, crawfish and frogs prohibited; only worms from authorized suppliers permitted — https://www.conservationhalton.ca/activities/fishing/
 

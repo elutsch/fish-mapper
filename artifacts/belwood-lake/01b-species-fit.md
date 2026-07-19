@@ -40,7 +40,7 @@ Note: No official MNR fisheries assessment or netting CPUE exists for the reserv
 ### Northern Pike
 - **Tier:** Destination
 - **Structure surfaced:** Weed edges and flats (primary ambush cover); the deep drowned river channel and the northern section into the Grand River channel; shoreline/island edges.
-- **Evidence signal:** 42-year Belwood & District Lions Pike Derby (42nd annual in 2024), pike-and-walleye tournament run with the GRCA, "all fish caught in Belwood Lake above the Shand Dam," length-based C&R with a 20" pike minimum — a documented tournament history. Pike is also the lake's best-known and most-logged species (157 Fishbrain catches, top of the list).
+- **Evidence signal:** Long-running annual Belwood & District Lions Pike Derby, a pike-and-walleye tournament run with the GRCA, "All Fish must be caught in Belwood Lake above the Shand Dam," length-based C&R with a 20" pike minimum — a documented tournament history (source archives span 2015–2025; specific edition number unverified). Pike is also the lake's best-known and most-logged species (157 Fishbrain catches, top of the list).
 - **Reasoning:** Named ambush structure plus a citable multi-decade tournament history and a clear reputational lead make pike the one species people genuinely travel to Belwood to target.
 - **Sources:** https://www.pikederby.org/newpage ; https://lakebelwood.com/things-to-do/adventure/link-to-fishing-page/ ; https://www.thefishinguide.com/belwood-lake.php ; https://fishbrain.com/fishing-waters/91L2cSz5/lake-belwood
 

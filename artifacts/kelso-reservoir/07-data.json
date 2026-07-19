@@ -1,0 +1,235 @@
+{
+  "slug": "kelso-reservoir",
+  "lake": "Kelso Reservoir",
+  "province": "Ontario",
+  "fmz": 16,
+  "waterbodyType": "reservoir",
+  "coordinates": { "lat": 43.5101, "lng": -79.9467 },
+  "morphology": {
+    "surfaceArea": "30.4 ha (~75 acres)",
+    "maxDepth": null,
+    "meanDepth": null,
+    "clarity": null,
+    "trophicStatus": null,
+    "thermalBehaviour": "Shallow warm-water creek impoundment; no deep cold-water habitat and no documented stratification data"
+  },
+  "bestSeason": "Late spring through fall; perch and panfish shore bite best May–October",
+  "overview": "Kelso Reservoir is a small warm-water impoundment — about 30 hectares — bolted onto Sixteen Mile Creek where it drops off the Niagara Escarpment at Milton. Conservation Halton threw the dam up in 1964 to keep the creek from flooding downtown Milton every spring thaw, and the flood-control basin it left behind is the water you fish today. Limestone cliffs wall one shore; a boardwalk and a swimming beach line another; the shallow, weedy \"Pirate's Cove\" juts off the middle. This is a casual family fishery — largemouth bass and yellow perch carry it, with rock bass, sunfish, and the odd crappie filling in. Non-motorized boats only, electric trolling motors excepted, off the small ramp inside Kelso Conservation Area. Shore fishing is open too — just not off the beach, the boardwalk, or the dam.",
+  "notableFacts": [
+    {
+      "fact": "Kelso Dam and Reservoir opened in 1964 by the conservation authority to control flooding on Sixteen Mile Creek.",
+      "sourceUrl": "https://www.conservationhalton.ca/about-us/history/"
+    },
+    {
+      "fact": "The Sixteen-Mile Creek Authority bought the land in 1961 for $40,000 and built a $325,000 water-control dam; Milton's main street previously flooded every spring thaw.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Kelso_Conservation_Area"
+    },
+    {
+      "fact": "The reservoir doubles as the cold-water source for snow-making at Glen Eden Ski & Snowboard Centre.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Kelso_Conservation_Area"
+    },
+    {
+      "fact": "Kelso is one of the few Conservation Halton reservoirs where boat fishing (non-motorized or electric) is permitted, alongside Mountsberg.",
+      "sourceUrl": "https://www.conservationhalton.ca/activities/fishing/"
+    }
+  ],
+  "regulations": [
+    {
+      "species": "Largemouth Bass",
+      "season": "fourth Saturday in June to November 30",
+      "limit": "S-6 / C-2 (combined with Smallmouth)",
+      "sizeLimit": null,
+      "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      "effectiveDate": "2025-12-08",
+      "verified": true
+    },
+    {
+      "species": "Yellow Perch",
+      "season": "open all year",
+      "limit": "S-50 / C-25",
+      "sizeLimit": null,
+      "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      "effectiveDate": "2025-12-08",
+      "verified": true
+    }
+  ],
+  "regsDisclaimer": "Regulations effective 2025-12-08, FMZ 16. This is a summary, not the legal regulation — confirm current rules with the official source before fishing.",
+  "launches": [
+    {
+      "name": "Kelso Conservation Area — 5234 Kelso Road, Milton",
+      "type": "trailer-and-carry-in",
+      "notes": "Small boat ramp plus gravel-beach carry-in. Non-motorized boats only, with an exception for electric trolling motors. Canoe/kayak/SUP/pedal-boat rentals on site. Paid day-use admission (reservations recommended via parkvisit.ca); park hours 8:30 am–9:00 pm. Shoreline fishing permitted except off the beach, boardwalk, pump house and its lot, Kelso Cove Waterpark, the boat-rentals beach, and the dam.",
+      "sourceUrl": "https://www.conservationhalton.ca/parks/kelso/"
+    }
+  ],
+  "species": [
+    {
+      "parentSlug": "smallmouth-bass",
+      "displayName": "Smallmouth Bass",
+      "tier": "present",
+      "structure": [],
+      "bestSeason": null,
+      "bodyCopy": null,
+      "qualitySignal": null,
+      "lede": null,
+      "howItFishes": null,
+      "structureDetails": null,
+      "speciesRules": null,
+      "sources": []
+    },
+    {
+      "parentSlug": "largemouth-bass",
+      "displayName": "Largemouth Bass",
+      "tier": "strong",
+      "structure": [
+        "shallow weedy flats at the beach/inflow (northwest) end",
+        "\"Pirate's Cove\" shallow jut",
+        "boardwalk shoreline margins"
+      ],
+      "bestSeason": "Late-June opener through fall",
+      "bodyCopy": "Largemouth own this reservoir — they're the most-logged catch here by a wide margin, ahead of perch and pumpkinseed. It's exactly the water they want: warm, shallow, weedy. Work the flats at the beach-and-inflow end in the northwest, the cover in Pirate's Cove, and the shaded margins along the boardwalk shore. You can't cast off the boardwalk itself, but the cover beside it still holds fish. From the late-June opener through fall, stick to the shallow green stuff and the cover edges — this is a shallow-water game start to finish.",
+      "qualitySignal": null,
+      "lede": "The northwest end is where Kelso's largemouth story starts — shallow, weedy water where Sixteen Mile Creek slides in and the flats warm first. This is a bass reservoir by default: about 30 hectares, warm and shallow top to bottom, exactly the habitat green bass were built for. From the beach-and-inflow flats to Pirate's Cove to the boardwalk margins, the whole shoreline reads as one long cover map. Fish it like one.",
+      "howItFishes": "Bass season opens the fourth Saturday of June and runs to November 30, and at Kelso that whole stretch is a shallow-water game. The reservoir has no real deep-cold refuge — it's a warm creek impoundment start to finish — so the fish stay tied to cover and weed edges rather than chasing a thermocline. Work Pirate's Cove and the northwest flats early, when the shallowest water warms first, then follow the shade along the boardwalk margins as summer settles in. Largemouth here eat what the reservoir grows: sunfish, perch, and crayfish along the vegetated edges. One local wrinkle — Conservation Halton permits worms as the only live bait, no minnows or crayfish — so plan around soft plastics and worms rather than a livebait forage match.",
+      "structureDetails": [
+        {
+          "name": "\"Pirate's Cove\" shallow jut",
+          "detail": "A named shallow cove off the middle of the reservoir — weedy, warm, and shallow, the kind of back-pocket cover largemouth hold in through the season."
+        },
+        {
+          "name": "Boardwalk shoreline margins",
+          "detail": "A boardwalk lines one shore; fishing off the boardwalk itself is prohibited, but the shaded, dock-like margin beside it is documented shoreline cover — most of the reservoir's largemouth get logged along water like this."
+        },
+        {
+          "name": "Shallow weedy flats at the beach/inflow (northwest) end",
+          "detail": "The warm shallow head of the impoundment where Sixteen Mile Creek enters; community catch logs are dominated by largemouth and pumpkinseed out of this end."
+        }
+      ],
+      "speciesRules": [
+        {
+          "rule": "Season: fourth Saturday in June to November 30 — Limit: S-6 / C-2 (combined with Smallmouth Bass) — Size: none",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2025-12-08"
+        },
+        {
+          "rule": "Waterbody exceptions: none — Kelso Reservoir is not listed in the FMZ 16 exceptions or sanctuaries; zone-wide regulations apply",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2025-12-08"
+        },
+        {
+          "rule": "Park rules (Conservation Halton, not provincial law): worms are the only permitted live bait (no minnows, crayfish, or frogs); lead tackle is discouraged; no fishing off the beach, boardwalk, pump house and its lot, Kelso Cove Waterpark, the boat-rentals beach, or the dam",
+          "sourceUrl": "https://www.conservationhalton.ca/activities/fishing/",
+          "effectiveDate": "2026-07-18"
+        }
+      ],
+      "sources": [
+        "https://www.conservationhalton.ca/activities/fishing/",
+        "https://fishbrain.com/fishing-waters/hypigzmg/kelso-lake",
+        "https://www.kayakfamily.ca/kayak-kelso-conservation-area.html"
+      ]
+    },
+    {
+      "parentSlug": "northern-pike",
+      "displayName": "Northern Pike",
+      "tier": "absent",
+      "structure": [],
+      "bestSeason": null,
+      "bodyCopy": null,
+      "qualitySignal": null,
+      "lede": null,
+      "howItFishes": null,
+      "structureDetails": null,
+      "speciesRules": null,
+      "sources": []
+    },
+    {
+      "parentSlug": "walleye",
+      "displayName": "Walleye",
+      "tier": "absent",
+      "structure": [],
+      "bestSeason": null,
+      "bodyCopy": null,
+      "qualitySignal": null,
+      "lede": null,
+      "howItFishes": null,
+      "structureDetails": null,
+      "speciesRules": null,
+      "sources": []
+    },
+    {
+      "parentSlug": "black-crappie",
+      "displayName": "Black Crappie",
+      "tier": "present",
+      "structure": [],
+      "bestSeason": null,
+      "bodyCopy": null,
+      "qualitySignal": null,
+      "lede": null,
+      "howItFishes": null,
+      "structureDetails": null,
+      "speciesRules": null,
+      "sources": []
+    },
+    {
+      "parentSlug": "yellow-perch",
+      "displayName": "Yellow Perch",
+      "tier": "strong",
+      "structure": ["boardwalk and shoreline margins", "mid-lake basin"],
+      "bestSeason": "Open all year; most reliable shore bite May through October",
+      "bodyCopy": "Perch are the sure thing at Kelso. No fish here gets confirmed more often by the anglers who log their catches, and most of it happens within reach of the bank. Fan the shoreline margins where the boardwalk shore drops into fishable water, or push out to the deeper mid-lake basin from a canoe or kayak. The season never closes on paper, but the dependable shore bite lines up with the park's May-through-October run. Small hooks, worked slow along the edges — this is the fishery that puts a kid's first fish on the dock.",
+      "qualitySignal": null,
+      "lede": "Kelso's perch don't take a season off — the fishery is open year-round on paper, and in the water it's the most dependable catch a shore angler will find here. The boardwalk shoreline margins are the everyman spot: reachable on foot, holding schoolfish through the warm months. Want bigger water? The mid-lake basin sits deeper off the middle for anyone in a canoe. Either way, they school where the food is, and they school in numbers.",
+      "howItFishes": "Perch school, so finding one usually means finding a pile. Along the boardwalk shore and the shallow margins they hold over the weed edges and flats, picking off invertebrates, insect larvae, and small minnows — light-tackle, small-hook fishing that suits kids and beginners. The season never closes, but the practical window is the park's own: Kelso runs day-use from roughly May through October, so that's when shore access lines up with the bite. For a change of scale, the mid-lake basin holds fish out over deeper water — reachable from a canoe or kayak, since the reservoir is non-motorized with electric trolling motors the only exception. Perch double as the reservoir's forage base, which is part of why the bass fishing holds up.",
+      "structureDetails": [
+        {
+          "name": "Boardwalk and shoreline margins",
+          "detail": "Shore-accessible edges along the boardwalk shore where perch school through the warm months — the most community-confirmed catch on the reservoir and the easiest fish to reach on foot."
+        },
+        {
+          "name": "Mid-lake basin",
+          "detail": "The deeper water off the middle of the reservoir (anglers report roughly 20 feet); perch have been taken here over the open basin, reachable from a non-motorized boat."
+        }
+      ],
+      "speciesRules": [
+        {
+          "rule": "Season: open all year — Limit: S-50 / C-25 — Size: none",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2025-12-08"
+        },
+        {
+          "rule": "Waterbody exceptions: none — Kelso Reservoir is not listed in the FMZ 16 exceptions or sanctuaries; zone-wide regulations apply",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2025-12-08"
+        },
+        {
+          "rule": "Park rules (Conservation Halton, not provincial law): worms are the only permitted live bait (no minnows, crayfish, or frogs); lead tackle is discouraged; no fishing off the beach, boardwalk, pump house and its lot, Kelso Cove Waterpark, the boat-rentals beach, or the dam",
+          "sourceUrl": "https://www.conservationhalton.ca/activities/fishing/",
+          "effectiveDate": "2026-07-18"
+        }
+      ],
+      "sources": [
+        "https://www.conservationhalton.ca/activities/fishing/",
+        "https://www.anglersatlas.com/place/117710/kelso-lake",
+        "https://fishbrain.com/fishing-waters/hypigzmg/kelso-lake"
+      ]
+    }
+  ],
+  "keyResources": [
+    {
+      "label": "The actual regs, straight from the source — FMZ 16, Government of Ontario",
+      "url": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16"
+    },
+    {
+      "label": "Launch, rentals, fees, and gate hours — Kelso Conservation Area, Conservation Halton",
+      "url": "https://www.conservationhalton.ca/parks/kelso/"
+    },
+    {
+      "label": "Species list, permitted methods, bait rules, and no-fishing zones — Conservation Halton Fishing",
+      "url": "https://www.conservationhalton.ca/activities/fishing/"
+    }
+  ],
+  "speciesCount": 2,
+  "lastVerified": "2026-07-19",
+  "factCheckStatus": "passed",
+  "regsGate": "passed"
+}

@@ -1,0 +1,252 @@
+{
+  "slug": "christie-lake",
+  "lake": "Christie Lake",
+  "province": "Ontario",
+  "fmz": 16,
+  "waterbodyType": "reservoir",
+  "coordinates": { "lat": 43.283, "lng": -80.011 },
+  "morphology": {
+    "surfaceArea": "≈60 ha (71.2 ha summer storage)",
+    "maxDepth": null,
+    "meanDepth": null,
+    "clarity": null,
+    "trophicStatus": null,
+    "thermalBehaviour": "No documented stratification data. HCA states Christie Lake never has safe ice conditions for ice fishing or skating, indicating an unstable/marginal ice regime."
+  },
+  "bestSeason": "Summer through fall; fishing opens the fourth Saturday in June",
+  "overview": "Christie Lake is a flood-control reservoir with a dam bolted across Spencer Creek — 180 metres of it, holding back roughly 60 hectares of shallow, warm, weedy water in the Dundas hills west of Hamilton. This is Hamilton Conservation Authority ground: gated, day-use, and it fishes like the warm impoundment it is. Largemouth bass and northern pike run the show, with crappie and panfish filling in behind. Pike bury into the Spencer Creek inflow marsh at the west end, where the Christie Wildlife Area feeds the lake through the vegetation; largemouth work the causeway shallows and the docks off the Marina Pavilion, which is also your launch — electric motors only, no gas. One catch: the HCA closes the lake April 1 through the fourth Saturday of June, so your season really opens midsummer and runs to freeze-up. And there's no freeze-up fishing here — Christie never sets safe ice.",
+  "notableFacts": [
+    {
+      "fact": "The 180-metre Christie Dam was completed in 1971 to prevent major flooding in low-lying Dundas; the reservoir holds enough water to fill more than 900 Olympic-sized swimming pools.",
+      "sourceUrl": "https://conservationhamilton.ca/wp-content/uploads/2026/02/Christie-Lake-Brochure-2026.pdf"
+    },
+    {
+      "fact": "The reservoir sits inside the Niagara Escarpment World Biosphere Reserve and Ontario's Greenbelt, within a 353-hectare conservation area.",
+      "sourceUrl": "https://conservationhamilton.ca/wp-content/uploads/2026/02/Christie-Lake-Brochure-2026.pdf"
+    },
+    {
+      "fact": "HCA manages Christie as a sustainable native warm-water fishery and promotes a voluntary catch-and-release program to support it.",
+      "sourceUrl": "https://conservationhamilton.ca/activities/fishing/"
+    }
+  ],
+  "regulations": [
+    {
+      "species": "Largemouth Bass",
+      "season": "fourth Saturday in June to November 30 (2026: Jun 27–Nov 30)",
+      "limit": "S-6 / C-2 (combined with Smallmouth Bass)",
+      "sizeLimit": "no size limit",
+      "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      "effectiveDate": "2026-01-01",
+      "verified": true
+    },
+    {
+      "species": "Northern Pike",
+      "season": "January 1 to March 31 and second Saturday in May to December 31 (2026: May 9–Dec 31)",
+      "limit": "S-6 / C-2",
+      "sizeLimit": "no size limit",
+      "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      "effectiveDate": "2026-01-01",
+      "verified": true
+    }
+  ],
+  "regsDisclaimer": "Regulations effective 2026-01-01, FMZ 16. This is a summary, not the legal regulation — confirm current rules with the official source before fishing.",
+  "launches": [
+    {
+      "name": "Christie Lake Conservation Area boat launch — Marina Pavilion, east end (1000 Highway 5 West, Dundas)",
+      "type": "trailer-and-carry-in",
+      "notes": "Small-boat ramp by the Marina Pavilion (paddlers report a ramp at the NE-corner parking lot). Electric trolling motors only — gasoline motors prohibited; boats excluded from the swimming area. Gated day-use entry, sunrise to sunset; 2026 fees $16.50 per vehicle+driver, $5.50 per passenger/walk-in.",
+      "sourceUrl": "https://conservationhamilton.ca/conservation-areas/christie-lake/"
+    },
+    {
+      "name": "Carry-in / paddlecraft access and rentals — Beach Store and Middletown Parking Lot",
+      "type": "carry-in",
+      "notes": "Canoe and paddleboard rentals at the Beach Store (lifejackets included; $40/2 hr, $70/4 hr, $100/day). Middletown Parking Lot (405 Middletown Road) provides west-side shore access toward the wildlife-area end.",
+      "sourceUrl": "https://conservationhamilton.ca/conservation-areas/christie-lake/"
+    }
+  ],
+  "species": [
+    {
+      "parentSlug": "smallmouth-bass",
+      "displayName": "Smallmouth Bass",
+      "tier": "absent",
+      "structure": [],
+      "bestSeason": null,
+      "bodyCopy": null,
+      "qualitySignal": null,
+      "lede": null,
+      "howItFishes": null,
+      "structureDetails": null,
+      "speciesRules": null,
+      "sources": []
+    },
+    {
+      "parentSlug": "largemouth-bass",
+      "displayName": "Largemouth Bass",
+      "tier": "strong",
+      "structure": [
+        "Spencer Creek inflow marsh (Christie Wildlife Area)",
+        "causeway shallows",
+        "Marina Pavilion docks"
+      ],
+      "bestSeason": "Summer through fall, from the late-June opener to freeze-up",
+      "bodyCopy": "Largemouth own the salad here. Christie is shallow, warm, and weed-choked — everything a bucketmouth wants — and they hold in the marshy Spencer Creek inflow at the west end, along the causeway shallows, and under the Marina Pavilion docks. Bluegill and sunfish stock the pantry. Because the park stays closed until the fourth Saturday of June, you're on them post-spawn from day one: hit the pads and wood early and late through summer, then slide out to the deeper weed edges as fall cools the shallows down.",
+      "qualitySignal": null,
+      "lede": "The west-end marsh is largemouth headquarters. Where Spencer Creek trickles in through the Christie Wildlife Area, the lake goes shallow, weedy, and green — a bucketmouth nursery of pads, wood, and stalled current. From there the fish spread to the causeway shallows and the Marina Pavilion docks, but the creek arm is the anchor: the warmest, weediest water on a warm, weedy reservoir, and the first place to start a search.",
+      "howItFishes": "Christie doesn't give you a spring bite — the park is closed April 1 to the fourth Saturday in June, which locks out the pre-spawn and spawn entirely, so you start post-spawn. From the late-June opener, fish shallow cover early and late: the pads and stumps of the Spencer Creek inflow, the rip-rap and shallows along the causeway, the shade under the Marina Pavilion docks. Bluegill and sunfish are the main forage, so match the panfish. It's a shallow, warm basin with no documented deep cold layer, so summer doesn't push bass far — they stay on cover, sliding to the deeper weed edges only as fall pulls the temperature down. There's no winter option here: HCA is clear that Christie never sets safe ice.",
+      "structureDetails": [
+        {
+          "name": "Spencer Creek inflow marsh / Christie Wildlife Area (west end)",
+          "detail": "The documented shallow, marshy creek-fed zone that becomes a shallow creek upstream — classic shallow vegetated largemouth habitat, and the warmest, weediest water on the reservoir. (Named/mapped feature; holding value is a general habitat pattern, not species-documented.)"
+        },
+        {
+          "name": "Causeway (mid-park)",
+          "detail": "A named shoreline/crossing structure shown on the park map; the causeway rip-rap and adjacent shallows are typical bass shore targets."
+        },
+        {
+          "name": "Marina / boat-launch bay (east end, by the Marina Pavilion)",
+          "detail": "The documented access bay with docks — dock structure is typical largemouth cover, and it's also where you launch (electric only)."
+        }
+      ],
+      "speciesRules": [
+        {
+          "rule": "Season: fourth Saturday in June to November 30 (2026: Jun 27–Nov 30) — Limit: S-6 / C-2 (combined with Smallmouth Bass) — Size: no size limit",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2026-01-01"
+        },
+        {
+          "rule": "Property closure: the Hamilton Conservation Authority closes Christie to fishing April 1 to the fourth Saturday in June (HCA calls it a \"fish sanctuary\") — an on-site rule enforced by the gated park, not a provincial regulation",
+          "sourceUrl": "https://conservationhamilton.ca/activities/fishing/",
+          "effectiveDate": "2026-07-19"
+        },
+        {
+          "rule": "Access: electric trolling motors only, gasoline motors prohibited",
+          "sourceUrl": "https://conservationhamilton.ca/conservation-areas/christie-lake/",
+          "effectiveDate": "2026-07-19"
+        },
+        {
+          "rule": "Bait: FMZ 16 is within the Southern Bait Management Zone — live or dead baitfish and leeches may not be transported into or out of the zone",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2026-01-01"
+        }
+      ],
+      "sources": [
+        "https://conservationhamilton.ca/activities/fishing/",
+        "https://fishbrain.com/fishing-waters/b5XVsYTt/christie-reservoir"
+      ]
+    },
+    {
+      "parentSlug": "northern-pike",
+      "displayName": "Northern Pike",
+      "tier": "strong",
+      "structure": [
+        "Spencer Creek inflow / west-end marsh",
+        "Christie Dam basin"
+      ],
+      "bestSeason": "Summer through fall (opens the fourth Saturday in June with the park)",
+      "bodyCopy": "Nothing gets logged more often on Christie than pike — anglers put more of them in the book than largemouth. They haunt the vegetated Spencer Creek inflow at the west end, sliding out of the Christie Wildlife Area to ambush whatever runs the weed edge. The deepest water sits back at the 180-metre dam — the place to check when summer heat shoves fish off the shallow flats. The spring closure runs through late June, so you'll skip the classic early-pike window; plan on summer and fall, and write off winter, because Christie never sets safe ice.",
+      "qualitySignal": null,
+      "lede": "Christie has exactly one piece of deep structure, and it's the dam. The 180-metre wall at the east end backs up the reservoir's deepest water — the summer refuge when heat flattens the shallow bite. The rest of the year, pike live up the other end, jammed into the vegetated Spencer Creek inflow where the Christie Wildlife Area feeds green water and cover into the lake. Two ends of the reservoir, one fish working both.",
+      "howItFishes": "Pike want two things here: weeds to hunt, and somewhere deeper to duck when it's hot. Spring spawning happens in the flooded west-end vegetation, but the park closure runs through late June, so you never fish that window — you meet them already set up on the weed edges. Through summer, the Spencer Creek inflow and the Christie Wildlife Area margins hold fish ambushing perch, shiners, and stray panfish along the green line. When midsummer heat thins the shallow action, the dam basin at the east end is the one deeper card to play. Come fall the shallow bite firms back up. The winter season is open on paper, but forget it — HCA is blunt that Christie never sets safe ice, so there's no on-site ice fishery.",
+      "structureDetails": [
+        {
+          "name": "Spencer Creek inflow / west-end marsh",
+          "detail": "The documented vegetated inflow zone that fits pike spawning and ambush habitat; pike presence itself is HCA-documented, and this is where they hunt the weed line spring through fall. (Named/mapped feature; holding value is a general habitat pattern.)"
+        },
+        {
+          "name": "Christie Dam basin (east side, 180 m dam)",
+          "detail": "The documented deepest-water feature of the flood-control reservoir sits at the dam — the general reservoir pattern makes it the place to look when summer heat pushes fish off the shallow flats."
+        }
+      ],
+      "speciesRules": [
+        {
+          "rule": "Season: January 1 to March 31 and second Saturday in May to December 31 (2026: May 9–Dec 31) — Limit: S-6 / C-2 — Size: no size limit",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2026-01-01"
+        },
+        {
+          "rule": "Property closure: the Hamilton Conservation Authority closes Christie to fishing April 1 to the fourth Saturday in June (HCA \"fish sanctuary\") — an on-site park rule, not a provincial regulation; it removes the early-spring pike window on-site",
+          "sourceUrl": "https://conservationhamilton.ca/activities/fishing/",
+          "effectiveDate": "2026-07-19"
+        },
+        {
+          "rule": "No ice fishery: HCA states Christie never has safe ice conditions — the January–March open season cannot be fished on-site",
+          "sourceUrl": "https://conservationhamilton.ca/activities/fishing/",
+          "effectiveDate": "2026-07-19"
+        },
+        {
+          "rule": "Bait: FMZ 16 is within the Southern Bait Management Zone — live or dead baitfish and leeches may not be transported into or out of the zone",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2026-01-01"
+        }
+      ],
+      "sources": [
+        "https://conservationhamilton.ca/activities/fishing/",
+        "https://fishbrain.com/fishing-waters/b5XVsYTt/christie-reservoir"
+      ]
+    },
+    {
+      "parentSlug": "walleye",
+      "displayName": "Walleye",
+      "tier": "absent",
+      "structure": [],
+      "bestSeason": null,
+      "bodyCopy": null,
+      "qualitySignal": null,
+      "lede": null,
+      "howItFishes": null,
+      "structureDetails": null,
+      "speciesRules": null,
+      "sources": []
+    },
+    {
+      "parentSlug": "black-crappie",
+      "displayName": "Black Crappie",
+      "tier": "present",
+      "structure": [],
+      "bestSeason": null,
+      "bodyCopy": null,
+      "qualitySignal": null,
+      "lede": null,
+      "howItFishes": null,
+      "structureDetails": null,
+      "speciesRules": null,
+      "sources": []
+    },
+    {
+      "parentSlug": "yellow-perch",
+      "displayName": "Yellow Perch",
+      "tier": "absent",
+      "structure": [],
+      "bestSeason": null,
+      "bodyCopy": null,
+      "qualitySignal": null,
+      "lede": null,
+      "howItFishes": null,
+      "structureDetails": null,
+      "speciesRules": null,
+      "sources": []
+    }
+  ],
+  "keyResources": [
+    {
+      "label": "The actual regs, straight from the source — FMZ 16, Government of Ontario",
+      "url": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16"
+    },
+    {
+      "label": "Launch, gate hours, fees, and the electric-only rule — Christie Lake Conservation Area, Hamilton Conservation Authority",
+      "url": "https://conservationhamilton.ca/conservation-areas/christie-lake/"
+    },
+    {
+      "label": "Fishing rules, the spring closure, and the native-fishery catch-and-release ethic — HCA fishing page",
+      "url": "https://conservationhamilton.ca/activities/fishing/"
+    },
+    {
+      "label": "Day-use and boat/canoe rental fees — HCA admission and fees",
+      "url": "https://conservationhamilton.ca/admissions-fees/"
+    }
+  ],
+  "speciesCount": 2,
+  "lastVerified": "2026-07-19",
+  "factCheckStatus": "passed",
+  "regsGate": "passed"
+}

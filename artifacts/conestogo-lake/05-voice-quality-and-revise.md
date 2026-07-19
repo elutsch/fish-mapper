@@ -62,7 +62,7 @@ Additional check applied this iteration per the updated voice.md: **anti-repetit
 ## Audit L — No-live-data check (LAKE-SPECIFIC)
 | ID | Location | Offending text | Verdict | Action applied | Notes |
 |----|----------|----------------|---------|----------------|-------|
-| L.1 | Full page scan | (none found) | PASS | — | No current water temp, wind, level, or "bite is on" anywhere. "Levels swing through the season" and "structure that fished one month can be high and dry the next" are evergreen reservoir dynamics; the 2024–2025 dam rehab is a dated historical fact, not a today-reading. Seasonal patterns (arms warm first, summer stratification, low-light windows, drawdown concentration) correctly retained per rules. |
+| L.1 | Full page scan | (none found) | PASS | — | No current live-conditions or "bite is on" language anywhere. "Levels swing through the season" and "structure that fished one month can be high and dry the next" are evergreen reservoir dynamics; the 2024–2025 dam rehab is a dated historical fact, not a today-reading. Seasonal patterns (arms warm first, summer stratification, low-light windows, drawdown concentration) correctly retained per rules. |
 
 `live_data_leaks_found` = 0.
 

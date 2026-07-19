@@ -58,7 +58,7 @@ Stage 4's `04-lake-copy.md` for Guelph Lake passes cleanly on the first pass. Ev
 | L.1 | Overview | "Reservoir levels are drawn down through autumn and refilled in spring" | PASS | — | Seasonal pattern, not a current reading — retained. |
 | L.2 | Smallmouth card | "As the reservoir draws down through autumn, expect fish to concentrate..." | PASS | — | Seasonal drawdown pattern — evergreen, retained. |
 
-No current/today water temp, wind, level, air quality, or "bite is on" language anywhere. `live_data_leaks_found` = 0.
+No current/today live-conditions or "bite is on" language anywhere. `live_data_leaks_found` = 0.
 
 ## Audit R — Regulations integrity check (BLOCKING)
 | ID | Check | Verdict | Action applied | Notes |

@@ -2,7 +2,7 @@
 // markdown research pipeline (Stages 0–5, 4b) and emitted by Stage 7.
 //
 // This layer is deliberately decoupled from the daily conditions layer
-// (weather, water estimate, air quality, solunar, craft/fishing verdicts),
+// (weather, solunar, craft/fishing verdicts),
 // which the conditions engine produces at request time and overlays onto a
 // profile by slug. A LakeProfile therefore carries NO live/conditions fields.
 

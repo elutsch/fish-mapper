@@ -21,6 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </a>
             <nav className="topnav" aria-label="Primary">
               <a href="/fishing">Map</a>
+              <a href="/about">About</a>
               <a href="/methods">Methods</a>
               <a href="/disclaimer">Safety</a>
             </nav>

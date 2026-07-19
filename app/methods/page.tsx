@@ -35,7 +35,6 @@ const dataSources = [
 ];
 
 const notYetUsed = [
-  "Live water temperature sensors or modelled water temperature history.",
   "Broad-scale monitoring catch rates as a quantitative scoring input.",
   "ERA5 or other two-week air-mass history beyond the pressure trend available from the current forecast request.",
   "Solunar major/minor feeding periods. The current site shows moon phase only."

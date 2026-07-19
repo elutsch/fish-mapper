@@ -5,6 +5,7 @@ import conestogoLake from "./conestogo-lake";
 import fairyLakeActon from "./fairy-lake-acton";
 import fanshaweLake from "./fanshawe-lake";
 import guelphLake from "./guelph-lake";
+import islandLakeOrangeville from "./island-lake-orangeville";
 import kelsoReservoir from "./kelso-reservoir";
 import lakeEugenia from "./lake-eugenia";
 import laurelCreekReservoir from "./laurel-creek-reservoir";
@@ -22,6 +23,7 @@ export const lakeProfiles: Record<string, LakeProfile> = {
   "fairy-lake-acton": fairyLakeActon,
   "fanshawe-lake": fanshaweLake,
   "guelph-lake": guelphLake,
+  "island-lake-orangeville": islandLakeOrangeville,
   "kelso-reservoir": kelsoReservoir,
   "lake-eugenia": lakeEugenia,
   "laurel-creek-reservoir": laurelCreekReservoir,

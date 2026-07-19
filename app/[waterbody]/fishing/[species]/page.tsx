@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getSpeciesCard, speciesPathSegment } from "@/app/components/SpeciesCards";
+import { getSpeciesCard } from "@/app/components/SpeciesCards";
 import { getLakeProfile, lakeProfiles } from "@/lib/lakeProfiles";
 import type { LakeProfile, LakeProfileSpecies } from "@/lib/lakeProfiles/types";
+import { formatSpeciesName, speciesPathSegment } from "@/lib/species";
 
 type PageProps = {
   params: Promise<{ waterbody: string; species: string }>;
@@ -27,10 +28,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const species = profile ? findSpecies(profile, speciesSlug) : undefined;
   if (!profile || !species) return {};
 
+  const speciesName = formatSpeciesName(species.displayName);
+
   return {
-    title: `${species.displayName} at ${profile.lake}`,
+    title: `${speciesName} at ${profile.lake}`,
     description:
-      species.lede ?? species.bodyCopy ?? `${species.displayName} fishing profile for ${profile.lake}.`
+      species.lede ?? species.bodyCopy ?? `${speciesName} fishing profile for ${profile.lake}.`
   };
 }
 
@@ -43,9 +46,10 @@ export default async function LakeSpeciesPage({ params }: PageProps) {
   if (!species || species.tier === "absent") notFound();
 
   const card = getSpeciesCard(species.displayName);
+  const speciesName = formatSpeciesName(species.displayName);
   const primaryStructure = species.structureDetails?.[0] ?? null;
   const secondaryStructure = species.structureDetails?.[1] ?? null;
-  const tacticalNote = species.lede ?? species.bodyCopy ?? `${species.displayName} is present in the ${profile.lake} research profile.`;
+  const tacticalNote = species.lede ?? species.bodyCopy ?? `${speciesName} is present in the ${profile.lake} research profile.`;
 
   return (
     <main className="screen species-page">
@@ -66,10 +70,10 @@ export default async function LakeSpeciesPage({ params }: PageProps) {
             {card ? (
               <img src={card.image} alt={`${card.label} species card`} />
             ) : (
-              <div>{species.displayName}</div>
+              <div>{speciesName}</div>
             )}
           </div>
-          <h1>{species.displayName}</h1>
+          <h1>{speciesName}</h1>
           <div className="species-tier">{species.tier}</div>
         </section>
 

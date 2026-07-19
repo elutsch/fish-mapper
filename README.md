@@ -12,12 +12,10 @@ Next.js App Router scaffold for per-waterbody on-water fishing pages. Each page 
 
 ## Environment
 
-- `ANTHROPIC_API_KEY` enables agent-written verdict JSON.
-- `ANTHROPIC_MODEL` defaults to `claude-sonnet-4-6`.
 - `KV_REST_API_URL` and `KV_REST_API_TOKEN` enable Vercel KV snapshots.
 - `CRON_SECRET` protects `/api/cron/fishing` when set.
 
-Without Anthropic or KV env vars, pages still render using the deterministic fallback and in-memory snapshots.
+Without KV env vars, pages still render using deterministic scoring and in-memory snapshots.
 
 ## Data Status
 

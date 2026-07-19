@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { LakeImage } from "@/app/components/LakeImage";
 import { SpotMap } from "@/app/components/SpotMap";
 import { buildConditionsDashboard } from "@/lib/conditions";
+import { formatLaunchType } from "@/lib/launch";
 import { getOrCreateSnapshot } from "@/lib/snapshot";
 import { spots, spotsAsGeoJson } from "@/lib/spots";
+import { formatSpeciesName } from "@/lib/species";
 import type { MapSpotStatus } from "@/lib/spots";
 import type { Rating, Spot, Verdict } from "@/lib/types";
 
@@ -85,24 +87,27 @@ export default async function FishingIndexPage() {
           <span className="button">Scroll</span>
         </div>
         <div className="spot-list" aria-label="Scrollable waterbody carousel">
-          {spots.map((spot) => (
-            <a key={spot.id} className="lake-card spot-card" href={`/${spot.id}/fishing`}>
-              <LakeImage spotId={spot.id}>
-                <span className="tag">{spot.launch.trailer ? "Ramp" : "Carry-in"}</span>
-              </LakeImage>
-              <div className="lake-body">
-                <h3>{spot.name}</h3>
-                <p className="muted">
-                  {spot.launch.trailer ? "Trailer launch and carry-in" : "Carry-in launch"}
-                </p>
-              </div>
-              <div className="facts">
-                <span className="pill">{spot.maxFetchKm?.toFixed(1)} km fetch</span>
-                {spot.fmz ? <span className="pill">FMZ {spot.fmz}</span> : null}
-              </div>
-              <p className="species-list">{spot.species.join(", ")}</p>
-            </a>
-          ))}
+          {spots.map((spot) => {
+            const status = statuses[spot.id]?.status ?? "unknown";
+            const statusLabel = statuses[spot.id]?.label ?? "Forecast pending";
+
+            return (
+              <a key={spot.id} className="lake-card spot-card" href={`/${spot.id}/fishing`}>
+                <LakeImage spotId={spot.id}>
+                  <span className={`lake-status-callout launch-status-${status}`}>{statusLabel}</span>
+                </LakeImage>
+                <div className="lake-body">
+                  <h3>{spot.name}</h3>
+                  <p className="muted">{formatLaunchType(spot.launch)}</p>
+                </div>
+                <div className="facts">
+                  <span className="pill">{spot.maxFetchKm?.toFixed(1)} km fetch</span>
+                  {spot.fmz ? <span className="pill">FMZ {spot.fmz}</span> : null}
+                </div>
+                <p className="species-list">{spot.species.map(formatSpeciesName).join(", ")}</p>
+              </a>
+            );
+          })}
         </div>
       </section>
     </main>

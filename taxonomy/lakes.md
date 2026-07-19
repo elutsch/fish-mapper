@@ -12,7 +12,7 @@ All waterbodies below are in **Ontario, FMZ 16** (Grand River region and adjacen
 | `puslinch-lake` | Puslinch Lake | 16 | natural-lake *(unconfirmed)* | Large kettle lake, Township of Puslinch. |
 | `laurel-creek-reservoir` | Laurel Creek Reservoir | 16 | reservoir | GRCA reservoir, Waterloo; distinct from Laurel Creek itself. |
 | `shades-mills-reservoir` | Shades Mills Reservoir | 16 | reservoir | GRCA reservoir on Mill Creek, Cambridge. |
-| `valens-lake` | Valens Lake | 16 | reservoir | Conservation Halton reservoir, Flamborough. |
+| `valens-lake` | Valens Lake | 16 | reservoir | Hamilton Conservation Authority reservoir on upper Spencer Creek, Flamborough. |
 | `fairy-lake-acton` | Fairy Lake | 16 | reservoir *(unconfirmed)* | The Fairy Lake in Acton — several "Fairy Lake" in Ontario; this is the Acton one. |
 | `mountsberg-reservoir` | Mountsberg Reservoir | 16 | reservoir | Conservation Halton reservoir, Campbellville. |
 | `christie-lake` | Christie Lake | 16 | reservoir | Christie Lake / Christie Conservation Area reservoir (HCA), Dundas — not Christie Lake near Perth, ON. |

@@ -1,3 +1,5 @@
+import { formatSpeciesName, normalizeSpeciesName } from "@/lib/species";
+
 export const speciesCards: Record<string, { label: string; image: string }> = {
   "largemouth bass": { label: "Largemouth Bass", image: "/species/largemouth-bass.webp" },
   "smallmouth bass": { label: "Smallmouth Bass", image: "/species/smallmouth-bass.webp" },
@@ -24,7 +26,7 @@ export function SpeciesCards({
         if (!card) {
           return (
             <div key={name} className="species-poster species-poster-fallback">
-              <span>{titleCase(name)}</span>
+              <span>{formatSpeciesName(name)}</span>
             </div>
           );
         }
@@ -45,21 +47,6 @@ export function SpeciesCards({
 
 export function getSpeciesCard(name: string) {
   return speciesCards[normalizeSpeciesName(name)];
-}
-
-export function normalizeSpeciesName(name: string) {
-  return name.toLowerCase() === "pike" ? "northern pike" : name.toLowerCase();
-}
-
-export function speciesPathSegment(name: string) {
-  return normalizeSpeciesName(name).replaceAll(" ", "-");
-}
-
-export function titleCase(value: string) {
-  return value
-    .split(" ")
-    .map((word) => `${word.slice(0, 1).toUpperCase()}${word.slice(1)}`)
-    .join(" ");
 }
 
 function dedupeSpecies(species: string[]) {

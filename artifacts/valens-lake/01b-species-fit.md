@@ -3,7 +3,7 @@ slug: valens-lake
 lake: Valens Lake
 province: Ontario
 fmz: 16
-generated_at: 2026-07-18
+generated_at: 2026-07-19
 destination_count: 0
 strong_count: 2
 present_count: 2
@@ -12,61 +12,59 @@ absent_count: 2
 
 # Species Fit: Valens Lake
 
-> **FLAG — taxonomy discrepancy (managing authority, not FMZ):** `taxonomy/lakes.md` disambiguates Valens Lake as a *"Conservation Halton reservoir."* This is **incorrect** — Valens Lake is owned and managed by the **Hamilton Conservation Authority (HCA)** (Valens Lake Conservation Area, Flamborough). **FMZ 16 is verified correct** against the official Ontario Fishing Regulations Summary for this Flamborough/Spencer Creek water — no zone change needed. Only the managing-authority label is wrong; downstream stages should cite HCA, not Conservation Halton.
-
 ## Summary
 - **Destination species:** none
-- **Strong species:** Northern Pike, Largemouth Bass
-- **Headline structure surfaced:** shallow bridge/footbridge basin (heavy weeds + submerged tree stumps, primary largemouth zone), weed beds and submerged stumps throughout the reservoir, and the dam-area deeper water (avg ~5–7 ft, the lake's deepest zone and best pike water) plus weedy bays and weed edges.
+- **Strong species:** Largemouth Bass, Northern Pike
+- **Headline structure surfaced:** deeper open water and pockets in the Valens Dam area; shallow heavy weeds and submerged stumps around the 140 m fishing bridge.
 
-This is a small, shallow, warm, stained, non-stocked flood-control reservoir. It is a genuine pike-and-largemouth fishery with named structure, but there is **no citable quality signal** anywhere (no MNR survey CPUE, no documented trophy/record, no tournament history, no stocking program) — so no species reaches Destination. Pike and largemouth top out at Strong on named structure plus a differentiator; crappie and perch are supporting panfish (Present); smallmouth and walleye are Absent on both undocumented presence and wrong habitat.
+Valens is a 76 ha, shallow Spencer Creek reservoir with an official HCA fish-community inventory and boat-electrofishing record. Largemouth and pike have lake-specific structure and current HCA backing, but neither has the comparative survey, trophy, tournament, or managed-stocking evidence needed for Destination. Crappie and perch are documented supporting fisheries without species-specific structure. Smallmouth and walleye are absent from the official lake inventory.
 
 ## Scoring detail
 
 ### Smallmouth Bass
 - **Tier:** Absent
 - **Structure surfaced:** (none)
-- **Evidence signal:** (none)
-- **Reasoning:** No documented presence in HCA lists, Fishbrain, or angler sources, and the habitat is a poor fit — shallow, warm, turbid/stained, weed-dominated water with no rock/gravel reefs, clear water, or current. Habitat-implausible and undocumented.
+- **Evidence signal:** not listed in HCA's 14-species lake inventory or current fishing page.
+- **Reasoning:** Valens is shallow and vegetation-heavy, and official monitoring does not document Smallmouth Bass. No hard-structure pattern was found.
 - **Sources:** —
 
 ### Largemouth Bass
 - **Tier:** Strong
-- **Structure surfaced:** Bridge/footbridge basin joining the two lobes (heavy weeds + submerged tree stumps — the primary largemouth zone); weed beds throughout the reservoir; submerged dead-tree stumps below the surface.
-- **Evidence signal:** No survey/trophy/stocking/tournament quality signal found — differentiator is a named, HCA-recognized signature-species fishery with a specific, structure-rich primary zone (bridge basin), fished with weedless plastics/frogs.
-- **Reasoning:** Documented present and well-matched to the shallow, weedy, stumpy warmwater habitat with a clearly named primary zone, which lifts it above generic presence. Absence of any citable quality signal caps it at Strong, not Destination.
-- **Sources:** https://conservationhamilton.ca/activities/fishing/ ; https://www.canadian-sportfishing.com/question/hi-italo-i-will-be-fishing-valens-lake-conservation-area... ; https://kayakingthegta.wordpress.com/2021/10/12/valens-lake-flamborough/
+- **Structure surfaced:** shallower water around the fishing bridge with heavy weeds and submerged stumps; open deeper water in the Valens Dam area.
+- **Evidence signal:** HCA boat-electrofishing found Largemouth Bass catch relatively stable over the monitoring period; current HCA materials continue to identify largemouth as a core fishery species.
+- **Reasoning:** The bridge and dam patterns are specific, source-backed reasons to target largemouth here, and the shallow warmwater reservoir matches the species. The survey is a real quality signal but does not establish destination-level regional performance, so Strong is the honest ceiling.
+- **Sources:** https://conservationhamilton.ca/wp-content/uploads/2022/02/Final-Approved-Valens-Master-Plan-2019.pdf ; https://conservationhamilton.ca/conservation-areas/valens-lake/ ; https://www.canadian-sportfishing.com/question/hi-italo-i-will-be-fishing-valens-lake-conservation-area-as-per-your-recomendation-what-lures-or-techniques-do-you-recommend-we-use-to-target-bass-and-pike-on-the-lake-thank-you-italo-2/
 
 ### Northern Pike
 - **Tier:** Strong
-- **Structure surfaced:** Dam-area deeper water (avg ~5–7 ft, the lake's deepest zone — ~50/50 pike/bass water); weed edges and weedy bays throughout with abundant panfish forage.
-- **Evidence signal:** No survey/trophy/stocking/tournament quality signal found — differentiator is that pike is the **most-logged species** on the lake (Fishbrain), ahead of largemouth, on a named structural pattern (dam-area water + weed edges).
-- **Reasoning:** Documented present, the most-caught species by anglers, and tied to specific named structure and forage — clearly above "it's present." No citable official quality signal exists, so it stays Strong rather than Destination.
-- **Sources:** https://conservationhamilton.ca/activities/fishing/ ; https://fishbrain.com/fishing-waters/meQGQMKu/valens-reservoir ; https://www.canadian-sportfishing.com/question/hi-italo-i-will-be-fishing-valens-lake-conservation-area...
+- **Structure surfaced:** open pockets in the deeper Valens Dam area, where the expert angler source describes shared bass-and-pike water.
+- **Evidence signal:** Northern Pike appears in HCA's official lake inventory and current 2026 fishing material; the dam area provides a lake-specific pattern.
+- **Reasoning:** Official presence plus a named, depth-verified fishing zone makes pike a clear target rather than a generic resident. No comparative catch-rate, trophy, tournament, or stocking evidence supports Destination.
+- **Sources:** https://conservationhamilton.ca/wp-content/uploads/2022/02/Final-Approved-Valens-Master-Plan-2019.pdf ; https://conservationhamilton.ca/wp-content/uploads/2026/05/BoDAgendapkg_26June4.pdf ; https://www.canadian-sportfishing.com/question/hi-italo-i-will-be-fishing-valens-lake-conservation-area-as-per-your-recomendation-what-lures-or-techniques-do-you-recommend-we-use-to-target-bass-and-pike-on-the-lake-thank-you-italo-2/
 
 ### Walleye
 - **Tier:** Absent
 - **Structure surfaced:** (none)
-- **Evidence signal:** (none)
-- **Reasoning:** No documented presence and no stocking. Habitat is wrong — small, shallow, warm, weedy reservoir with no deep/rocky reefs, gravel bars, or river current for spawning. Confirming searches for MNR survey/stocking returned nothing for Valens. Habitat-implausible and undocumented.
+- **Evidence signal:** not listed in HCA's lake inventory or current fishing materials.
+- **Reasoning:** No documented presence or stocking record was found, and the small shallow reservoir lacks a sourced walleye pattern.
 - **Sources:** —
 
 ### Black Crappie
 - **Tier:** Present
-- **Structure surfaced:** Weed edges and submerged timber/stumps (bridge basin) — general crappie-holding cover documented lake-wide; no crappie-specific spot named.
-- **Evidence signal:** Presence confirmed on the HCA species list; no named crappie structure and no quality signal — Present only.
-- **Reasoning:** Documented present and habitat-plausible (warm, stained water with wood/weed cover), but sources name no crappie-specific structure and give no differentiator, so it does not exceed Present.
+- **Structure surfaced:** (none specific to crappie)
+- **Evidence signal:** present in HCA's official lake inventory and current fishing list.
+- **Reasoning:** Presence is authoritative, but no source located a crappie-specific structure or quality differentiator. Present is the evidence-backed tier.
 - **Sources:** —
 
 ### Yellow Perch
 - **Tier:** Present
-- **Structure surfaced:** Weed flats and mid-depth weed edges (schooling panfish over extensive vegetation).
-- **Evidence signal:** Confirmed catches (HCA list + Fishbrain); functions also as primary pike/largemouth forage. No quality signal — Present only.
-- **Reasoning:** Documented present and well-suited to the weedy reservoir, but it is a supporting panfish/forage species with no differentiator that would make it a reason to come. Present.
+- **Structure surfaced:** (none specific to perch)
+- **Evidence signal:** HCA's monitoring says Yellow Perch arrived between 2010 and 2012; current HCA materials list perch.
+- **Reasoning:** Perch are confirmed and part of the forage/panfish community, but no named structure or comparative quality signal makes them a reason to travel.
 - **Sources:** —
 
 ## Confidence assessment
-- **Searches run:** 2 (plus the Stage 1a research substrate)
-- **Species with Destination/Strong tier and named-structure evidence:** 2 (Northern Pike, Largemouth Bass) — both have named structure
-- **Destination-tier species with a citable quality signal (survey/trophy/stocking/tournament):** 0 — no species reaches Destination; no citable quality signal exists for any species (non-stocked native reservoir, no MNR survey/tournament/trophy record located)
-- **Gaps remaining:** No official morphometry (surface area/max depth) is published; depth is angler-estimated (~5–7 ft avg near dam). This does not change tiers — the shallow warmwater character is well established and no quality signal exists to elevate any species above Strong.
+- **Searches run:** 8 source fetches plus targeted sitemap/source recovery for the Canadian Sportfishing page.
+- **Species with Destination/Strong tier and named-structure evidence:** 2.
+- **Destination-tier species with a citable quality signal:** 0 — no Destination species assigned.
+- **Gaps remaining:** no official bathymetric contour map, no comparative fish-survey metrics, and no species-specific structure for crappie or perch.

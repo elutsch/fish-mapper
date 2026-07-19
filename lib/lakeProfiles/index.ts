@@ -13,6 +13,7 @@ import mountsbergReservoir from "./mountsberg-reservoir";
 import pittockLake from "./pittock-lake";
 import puslinchLake from "./puslinch-lake";
 import shadesMillsReservoir from "./shades-mills-reservoir";
+import valensLake from "./valens-lake";
 import wildwoodReservoir from "./wildwood-reservoir";
 
 // Stage 7 registers each generated profile here, keyed by slug.
@@ -31,6 +32,7 @@ export const lakeProfiles: Record<string, LakeProfile> = {
   "pittock-lake": pittockLake,
   "puslinch-lake": puslinchLake,
   "shades-mills-reservoir": shadesMillsReservoir,
+  "valens-lake": valensLake,
   "wildwood-reservoir": wildwoodReservoir,
 };
 

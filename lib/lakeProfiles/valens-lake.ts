@@ -1,0 +1,281 @@
+import type { LakeProfile } from "./types";
+
+const valensLake = {
+  slug: "valens-lake",
+  lake: "Valens Lake",
+  province: "Ontario",
+  fmz: 16,
+  waterbodyType: "reservoir",
+  coordinates: { lat: 43.3739, lng: -80.1472 },
+  morphology: {
+    surfaceArea: "76 ha at full capacity",
+    maxDepth: "4.6 m at Valens Dam",
+    meanDepth: null,
+    clarity: "stained",
+    trophicStatus: null,
+    thermalBehaviour: null,
+  },
+  bestSeason:
+    "Fourth Saturday in June through fall for open water; January through March for pike and panfish through the ice",
+  overview:
+    "Valens is 76 hectares of upper Spencer Creek held behind a dam, shallow enough that the whole fishery stays close to weeds, wood, and open pockets. The reservoir stretches roughly 1.6 kilometres and bottoms at 4.6 metres beside Valens Dam. Around the 140-metre fishing bridge, heavier weeds and submerged stumps turn the shallows into largemouth water. Down by the dam, the open 5–7-foot fishing zone gives both bass and northern pike room to work. HCA's electrofishing record found largemouth catches steady across its sampling period; crappie and yellow perch fill out the panfish side. The Boat House launch, docks, shoreline, and bridge put most of that water within reach, but leave the gas outboard at home — Valens is electric or paddle power only. One hard stop: HCA closes fishing from April 1 until the fourth Saturday in June.",
+  notableFacts: [
+    {
+      fact: "The Valens reservoir covers 76 ha at full capacity, extends approximately 1.6 km, and reaches a maximum depth of 4.6 m at the dam",
+      sourceUrl:
+        "https://conservationhamilton.ca/wp-content/uploads/2022/02/Final-Approved-Valens-Master-Plan-2019.pdf",
+    },
+    {
+      fact: "Valens Dam was completed in 1966; the conservation property opened for day use on June 28, 1968",
+      sourceUrl:
+        "https://conservationhamilton.ca/wp-content/uploads/2022/02/Final-Approved-Valens-Master-Plan-2019.pdf",
+    },
+    {
+      fact: "HCA's boat-electrofishing record found the Largemouth Bass catch relatively stable across the sampling period; Yellow Perch arrived between 2010 and 2012",
+      sourceUrl:
+        "https://conservationhamilton.ca/wp-content/uploads/2022/02/Final-Approved-Valens-Master-Plan-2019.pdf",
+    },
+    {
+      fact: "HCA documented 14 fish species in the reservoir, including Largemouth Bass, Northern Pike, Black Crappie, and Yellow Perch",
+      sourceUrl:
+        "https://conservationhamilton.ca/wp-content/uploads/2022/02/Final-Approved-Valens-Master-Plan-2019.pdf",
+    },
+    {
+      fact: "The 140 m fishing bridge was completed in 1977 and remains a named access feature across the reservoir",
+      sourceUrl:
+        "https://conservationhamilton.ca/wp-content/uploads/2022/02/Final-Approved-Valens-Master-Plan-2019.pdf",
+    },
+  ],
+  regulations: [
+    {
+      species: "Largemouth and Smallmouth Bass combined",
+      season: "fourth Saturday in June to November 30",
+      limit: "S-6 / C-2",
+      sizeLimit: null,
+      sourceUrl:
+        "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      effectiveDate: "2025-12-08",
+      verified: true,
+    },
+    {
+      species: "Northern Pike",
+      season:
+        "January 1 to March 31 and second Saturday in May to December 31",
+      limit: "S-6 / C-2",
+      sizeLimit: null,
+      sourceUrl:
+        "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      effectiveDate: "2025-12-08",
+      verified: true,
+    },
+  ],
+  regsDisclaimer:
+    "Regulations effective 2025-12-08, FMZ 16. Summary only — confirm current rules with the Government of Ontario before fishing.",
+  launches: [
+    {
+      name: "Valens Lake Boat House launch",
+      type: "carry-in",
+      notes:
+        "1691 Regional Road 97, Flamborough. Canoes, kayaks, rowboats, SUPs, and electric-powered craft; day-use admission applies. Gasoline motors are prohibited. Fishing is also available from shoreline, docks, and the 140 m bridge.",
+      sourceUrl: "https://conservationhamilton.ca/activities/boating/",
+    },
+  ],
+  species: [
+    {
+      parentSlug: "smallmouth-bass",
+      displayName: "Smallmouth Bass",
+      tier: "absent",
+      structure: [],
+      bestSeason: null,
+      bodyCopy: null,
+      qualitySignal: null,
+      lede: null,
+      howItFishes: null,
+      structureDetails: null,
+      speciesRules: null,
+      sources: [],
+    },
+    {
+      parentSlug: "largemouth-bass",
+      displayName: "Largemouth Bass",
+      tier: "strong",
+      structure: [
+        "open, deeper water in the Valens Dam area",
+        "shallower water around the 140 m fishing bridge",
+      ],
+      bestSeason: "Fourth Saturday in June through fall",
+      bodyCopy:
+        "The bridge is the largemouth filter. Its shallow weeds and submerged stumps demand a clean path through the cover, while the dam end opens into a deeper 5–7-foot fishing zone shared with pike. HCA's boat-electrofishing record found largemouth catches relatively stable across the sampling period, solid evidence that the fishery persists without turning Valens into a destination claim. Start when HCA lifts the spring closure, then split your time between bridge cover and dam-side openings.",
+      qualitySignal:
+        "HCA boat-electrofishing found Largemouth Bass catch relatively stable over the monitoring period.",
+      lede:
+        "The 140-metre fishing bridge divides more than the reservoir. Around it, shallow weeds and submerged stumps turn every clean opening into largemouth water; toward Valens Dam, the basin opens into a deeper 5–7-foot fishing zone shared with pike. HCA's boat-electrofishing record found largemouth catches relatively stable through its sampling period, enough to make bass a real Valens target without dressing it up as a destination fishery.",
+      howItFishes:
+        "The lake-specific choice is cover or open water. Around the bridge, heavier weeds and hidden stumps force you to work the gaps without burying every presentation. The Canadian Sportfishing source explicitly frames this as the largemouth zone. Move toward Valens Dam and the water opens into a deeper area, averaging 5–7 feet in that source, where bass mix with northern pike. HCA independently places the reservoir's 4.6-metre maximum depth at the dam, so the direction holds even though no contour map is published. The season starts only when HCA lifts its annual closure on the fourth Saturday in June. From there through fall, the bridge cover and dam openings are the two defensible patterns; finer seasonal movements were not documented.",
+      structureDetails: [
+        {
+          name: "Open, deeper water in the Valens Dam area",
+          detail:
+            "The expert angler source describes a 5–7-foot fishing zone with open pockets and both bass and pike. HCA independently confirms that the reservoir's 4.6-metre maximum depth sits at the dam.",
+        },
+        {
+          name: "Shallower water around the 140 m fishing bridge",
+          detail:
+            "Heavier weeds and submerged stumps make this the documented largemouth cover pattern. The bridge itself is an official HCA feature completed in 1977.",
+        },
+      ],
+      speciesRules: [
+        {
+          rule: "Largemouth and Smallmouth Bass combined — Season: fourth Saturday in June to November 30 — Limit: S-6 / C-2 — Size: none stated",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Waterbody exceptions: none documented for Valens Lake in the FMZ 16 summary",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "HCA property closure: fishing is closed April 1 to the fourth Saturday in June annually; fishing opened June 27 in 2026",
+          sourceUrl: "https://conservationhamilton.ca/activities/fishing/",
+          effectiveDate: "2026-06-27",
+        },
+        {
+          rule: "Access rule: electric trolling motors and non-powered craft only; gasoline motors prohibited",
+          sourceUrl:
+            "https://conservationhamilton.ca/rules-and-regulations-at-conservation-areas/",
+          effectiveDate: "2026-01-01",
+        },
+      ],
+      sources: [
+        "https://conservationhamilton.ca/wp-content/uploads/2022/02/Final-Approved-Valens-Master-Plan-2019.pdf",
+        "https://conservationhamilton.ca/conservation-areas/valens-lake/",
+        "https://www.canadian-sportfishing.com/question/hi-italo-i-will-be-fishing-valens-lake-conservation-area-as-per-your-recomendation-what-lures-or-techniques-do-you-recommend-we-use-to-target-bass-and-pike-on-the-lake-thank-you-italo-2/",
+      ],
+    },
+    {
+      parentSlug: "northern-pike",
+      displayName: "Northern Pike",
+      tier: "strong",
+      structure: ["open pockets in the deeper Valens Dam area"],
+      bestSeason:
+        "January through March through the ice; fourth Saturday in June through fall in open water",
+      bodyCopy:
+        "Pike get the cleaner lane beside Valens Dam. The sourced pattern is simple: open pockets in the deeper 5–7-foot fishing zone, where the same water can produce bass. HCA still names northern pike among the reservoir's core fish in its 2026 material, and winter adds a second legal window before the April closure. Keep the claim tight — there is no published pike survey rate or trophy record here — but the dam zone gives you a real place to start.",
+      qualitySignal:
+        "Northern Pike appears in HCA's official lake inventory and current 2026 fishing material; no comparative survey metric was found.",
+      lede:
+        "Valens pike have one source-backed starting line: the open pockets beside the dam. The expert angler account puts that water at an average 5–7 feet and calls it shared bass-and-pike territory; HCA's master plan confirms the reservoir reaches its 4.6-metre maximum at Valens Dam. That is a narrow pattern, but it is real — and HCA still names northern pike among the lake's core fish in 2026.",
+      howItFishes:
+        "Work from the physical fact outward. Valens is a shallow 76-hectare reservoir, and its deepest verified water lies at the dam. The Canadian Sportfishing source identifies open pockets in that dam-area zone as the pike-and-bass pattern, so pike anglers have a named place to begin without inventing weedlines or contours the sources never mapped. The lake's official inventory also includes shiners, sunfish, perch, suckers, and bullheads, giving pike a documented forage community. Winter supplies a second window: the FMZ 16 pike season runs January 1 through March 31, and HCA permits ice fishing when conditions allow. Then HCA closes the whole lake from April 1 until the fourth Saturday in June. Open-water fishing resumes from that Saturday through fall.",
+      structureDetails: [
+        {
+          name: "Open pockets in the deeper Valens Dam area",
+          detail:
+            "The expert angler source identifies the 5–7-foot dam zone as shared bass-and-pike water. HCA independently verifies that the reservoir's maximum depth occurs at Valens Dam.",
+        },
+      ],
+      speciesRules: [
+        {
+          rule: "Northern Pike — Season: January 1 to March 31 and second Saturday in May to December 31 — Limit: S-6 / C-2 — Size: none stated",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Waterbody exceptions: none documented for Valens Lake in the FMZ 16 summary",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "HCA property closure: fishing is closed April 1 to the fourth Saturday in June annually; fishing opened June 27 in 2026",
+          sourceUrl: "https://conservationhamilton.ca/activities/fishing/",
+          effectiveDate: "2026-06-27",
+        },
+        {
+          rule: "Ice access: HCA permits ice fishing at Valens when conditions allow; it provides no huts, rental equipment, or pre-drilled holes",
+          sourceUrl: "https://conservationhamilton.ca/activities/fishing/",
+          effectiveDate: "2026-01-01",
+        },
+      ],
+      sources: [
+        "https://conservationhamilton.ca/wp-content/uploads/2022/02/Final-Approved-Valens-Master-Plan-2019.pdf",
+        "https://conservationhamilton.ca/wp-content/uploads/2026/05/BoDAgendapkg_26June4.pdf",
+        "https://www.canadian-sportfishing.com/question/hi-italo-i-will-be-fishing-valens-lake-conservation-area-as-per-your-recomendation-what-lures-or-techniques-do-you-recommend-we-use-to-target-bass-and-pike-on-the-lake-thank-you-italo-2/",
+      ],
+    },
+    {
+      parentSlug: "walleye",
+      displayName: "Walleye",
+      tier: "absent",
+      structure: [],
+      bestSeason: null,
+      bodyCopy: null,
+      qualitySignal: null,
+      lede: null,
+      howItFishes: null,
+      structureDetails: null,
+      speciesRules: null,
+      sources: [],
+    },
+    {
+      parentSlug: "black-crappie",
+      displayName: "Black Crappie",
+      tier: "present",
+      structure: [],
+      bestSeason: null,
+      bodyCopy: null,
+      qualitySignal: null,
+      lede: null,
+      howItFishes: null,
+      structureDetails: null,
+      speciesRules: null,
+      sources: [],
+    },
+    {
+      parentSlug: "yellow-perch",
+      displayName: "Yellow Perch",
+      tier: "present",
+      structure: [],
+      bestSeason: null,
+      bodyCopy: null,
+      qualitySignal: null,
+      lede: null,
+      howItFishes: null,
+      structureDetails: null,
+      speciesRules: null,
+      sources: [],
+    },
+  ],
+  keyResources: [
+    {
+      label: "FMZ 16 fishing regulations — Government of Ontario",
+      url: "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+    },
+    {
+      label: "Fishing closure, species, and ice access — HCA",
+      url: "https://conservationhamilton.ca/activities/fishing/",
+    },
+    {
+      label: "Launch, shoreline access, and Valens Lake information — HCA",
+      url: "https://conservationhamilton.ca/conservation-areas/valens-lake/",
+    },
+    {
+      label: "Boat House launch and rentals — HCA",
+      url: "https://conservationhamilton.ca/activities/boating/",
+    },
+    {
+      label: "Valens Lake Master Plan — HCA",
+      url: "https://conservationhamilton.ca/wp-content/uploads/2022/02/Final-Approved-Valens-Master-Plan-2019.pdf",
+    },
+  ],
+  speciesCount: 2,
+  lastVerified: "2026-07-19",
+  factCheckStatus: "passed",
+  regsGate: "passed",
+} satisfies LakeProfile;
+
+export default valensLake;

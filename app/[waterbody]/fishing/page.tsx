@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { LakeImage } from "@/app/components/LakeImage";
 import { RatingBadge } from "@/app/components/RatingBadge";
-import { getSpeciesCard, SpeciesCards, speciesPathSegment } from "@/app/components/SpeciesCards";
+import { getSpeciesCard, SpeciesCards } from "@/app/components/SpeciesCards";
 import { buildConditionsDashboard } from "@/lib/conditions";
 import { craftLabels, formatDate, formatHour } from "@/lib/format";
 import { getLakeProfile } from "@/lib/lakeProfiles";
 import type { LakeProfile } from "@/lib/lakeProfiles/types";
+import { formatSpeciesName, speciesPathSegment } from "@/lib/species";
 import { getOrCreateSnapshot } from "@/lib/snapshot";
 import { getSpot, spots } from "@/lib/spots";
 import type { Craft, ForecastHour } from "@/lib/types";
@@ -314,6 +315,11 @@ function LakeProfileIntro({ profile }: { profile: LakeProfile }) {
     <section className="lake-profile profile-front" aria-label={`${profile.lake} fishing profile`}>
       <div className="profile-hero profile-hero-front">
         <div>
+          <LakeImage
+            spotId={profile.slug}
+            className="profile-lake-image"
+            label={`Illustrated view of ${profile.lake}`}
+          />
           <span className="profile-kicker">
             {profile.waterbodyType} / FMZ {profile.fmz}
           </span>
@@ -331,7 +337,7 @@ function LakeProfileIntro({ profile }: { profile: LakeProfile }) {
       <div className="profile-strip profile-strip-large">
         <div>
           <h3>Species at a glance</h3>
-          <p>{[...cardedSpecies, ...presentSpecies].map((species) => species.displayName).join(", ")}</p>
+          <p>{[...cardedSpecies, ...presentSpecies].map((species) => formatSpeciesName(species.displayName)).join(", ")}</p>
         </div>
         <ProfileSpeciesCards profile={profile} />
       </div>
@@ -366,7 +372,7 @@ function LakeProfileSections({ profile, caveats }: { profile: LakeProfile; cavea
         <div className="reg-grid">
           {profile.regulations.map((regulation) => (
             <article key={regulation.species} className="reg-card">
-              <h4>{regulation.species}</h4>
+              <h4>{formatSpeciesName(regulation.species)}</h4>
               {regulation.verified ? (
                 <>
                   <p>
@@ -454,7 +460,7 @@ function ProfileSpeciesCards({ profile }: { profile: LakeProfile }) {
             {card ? (
               <img src={card.image} alt={`${card.label} species card`} loading="lazy" />
             ) : (
-              <span>{species.displayName}</span>
+              <span>{formatSpeciesName(species.displayName)}</span>
             )}
           </a>
         );

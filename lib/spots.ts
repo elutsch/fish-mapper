@@ -1,4 +1,6 @@
 import rawSpots from "@/data/spots.json";
+import { formatAccessFee, formatLaunchType } from "./launch";
+import { formatSpeciesName } from "./species";
 import type { Spot } from "./types";
 
 export const spots = rawSpots as Spot[];
@@ -16,7 +18,8 @@ type SpotGeoJson = GeoJSON.FeatureCollection<
     name: string;
     trailer: boolean;
     carryIn: boolean;
-    launchName: string;
+    launchTypeLabel: string;
+    accessFeeLabel: string;
     maxFetchKm: number | null;
     sourceAccessPointId: string | null;
     species: string[];
@@ -45,11 +48,12 @@ export function spotsAsGeoJson(statuses: Record<string, MapSpotStatus> = {}): Sp
         name: spot.name,
         trailer: spot.launch.trailer,
         carryIn: spot.launch.carryIn,
-        launchName: spot.launch.name ?? (spot.launch.trailer ? "Boat launch" : "Carry-in launch"),
+        launchTypeLabel: formatLaunchType(spot.launch),
+        accessFeeLabel: formatAccessFee(spot.launch),
         maxFetchKm: spot.maxFetchKm ?? null,
         sourceAccessPointId: spot.sourceAccessPointId ?? null,
         species: spot.species,
-        speciesLabel: spot.species.join(", "),
+        speciesLabel: spot.species.map(formatSpeciesName).join(", "),
         status: statuses[spot.id]?.status ?? "unknown",
         statusLabel: statuses[spot.id]?.label ?? "Forecast pending",
         statusDetail: statuses[spot.id]?.detail ?? "Open this lake for the latest conditions."

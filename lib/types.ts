@@ -12,6 +12,8 @@ export type Spot = {
     trailer: boolean;
     carryIn: boolean;
     name?: string;
+    electricOnly?: boolean;
+    accessFee?: "paid" | "free" | "varies";
   };
   shorelineFetch: number[];
   maxFetchKm?: number;

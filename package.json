@@ -11,7 +11,6 @@
     "validate:spots": "tsx scripts/validate-spots.ts"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.56.0",
     "@vercel/kv": "^3.0.0",
     "maplibre-gl": "^5.6.0",
     "next": "^15.4.2",

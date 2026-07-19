@@ -11,7 +11,8 @@ type SpotFeatureCollection = GeoJSON.FeatureCollection<
     name: string;
     trailer: boolean;
     carryIn: boolean;
-    launchName: string;
+    launchTypeLabel: string;
+    accessFeeLabel: string;
     maxFetchKm: number | null;
     sourceAccessPointId: string | null;
     species: string[];
@@ -175,7 +176,15 @@ function showLaunchPopup(
   feature: GeoJSON.Feature<GeoJSON.Point, SpotFeatureCollection["features"][number]["properties"]>
 ) {
   const [lng, lat] = feature.geometry.coordinates;
-  const { id, name, trailer, carryIn, launchName, speciesLabel, statusLabel, statusDetail } = feature.properties;
+  const { id, name, launchTypeLabel, accessFeeLabel, speciesLabel, status, statusLabel } = feature.properties;
+  const statusCallout =
+    status === "prime"
+      ? "Prime Today"
+      : status === "marginal"
+        ? "Marginal Today"
+        : status === "tough"
+          ? "Tough Today"
+          : "Forecast Pending";
   const popup = new maplibregl.Popup({
     closeButton: false,
     closeOnClick: true,
@@ -184,11 +193,10 @@ function showLaunchPopup(
     offset: 16
   }).setHTML(
     `<article class="launch-card launch-card-link" role="link" tabindex="0" data-href="/${escapeHtml(id)}/fishing">
+      <b class="launch-status-callout launch-status-${status}" aria-label="${escapeHtml(statusLabel)}">${statusCallout}</b>
       <strong>${escapeHtml(name)}</strong>
-      <span>${escapeHtml(statusLabel)}</span>
-      <p>${escapeHtml(statusDetail)}</p>
-      <p>${trailer ? "Trailer ramp plus carry-in access." : carryIn ? "Carry-in launch access." : "Launch access needs review."}</p>
-      <em>${escapeHtml(launchName)}</em>
+      <span>${escapeHtml(launchTypeLabel)}</span>
+      <em>${escapeHtml(accessFeeLabel)}</em>
       <div>${escapeHtml(speciesLabel)}</div>
     </article>`
   );

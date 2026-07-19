@@ -317,8 +317,7 @@ function LakeProfileIntro({ profile }: { profile: LakeProfile }) {
           <span className="profile-kicker">
             {profile.waterbodyType} / FMZ {profile.fmz}
           </span>
-          <div className="eyebrow">{profile.lake}</div>
-          <h1>Lake Profile</h1>
+          <h1>{profile.lake}</h1>
           <p>{firstSentences(profile.overview, 2)}</p>
         </div>
         <aside className="profile-facts" aria-label="Lake facts">

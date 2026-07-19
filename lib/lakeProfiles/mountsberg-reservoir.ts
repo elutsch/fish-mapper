@@ -50,7 +50,7 @@ const mountsbergReservoir: LakeProfile = {
       sizeLimit: "no size limit",
       sourceUrl:
         "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-      effectiveDate: "2026-01-01",
+      effectiveDate: "2025-12-08",
       verified: true,
     },
     {
@@ -61,12 +61,12 @@ const mountsbergReservoir: LakeProfile = {
       sizeLimit: "no size limit",
       sourceUrl:
         "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-      effectiveDate: "2026-01-01",
+      effectiveDate: "2025-12-08",
       verified: true,
     },
   ],
   regsDisclaimer:
-    "Regulations effective 2026-01-01, FMZ 16. This is a summary, not the legal regulation — confirm current rules with the official source before fishing.",
+    "Regulations effective 2025-12-08, FMZ 16. This is a summary, not the legal regulation — confirm current rules with the official source before fishing.",
   launches: [
     {
       name: "Mountsberg Dam launch",
@@ -132,18 +132,18 @@ const mountsbergReservoir: LakeProfile = {
           rule: "Season: fourth Saturday in June to November 30 (2026: Jun 27–Nov 30) — Limit: S-6 / C-2 (combined with Smallmouth Bass) — Size: no size limit",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Waterbody exceptions: none — Mountsberg Reservoir is not named in the FMZ 16 summary, and the zone's Bronte Creek fish sanctuary does not name it; zone-wide regulations apply",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Access / bait: FMZ 16 is within the Southern Bait Management Zone (no transport of live/dead baitfish or leeches in or out); on top of that, Conservation Halton bans live bait at the property — no live minnows, crayfish, or frogs, worms only from authorized suppliers or the park — and permits electric trolling motors only, no gas",
           sourceUrl: "https://www.conservationhalton.ca/activities/fishing/",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
       ],
       sources: [
@@ -185,18 +185,18 @@ const mountsbergReservoir: LakeProfile = {
           rule: "Season: January 1 to March 31 and second Saturday in May to December 31 (2026: May 9–Dec 31) — Limit: S-6 / C-2 — Size: no size limit",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Waterbody exceptions: none — Mountsberg Reservoir is not named in the FMZ 16 summary, and the zone's Bronte Creek fish sanctuary does not name it; zone-wide regulations apply",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Access / bait: FMZ 16 is within the Southern Bait Management Zone (no transport of live/dead baitfish or leeches in or out); Conservation Halton additionally bans live bait at the property — no live minnows, crayfish, or frogs, worms only from authorized suppliers or the park — and permits electric trolling motors only, no gas",
           sourceUrl: "https://www.conservationhalton.ca/activities/fishing/",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
       ],
       sources: [

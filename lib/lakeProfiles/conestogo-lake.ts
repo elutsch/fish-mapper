@@ -51,7 +51,7 @@ const conestogoLake: LakeProfile = {
       sizeLimit: 'not more than 1 over 46 cm (18")',
       sourceUrl:
         "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-      effectiveDate: "2026-01-01",
+      effectiveDate: "2025-12-08",
       verified: true,
     },
     {
@@ -62,7 +62,7 @@ const conestogoLake: LakeProfile = {
       sizeLimit: "no size limit",
       sourceUrl:
         "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-      effectiveDate: "2026-01-01",
+      effectiveDate: "2025-12-08",
       verified: true,
     },
     {
@@ -72,12 +72,12 @@ const conestogoLake: LakeProfile = {
       sizeLimit: null,
       sourceUrl:
         "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-      effectiveDate: "2026-01-01",
+      effectiveDate: "2025-12-08",
       verified: true,
     },
   ],
   regsDisclaimer:
-    "Regulations effective 2026-01-01, FMZ 16. This is a summary, not the legal regulation — confirm current rules with the official source before fishing.",
+    "Regulations effective 2025-12-08, FMZ 16. This is a summary, not the legal regulation — confirm current rules with the official source before fishing.",
   launches: [
     {
       name: "Conestogo Lake Conservation Area — 6580 Wellington County Road 11, Wallenstein",
@@ -128,19 +128,19 @@ const conestogoLake: LakeProfile = {
           rule: "Season: fourth Saturday in June to Nov 30 (2026: Jun 27–Nov 30) — Limit: S-6 / C-2 (combined with Largemouth Bass)",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Waterbody exceptions: none — Conestogo Lake appears in neither the FMZ 16 exceptions nor sanctuaries lists; zone-wide regulations apply",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Bait: FMZ 16 is within the Southern Bait Management Zone, which restricts transport of live/dead baitfish and leeches",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
       ],
       sources: [
@@ -195,19 +195,19 @@ const conestogoLake: LakeProfile = {
           rule: "Season: Jan 1–Mar 31 and second Saturday in May to Dec 31 (2026: May 9–Dec 31) — Limit: S-6 / C-2 — Size: no size limit",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Waterbody exceptions: none — Conestogo Lake appears in neither the FMZ 16 exceptions nor sanctuaries lists; zone-wide regulations apply",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Bait: FMZ 16 is within the Southern Bait Management Zone, which restricts transport of live/dead baitfish and leeches",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
       ],
       sources: [
@@ -249,19 +249,19 @@ const conestogoLake: LakeProfile = {
           rule: 'Season: Jan 1–Mar 15 and second Saturday in May to Dec 31 (2026: May 9–Dec 31) — Limit: S-4 / C-2, not more than 1 over 46 cm (18") (combined with Sauger)',
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Waterbody exceptions: none — Conestogo Lake appears in neither the FMZ 16 exceptions nor sanctuaries lists; zone-wide regulations apply",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Bait: FMZ 16 is within the Southern Bait Management Zone, which restricts transport of live/dead baitfish and leeches",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
       ],
       sources: [

@@ -55,7 +55,7 @@ const puslinchLake: LakeProfile = {
       sizeLimit: null,
       sourceUrl:
         "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-      effectiveDate: "2026-01-01",
+      effectiveDate: "2025-12-08",
       verified: true,
     },
     {
@@ -66,12 +66,12 @@ const puslinchLake: LakeProfile = {
       sizeLimit: "no size limit",
       sourceUrl:
         "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-      effectiveDate: "2026-01-01",
+      effectiveDate: "2025-12-08",
       verified: true,
     },
   ],
   regsDisclaimer:
-    "Regulations effective 2026-01-01, FMZ 16. This is a summary, not the legal regulation — confirm current rules with the official source before fishing.",
+    "Regulations effective 2025-12-08, FMZ 16. This is a summary, not the legal regulation — confirm current rules with the official source before fishing.",
   launches: [],
   species: [
     {
@@ -127,19 +127,19 @@ const puslinchLake: LakeProfile = {
           rule: "Season: fourth Saturday in June to Nov 30 (2026: Jun 27–Nov 30) — Limit: S-6 / C-2 (combined Largemouth & Smallmouth Bass) — no size limit",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Waterbody exceptions: none — Puslinch Lake appears in neither the FMZ 16 exceptions nor sanctuaries lists; zone-wide regulations apply",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Bait: FMZ 16 is within the Southern Bait Management Zone, which restricts transport of live or dead baitfish and leeches into or out of the zone",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Access: there has been no public boat launch since the McClintock's closure of July 14, 2020; the shoreline is private and the Travelled Road right-of-way is pedestrian-only — sort out legal access before fishing",
@@ -193,19 +193,19 @@ const puslinchLake: LakeProfile = {
           rule: "Season: Jan 1–Mar 31 and second Saturday in May to Dec 31 (2026: May 9–Dec 31) — Limit: S-6 / C-2 — Size: no size limit",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Waterbody exceptions: none — Puslinch Lake appears in neither the FMZ 16 exceptions nor sanctuaries lists; zone-wide regulations apply",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Bait: FMZ 16 is within the Southern Bait Management Zone, which restricts transport of live or dead baitfish and leeches into or out of the zone",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Access: the winter pike season is open (Jan 1–Mar 31), but with no public launch or shoreline access since the July 14, 2020 closure there is no documented legal winter/ice access — plan legal access before fishing",

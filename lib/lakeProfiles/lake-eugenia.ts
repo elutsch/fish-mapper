@@ -46,7 +46,7 @@ const lakeEugenia: LakeProfile = {
       sizeLimit: "no size limit",
       sourceUrl:
         "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-      effectiveDate: "2026-01-01",
+      effectiveDate: "2025-12-08",
       verified: true,
     },
     {
@@ -56,12 +56,12 @@ const lakeEugenia: LakeProfile = {
       sizeLimit: "no size limit",
       sourceUrl:
         "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-      effectiveDate: "2026-01-01",
+      effectiveDate: "2025-12-08",
       verified: true,
     },
   ],
   regsDisclaimer:
-    "Regulations effective 2026-01-01, FMZ 16. This is a summary, not the legal regulation — confirm current rules with the official source before fishing.",
+    "Regulations effective 2025-12-08, FMZ 16. This is a summary, not the legal regulation — confirm current rules with the official source before fishing.",
   launches: [
     {
       name: "Lake Eugenia Public Boat Launch & Beach — Canrobert Street (251 Canrobert St, Eugenia/Flesherton), southwest shore",
@@ -106,19 +106,19 @@ const lakeEugenia: LakeProfile = {
           rule: "Largemouth & Smallmouth Bass (combined) — Season: fourth Saturday in June to November 30 — Limit: S-6 / C-2 — Size: no size limit",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Waterbody exceptions: none — Lake Eugenia appears in neither the FMZ 16 exceptions nor sanctuaries lists; zone-wide regulations apply",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Bait: FMZ 16 is within the Southern Bait Management Zone, which restricts transport of live/dead baitfish and leeches",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Access: the only public way in is the Canrobert Street launch on the southwest shore — all other shoreline is private, and the motorboat launch runs on a seasonal fee pass (2026 season from May 8)",
@@ -171,19 +171,19 @@ const lakeEugenia: LakeProfile = {
           rule: "Largemouth & Smallmouth Bass (combined) — Season: fourth Saturday in June to November 30 — Limit: S-6 / C-2 — Size: no size limit",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Waterbody exceptions: none — Lake Eugenia appears in neither the FMZ 16 exceptions nor sanctuaries lists; zone-wide regulations apply",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Bait: FMZ 16 is within the Southern Bait Management Zone, which restricts transport of live/dead baitfish and leeches",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Access: the only public way in is the Canrobert Street launch on the southwest shore — all other shoreline is private, and the motorboat launch runs on a seasonal fee pass (2026 season from May 8)",
@@ -269,19 +269,19 @@ const lakeEugenia: LakeProfile = {
           rule: "Yellow Perch — Season: open all year — Limit: S-50 / C-25 — Size: no size limit",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Waterbody exceptions: none — Lake Eugenia appears in neither the FMZ 16 exceptions nor sanctuaries lists; zone-wide regulations apply",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Bait: FMZ 16 is within the Southern Bait Management Zone, which restricts transport of live/dead baitfish and leeches",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Access: the only public way in is the Canrobert Street launch on the southwest shore — all other shoreline is private, and the motorboat launch runs on a seasonal fee pass (2026 season from May 8)",

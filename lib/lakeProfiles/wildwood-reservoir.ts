@@ -54,7 +54,7 @@ const wildwoodReservoir: LakeProfile = {
       sizeLimit: "no size limit",
       sourceUrl:
         "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-      effectiveDate: "2026-01-01",
+      effectiveDate: "2025-12-08",
       verified: true,
     },
     {
@@ -64,12 +64,12 @@ const wildwoodReservoir: LakeProfile = {
       sizeLimit: null,
       sourceUrl:
         "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-      effectiveDate: "2026-01-01",
+      effectiveDate: "2025-12-08",
       verified: true,
     },
   ],
   regsDisclaimer:
-    "Regulations effective 2026-01-01, FMZ 16. This is a summary, not the legal regulation — confirm current rules with the official source before fishing.",
+    "Regulations effective 2025-12-08, FMZ 16. This is a summary, not the legal regulation — confirm current rules with the official source before fishing.",
   launches: [
     {
       name: "Wildwood Conservation Area boat launch — 3995 Line 9, St. Marys",
@@ -149,19 +149,19 @@ const wildwoodReservoir: LakeProfile = {
           rule: "Season: Jan 1–Mar 31 and second Saturday in May to Dec 31 (2026: May 9–Dec 31) — Limit: S-6 / C-2 — Size: no size limit",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Waterbody exceptions: none — Wildwood Lake/Reservoir and Trout Creek appear in neither the FMZ 16 exceptions nor sanctuaries lists; zone-wide regulations apply",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Bait: FMZ 16 is within the Southern Bait Management Zone, which restricts transporting live or dead baitfish and leeches into or out of the zone",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
       ],
       sources: [
@@ -224,19 +224,19 @@ const wildwoodReservoir: LakeProfile = {
           rule: "Season: open all year — Limit: S-50 / C-25",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Waterbody exceptions: none — Wildwood Lake/Reservoir and Trout Creek appear in neither the FMZ 16 exceptions nor sanctuaries lists; zone-wide regulations apply",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Bait: FMZ 16 is within the Southern Bait Management Zone, which restricts transporting live or dead baitfish and leeches into or out of the zone",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
       ],
       sources: [

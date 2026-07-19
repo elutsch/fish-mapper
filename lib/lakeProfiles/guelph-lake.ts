@@ -52,7 +52,7 @@ const guelphLake: LakeProfile = {
       sizeLimit: "none",
       sourceUrl:
         "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-      effectiveDate: "2026-01-01",
+      effectiveDate: "2025-12-08",
       verified: true,
     },
     {
@@ -63,12 +63,12 @@ const guelphLake: LakeProfile = {
       sizeLimit: "none",
       sourceUrl:
         "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-      effectiveDate: "2026-01-01",
+      effectiveDate: "2025-12-08",
       verified: true,
     },
   ],
   regsDisclaimer:
-    "Regulations effective 2026-01-01, FMZ 16. This is a summary, not the legal regulation — confirm current rules with the official source before fishing.",
+    "Regulations effective 2025-12-08, FMZ 16. This is a summary, not the legal regulation — confirm current rules with the official source before fishing.",
   launches: [
     {
       name: "Guelph Lake Conservation Area boat launches — 7743 Conservation Drive, Guelph",
@@ -119,19 +119,19 @@ const guelphLake: LakeProfile = {
           rule: "Smallmouth & Largemouth Bass (combined) — Season: fourth Saturday in June to November 30; Limit: S-6 / C-2; Size: none",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Bait: FMZ 16 is in the Southern Bait Management Zone — live or dead baitfish and leeches may not be transported into or out of the zone (preserved baitfish permitted)",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Access: Electric trolling motors only — outboards and personal watercraft are prohibited; launch from the Guelph Lake Conservation Area ramps off Conservation Drive (day-use fee)",
           sourceUrl:
             "https://www.grandriver.ca/outdoor-recreation/conservation-areas/guelph-lake/",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
       ],
       sources: [
@@ -170,19 +170,19 @@ const guelphLake: LakeProfile = {
           rule: "Smallmouth & Largemouth Bass (combined) — Season: fourth Saturday in June to November 30; Limit: S-6 / C-2; Size: none",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Bait: FMZ 16 is in the Southern Bait Management Zone — live or dead baitfish and leeches may not be transported into or out of the zone (preserved baitfish permitted)",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Access: The eastern, weedy portion of the lake sits east of Wellington Rd 124 and is reached off Wellington Rd 29 by a carry-in path to a small canoe/kayak launch, outside the main conservation area",
           sourceUrl:
             "https://www.grandriver.ca/outdoor-recreation/conservation-areas/guelph-lake/",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
       ],
       sources: [
@@ -222,19 +222,19 @@ const guelphLake: LakeProfile = {
           rule: "Northern Pike — Season: January 1 to March 31, and second Saturday in May to December 31; Limit: S-6 / C-2; Size: none",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Bait: FMZ 16 is in the Southern Bait Management Zone — live or dead baitfish and leeches may not be transported into or out of the zone (preserved baitfish permitted)",
           sourceUrl:
             "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
         {
           rule: "Access: Guelph Lake is an official GRCA ice-fishing reservoir for pike when ice is monitored safe; no bait sales or hut rentals on site",
           sourceUrl:
             "https://www.grandriver.ca/outdoor-recreation/fishing/ice-fishing/",
-          effectiveDate: "2026-01-01",
+          effectiveDate: "2025-12-08",
         },
       ],
       sources: [

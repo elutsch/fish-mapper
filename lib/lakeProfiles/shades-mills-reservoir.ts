@@ -1,0 +1,407 @@
+import type { LakeProfile } from "./types";
+
+// Stage 7 output — generated 2026-07-18 from the verified Bite Club-register
+// copy (04-lake-copy.md / 04b-species-subguides.md, Stage 5 passed). All
+// rendered content is carried verbatim from the verified substrate.
+const shadesMillsReservoir: LakeProfile = {
+  slug: "shades-mills-reservoir",
+  lake: "Shades Mills Reservoir",
+  province: "Ontario",
+  fmz: 16,
+  waterbodyType: "reservoir",
+  coordinates: { lat: 43.377629, lng: -80.2836082 },
+  morphology: {
+    surfaceArea: "32 ha (80 acres)",
+    maxDepth: null,
+    meanDepth: null,
+    clarity: null,
+    trophicStatus: null,
+    thermalBehaviour: null,
+  },
+  bestSeason:
+    "Open water spring through fall, plus a supervised winter ice fishery",
+  overview:
+    'Shades Mills is Mill Creek backed up behind a flood-control dam, minutes from central Cambridge. The creek slides in through a long, narrow arm off the northeast, then the water widens southwest into the main basin — "Shade\'s Reservoir" on the park map — and runs down to the 9.8 m dam GRCA built in 1973. Thirty-two hectares, no gas motors, one launch on the south shore by the beach. It\'s a warm, shore-friendly panfish and pike water, not a deep-structure lake — no depth chart exists for it. GRCA calls pike, largemouth, crappie and yellow perch plentiful, and three of those carry over into winter: this is one of only four GRCA areas running a supervised through-the-ice fishery. Shore anglers work the designated fishing nodes and docks in the day-use area; the southeast creek shore is posted no public access.',
+  notableFacts: [
+    {
+      fact: 'GRCA states northern pike, largemouth bass, smallmouth bass, yellow perch and black crappie "are plentiful in the reservoir"',
+      sourceUrl:
+        "https://www.grandriver.ca/outdoor-recreation/conservation-areas/shades-mills/",
+    },
+    {
+      fact: "One of only four GRCA conservation areas with a supervised ice-fishing program (alongside Guelph Lake, Pinehurst Lake and Belwood Lake)",
+      sourceUrl:
+        "https://www.grandriver.ca/outdoor-recreation/fishing/ice-fishing/",
+    },
+    {
+      fact: "Shade's Mills Dam was built in 1973 as a flood-control dam on Mill Creek: 9.8 m high with 3.2 million m³ of storage — one of the GRCA's seven multi-purpose dams",
+      sourceUrl:
+        "https://www.grandriver.ca/our-watershed/dams-and-reservoirs/grca-dams/",
+    },
+    {
+      fact: "The reservoir sits on Mill Creek, a groundwater-fed coldwater stream whose upstream reaches hold brook trout and provincially stocked brown trout (104 km² subwatershed)",
+      sourceUrl: "https://en.wikipedia.org/wiki/Mill_Creek,_Puslinch",
+    },
+    {
+      fact: "32-hectare (80-acre) urban reservoir open all year for day use, with an electric-only launch and on-site paddle-craft rentals",
+      sourceUrl:
+        "https://www.grandriver.ca/outdoor-recreation/conservation-areas/shades-mills/",
+    },
+  ],
+  regulations: [
+    {
+      species: "Largemouth & Smallmouth Bass (combined)",
+      season: "fourth Saturday in June to November 30",
+      limit: "S-6 / C-2",
+      sizeLimit: null,
+      sourceUrl:
+        "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      effectiveDate: "2025-12-08",
+      verified: true,
+    },
+    {
+      species: "Northern Pike",
+      season:
+        "January 1 to March 31 and second Saturday in May to December 31",
+      limit: "S-6 / C-2",
+      sizeLimit: null,
+      sourceUrl:
+        "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      effectiveDate: "2025-12-08",
+      verified: true,
+    },
+    {
+      species: "Black Crappie",
+      season: "open all year",
+      limit: "S-30 / C-10",
+      sizeLimit: null,
+      sourceUrl:
+        "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      effectiveDate: "2025-12-08",
+      verified: true,
+    },
+    {
+      species: "Yellow Perch",
+      season: "open all year",
+      limit: "S-50 / C-25",
+      sizeLimit: null,
+      sourceUrl:
+        "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      effectiveDate: "2025-12-08",
+      verified: true,
+    },
+  ],
+  regsDisclaimer:
+    "Regulations effective 2025-12-08, FMZ 16. This is a summary, not the legal regulation — confirm current rules with the official source before fishing.",
+  launches: [
+    {
+      name: "Boat launch, Shade's Mills Conservation Area, 450 Avenue Road, Cambridge, ON N1R 5S4",
+      type: "trailer-and-carry-in",
+      notes:
+        'Single launch, ramp on the south shore near the beach/boat-rental area (marked "Boat Launch (No Gas-Powered Motors)" on the official map) — electric motors only / non-motorized craft; day-use entrance fee applies (2026: adult 13–64 $9.50, child 4–12 $4.00, senior/disability $7.50; automatic-gate vehicle rate $19.00 per vehicle max six people); no separate launch fee listed — open all year, day use dawn to dusk.',
+      sourceUrl:
+        "https://www.grandriver.ca/outdoor-recreation/conservation-areas/shades-mills/",
+    },
+    {
+      name: "Shore access — designated shoreline fishing nodes and docks in the day-use area",
+      type: "carry-in",
+      notes:
+        'Official map fishing icons; southeast shore of the creek arm marked "NO PUBLIC ACCESS".',
+      sourceUrl:
+        "https://www.grandriver.ca/media/cihpvlr3/shadestearoff-2022.pdf",
+    },
+  ],
+  species: [
+    {
+      parentSlug: "largemouth-bass",
+      displayName: "Largemouth Bass",
+      tier: "strong",
+      structure: [
+        "south-shore day-use shoreline — docks, beach and boat-rental frontage, and designated fishing nodes on the park map",
+      ],
+      bestSeason: "Late June opener through fall",
+      bodyCopy:
+        "A warm, shallow, weedy 32-hectare pond is exactly what largemouth want, and GRCA lists them plentiful. The catchable water for shore anglers is the south side — the docks, the beach frontage, and the marked fishing nodes in the day-use area. That's where the numbers show up: the one detailed report from this reservoir pulled more largemouth than anything else, all from that accessible shoreline on a small jig-and-grub. From the late-June opener on, work the dock cover and weedy edges close to the bank.",
+      qualitySignal: null,
+      lede:
+        "Thirty-two hectares of warm, shallow, weedy creek impoundment is largemouth home water, and GRCA calls them plentiful. The fish live where you can reach them: the south-shore day-use frontage, right off the docks and the beach. The one detailed report from here pulled more largemouth than any other species — all of it from that accessible bank on a small jig-and-grub.",
+      howItFishes:
+        "This is a shore game. The catchable water is the south side of the reservoir — the docks, the beach and boat-rental frontage, and the designated fishing nodes marked on the GRCA park map. The southeast creek shore is posted no public access, so it's the day-use side or nothing for bank anglers. A warm, weedy, stained-tolerant impoundment suits largemouth better than the smallmouth sharing the water, and the dock cover and weedy shoreline edges hold them from the fourth-Saturday-of-June opener through fall. Work the cover close to the bank. There's no depth chart for this reservoir and no documented deep-water pattern, so don't chase structure that isn't there — the shoreline is the fishery. Sunfish and perch fill out the forage base along those same weedy margins.",
+      structureDetails: [
+        {
+          name: "South-shore day-use shoreline",
+          detail:
+            "The docks, beach and boat-rental frontage, and the designated shoreline fishing nodes marked on the official GRCA park map — the accessible bank where the single located angler report caught six largemouth on a 1/16 oz jig-and-grub. It's the only shore water open to the public; the southeast creek shore is posted no access.",
+        },
+      ],
+      speciesRules: [
+        {
+          rule: "Largemouth & Smallmouth Bass (combined) — Season: fourth Saturday in June to November 30 — Limit: S-6 / C-2 — Size: none stated",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Waterbody exceptions: none — the FMZ 16 summary lists no exceptions for Shade's Mills, Mill Creek, or Cambridge; zone-wide rules apply",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Bait: FMZ 16 is a Bait Management Zone — live or dead baitfish and leeches may not be transported into or out of it",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Access: GRCA property rule — non-motorized craft and electric motors only; day-use admission applies",
+          sourceUrl:
+            "https://www.grandriver.ca/outdoor-recreation/conservation-areas/shades-mills/",
+          effectiveDate: "2025-12-08",
+        },
+      ],
+      sources: [
+        "https://www.grandriver.ca/outdoor-recreation/conservation-areas/shades-mills/",
+        "https://www.grandriver.ca/media/cihpvlr3/shadestearoff-2022.pdf",
+        "https://ontariofishingcommunity.com/topic/10052-shades-mill-report/",
+      ],
+    },
+    {
+      parentSlug: "northern-pike",
+      displayName: "Northern Pike",
+      tier: "strong",
+      structure: [
+        "Mill Creek inflow arm (northeast)",
+        "main basin toward the dam",
+      ],
+      bestSeason: "Open water spring through fall, plus the winter ice fishery",
+      bodyCopy:
+        "Pike own the skinny northeast arm where Mill Creek feeds in — a long, weedy riverine slot is textbook ambush water, and pike are a named GRCA winter target here. In summer the deepest water in the impoundment sits down in the main basin toward the dam, so that's the cooler side to probe when the shallows heat up. Come ice, they're one of three species the supervised fishery chases through the hole. Just remember the electric-only rule when you're covering that arm — no outboard to lean on.",
+      qualitySignal: null,
+      lede:
+        "The skinny northeast arm is the pike bet. Mill Creek slides into the reservoir through a long, narrow slot off the northeast — a warm, weedy riverine channel that reads like textbook pike ambush water. And these fish stay catchable past ice-up: pike are one of three species GRCA runs its supervised through-the-ice program for here, making Shade's Mills a rare winter option.",
+      howItFishes:
+        "Two zones carry the pike year. Through open water, the Mill Creek inflow arm off the northeast is the ambush water — a long, narrow, weedy riverine slot where a flood-control impoundment's warmest, greenest shallows meet moving water. As the shallows heat up in summer, the deepest water in the impoundment sits down in the main basin toward the 9.8 m dam at the southwest end, so that's the cooler side to probe when the arm goes warm. There's no published depth map here, so treat that as the general reservoir pattern, not a marked contour. Come winter, pike are a named GRCA ice target — chased through the hole reservoir-wide when the ice is safe. Perch and panfish are the forage that keeps them fed. One practical note: it's electric motors and paddle craft only, so plan on working that long arm without an outboard.",
+      structureDetails: [
+        {
+          name: "Mill Creek inflow arm (northeast)",
+          detail:
+            "The long, narrow northeast arm where Mill Creek enters, shown on the official park map — a shallow, weedy riverine slot that fishes as classic warm-reservoir pike ambush water and stays in play as a named GRCA winter ice target.",
+        },
+        {
+          name: "Main basin toward Shade's Mills Dam (southwest)",
+          detail:
+            "The reservoir widens southwest into its main basin toward the 9.8 m dam, where the deepest impoundment water sits — the cooler side to probe when the shallows heat up. Depth is inferred from the dam, not a survey; treat it as a general reservoir pattern.",
+        },
+      ],
+      speciesRules: [
+        {
+          rule: "Northern Pike — Season: January 1 to March 31 and second Saturday in May to December 31 — Limit: S-6 / C-2 — Size: none stated",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Waterbody exceptions: none — the FMZ 16 summary lists no exceptions for Shade's Mills, Mill Creek, or Cambridge; zone-wide rules apply",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Bait: FMZ 16 is a Bait Management Zone — live or dead baitfish and leeches may not be transported into or out of it",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Ice fishing: supervised GRCA program, offered only when ice meets safety requirements and suspended when unsafe; GRCA sells no bait and rents no huts",
+          sourceUrl:
+            "https://www.grandriver.ca/outdoor-recreation/fishing/ice-fishing/",
+          effectiveDate: "2025-12-08",
+        },
+      ],
+      sources: [
+        "https://www.grandriver.ca/outdoor-recreation/conservation-areas/shades-mills/",
+        "https://www.grandriver.ca/outdoor-recreation/fishing/ice-fishing/",
+        "https://www.grandriver.ca/media/cihpvlr3/shadestearoff-2022.pdf",
+      ],
+    },
+    {
+      parentSlug: "black-crappie",
+      displayName: "Black Crappie",
+      tier: "strong",
+      structure: [
+        "docks and shoreline fishing platforms near the beach and boat-rental area",
+        "reservoir-wide under the ice",
+      ],
+      bestSeason: "Spring in shallow cover; a named winter ice target",
+      bodyCopy:
+        "Crappie stack tight in the day-use cover. The single report from here landed ten of them off the shore platforms near the beach on small jigs — the highest count of any species that day. Spring pulls them into shallow cover to spawn, which lines up with the shore-accessible docks and nodes. Then winter turns them into an official target: black crappie is one of the three species the GRCA ice program runs for, spread reservoir-wide once there's safe ice.",
+      qualitySignal: null,
+      lede:
+        "Crappie stack tight in the day-use cover here, and the numbers back it: the single located report landed ten of them off the shore platforms near the beach — the highest count of any species that day. Better still, they don't quit at freeze-up. Black crappie is one of three species GRCA runs its supervised ice fishery for, so this fish carries the shoulder season.",
+      howItFishes:
+        "Cover is the whole story. The docks and shoreline fishing platforms near the beach and boat-rental area are where crappie hold, and the one detailed angler report pulled ten from that shore water on small jigs. Spring pulls them into shallow cover to spawn — the regional southern-Ontario pattern, mid-to-late spring — which lines up neatly with the shore-accessible docks and marked fishing nodes on the park map. Season stays open all year, so there's no closed window to work around. Then winter flips crappie into an official GRCA through-the-ice target, spread reservoir-wide once there's safe ice. No depth data exists for this water, so the play is cover, not contour: work the wood, docks, and shoreline structure you can see and reach.",
+      structureDetails: [
+        {
+          name: "Docks and shoreline fishing platforms near the beach / boat-rental area",
+          detail:
+            "The shore cover on the south side where the single located angler report took ten crappie on small jigs — accessible platform-and-dock water that lines up with the spring shallow-cover spawn.",
+        },
+        {
+          name: "Winter reservoir-wide ice fishery",
+          detail:
+            "Black crappie is one of three official GRCA through-the-ice targets at Shade's Mills, spread across the reservoir once the supervised program opens on safe ice.",
+        },
+      ],
+      speciesRules: [
+        {
+          rule: "Black Crappie — Season: open all year — Limit: S-30 / C-10",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Waterbody exceptions: none — the FMZ 16 summary lists no exceptions for Shade's Mills, Mill Creek, or Cambridge; zone-wide rules apply",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Bait: FMZ 16 is a Bait Management Zone — live or dead baitfish and leeches may not be transported into or out of it",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Ice fishing: supervised GRCA program, offered only when ice meets safety requirements and suspended when unsafe; GRCA sells no bait and rents no huts",
+          sourceUrl:
+            "https://www.grandriver.ca/outdoor-recreation/fishing/ice-fishing/",
+          effectiveDate: "2025-12-08",
+        },
+      ],
+      sources: [
+        "https://www.grandriver.ca/outdoor-recreation/fishing/ice-fishing/",
+        "https://www.grandriver.ca/outdoor-recreation/conservation-areas/shades-mills/",
+        "https://ontariofishingcommunity.com/topic/10052-shades-mill-report/",
+      ],
+    },
+    {
+      parentSlug: "yellow-perch",
+      displayName: "Yellow Perch",
+      tier: "strong",
+      structure: [
+        "designated shoreline fishing nodes on the park map",
+        "reservoir-wide under the ice",
+      ],
+      bestSeason: "Open all year; strong through the ice",
+      bodyCopy:
+        "Perch do double duty here — a panfish worth catching and the groceries that keep the pike fat. They school along the marked shoreline fishing nodes, and the one report from the reservoir turned up half a dozen from shore alongside the crappie. Season's open year-round, but the standout window is winter: perch are the third GRCA through-the-ice target, and a school under the hole keeps the whole family busy. Fish small and light off the day-use shore.",
+      qualitySignal: null,
+      lede:
+        "Perch pull double duty at Shade's Mills — a panfish worth catching and the groceries that keep the pike fat. They school along the shoreline fishing nodes marked on the park map, and the one report from the reservoir turned up half a dozen from shore alongside the crappie. The season never closes, but the standout stretch is winter: perch are the third GRCA through-the-ice target.",
+      howItFishes:
+        "Fish small and light off the day-use shore. Perch school along the designated shoreline fishing nodes on the park map, and the single located angler report took six from that accessible bank next to the crappie catch, all on a small jig-and-grub. The season is open year-round, so this is a fish you can chase in any month there's access. The peak window is winter: perch are one of three species the supervised GRCA ice program runs for, and a school found under the hole keeps the whole family busy. There's no depth chart for this reservoir, so the pattern is the marked shore nodes and, in season, the reservoir-wide ice fishery — not a deep-basin search. Note too that this same perch population is a primary forage base for the reservoir's pike.",
+      structureDetails: [
+        {
+          name: "Designated shoreline fishing nodes (park map)",
+          detail:
+            "The marked shore fishing spots on the official GRCA park map where perch school — the accessible day-use bank that produced six perch in the single located angler report, on the same water as the crappie.",
+        },
+        {
+          name: "Winter reservoir-wide ice fishery",
+          detail:
+            "Yellow perch is one of three official GRCA through-the-ice targets at Shade's Mills, schooling reservoir-wide once the supervised program opens on safe ice.",
+        },
+      ],
+      speciesRules: [
+        {
+          rule: "Yellow Perch — Season: open all year — Limit: S-50 / C-25",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Waterbody exceptions: none — the FMZ 16 summary lists no exceptions for Shade's Mills, Mill Creek, or Cambridge; zone-wide rules apply",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Bait: FMZ 16 is a Bait Management Zone — live or dead baitfish and leeches may not be transported into or out of it",
+          sourceUrl:
+            "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          effectiveDate: "2025-12-08",
+        },
+        {
+          rule: "Ice fishing: supervised GRCA program, offered only when ice meets safety requirements and suspended when unsafe; GRCA sells no bait and rents no huts",
+          sourceUrl:
+            "https://www.grandriver.ca/outdoor-recreation/fishing/ice-fishing/",
+          effectiveDate: "2025-12-08",
+        },
+      ],
+      sources: [
+        "https://www.grandriver.ca/outdoor-recreation/fishing/ice-fishing/",
+        "https://www.grandriver.ca/outdoor-recreation/conservation-areas/shades-mills/",
+        "https://www.grandriver.ca/media/cihpvlr3/shadestearoff-2022.pdf",
+      ],
+    },
+    {
+      parentSlug: "smallmouth-bass",
+      displayName: "Smallmouth Bass",
+      tier: "present",
+      structure: [],
+      bestSeason: null,
+      bodyCopy: null,
+      qualitySignal: null,
+      lede: null,
+      howItFishes: null,
+      structureDetails: null,
+      speciesRules: null,
+      sources: [],
+    },
+    {
+      parentSlug: "walleye",
+      displayName: "Walleye",
+      tier: "absent",
+      structure: [],
+      bestSeason: null,
+      bodyCopy: null,
+      qualitySignal: null,
+      lede: null,
+      howItFishes: null,
+      structureDetails: null,
+      speciesRules: null,
+      sources: [],
+    },
+  ],
+  keyResources: [
+    {
+      label: "The actual regs, straight from the source — FMZ 16, Government of Ontario",
+      url: "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+    },
+    {
+      label:
+        "Launch, hours, and the reservoir itself — Shade's Mills Conservation Area, Grand River Conservation Authority",
+      url: "https://www.grandriver.ca/outdoor-recreation/conservation-areas/shades-mills/",
+    },
+    {
+      label: "Day-use and rental fees — GRCA Shade's Mills fees",
+      url: "https://www.grandriver.ca/outdoor-recreation/conservation-areas/conservation-area-services-info-fees-and-more/conservation-area-fees/shades-mills-fees/",
+    },
+    {
+      label: "Ice-fishing program and safety status — GRCA",
+      url: "https://www.grandriver.ca/outdoor-recreation/fishing/ice-fishing/",
+    },
+    {
+      label: "Stocking record, FMZ 16 — Ontario Fish ON-Line",
+      url: "https://www.lioapplications.lrc.gov.on.ca/services/FishONLine/StockingList.aspx?json=true&fmz=16&stock=AllSpecies&diagnostics=false&lang=en",
+    },
+  ],
+  speciesCount: 4,
+  lastVerified: "2026-07-18",
+  factCheckStatus: "passed",
+  regsGate: "passed",
+};
+
+export default shadesMillsReservoir;

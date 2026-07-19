@@ -180,6 +180,7 @@ function showLaunchPopup(
     closeButton: false,
     closeOnClick: true,
     className: "launch-popup",
+    maxWidth: "340px",
     offset: 16
   }).setHTML(
     `<article class="launch-card launch-card-link" role="link" tabindex="0" data-href="/${escapeHtml(id)}/fishing">

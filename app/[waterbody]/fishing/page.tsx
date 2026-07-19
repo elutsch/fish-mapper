@@ -54,8 +54,6 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
     .filter((_, index) => index % 2 === 0);
   const dashboard = buildConditionsDashboard({ hours: forecast, verdict, pressureTrend });
   const quickSummary = firstSentence(dashboard.grade.note);
-  const conditionAlert =
-    Number(dashboard.uv.value) >= 6 ? "High UV warning mid-day" : "Watch wind shifts near launch";
 
   const schema = {
     "@context": "https://schema.org",
@@ -108,7 +106,7 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
                 <span>Quick Summary</span>
                 <p>{quickSummary}</p>
               </div>
-              <div className="condition-alert">Warning: {conditionAlert}</div>
+              <div className="condition-alert">Heads up — {dashboard.alert}</div>
               <div className="condition-stamp">Bite</div>
             </div>
             <div className="conditions-grid">
@@ -127,11 +125,11 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
               <p>{dashboard.grade.note}</p>
             </div>
             <div className="grade-callout">
-              <span>Critical Info</span>
-              <p>"The wind is your ally today, angler!"</p>
+              <span>The Edge</span>
+              <p>{dashboard.callout}</p>
             </div>
             <div className="grade-actions" aria-label="Fishing dashboard actions">
-              <a href="#conditions">Log Catch</a>
+              <a href="#conditions">Hour by Hour</a>
               <a href="/fishing">Map View</a>
             </div>
           </div>

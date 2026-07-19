@@ -23,8 +23,12 @@ export function buildConditionsDashboard({ hours, verdict, pressureTrend }: Dash
   const sunrise = representative?.sunrise;
   const sunset = representative?.sunset;
   const grade = fishingGrade(verdict, peakWind, peakGust, pressureTrend.label);
+  const alert = conditionsAlert(peakWind, peakGust, uvIndex, pressureTrend.label);
+  const callout = gradeCallout(grade.value, pressureTrend.label);
 
   return {
+    alert,
+    callout,
     temp: {
       value: typeof tempNow === "number" ? `${Math.round(tempNow)}°` : "n/a",
       detail:
@@ -54,6 +58,33 @@ export function buildConditionsDashboard({ hours, verdict, pressureTrend }: Dash
     },
     grade
   };
+}
+
+// The single most relevant watch-out for the day, framed as a caution. Ordered
+// hard hazards first (gust, wind), then sun, then the pressure story.
+function conditionsAlert(
+  peakWind: number,
+  peakGust: number,
+  uvIndex: number,
+  pressure: PressureTrend["label"]
+) {
+  if (peakGust >= 45) return `Gusts to ${Math.round(peakGust)} km/h — tuck into sheltered water.`;
+  if (peakWind >= 25) return `Wind up to ${Math.round(peakWind)} km/h — the lee shore is your friend.`;
+  if (uvIndex >= 7) return `UV peaks near ${Math.round(uvIndex)} midday — shade up and lean on the low-light hours.`;
+  if (pressure === "falling") return "Pressure's sliding — fish it hard before the front moves in.";
+  if (pressure === "rising") return "Pressure's climbing — expect a slower, pickier bite.";
+  if (uvIndex >= 6) return "Bright midday sun — the bite favors dawn and dusk.";
+  return "Light wind, steady pressure — no excuses today.";
+}
+
+// The tactical edge for the day — where to point your effort. Kept from
+// contradicting the alert's wind advice; leans on pressure and the overall grade.
+function gradeCallout(grade: string, pressure: PressureTrend["label"]) {
+  if (pressure === "falling") return "Falling pressure trips the feed switch — fish the window before the front.";
+  if (grade === "A" || grade === "B+") return "The pieces line up today — start on your confidence water and trust it.";
+  if (grade === "D") return "A grind — slow down and pick apart the structure you know cold.";
+  if (pressure === "rising") return "Bluebird high — go slower, go deeper, work the shade lines.";
+  return "Read the water, fish the edges, and let the low-light hours do the work.";
 }
 
 function nearestHour(hours: ForecastHour[], targetHour: number) {

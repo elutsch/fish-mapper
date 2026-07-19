@@ -52,6 +52,8 @@ export const lakeProfiles: Record<string, LakeProfile> = {
 ```
 Use the slug as filename (without extension) and record key. Hyphenated slugs use bracket notation.
 
+If this run adds a lake or river spot that appears in `data/spots.json`, also follow the repository-level `AGENTS.md` waterbody card artwork instruction: generate `public/waterbodies/{slug}.webp` as a stylized cartoon card image from online reference cues, or explicitly record the missing asset in the handoff and `.context/todos.md` if generation is unavailable.
+
 ## Target shape
 
 Read `src/lib/data/types.ts` first; if it differs from below, the schema wins.

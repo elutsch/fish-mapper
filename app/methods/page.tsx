@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Methods",
   description:
-    "How AER builds Southern Ontario fishing condition pages from launch profiles, Open-Meteo forecasts, fetch geometry, pressure trends, and craft-specific thresholds."
+    "How Bite Club builds Southern Ontario fishing condition pages from launch profiles, Open-Meteo forecasts, fetch geometry, pressure trends, and craft-specific thresholds."
 };
 
 const dataSources = [
@@ -52,7 +52,7 @@ export default function MethodsPage() {
           is practical: tell an angler whether the water is worth fishing today, which craft has
           enough margin, and which conditions are driving the call.
         </p>
-        <div className="burst">AER<br />Logic</div>
+        <div className="burst">Bite<br />Logic</div>
       </section>
 
       <section className="method-panel">

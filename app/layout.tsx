@@ -3,11 +3,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "AER Fishing Conditions",
-    template: "%s | AER Fishing Conditions"
+    default: "Bite Club",
+    template: "%s | Bite Club"
   },
   description:
-    "On-water fishing condition verdicts for Southern Ontario, separated by powerboat, kayak, and canoe."
+    "Bite Club gives Southern Ontario anglers on-water fishing condition verdicts by powerboat, kayak, and canoe."
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -16,31 +16,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <div className="app-shell">
           <header className="site-header">
-            <a className="menu-icon" href="/fishing" aria-label="Fishing map">
-              <span />
-              <span />
-              <span />
+            <a className="brand" href="/fishing" aria-label="Bite Club home">
+              <img className="brand-logo" src="/brand/bite-club-logo.png" alt="Bite Club" />
             </a>
-            <a className="brand" href="/fishing">
-              AER Action
-            </a>
-            <a className="target-icon" href="/fishing" aria-label="Map overview" />
+            <nav className="topnav" aria-label="Primary">
+              <a href="/fishing">Map</a>
+              <a href="/methods">Methods</a>
+              <a href="/disclaimer">Safety</a>
+            </nav>
           </header>
           {children}
-          <nav className="bottomnav" aria-label="Primary">
-            <a className="navitem active" href="/fishing">
-              Home
-            </a>
-            <a className="navitem" href="/fishing">
-              Maps
-            </a>
-            <a className="navitem" href="/methods">
-              Details
-            </a>
-            <a className="navitem" href="/disclaimer">
-              Safety
-            </a>
-          </nav>
         </div>
       </body>
     </html>

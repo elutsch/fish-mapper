@@ -15,8 +15,14 @@ type SpotFeatureCollection = GeoJSON.FeatureCollection<
     maxFetchKm: number | null;
     sourceAccessPointId: string | null;
     species: string[];
+    speciesLabel: string;
+    status: "prime" | "marginal" | "tough" | "unknown";
+    statusLabel: string;
+    statusDetail: string;
   }
 >;
+
+const statusLayers = ["prime", "marginal", "tough", "unknown"] as const;
 
 export function SpotMap({ geojson }: { geojson: SpotFeatureCollection }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -28,6 +34,7 @@ export function SpotMap({ geojson }: { geojson: SpotFeatureCollection }) {
       container: containerRef.current,
       style: {
         version: 8,
+        glyphs: "https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf",
         sources: {
           osm: {
             type: "raster",
@@ -42,75 +49,169 @@ export function SpotMap({ geojson }: { geojson: SpotFeatureCollection }) {
       zoom: 7.3
     });
 
-    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
     map.addControl(new CurrentLocationControl(), "top-right");
+    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
 
     map.on("load", () => {
       const bounds = new maplibregl.LngLatBounds();
-      const markers = geojson.features.map((feature) => {
-        const [lng, lat] = feature.geometry.coordinates;
-        const { id, name, trailer, carryIn, launchName, species } = feature.properties;
-        bounds.extend([lng, lat]);
+      geojson.features.forEach((feature) => {
+        bounds.extend(feature.geometry.coordinates as [number, number]);
+      });
 
-        const markerEl = document.createElement("button");
-        markerEl.type = "button";
-        markerEl.className = `boat-launch-marker ${trailer ? "trailer" : "carry-in"}`;
-        markerEl.setAttribute("aria-label", `${name} fishing conditions`);
-        markerEl.innerHTML = boatLaunchSvg;
+      addLaunchImages(map);
 
-        const popup = new maplibregl.Popup({
-          closeButton: false,
-          closeOnClick: false,
-          className: "launch-popup",
-          offset: 16
-        }).setHTML(
-          `<article class="launch-card launch-card-link" role="link" tabindex="0" data-href="/${escapeHtml(id)}/fishing">
-            <strong>${escapeHtml(name)}</strong>
-            <span>${escapeHtml(launchName)}</span>
-            <p>${trailer ? "Trailer ramp plus carry-in access." : carryIn ? "Carry-in launch access." : "Launch access needs review."}</p>
-            <div>${escapeHtml(species.join(", "))}</div>
-          </article>`
-        );
+      map.addSource("spots", {
+        type: "geojson",
+        data: geojson,
+        cluster: true,
+        clusterMaxZoom: 9,
+        clusterRadius: 52
+      });
 
-        const marker = new maplibregl.Marker({ element: markerEl, anchor: "bottom" })
-          .setLngLat([lng, lat])
-          .setPopup(popup)
-          .addTo(map);
+      map.addLayer({
+        id: "spot-clusters",
+        type: "circle",
+        source: "spots",
+        filter: ["has", "point_count"],
+        paint: {
+          "circle-color": "#00d9e8",
+          "circle-radius": ["step", ["get", "point_count"], 23, 6, 29, 12, 35],
+          "circle-stroke-color": "#171717",
+          "circle-stroke-width": 4
+        }
+      });
 
-        const show = () => popup.setLngLat([lng, lat]).addTo(map);
-        const openLakePage = (event: Event) => {
-          const card = event.currentTarget as HTMLElement;
-          const href = card.dataset.href;
-          if (href) window.location.href = href;
-        };
-        popup.on("open", () => {
-          const card = popup.getElement().querySelector<HTMLElement>(".launch-card-link");
-          if (!card || card.dataset.bound === "true") return;
-          card.dataset.bound = "true";
-          card.addEventListener("click", openLakePage);
-          card.addEventListener("keydown", (event) => {
-            if (event.key === "Enter" || event.key === " ") {
-              event.preventDefault();
-              openLakePage(event);
-            }
-          });
+      map.addLayer({
+        id: "spot-cluster-count",
+        type: "symbol",
+        source: "spots",
+        filter: ["has", "point_count"],
+        layout: {
+          "text-field": ["get", "point_count_abbreviated"],
+          "text-font": ["Open Sans Bold"],
+          "text-size": 18,
+          "text-allow-overlap": true
+        },
+        paint: {
+          "text-color": "#171717"
+        }
+      });
+
+      statusLayers.forEach((status) => {
+        map.addLayer({
+          id: `spot-${status}`,
+          type: "symbol",
+          source: "spots",
+          filter: ["all", ["!", ["has", "point_count"]], ["==", ["get", "status"], status]],
+          layout: {
+            "icon-image": `launch-${status}`,
+            "icon-size": 1,
+            "icon-anchor": "bottom",
+            "icon-allow-overlap": true,
+            "icon-ignore-placement": true
+          }
         });
-        markerEl.addEventListener("click", show);
-
-        return marker;
       });
 
       if (!bounds.isEmpty()) {
-        map.fitBounds(bounds, { padding: 58, maxZoom: 9.2, duration: 0 });
+        map.resize();
+        map.fitBounds(bounds, { padding: fitPadding(map), maxZoom: 9.2, duration: 0 });
       }
 
-      map.once("remove", () => markers.forEach((marker) => marker.remove()));
+      map.on("click", "spot-clusters", async (event) => {
+        const feature = map.queryRenderedFeatures(event.point, { layers: ["spot-clusters"] })[0];
+        const clusterId = feature?.properties?.cluster_id;
+        if (typeof clusterId !== "number") return;
+
+        const source = map.getSource("spots") as maplibregl.GeoJSONSource;
+        const zoom = await source.getClusterExpansionZoom(clusterId);
+        map.easeTo({
+          center: (feature.geometry as GeoJSON.Point).coordinates as [number, number],
+          zoom,
+          duration: 450
+        });
+      });
+
+      statusLayers.forEach((status) => {
+        map.on("click", `spot-${status}`, (event) => {
+          const feature = event.features?.[0];
+          if (!feature || feature.geometry.type !== "Point") return;
+          showLaunchPopup(
+            map,
+            feature as unknown as GeoJSON.Feature<GeoJSON.Point, SpotFeatureCollection["features"][number]["properties"]>
+          );
+        });
+
+        map.on("mouseenter", `spot-${status}`, () => {
+          map.getCanvas().style.cursor = "pointer";
+        });
+        map.on("mouseleave", `spot-${status}`, () => {
+          map.getCanvas().style.cursor = "";
+        });
+      });
+
+      map.on("mouseenter", "spot-clusters", () => {
+        map.getCanvas().style.cursor = "zoom-in";
+      });
+      map.on("mouseleave", "spot-clusters", () => {
+        map.getCanvas().style.cursor = "";
+      });
     });
 
     return () => map.remove();
   }, [geojson]);
 
   return <div ref={containerRef} className="map-shell" aria-label="Southern Ontario fishing spots map" />;
+}
+
+function fitPadding(map: maplibregl.Map) {
+  return map.getContainer().clientWidth < 520
+    ? { top: 36, right: 28, bottom: 36, left: 28 }
+    : 58;
+}
+
+function showLaunchPopup(
+  map: maplibregl.Map,
+  feature: GeoJSON.Feature<GeoJSON.Point, SpotFeatureCollection["features"][number]["properties"]>
+) {
+  const [lng, lat] = feature.geometry.coordinates;
+  const { id, name, trailer, carryIn, launchName, speciesLabel, statusLabel, statusDetail } = feature.properties;
+  const popup = new maplibregl.Popup({
+    closeButton: false,
+    closeOnClick: true,
+    className: "launch-popup",
+    offset: 16
+  }).setHTML(
+    `<article class="launch-card launch-card-link" role="link" tabindex="0" data-href="/${escapeHtml(id)}/fishing">
+      <strong>${escapeHtml(name)}</strong>
+      <span>${escapeHtml(statusLabel)}</span>
+      <p>${escapeHtml(statusDetail)}</p>
+      <p>${trailer ? "Trailer ramp plus carry-in access." : carryIn ? "Carry-in launch access." : "Launch access needs review."}</p>
+      <em>${escapeHtml(launchName)}</em>
+      <div>${escapeHtml(speciesLabel)}</div>
+    </article>`
+  );
+
+  const openLakePage = (event: Event) => {
+    const card = event.currentTarget as HTMLElement;
+    const href = card.dataset.href;
+    if (href) window.location.href = href;
+  };
+
+  popup.on("open", () => {
+    const card = popup.getElement().querySelector<HTMLElement>(".launch-card-link");
+    if (!card || card.dataset.bound === "true") return;
+    card.dataset.bound = "true";
+    card.addEventListener("click", openLakePage);
+    card.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openLakePage(event);
+      }
+    });
+  });
+
+  popup.setLngLat([lng, lat]).addTo(map);
 }
 
 class CurrentLocationControl implements maplibregl.IControl {
@@ -128,7 +229,11 @@ class CurrentLocationControl implements maplibregl.IControl {
     button.className = "current-location-button";
     button.setAttribute("aria-label", "Find my location");
     button.title = "Find my location";
-    button.innerHTML = `<span aria-hidden="true"></span>`;
+    button.innerHTML = `<svg class="target-ring" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="8" />
+      <circle cx="12" cy="12" r="3" />
+      <path d="M12 1v5M12 18v5M1 12h5M18 12h5" />
+    </svg>`;
     button.addEventListener("click", () => this.locate(button));
 
     this.container.appendChild(button);
@@ -170,14 +275,35 @@ class CurrentLocationControl implements maplibregl.IControl {
   }
 }
 
-const boatLaunchSvg = `
-  <svg viewBox="0 0 44 52" aria-hidden="true" focusable="false">
-    <path class="pin" d="M22 50C14 39 7 30 7 20 7 9.5 14.2 3 22 3s15 6.5 15 17c0 10-7 19-15 30Z" />
-    <path class="boat" d="M12 26h20l-4 8H16l-4-8Z" />
-    <path class="bow" d="M17 22h13l2 4H14l3-4Z" />
-    <path class="ramp" d="M13 37h18" />
-    <path class="ramp" d="M16 41h12" />
+function addLaunchImages(map: maplibregl.Map) {
+  const colors = {
+    prime: "#9cff13",
+    marginal: "#f87500",
+    tough: "#a83f37",
+    unknown: "#d8d8d8"
+  };
+
+  Object.entries(colors).forEach(([status, color]) => {
+    const image = new Image(44, 52);
+    image.onload = () => {
+      if (!map.hasImage(`launch-${status}`)) {
+        map.addImage(`launch-${status}`, image, { pixelRatio: 1 });
+      }
+    };
+    image.src = launchIconDataUrl(color);
+  });
+}
+
+function launchIconDataUrl(fill: string) {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 52">
+    <path d="M22 50C14 39 7 30 7 20 7 9.5 14.2 3 22 3s15 6.5 15 17c0 10-7 19-15 30Z" fill="${fill}" stroke="#171717" stroke-width="3"/>
+    <path d="M12 26h20l-4 8H16l-4-8Z" fill="#171717"/>
+    <path d="M17 22h13l2 4H14l3-4Z" fill="#171717"/>
+    <path d="M13 37h18" fill="none" stroke="#171717" stroke-linecap="square" stroke-width="3"/>
+    <path d="M16 41h12" fill="none" stroke="#171717" stroke-linecap="square" stroke-width="3"/>
   </svg>`;
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
 
 function escapeHtml(value: string) {
   return value

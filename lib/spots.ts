@@ -3,6 +3,12 @@ import type { Spot } from "./types";
 
 export const spots = rawSpots as Spot[];
 
+export type MapSpotStatus = {
+  status: "prime" | "marginal" | "tough" | "unknown";
+  label: string;
+  detail: string;
+};
+
 type SpotGeoJson = GeoJSON.FeatureCollection<
   GeoJSON.Point,
   {
@@ -14,6 +20,10 @@ type SpotGeoJson = GeoJSON.FeatureCollection<
     maxFetchKm: number | null;
     sourceAccessPointId: string | null;
     species: string[];
+    speciesLabel: string;
+    status: MapSpotStatus["status"];
+    statusLabel: string;
+    statusDetail: string;
   }
 >;
 
@@ -21,7 +31,7 @@ export function getSpot(id: string) {
   return spots.find((spot) => spot.id === id);
 }
 
-export function spotsAsGeoJson(): SpotGeoJson {
+export function spotsAsGeoJson(statuses: Record<string, MapSpotStatus> = {}): SpotGeoJson {
   return {
     type: "FeatureCollection",
     features: spots.map((spot) => ({
@@ -38,7 +48,11 @@ export function spotsAsGeoJson(): SpotGeoJson {
         launchName: spot.launch.name ?? (spot.launch.trailer ? "Boat launch" : "Carry-in launch"),
         maxFetchKm: spot.maxFetchKm ?? null,
         sourceAccessPointId: spot.sourceAccessPointId ?? null,
-        species: spot.species
+        species: spot.species,
+        speciesLabel: spot.species.join(", "),
+        status: statuses[spot.id]?.status ?? "unknown",
+        statusLabel: statuses[spot.id]?.label ?? "Forecast pending",
+        statusDetail: statuses[spot.id]?.detail ?? "Open this lake for the latest conditions."
       }
     }))
   };

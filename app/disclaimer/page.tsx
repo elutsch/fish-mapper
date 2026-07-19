@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Safety Notice & Disclaimer",
   description:
-    "Safety notice and disclaimer for AER fishing condition forecasts, craft verdicts, and lake planning information."
+    "Safety notice and disclaimer for Bite Club fishing condition forecasts, craft verdicts, and lake planning information."
 };
 
 export default function DisclaimerPage() {

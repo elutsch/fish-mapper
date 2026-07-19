@@ -34,7 +34,7 @@ export function buildConditionsDashboard({ hours, verdict, pressureTrend }: Dash
       detail:
         typeof tempHigh === "number" && typeof tempLow === "number"
           ? `H ${Math.round(tempHigh)}° · L ${Math.round(tempLow)}°`
-          : "Current surface forecast"
+          : "Forecast air temperature"
     },
     uv: {
       value: Number.isFinite(uvIndex) ? uvIndex.toFixed(1) : "n/a",

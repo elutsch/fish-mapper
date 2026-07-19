@@ -15,6 +15,19 @@ const longFetchSpot: Spot = {
   fmz: "16"
 };
 
+const conestogoLikeSpot: Spot = {
+  id: "conestogo-like",
+  name: "Conestogo Like Lake",
+  waterbody: "Conestogo Like Lake",
+  lat: 43.7,
+  lng: -80.77,
+  launch: { trailer: true, carryIn: true },
+  shorelineFetch: [35, 215],
+  maxFetchKm: 5.7,
+  species: [],
+  fmz: "16"
+};
+
 function hours(windKmh: number, gustKmh: number, windDirDeg = 225): ForecastHour[] {
   return Array.from({ length: 12 }, (_, index) => ({
     time: `2026-07-18T${String(index + 6).padStart(2, "0")}:00:00-04:00`,
@@ -54,6 +67,20 @@ describe("fallback verdict gates", () => {
     expect(verdict.byCraft.powerboat.rating).toBe("no-go");
     expect(verdict.byCraft.kayak.rating).toBe("no-go");
     expect(verdict.byCraft.canoe.rating).toBe("no-go");
+  });
+
+  it("keeps a Conestogo-like high-gust day marginal for powerboats but closed for paddlecraft", () => {
+    const verdict = fallbackVerdict(
+      conestogoLikeSpot,
+      hours(19, 56, 225),
+      { label: "steady", rateHpaPer24h: 0 },
+      "2026-07-18"
+    );
+
+    expect(verdict.byCraft.powerboat.rating).toBe("marginal");
+    expect(verdict.byCraft.kayak.rating).toBe("no-go");
+    expect(verdict.byCraft.canoe.rating).toBe("no-go");
+    expect(verdict.summaryMd).toContain("protected-water window");
   });
 
   it("names a different lee for a strong southwest wind than an east wind", () => {

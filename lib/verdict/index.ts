@@ -14,13 +14,8 @@ export async function generateVerdict(
       return agentVerdict;
     }
   } catch (error) {
-    return fallbackVerdict(
-      spot,
-      hours,
-      pressureTrend,
-      validFor,
-      `Agent verdict failed: ${error instanceof Error ? error.message : "unknown error"}.`
-    );
+    console.warn("Agent verdict failed; using deterministic fallback.", error);
+    return fallbackVerdict(spot, hours, pressureTrend, validFor);
   }
 
   return fallbackVerdict(spot, hours, pressureTrend, validFor);

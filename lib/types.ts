@@ -37,8 +37,6 @@ export type ForecastHour = {
   cloudPct: number;
   sunrise?: string;
   sunset?: string;
-  aqhi?: number;
-  pm25?: number;
 };
 
 export type CraftVerdict = {

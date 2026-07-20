@@ -733,8 +733,39 @@ h3 {
   border-right: 0;
 }
 
-.condition-cell:nth-last-child(-n + 3) {
+/* Full-width precipitation band below the six metric tiles. Spanning the row
+   keeps the 3-column grid clean (no orphaned partial row) and the six tiles
+   above it keep their bottom borders as the separator from this band. */
+.condition-precip {
+  grid-column: 1 / -1;
+  min-height: 0;
+  border-right: 0;
   border-bottom: 0;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  grid-template-areas:
+    "label label"
+    "value detail";
+  align-content: center;
+  align-items: center;
+  column-gap: clamp(20px, 4vw, 52px);
+  row-gap: 14px;
+  padding-block: clamp(26px, 3vw, 40px);
+}
+
+.condition-precip > span {
+  grid-area: label;
+}
+
+.condition-precip > strong {
+  grid-area: value;
+  white-space: nowrap;
+  font-size: clamp(40px, 4.6vw, 64px);
+}
+
+.condition-precip > p {
+  grid-area: detail;
+  justify-self: end;
+  text-align: right;
 }
 
 .condition-cell-emphasis {
@@ -2608,14 +2639,6 @@ a.lake-card:active {
     border-right: 0;
   }
 
-  .condition-cell:nth-last-child(-n + 3) {
-    border-bottom: 3px solid var(--ink);
-  }
-
-  .condition-cell:nth-last-child(-n + 2) {
-    border-bottom: 0;
-  }
-
   .fishing-grade {
     grid-template-columns: auto minmax(0, 1fr);
   }
@@ -2846,6 +2869,21 @@ a.lake-card:active {
 
   .condition-cell strong {
     font-size: clamp(38px, 12vw, 48px);
+  }
+
+  /* Stack the precip band like a normal tile on phones. */
+  .condition-precip {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "label"
+      "value"
+      "detail";
+    row-gap: 12px;
+  }
+
+  .condition-precip > p {
+    justify-self: start;
+    text-align: left;
   }
 
   .fishing-grade {

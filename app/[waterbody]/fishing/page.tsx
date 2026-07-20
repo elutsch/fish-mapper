@@ -52,7 +52,7 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
     })
     .filter((_, index) => index % 2 === 0);
   const dashboard = buildConditionsDashboard({ hours: forecast, verdict, pressureTrend });
-  const quickSummary = dailyReadSummary(forecast, verdict);
+  const quickSummary = dashboard.summary;
   const publicCaveats = publicFacingCaveats(verdict.caveats);
 
   const schema = {
@@ -115,6 +115,7 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
               <DashboardMetric label="Pressure" value={dashboard.pressure.value} detail={dashboard.pressure.detail} />
               <DashboardMetric label="Sunrise/Sunset" value={dashboard.sun.value} detail={dashboard.sun.detail} />
               <DashboardMetric label="Moon Phase" value={dashboard.moon.value} detail={dashboard.moon.detail} emphasis />
+              <DashboardMetric label="Precip" value={dashboard.precip.value} detail={dashboard.precip.detail} wide />
             </div>
           </div>
           <div className="fishing-grade">
@@ -223,15 +224,20 @@ function DashboardMetric({
   label,
   value,
   detail,
-  emphasis = false
+  emphasis = false,
+  wide = false
 }: {
   label: string;
   value: string;
   detail: string;
   emphasis?: boolean;
+  wide?: boolean;
 }) {
+  const className = ["condition-cell", emphasis && "condition-cell-emphasis", wide && "condition-precip"]
+    .filter(Boolean)
+    .join(" ");
   return (
-    <article className={emphasis ? "condition-cell condition-cell-emphasis" : "condition-cell"}>
+    <article className={className}>
       <span>{label}</span>
       <strong>{value}</strong>
       <p>{detail}</p>
@@ -507,40 +513,6 @@ function hourFishability(
   return { label: "Fishable", level: "go" as const };
 }
 
-function dailyReadSummary(hours: ForecastHour[], verdict: { byCraft: Record<Craft, { rating: string; bestWindow?: string }> }) {
-  const daylight = hours.filter((hour) => {
-    const localHour = Number(hour.time.slice(11, 13));
-    return localHour >= 5 && localHour <= 21;
-  });
-  const peakGust = Math.max(...daylight.map((hour) => hour.gustKmh), 0);
-  const fishableWindow = firstFishableWindow(daylight);
-  const craftRatings = Object.values(verdict.byCraft).map((craft) => craft.rating);
-  const allNoGo = craftRatings.every((rating) => rating === "no-go");
-  const onlyPowerboatHasMargin =
-    verdict.byCraft.powerboat.rating !== "no-go" &&
-    verdict.byCraft.kayak.rating === "no-go" &&
-    verdict.byCraft.canoe.rating === "no-go";
-
-  if (allNoGo && fishableWindow) {
-    return `Fish may be active, but the launch window is short: ${fishableWindow} is the cleanest water before gusts near ${Math.round(
-      peakGust
-    )} km/h take over.`;
-  }
-  if (allNoGo) {
-    return `Fish activity does not overcome the on-water risk today; gusts near ${Math.round(
-      peakGust
-    )} km/h make this a stay-off-the-water call.`;
-  }
-  if (onlyPowerboatHasMargin) {
-    const window = verdict.byCraft.powerboat.bestWindow ?? fishableWindow;
-    return `The bite has a window, but craft matters: powerboats get the most margin ${window ? `around ${window}` : "early"} while kayaks and canoes lose position control as gusts build.`;
-  }
-  if (fishableWindow) {
-    return `Best launch window is ${fishableWindow}; after that, wind and gusts decide how much water is realistically fishable.`;
-  }
-  return "Today is a craft-specific call: read the hourly wind and launch only where the water stays controlled.";
-}
-
 function isInWindow(time: string, window: string) {
   const match = /^(\d{2}):(\d{2})-(\d{2}):(\d{2})$/.exec(window);
   if (!match) return true;
@@ -550,29 +522,6 @@ function isInWindow(time: string, window: string) {
   const start = Number(match[1]) * 60 + Number(match[2]);
   const end = Number(match[3]) * 60 + Number(match[4]);
   return current >= start && current <= end;
-}
-
-function firstFishableWindow(hours: ForecastHour[]) {
-  const fishable = hours.filter((hour) => hourFishability(hour).level === "go");
-  const first = fishable[0];
-  if (!first) return null;
-  const startHour = Number(first.time.slice(11, 13));
-  let endHour = startHour + 1;
-  for (const hour of fishable.slice(1)) {
-    const currentHour = Number(hour.time.slice(11, 13));
-    if (currentHour === endHour) {
-      endHour += 1;
-      continue;
-    }
-    break;
-  }
-  return `${formatWindowHour(startHour)}-${formatWindowHour(Math.min(endHour, 23))}`;
-}
-
-function formatWindowHour(hour: number) {
-  const suffix = hour >= 12 ? "pm" : "am";
-  const display = hour % 12 === 0 ? 12 : hour % 12;
-  return `${display}${suffix}`;
 }
 
 function publicFacingCaveats(caveats: string[]) {

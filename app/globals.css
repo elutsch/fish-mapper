@@ -733,8 +733,39 @@ h3 {
   border-right: 0;
 }
 
-.condition-cell:nth-last-child(-n + 3) {
+/* Full-width precipitation band below the six metric tiles. Spanning the row
+   keeps the 3-column grid clean (no orphaned partial row) and the six tiles
+   above it keep their bottom borders as the separator from this band. */
+.condition-precip {
+  grid-column: 1 / -1;
+  min-height: 0;
+  border-right: 0;
   border-bottom: 0;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  grid-template-areas:
+    "label label"
+    "value detail";
+  align-content: center;
+  align-items: center;
+  column-gap: clamp(20px, 4vw, 52px);
+  row-gap: 14px;
+  padding-block: clamp(26px, 3vw, 40px);
+}
+
+.condition-precip > span {
+  grid-area: label;
+}
+
+.condition-precip > strong {
+  grid-area: value;
+  white-space: nowrap;
+  font-size: clamp(40px, 4.6vw, 64px);
+}
+
+.condition-precip > p {
+  grid-area: detail;
+  justify-self: end;
+  text-align: right;
 }
 
 .condition-cell-emphasis {
@@ -2007,6 +2038,57 @@ a.lake-card:active {
   text-transform: uppercase;
 }
 
+/* Species guide — reuses the profile hero/panel system; only the species card
+   framing, back link, and horizontal facts band are page-specific. */
+.species-hero-card {
+  align-self: center;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 1 / 1;
+  justify-self: end;
+  border: 4px solid var(--ink);
+  box-shadow: 8px 8px 0 rgba(23, 23, 23, 0.72);
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.11) 1px, transparent 1.45px),
+    #2f3332;
+  background-size: 9px 9px;
+  overflow: hidden;
+}
+
+.species-hero-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.species-hero-fallback {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: end start;
+  padding: 20px;
+  color: #fff;
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.species-back-link {
+  display: inline-block;
+  margin-top: 20px;
+  color: var(--rust);
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
+
+.species-facts {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
 .profile-panel {
   padding: clamp(22px, 3.6vw, 44px);
   display: grid;
@@ -2189,262 +2271,6 @@ a.lake-card:active {
 .profile-caveats {
   border: 3px solid var(--ink);
   box-shadow: 4px 4px 0 var(--ink);
-}
-
-.species-page {
-  justify-items: center;
-}
-
-.species-dossier {
-  width: min(520px, 100%);
-  border: 4px solid var(--ink);
-  box-shadow: 8px 9px 0 var(--ink);
-  background:
-    radial-gradient(circle, rgba(23, 23, 23, 0.18) 1px, transparent 1.35px),
-    #fffdf8;
-  background-size: 9px 9px;
-  display: grid;
-  gap: 22px;
-  padding: clamp(16px, 3vw, 28px);
-}
-
-.species-dossier-top {
-  margin: calc(clamp(16px, 3vw, 28px) * -1) calc(clamp(16px, 3vw, 28px) * -1) 0;
-  min-height: 62px;
-  padding: 12px 16px;
-  border-bottom: 4px solid var(--ink);
-  background:
-    radial-gradient(circle, rgba(23, 23, 23, 0.42) 1.4px, transparent 1.6px),
-    var(--gray);
-  background-size: 8px 8px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 12px;
-  align-items: center;
-}
-
-.species-dossier-top > span {
-  color: var(--teal);
-  font-size: 20px;
-  font-style: italic;
-  text-transform: uppercase;
-  transform: skewX(-10deg);
-}
-
-.species-back {
-  color: var(--ink);
-  font-family: "Courier New", monospace;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  text-decoration-thickness: 3px;
-  text-underline-offset: 4px;
-}
-
-.species-back:last-child {
-  justify-self: end;
-}
-
-.species-cover-card,
-.species-detail-panel,
-.tactical-log {
-  border: 3px solid var(--ink);
-  box-shadow: 5px 6px 0 var(--ink);
-  background: #fff;
-  padding: clamp(18px, 3vw, 28px);
-}
-
-.species-cover-card {
-  display: grid;
-  justify-items: center;
-  gap: 14px;
-}
-
-.species-cover-media {
-  width: min(100%, 370px);
-  aspect-ratio: 1 / 1;
-  border: 4px solid var(--ink);
-  background:
-    radial-gradient(circle, rgba(255, 255, 255, 0.11) 1px, transparent 1.45px),
-    #2f3332;
-  background-size: 9px 9px;
-  box-shadow: 8px 8px 0 rgba(23, 23, 23, 0.72);
-  position: relative;
-  overflow: hidden;
-}
-
-.species-cover-media > span {
-  position: absolute;
-  right: 12px;
-  top: 14px;
-  z-index: 1;
-  padding: 10px 12px;
-  color: #fff;
-  background: var(--rust);
-  border: 3px solid var(--ink);
-  box-shadow: 3px 3px 0 var(--ink);
-  font-size: 13px;
-  text-transform: uppercase;
-  transform: rotate(-1deg);
-}
-
-.species-cover-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.species-cover-media div {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  place-items: end start;
-  padding: 20px;
-  color: #fff;
-  font-size: 42px;
-  line-height: 1.05;
-  text-transform: uppercase;
-}
-
-.species-cover-card h1 {
-  margin: 0;
-  max-width: 100%;
-  color: var(--ink);
-  font-size: clamp(36px, 8vw, 52px);
-  line-height: 1.05;
-  text-align: center;
-}
-
-.species-tier {
-  padding: 7px 14px;
-  color: var(--ink);
-  background: var(--lime);
-  border: 3px solid var(--ink);
-  box-shadow: 3px 3px 0 var(--ink);
-  font-family: "Courier New", monospace;
-  font-size: 13px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.species-quick-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-}
-
-.species-quick-card {
-  min-height: 150px;
-  padding: 18px;
-  border: 3px solid var(--ink);
-  box-shadow: 5px 6px 0 var(--ink);
-  display: grid;
-  align-content: start;
-  gap: 10px;
-}
-
-.habitat-card {
-  background: var(--cyan);
-}
-
-.rank-card {
-  background: var(--orange);
-}
-
-.species-quick-card span,
-.tactical-row span {
-  font-family: "Courier New", monospace;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.species-quick-card span {
-  font-size: 24px;
-}
-
-.species-quick-card p,
-.species-detail-panel p,
-.tactical-log blockquote {
-  margin: 0;
-  font-family: "Comic Neue", "Comic Sans MS", cursive;
-  font-size: clamp(15px, 2vw, 18px);
-  font-weight: 700;
-  line-height: 1.35;
-  letter-spacing: 0.03em;
-}
-
-.rank-card strong {
-  font-size: 24px;
-  line-height: 1.05;
-  text-transform: uppercase;
-}
-
-.tactical-log {
-  display: grid;
-  gap: 18px;
-}
-
-.tactical-log h2,
-.species-detail-panel h2 {
-  font-size: clamp(28px, 6vw, 40px);
-  line-height: 1.05;
-  text-decoration: underline;
-  text-decoration-thickness: 3px;
-  text-underline-offset: 5px;
-}
-
-.tactical-row {
-  display: grid;
-  grid-template-columns: 48px 1fr;
-  gap: 14px;
-  align-items: center;
-}
-
-.tactical-row b {
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  color: #fff;
-  background: var(--ink);
-  font-size: 21px;
-}
-
-.tactical-row div {
-  display: grid;
-  gap: 4px;
-}
-
-.tactical-row span {
-  color: var(--rust);
-}
-
-.tactical-row strong {
-  font-size: 20px;
-  line-height: 1.1;
-}
-
-.tactical-log blockquote {
-  margin-top: 8px;
-  padding: 22px;
-  border: 3px solid var(--ink);
-  background: #fff;
-  font-style: italic;
-}
-
-.species-detail-panel {
-  display: grid;
-  gap: 16px;
-}
-
-.species-sources a {
-  overflow-wrap: anywhere;
-  color: var(--rust);
-  font-family: "Comic Neue", "Comic Sans MS", cursive;
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1.35;
 }
 
 .detail-card {
@@ -2813,14 +2639,6 @@ a.lake-card:active {
     border-right: 0;
   }
 
-  .condition-cell:nth-last-child(-n + 3) {
-    border-bottom: 3px solid var(--ink);
-  }
-
-  .condition-cell:nth-last-child(-n + 2) {
-    border-bottom: 0;
-  }
-
   .fishing-grade {
     grid-template-columns: auto minmax(0, 1fr);
   }
@@ -2968,9 +2786,7 @@ a.lake-card:active {
 
   .notable-card,
   .reg-card,
-  .access-card,
-  .species-detail-panel,
-  .tactical-log {
+  .access-card {
     padding: 16px;
   }
 
@@ -3055,6 +2871,21 @@ a.lake-card:active {
     font-size: clamp(38px, 12vw, 48px);
   }
 
+  /* Stack the precip band like a normal tile on phones. */
+  .condition-precip {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "label"
+      "value"
+      "detail";
+    row-gap: 12px;
+  }
+
+  .condition-precip > p {
+    justify-self: start;
+    text-align: left;
+  }
+
   .fishing-grade {
     min-height: auto;
   }
@@ -3137,17 +2968,8 @@ a.lake-card:active {
     padding: 18px;
   }
 
-  .species-quick-grid,
-  .species-dossier-top {
+  .species-facts {
     grid-template-columns: 1fr;
-  }
-
-  .species-dossier-top,
-  .species-dossier-top > span,
-  .species-back:last-child {
-    justify-items: start;
-    justify-self: start;
-    text-align: left;
   }
 }
 

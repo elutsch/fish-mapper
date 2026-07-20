@@ -1,0 +1,310 @@
+{
+  "slug": "grand-river-paris",
+  "lake": "Grand River at Paris",
+  "province": "Ontario",
+  "fmz": 16,
+  "waterbodyType": "river",
+  "coordinates": {
+    "lat": 43.1946,
+    "lng": -80.3849
+  },
+  "morphology": {
+    "surfaceArea": null,
+    "maxDepth": null,
+    "meanDepth": "~1 m (3 ft) average through the reach; wadeable, with deeper holes above dams",
+    "clarity": null,
+    "trophicStatus": null,
+    "thermalBehaviour": null
+  },
+  "bestSeason": "Summer through early fall for smallmouth; spring and fall for walleye and pike",
+  "overview": "This isn't a lake — it's moving water. The Grand runs shallow and wadeable through Paris, hip-to-chest deep over rock, gravel, and rubble, breaking into the runs, pools, and riffles that river smallmouth were built for. The Nith River piles in at the Forks of the Grand and bumps the flow; Penman's Dam anchors the town. Downstream, the whole Paris-to-Brantford stretch carries an \"Exceptional Waters\" tag — and a hard rule that comes with it. Cold water leaking in from Whitemans Creek and springs keeps smallmouth, walleye, and pike all in play, with the deep holes above Wilkes Dam in Brantford stacking fish where the current slows. Your way in is on foot or by paddle: municipal parks in Paris, Bean Park on Spencer Street, the rail trail along the bank. No ramp — you wade it, canoe it, or drift it.",
+  "notableFacts": [
+    {
+      "fact": "The Grand River between Paris and Brantford is a designated \"Exceptional Waters\" reach — the fishing season was extended and special barbless-hook, artificial-lure, catch-and-release regulations were put in place to manage the fishery.",
+      "sourceUrl": "https://www.grandriver.ca/our-watershed/fisheries-management/exceptional-waters"
+    },
+    {
+      "fact": "Cold water entering from Whitemans Creek and springs makes the reach good habitat for smallmouth bass, walleye, northern pike and rainbow trout, and supports species at risk including black redhorse and river redhorse.",
+      "sourceUrl": "https://www.grandriver.ca/our-watershed/fisheries-management/exceptional-waters"
+    },
+    {
+      "fact": "The Grand River (Paris) special regulation makes brown trout, northern pike, rainbow trout, smallmouth bass and walleye strictly catch-and-release (S-0 / C-0), artificial lures only, single barbless hook.",
+      "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16"
+    },
+    {
+      "fact": "The Nith River joins the Grand at Paris — the \"Forks of the Grand\" — adding flow to the reach.",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Grand_River_(Ontario)"
+    },
+    {
+      "fact": "Penman's Dam in Paris was built in 1918 by the Penman clothing company for mill waterpower.",
+      "sourceUrl": "https://1000towns.ca/penmans-dam-on-the-grand-river/"
+    }
+  ],
+  "regulations": [
+    {
+      "species": "Smallmouth Bass",
+      "season": "Base FMZ 16: fourth Saturday in June to Nov 30 (reach governed by the Paris catch-and-release special regulation)",
+      "limit": "S-0 / C-0 (catch-and-release) in the Paris–Brantford special-regulation reach; artificial lures only, single barbless hook. Base FMZ 16 limit S-6 / C-2.",
+      "sizeLimit": null,
+      "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      "effectiveDate": "2025-12-08",
+      "verified": true
+    },
+    {
+      "species": "Walleye",
+      "season": "Base FMZ 16: Jan 1–Mar 15 and second Saturday in May to Dec 31 (reach governed by the Paris catch-and-release special regulation)",
+      "limit": "S-0 / C-0 (catch-and-release) in the Paris–Brantford special-regulation reach; artificial lures only, single barbless hook. Base FMZ 16 limit S-4 / C-2, not more than 1 greater than 46 cm.",
+      "sizeLimit": "not more than 1 greater than 46 cm (base zone)",
+      "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      "effectiveDate": "2025-12-08",
+      "verified": true
+    },
+    {
+      "species": "Northern Pike",
+      "season": "Base FMZ 16: Jan 1–Mar 31 and second Saturday in May to Dec 31 (reach governed by the Paris catch-and-release special regulation)",
+      "limit": "S-0 / C-0 (catch-and-release) in the Paris–Brantford special-regulation reach; artificial lures only, single barbless hook. Base FMZ 16 limit S-6 / C-2.",
+      "sizeLimit": null,
+      "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      "effectiveDate": "2025-12-08",
+      "verified": true
+    }
+  ],
+  "regsDisclaimer": "Regulations effective 2025-12-08, FMZ 16. This is a summary, not the legal regulation — confirm current rules with the official source before fishing. The Paris-to-Brantford reach is a catch-and-release zone: artificial lures only, single barbless hook. Two seasonal sanctuary closures apply.",
+  "launches": [
+    {
+      "name": "Municipal parks, downtown Paris",
+      "type": "carry-in",
+      "notes": "Carry-in / wade access to the reach; no trailer boat ramp on this stretch. Wade, canoe, or drift boat.",
+      "sourceUrl": "https://www.grandriver.ca/outdoor-recreation/fishing/fishing-rivers-and-streams/"
+    },
+    {
+      "name": "Bean Park, Spencer Street (south end of Paris)",
+      "type": "carry-in",
+      "notes": "Carry-in / shore access, maintained by the County of Brant.",
+      "sourceUrl": "https://www.brant.ca/recreation-and-parks/outdoor-courts-sports-and-trails/paddling/"
+    },
+    {
+      "name": "Penman's Dam Park, Willow Street, Paris",
+      "type": "carry-in",
+      "notes": "Shore access and a portage landing on the east bank around the dam.",
+      "sourceUrl": "https://1000towns.ca/penmans-dam-on-the-grand-river/"
+    },
+    {
+      "name": "Brant Conservation Area / Cockshutt Bridge, Brantford (downstream end)",
+      "type": "carry-in",
+      "notes": "Shore / wade access at the downstream end of the reach.",
+      "sourceUrl": "https://www.grandriver.ca/our-watershed/fisheries-management/exceptional-waters"
+    }
+  ],
+  "species": [
+    {
+      "parentSlug": "smallmouth-bass",
+      "displayName": "Smallmouth Bass",
+      "tier": "destination",
+      "structure": [
+        "the wadeable Exceptional Waters reach (rock/gravel/rubble bottom)",
+        "current seams and pool tail-outs",
+        "deep holes above Wilkes Dam (Brantford)",
+        "the Whitemans Creek confluence"
+      ],
+      "bestSeason": "Summer through early fall",
+      "bodyCopy": "This is the whole reason the reach has a name. The Grand from Paris to Brantford is provincially flagged \"Exceptional Waters,\" managed on purpose — extended season, barbless hooks, artificial lures, every bass released — to keep the smallmouth this good. Read the current: they sit in the seams where fast water shoulders into slow, tuck behind rock, and hang on pool tail-outs, running down crayfish and sculpins over gravel. The cold slug from Whitemans Creek pulls them onto that seam in summer heat. Down at Wilkes Dam the water deepens over rubble and old-dam bones — where they hold when the shallow runs warm. Bring waders; keep nothing.",
+      "qualitySignal": "Provincially designated \"Exceptional Waters\" reach managed with a species-specific barbless, artificial-lure, catch-and-release special regulation",
+      "lede": "The Paris-to-Brantford reach is smallmouth water first and everything else second. It carries the province's \"Exceptional Waters\" tag for a reason: an extended season and barbless, artificial-only, catch-and-release rules built to protect the bass. You wade it — hip-to-chest over rock, gravel, and rubble — reading the current seams and pool tail-outs where river bronzebacks live.",
+      "howItFishes": "The pattern is current, not depth. Smallmouth hold where fast water shoulders into slow — the seams, the pockets behind rock, the tail-outs where pools dump into the next riffle — and they run down crayfish and sculpins across the gravel and rubble bottom. When the reach heats up in summer, the cold water bleeding in from Whitemans Creek and the springs pulls fish onto those inflow seams. As the shallow runs warm through, they slide to the deeper holes above Wilkes Dam in Brantford, where rubble and old-dam structure add depth. Best summer through early fall. Every bass goes back — this is a release-only reach.",
+      "structureDetails": [
+        {
+          "name": "The wadeable Exceptional Waters reach (rock/gravel/rubble)",
+          "detail": "The run-pool-riffle river itself between Paris and Brantford, hip-to-chest deep, is the core smallmouth habitat and the water the special catch-and-release regulation was built to protect."
+        },
+        {
+          "name": "Current seams and pool tail-outs",
+          "detail": "Where faster water meets slower holding water over gravel and rubble — the classic river-smallmouth ambush lies in a reach averaging about a metre deep."
+        },
+        {
+          "name": "Deep holes above Wilkes Dam (Brantford)",
+          "detail": "Rubble and old-dam remnants create depth and structure that hold smallmouth when the shallow upstream runs warm."
+        },
+        {
+          "name": "Whitemans Creek confluence",
+          "detail": "A cold-water inflow between Paris and Brantford that creates a summer temperature refuge and a feeding lane."
+        }
+      ],
+      "speciesRules": [
+        {
+          "rule": "Reach special regulation: catch-and-release only (S-0 / C-0), artificial lures only, single barbless hook — from 100 m below the Hwy 2 bridge in Paris to the pedestrian bridge above Brant Conservation Area, Brantford",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2025-12-08"
+        },
+        {
+          "rule": "Base FMZ 16 bass season: fourth Saturday in June to Nov 30",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2025-12-08"
+        },
+        {
+          "rule": "Sanctuary closures: no fishing Oct 1–Nov 30 (Penman Dam to William Street Bridge) and March 1 to the Friday before the fourth Saturday in April (Paris to Brantford pedestrian bridge)",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2025-12-08"
+        }
+      ],
+      "sources": [
+        "https://www.grandriver.ca/our-watershed/fisheries-management/exceptional-waters",
+        "https://www.grandriver.ca/outdoor-recreation/fishing/fishing-rivers-and-streams/"
+      ]
+    },
+    {
+      "parentSlug": "largemouth-bass",
+      "displayName": "Largemouth Bass",
+      "tier": "present",
+      "structure": [],
+      "bestSeason": null,
+      "bodyCopy": null,
+      "qualitySignal": null,
+      "lede": null,
+      "howItFishes": null,
+      "structureDetails": null,
+      "speciesRules": null,
+      "sources": []
+    },
+    {
+      "parentSlug": "northern-pike",
+      "displayName": "Northern Pike",
+      "tier": "strong",
+      "structure": [
+        "slower runs and deep pools, and the deep water above Wilkes Dam",
+        "slack backwaters / the millpond above Penman's Dam (Paris)"
+      ],
+      "bestSeason": "Spring and fall",
+      "bodyCopy": "Pike want the soft water. In a river that mostly rips, they set up where it slows — the deeper pools, the slack margins, the millpond backing up behind Penman's Dam — and wait on the current break for whatever the flow delivers. The deep holes above Wilkes Dam are the reliable address: enough depth and slack to hold a river pike, enough baitfish sliding through to keep one fed. Spring and fall, when the water's cool, is your window. Same reach rule applies — artificial lures, barbless, and the fish goes back.",
+      "qualitySignal": null,
+      "lede": "Pike are the soft-water fish on a river that mostly moves. Where the Grand slows — the deeper pools, the slack margins, the millpond backing up behind Penman's Dam — a river pike sets up on the current break and waits. The deep water above Wilkes Dam is the dependable address, cool-season best, and every fish here goes back under the reach's release-only rule.",
+      "howItFishes": "Look for slack, not speed. In the wadeable Paris-to-Brantford water, pike hold in the slower runs and deeper pools and along the soft edges where current dies, ambushing baitfish that drift down the seam. The deep water above Wilkes Dam in Brantford gives them the depth and structure they want in a shallow river; the slack millpond above Penman's Dam in Paris offers the same soft holding water upstream. Cold water suits them, so spring and fall are the windows — the reach's cold-water inflows keep temperatures workable. Artificial lures and barbless hooks only, and pike are catch-and-release here.",
+      "structureDetails": [
+        {
+          "name": "Slower runs, deep pools, and the deep water above Wilkes Dam",
+          "detail": "The reach's holding water, where a river pike ambushes from current breaks and slack margins with enough depth to hold."
+        },
+        {
+          "name": "Slack backwaters / the millpond above Penman's Dam (Paris)",
+          "detail": "Soft-current water where the river pools behind the dam — pike-friendly holding water upstream in the reach."
+        }
+      ],
+      "speciesRules": [
+        {
+          "rule": "Reach special regulation: catch-and-release only (S-0 / C-0), artificial lures only, single barbless hook (Paris to Brantford boundary)",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2025-12-08"
+        },
+        {
+          "rule": "Base FMZ 16 pike season: Jan 1–Mar 31 and second Saturday in May to Dec 31; S-6 / C-2, no size limit (harvest overridden to C-0 in this reach)",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2025-12-08"
+        },
+        {
+          "rule": "Sanctuary closures: no fishing Oct 1–Nov 30 (Penman Dam to William Street Bridge) and March 1 to the Friday before the fourth Saturday in April (Paris to Brantford pedestrian bridge)",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2025-12-08"
+        }
+      ],
+      "sources": [
+        "https://www.grandriver.ca/our-watershed/fisheries-management/exceptional-waters",
+        "https://www.grandriver.ca/outdoor-recreation/fishing/fishing-rivers-and-streams/"
+      ]
+    },
+    {
+      "parentSlug": "walleye",
+      "displayName": "Walleye",
+      "tier": "strong",
+      "structure": [
+        "deep water and holes above Wilkes Dam (Brantford)",
+        "current areas and cold-water inflow near Whitemans Creek"
+      ],
+      "bestSeason": "Spring and fall, low light",
+      "bodyCopy": "Walleye live where the river gives them cover and cool. The GRCA credits the cold water bleeding in from Whitemans Creek and the springs for holding them here, and they stack in the current seams and the deeper, dimmer water. The holes above Wilkes Dam are the anchor — rubble, old structure, and depth that lets them sit off the light and slide up to feed at dawn and dusk. Work the low-light edges of the day in spring and fall. Catch-and-release only, artificial lures, single barbless hook — no exceptions on this reach.",
+      "qualitySignal": null,
+      "lede": "Walleye hold where the Grand gives them depth and cool water. The GRCA credits the cold flow bleeding in from Whitemans Creek and the springs for keeping them in this reach, and they sit in the current seams and the dim, deeper water. The holes above Wilkes Dam are the anchor — best worked at dawn and dusk, and every fish released.",
+      "howItFishes": "Fish the low light and the cool water. Walleye in the Paris-to-Brantford reach favour the deeper, dimmer water and the current areas where the cold inflow from Whitemans Creek and the springs holds temperatures down. The deep holes above Wilkes Dam in Brantford — rubble and old-dam structure — are the reliable holding water, letting fish sit off the light and slide up the seams to feed as the sun drops. Spring and fall, worked at dawn and dusk, are the prime windows. As with the bass and pike, walleye here are catch-and-release, on artificial lures and a single barbless hook.",
+      "structureDetails": [
+        {
+          "name": "Deep water and holes above Wilkes Dam (Brantford)",
+          "detail": "Rubble and old-dam structure create the depth that concentrates walleye in an otherwise shallow river."
+        },
+        {
+          "name": "Current areas and cold-water inflow near Whitemans Creek",
+          "detail": "The cooler, oxygenated flowing water the GRCA credits for supporting walleye through the reach."
+        }
+      ],
+      "speciesRules": [
+        {
+          "rule": "Reach special regulation: catch-and-release only (S-0 / C-0), artificial lures only, single barbless hook (Paris to Brantford boundary)",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2025-12-08"
+        },
+        {
+          "rule": "Base FMZ 16 walleye season: Jan 1–Mar 15 and second Saturday in May to Dec 31; S-4 / C-2, not more than 1 greater than 46 cm (harvest overridden to C-0 in this reach)",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2025-12-08"
+        },
+        {
+          "rule": "Sanctuary closures: no fishing Oct 1–Nov 30 (Penman Dam to William Street Bridge) and March 1 to the Friday before the fourth Saturday in April (Paris to Brantford pedestrian bridge)",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2025-12-08"
+        }
+      ],
+      "sources": [
+        "https://www.grandriver.ca/our-watershed/fisheries-management/exceptional-waters",
+        "https://www.grandriver.ca/outdoor-recreation/fishing/fishing-rivers-and-streams/"
+      ]
+    },
+    {
+      "parentSlug": "black-crappie",
+      "displayName": "Black Crappie",
+      "tier": "present",
+      "structure": [],
+      "bestSeason": null,
+      "bodyCopy": null,
+      "qualitySignal": null,
+      "lede": null,
+      "howItFishes": null,
+      "structureDetails": null,
+      "speciesRules": null,
+      "sources": []
+    },
+    {
+      "parentSlug": "yellow-perch",
+      "displayName": "Yellow Perch",
+      "tier": "present",
+      "structure": [],
+      "bestSeason": null,
+      "bodyCopy": null,
+      "qualitySignal": null,
+      "lede": null,
+      "howItFishes": null,
+      "structureDetails": null,
+      "speciesRules": null,
+      "sources": []
+    }
+  ],
+  "keyResources": [
+    {
+      "label": "The actual regs, straight from the source — FMZ 16, Government of Ontario",
+      "url": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16"
+    },
+    {
+      "label": "What makes the Paris-to-Brantford reach \"Exceptional Waters\" — Grand River Conservation Authority",
+      "url": "https://www.grandriver.ca/our-watershed/fisheries-management/exceptional-waters"
+    },
+    {
+      "label": "Fishing the Grand's rivers and streams — access and species — Grand River Conservation Authority",
+      "url": "https://www.grandriver.ca/outdoor-recreation/fishing/fishing-rivers-and-streams/"
+    },
+    {
+      "label": "River access and paddling put-ins around Paris — County of Brant",
+      "url": "https://www.brant.ca/recreation-and-parks/outdoor-courts-sports-and-trails/paddling/"
+    }
+  ],
+  "speciesCount": 3,
+  "lastVerified": "2026-07-20",
+  "factCheckStatus": "passed",
+  "regsGate": "passed"
+}

@@ -30,19 +30,6 @@ const sections: FaqSection[] = [
         )
       },
       {
-        question: "Who created Bite Club, and is it reliable?",
-        answer: (
-          <p>
-            Bite Club was created by Erik Lutsch, an atmospheric scientist with a PhD from the
-            University of Toronto and experience working with satellite and weather data at
-            Environment and Climate Change Canada. Forecasts use documented weather inputs and
-            deterministic rules, while lake research links its factual sources. The full process is
-            published on the <a href="/methods">Methods</a> page. It is a planning tool, not a
-            guarantee of weather, safety, or fish.
-          </p>
-        )
-      },
-      {
         question: "What lakes and areas does Bite Club cover?",
         answer: (
           <p>
@@ -282,7 +269,6 @@ export default function FaqPage() {
           How Bite Club works, what the conditions mean, and where the forecast stops. Read the{" "}
           <a href="/disclaimer">Safety Notice &amp; Disclaimer</a> before heading out.
         </p>
-        <div className="burst">Q<br />A</div>
       </section>
 
       <nav className="faq-index" aria-label="FAQ sections">

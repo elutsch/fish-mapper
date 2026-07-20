@@ -73,9 +73,8 @@ export default function AboutPage() {
             <h3>Honest About What It Knows</h3>
             <p>
               We flag where the science is solid and where it is an estimate. Fish-activity ratings
-              shift your odds rather than guarantee a catch. You can read exactly how every verdict
-              is built on the{" "}
-              <a href="/methodology">Methodology</a> page.
+              shift your odds rather than guarantee a catch. Every verdict is built from documented
+              weather inputs and deterministic rules.
             </p>
           </article>
           <article>

@@ -108,9 +108,7 @@ export default function DisclaimerPage() {
         <h2>Use means acknowledgement.</h2>
         <p>
           By using this site you acknowledge that you have read and understood this notice. If you do
-          not agree, do not rely on the information provided here. See also the{" "}
-          <a href="/methods">Methods</a> page for how forecasts are built and where the data comes
-          from.
+          not agree, do not rely on the information provided here.
         </p>
       </section>
     </main>

@@ -22,7 +22,7 @@ export function buildConditionsDashboard({ hours, verdict, pressureTrend }: Dash
   const tempLow = firstNumber(daylight.map((hour) => hour.tempMinC));
   const sunrise = representative?.sunrise;
   const sunset = representative?.sunset;
-  const grade = fishingGrade(verdict, peakWind, peakGust, pressureTrend.label);
+  const grade = fishingGrade(verdict);
   const alert = conditionsAlert(peakWind, peakGust, uvIndex, pressureTrend.label);
   const callout = gradeCallout(grade.value, pressureTrend.label);
 
@@ -37,19 +37,19 @@ export function buildConditionsDashboard({ hours, verdict, pressureTrend }: Dash
           : "Forecast air temperature"
     },
     uv: {
-      value: Number.isFinite(uvIndex) ? uvIndex.toFixed(1) : "n/a",
+      value: Number.isFinite(uvIndex) ? `${Math.round(uvIndex)}` : "n/a",
       detail: "Scale 0-11"
     },
     wind: {
-      value: `${Math.round(peakWind)} km/h`,
-      detail: `${windDirection(representative?.windDirDeg ?? 0)} · gust ${Math.round(peakGust)}`
+      value: `${Math.round(peakWind)}\nkm/h`,
+      detail: `${windDirection(representative?.windDirDeg ?? 0)} · gust ${Math.round(peakGust)} km/h`
     },
     pressure: {
-      value: representative ? `${representative.pressureHpa.toFixed(1)}` : "n/a",
-      detail: `${pressureTrend.label} · ${pressureTrend.rateHpaPer24h} hPa/24h`
+      value: representative ? `${Math.round(representative.pressureHpa)}\nhPa` : "n/a",
+      detail: `${pressureTrend.label} · ${Math.round(pressureTrend.rateHpaPer24h)} hPa/24h`
     },
     sun: {
-      value: sunrise && sunset ? `${formatClock(sunrise)}/${formatClock(sunset)}` : "n/a",
+      value: sunrise && sunset ? `${formatClock(sunrise)}\n${formatClock(sunset)}` : "n/a",
       detail: sunrise && sunset ? `${daylightDuration(sunrise, sunset)} daylight` : "Sun times unavailable"
     },
     moon: {
@@ -81,8 +81,8 @@ function conditionsAlert(
 // contradicting the alert's wind advice; leans on pressure and the overall grade.
 function gradeCallout(grade: string, pressure: PressureTrend["label"]) {
   if (pressure === "falling") return "Falling pressure trips the feed switch — fish the window before the front.";
-  if (grade === "A" || grade === "B+") return "The pieces line up today — start on your confidence water and trust it.";
-  if (grade === "D") return "A grind — slow down and pick apart the structure you know cold.";
+  if (grade === "A+") return "The pieces line up today — start on your confidence water and trust it.";
+  if (grade === "F+") return "A grind — slow down and pick apart the structure you know cold.";
   if (pressure === "rising") return "Bluebird high — go slower, go deeper, work the shade lines.";
   return "Read the water, fish the edges, and let the low-light hours do the work.";
 }
@@ -99,42 +99,26 @@ function firstNumber(values: Array<number | undefined>) {
   return values.find((value): value is number => typeof value === "number" && Number.isFinite(value));
 }
 
-function fishingGrade(
-  verdict: Verdict,
-  peakWind: number,
-  peakGust: number,
-  pressure: PressureTrend["label"]
-) {
-  const ratingScores: Record<Rating, number> = { go: 4, marginal: 2, "no-go": 0 };
-  const average =
-    (ratingScores[verdict.byCraft.powerboat.rating] +
-      ratingScores[verdict.byCraft.kayak.rating] +
-      ratingScores[verdict.byCraft.canoe.rating]) /
-    3;
-  const windPenalty = peakWind >= 25 || peakGust >= 42 ? 1 : peakWind >= 18 ? 0.5 : 0;
-  const pressureBonus = pressure === "falling" ? 0.35 : pressure === "rising" ? -0.25 : 0;
-  const score = Math.max(0, Math.min(4, average - windPenalty + pressureBonus));
-  const letter =
-    score >= 3.6
-      ? "A"
-      : score >= 3.1
-        ? "B+"
-        : score >= 2.5
-          ? "B"
-          : score >= 1.8
-            ? "C+"
-            : score >= 1.1
-              ? "C"
-              : "D";
+// Three-tier grade tied directly to the day's Prime/Marginal/Tough call:
+// any craft with a clear go is Prime (A+), otherwise any craft with a limited
+// window is Marginal (C+), otherwise the day is Tough (F+). This mirrors the
+// map's statusFromRatings so the grade and the call never disagree.
+function fishingGrade(verdict: Verdict) {
+  const ratings: Rating[] = [
+    verdict.byCraft.powerboat.rating,
+    verdict.byCraft.kayak.rating,
+    verdict.byCraft.canoe.rating
+  ];
+  const { value, detail, status } = ratings.includes("go")
+    ? { value: "A+", detail: "Prime today", status: "prime" as const }
+    : ratings.includes("marginal")
+      ? { value: "C+", detail: "Marginal today", status: "marginal" as const }
+      : { value: "F+", detail: "Tough today", status: "tough" as const };
 
   return {
-    value: letter,
-    detail:
-      letter === "A" || letter === "B+"
-        ? "Strong fishing window"
-        : letter === "B" || letter === "C+"
-          ? "Selective fishing window"
-          : "Tough fishing window",
+    value,
+    detail,
+    status,
     note: verdict.summaryMd
   };
 }

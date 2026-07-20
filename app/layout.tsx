@@ -22,9 +22,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <nav className="topnav" aria-label="Primary">
               <a href="/fishing">Home</a>
               <a href="/about">About</a>
-              <a href="/faq">FAQ</a>
-              <a href="/methods">Methods</a>
               <a href="/disclaimer">Safety</a>
+              <a href="/faq">FAQ</a>
             </nav>
             <details className="mobile-nav">
               <summary aria-label="Open navigation menu" title="Open navigation menu">
@@ -37,9 +36,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <nav className="mobile-nav-panel" aria-label="Mobile primary">
                 <a href="/fishing">Home</a>
                 <a href="/about">About</a>
-                <a href="/faq">FAQ</a>
-                <a href="/methods">Methods</a>
                 <a href="/disclaimer">Safety</a>
+                <a href="/faq">FAQ</a>
               </nav>
             </details>
           </header>
@@ -54,9 +52,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <nav className="footer-nav" aria-label="Footer">
                 <a href="/fishing">Home</a>
                 <a href="/about">About</a>
-                <a href="/faq">FAQ</a>
-                <a href="/methods">Methods</a>
                 <a href="/disclaimer">Safety</a>
+                <a href="/faq">FAQ</a>
               </nav>
             </div>
             <div className="footer-bottom">

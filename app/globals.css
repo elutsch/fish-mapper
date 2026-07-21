@@ -615,6 +615,220 @@ h3 {
   letter-spacing: 0.02em;
 }
 
+/* Global contact CTA banner — full-bleed above the footer, matching the
+   Hero / What-We-Do look (scrimmed pop-art background + .alert chip). */
+.contact-cta {
+  min-height: clamp(320px, 34vw, 440px);
+  padding: clamp(32px, 5vw, 64px) clamp(18px, 4vw, 54px);
+  display: flex;
+  align-items: flex-end;
+  border-top: 5px solid var(--ink);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 252, 232, 0.98) 0%,
+      rgba(255, 252, 232, 0.96) 30%,
+      rgba(255, 252, 232, 0.8) 52%,
+      rgba(255, 252, 232, 0.4) 74%,
+      rgba(255, 252, 232, 0) 100%
+    ),
+    url("/hero/contact-cta-bg.webp") center top/cover;
+}
+
+.contact-cta-copy {
+  max-width: min(620px, 100%);
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+}
+
+.contact-cta-copy h2 {
+  margin: 0;
+  max-width: 560px;
+  color: var(--ink);
+  font-size: clamp(40px, 5.4vw, 76px);
+  line-height: 1.02;
+  text-shadow: 3px 3px 0 rgba(255, 255, 255, 0.7);
+}
+
+.contact-cta-copy p {
+  margin: 0;
+  max-width: 520px;
+  color: #263130;
+  font-family: "Comic Neue", "Comic Sans MS", cursive;
+  font-size: clamp(16px, 1.6vw, 21px);
+  font-weight: 700;
+  line-height: 1.32;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.contact-cta-button {
+  margin-top: 4px;
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  padding: 13px 26px;
+  background: var(--gold);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: clamp(16px, 1.5vw, 20px);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: transform 0.05s ease, box-shadow 0.05s ease;
+}
+
+.contact-cta-button:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+
+.contact-cta-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+.contact-cta-button:disabled {
+  opacity: 0.6;
+  cursor: default;
+  transform: none;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+/* Contact popup form (native <dialog>) */
+.contact-modal {
+  width: min(520px, calc(100vw - 32px));
+  padding: 0;
+  border: 4px solid var(--ink);
+  border-radius: 0;
+  background: var(--paper);
+  box-shadow: 8px 9px 0 rgba(0, 0, 0, 0.34);
+  color: var(--ink);
+}
+
+.contact-modal::backdrop {
+  background: rgba(23, 23, 23, 0.62);
+}
+
+.contact-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px clamp(18px, 3vw, 26px);
+  background: var(--ink);
+  color: #fff;
+}
+
+.contact-modal-head h3 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(22px, 3vw, 30px);
+}
+
+.contact-modal-close {
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-family: inherit;
+  font-size: 30px;
+  line-height: 1;
+  padding: 0 4px;
+  cursor: pointer;
+}
+
+.contact-form,
+.contact-modal-success {
+  display: grid;
+  gap: 16px;
+  padding: clamp(18px, 3vw, 28px);
+}
+
+.contact-field {
+  display: grid;
+  gap: 6px;
+}
+
+.contact-field > span {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.contact-field input,
+.contact-field textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border: 3px solid var(--ink);
+  background: #fff;
+  color: var(--ink);
+  font-family: "Comic Neue", "Comic Sans MS", cursive;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.contact-field textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.contact-field input:focus-visible,
+.contact-field textarea:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 1px;
+}
+
+.contact-form-error {
+  margin: 0;
+  padding: 10px 12px;
+  border: 3px solid var(--no-go);
+  background: #ffe9e6;
+  color: var(--no-go);
+  font-family: "Comic Neue", "Comic Sans MS", cursive;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.contact-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.contact-form-cancel {
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  padding: 13px 22px;
+  background: #fff;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: clamp(15px, 1.4vw, 18px);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+}
+
+.contact-form-cancel:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.contact-success-title {
+  margin: 0;
+  color: var(--teal);
+  font-size: clamp(28px, 4vw, 40px);
+}
+
+.contact-modal-success p {
+  margin: 0;
+}
+
 .conditions-dashboard {
   display: grid;
   gap: 26px;
@@ -2919,6 +3133,20 @@ a.lake-card:active {
   .what-we-do,
   .what-we-do-grid {
     grid-template-columns: 1fr;
+  }
+
+  .contact-cta {
+    min-height: auto;
+    padding: clamp(28px, 8vw, 42px) clamp(16px, 5vw, 26px);
+    background:
+      linear-gradient(
+        0deg,
+        rgba(255, 252, 232, 0.95) 0%,
+        rgba(255, 252, 232, 0.72) 46%,
+        rgba(255, 252, 232, 0.28) 78%,
+        rgba(255, 252, 232, 0) 100%
+      ),
+      url("/hero/contact-cta-bg.webp") center top/cover;
   }
 
   .screen {

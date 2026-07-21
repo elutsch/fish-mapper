@@ -1,7 +1,8 @@
 import { compass } from "./format";
-import { dayGrade } from "./rating";
+import type { ActivityLevel, LaunchLevel } from "./rating";
+import { dayActivity, dayGrade, launchFromWind } from "./rating";
 import type { ForecastHour, PressureTrend, Spot, Verdict } from "./types";
-import { fetchPenaltyFor } from "./verdict/rules";
+import { fetchPenaltyFor, leewardShore } from "./verdict/rules";
 
 type DashboardInput = {
   hours: ForecastHour[];
@@ -34,23 +35,29 @@ export function buildConditionsDashboard({ hours, verdict, pressureTrend, spot }
   const precipTotal = precipByHour.reduce((sum, mm) => sum + mm, 0);
   const precipPeak = Math.max(...precipByHour, 0);
   const wetHours = precipByHour.filter((mm) => mm >= 0.2).length;
-  const cloudByHour = daylight.map((hour) => hour.cloudPct ?? 0);
-  const cloudAvg = cloudByHour.length ? cloudByHour.reduce((sum, pct) => sum + pct, 0) / cloudByHour.length : 0;
-  const grade = { ...dayGrade(daylight, pressureTrend.label, fetchPenaltyFor(spot)), note: verdict.summaryMd };
-  const alert = conditionsAlert(peakWind, peakGust, uvIndex, pressureTrend.label);
-  const callout = gradeCallout(grade.value, pressureTrend.label);
+  const fetchPenalty = fetchPenaltyFor(spot);
+  const leeShore = peakWindHour ? leewardShore(peakWindHour.windDirDeg) : "lee";
+  const note = gradeNarrative({
+    launch: launchFromWind(peakWind, peakGust, fetchPenalty).level,
+    activity: dayActivity(daylight, pressureTrend.label),
+    pressure: pressureTrend.label,
+    fetchKm: spot.maxFetchKm ?? null,
+    windDir,
+    lee: leeShore,
+    peakWind,
+    peakGust,
+    uv: uvIndex
+  });
+  const grade = { ...dayGrade(daylight, pressureTrend.label, fetchPenalty), note };
   const summary = conditionsSummary({
     tempHigh,
     tempLow,
     peakGust,
     precipTotal,
-    cloudAvg,
     pressure: pressureTrend.label
   });
 
   return {
-    alert,
-    callout,
     summary,
     temp: {
       // Daily high/low — the once-a-day values, not an hourly "current" reading.
@@ -101,30 +108,19 @@ export function buildConditionsDashboard({ hours, verdict, pressureTrend, spot }
   };
 }
 
-// A plain-English read of the day's overall conditions — sky, temperature,
-// wind, and what the pressure story means for the bite. Deliberately NOT about
-// launch windows or craft: this describes the weather, not when to be on it.
+// Plain-English read for the Quick Summary, in a fixed order so it always reads
+// well: (1) rain if forecast + temperature, (2) wind & gusts, (3) what the
+// pressure trend means for the bite.
 function conditionsSummary(input: {
   tempHigh?: number;
   tempLow?: number;
   peakGust: number;
   precipTotal: number;
-  cloudAvg: number;
   pressure: PressureTrend["label"];
 }) {
-  const { tempHigh, tempLow, peakGust, precipTotal, cloudAvg, pressure } = input;
+  const { tempHigh, tempLow, peakGust, precipTotal, pressure } = input;
 
-  const sky =
-    precipTotal >= 5
-      ? "Rainy"
-      : precipTotal >= 1
-        ? "Showery"
-        : cloudAvg < 30
-          ? "Clear"
-          : cloudAvg < 70
-            ? "Part sun"
-            : "Overcast";
-
+  // 1. Rain (only if forecast) + temperature.
   const warmth =
     typeof tempHigh !== "number"
       ? null
@@ -137,20 +133,26 @@ function conditionsSummary(input: {
             : tempHigh <= 29
               ? "warm"
               : "hot";
-
-  const tempTail =
+  const tempCore =
     typeof tempHigh === "number"
-      ? `, with a high of ${Math.round(tempHigh)}°${
+      ? `high of ${Math.round(tempHigh)}°${
           typeof tempLow === "number" ? ` and a low of ${Math.round(tempLow)}°` : ""
         }`
-      : "";
+      : null;
+  const rain = precipTotal >= 5 ? "Rainy" : precipTotal >= 1 ? "Showery" : null;
 
-  const skyAndTemp = warmth
-    ? `${sky} and ${warmth}${tempTail}.`
-    : `${sky} conditions today${tempTail}.`;
+  const opener =
+    warmth && tempCore
+      ? rain
+        ? `${rain} and ${warmth}, with a ${tempCore}.`
+        : `${warmth[0].toUpperCase()}${warmth.slice(1)}, with a ${tempCore}.`
+      : rain
+        ? `${rain} through the day.`
+        : "Settled conditions today.";
 
+  // 2. Wind & gusts.
   const gust = Math.round(peakGust);
-  const windClause =
+  const wind =
     peakGust < 20
       ? "Winds stay light"
       : peakGust < 35
@@ -159,41 +161,72 @@ function conditionsSummary(input: {
           ? `Breezy, gusts to ${gust} km/h`
           : `Windy, gusts to ${gust} km/h`;
 
-  const pressureClause =
+  // 3. Pressure trend.
+  const pressureLine =
     pressure === "falling"
-      ? "falling pressure often fires up the bite"
+      ? "Falling pressure often fires up the bite"
       : pressure === "rising"
-        ? "rising pressure can make for a slower, pickier bite"
-        : "steady pressure should keep the bite consistent";
+        ? "Rising pressure can make for a slower, pickier bite"
+        : "Steady pressure should keep the bite consistent";
 
-  return `${skyAndTemp} ${windClause} — ${pressureClause}.`;
+  return `${opener} ${wind}. ${pressureLine}.`;
 }
 
-// The single most relevant watch-out for the day, framed as a caution. Ordered
-// hard hazards first (gust, wind), then sun, then the pressure story.
-function conditionsAlert(
-  peakWind: number,
-  peakGust: number,
-  uvIndex: number,
-  pressure: PressureTrend["label"]
-) {
-  if (peakGust >= 45) return `Gusts to ${Math.round(peakGust)} km/h — tuck into sheltered water.`;
-  if (peakWind >= 25) return `Wind up to ${Math.round(peakWind)} km/h — the lee shore is your friend.`;
-  if (uvIndex >= 7) return `UV peaks near ${Math.round(uvIndex)} midday — shade up and lean on the low-light hours.`;
-  if (pressure === "falling") return "Pressure's sliding — fish it hard before the front moves in.";
-  if (pressure === "rising") return "Pressure's climbing — expect a slower, pickier bite.";
-  if (uvIndex >= 6) return "Bright midday sun — the bite favors dawn and dusk.";
-  return "Light wind, steady pressure — no excuses today.";
-}
+// The grade narrative, in a fixed order: (1) boating conditions from the day's
+// worst-case launch read, naming fetch/wind/direction; (2) fishing conditions
+// from the typical fish activity + the pressure driver; (3) one concluding
+// tactic for how to fish the lake.
+function gradeNarrative(input: {
+  launch: LaunchLevel;
+  activity: ActivityLevel;
+  pressure: PressureTrend["label"];
+  fetchKm: number | null;
+  windDir: string | null;
+  lee: string;
+  peakWind: number;
+  peakGust: number;
+  uv: number;
+}) {
+  const { launch, activity, pressure, fetchKm, windDir, lee, peakWind, peakGust, uv } = input;
+  const fetch = fetchKm ? `${fetchKm.toFixed(1)} km` : "open water";
+  const wind = Math.round(peakWind);
+  const gust = Math.round(peakGust);
+  const dir = windDir ?? "the prevailing wind";
 
-// The tactical edge for the day — where to point your effort. Kept from
-// contradicting the alert's wind advice; leans on pressure and the overall grade.
-function gradeCallout(grade: string, pressure: PressureTrend["label"]) {
-  if (pressure === "falling") return "Falling pressure trips the feed switch — fish the window before the front.";
-  if (grade === "A+") return "The pieces line up today — start on your confidence water and trust it.";
-  if (grade === "F+") return "A grind — slow down and pick apart the structure you know cold.";
-  if (pressure === "rising") return "Bluebird high — go slower, go deeper, work the shade lines.";
-  return "Read the water, fish the edges, and let the low-light hours do the work.";
+  const boating =
+    launch === "all-clear"
+      ? `Easy water — light ${dir} winds keep ${fetch} of fetch calm and controllable.`
+      : launch === "fishable"
+        ? `Boatable but breezy — ${wind} km/h from the ${dir} over ${fetch} of fetch builds some chop; the ${lee} shore stays cleanest.`
+        : launch === "caution"
+          ? `Choppy — gusts to ${gust} km/h drive ${fetch} of fetch, so shelter on the ${lee} shore and keep runs short.`
+          : `Too rough to launch — ${gust} km/h gusts across ${fetch} of fetch push the whole lake past a safe margin.`;
+
+  const driver =
+    pressure === "falling"
+      ? "a falling barometer often trips a pre-front feed"
+      : pressure === "rising"
+        ? "the rising barometer leans toward a pickier bite"
+        : uv >= 7
+          ? "with bright sun, dawn and dusk are your windows"
+          : "steady pressure keeps it predictable";
+  const fishing =
+    activity === "maximum"
+      ? `The bite should be firing — ${driver}.`
+      : activity === "high"
+        ? `Good bite potential — ${driver}.`
+        : activity === "fair"
+          ? `A middling bite — ${driver}.`
+          : `Slow bite likely — ${driver}.`;
+
+  const tactic =
+    launch === "caution" || launch === "do-not-launch"
+      ? `Fish the ${lee} shore where wind stacks bait and keep it tight to cover.`
+      : pressure === "falling"
+        ? "Get out early and fish hard before the front."
+        : "Work the shoreline edges and lean on the low-light hours.";
+
+  return `${boating} ${fishing} ${tactic}`;
 }
 
 function nearestHour(hours: ForecastHour[], targetHour: number) {

@@ -67,11 +67,22 @@ function gustBand(gust: number) {
   return 0;
 }
 
-export function launchRead(hour: ForecastHour, fetchPenalty = 0) {
-  const wind = hour.windKmh + fetchPenalty;
-  const gust = hour.gustKmh + fetchPenalty * 1.4;
+export function launchFromWind(windKmh: number, gustKmh: number, fetchPenalty = 0) {
+  const wind = windKmh + fetchPenalty;
+  const gust = gustKmh + fetchPenalty * 1.4;
   const severity = Math.max(windBand(wind), gustBand(gust));
   return { severity, ...LAUNCH_LEVELS[severity] };
+}
+
+export function launchRead(hour: ForecastHour, fetchPenalty = 0) {
+  return launchFromWind(hour.windKmh, hour.gustKmh, fetchPenalty);
+}
+
+// Typical fish activity over the day — the average hourly rank mapped to a level.
+export function dayActivity(hours: ForecastHour[], pressure: PressureTrend["label"]): ActivityLevel {
+  const ranks = hours.map((hour) => ACTIVITY_RANK[fishActivity(hour, pressure).level]);
+  const average = ranks.length ? ranks.reduce((sum, rank) => sum + rank, 0) / ranks.length : 1;
+  return average < 1.5 ? "low" : average < 2.5 ? "fair" : average < 3.5 ? "high" : "maximum";
 }
 
 // Day grade: per daylight hour, average the Fish Activity rank (1–4) with the

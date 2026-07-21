@@ -109,7 +109,6 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
                 <span>Quick Summary</span>
                 <p>{quickSummary}</p>
               </div>
-              <div className="condition-alert">Heads up — {dashboard.alert}</div>
             </div>
             <div className="conditions-grid">
               <DashboardMetric label="Air Temp" value={dashboard.temp.value} detail={dashboard.temp.detail} />
@@ -131,10 +130,6 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
             <div>
               <span>{dashboard.grade.detail}</span>
               <p>{dashboard.grade.note}</p>
-            </div>
-            <div className="grade-callout">
-              <span>The Edge</span>
-              <p>{dashboard.callout}</p>
             </div>
             <div className="grade-actions" aria-label="Fishing dashboard actions">
               <a href="#conditions">Hour by Hour</a>
@@ -164,12 +159,6 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
                     <h3>{craftLabels[craft]}</h3>
                     <RatingBadge rating={craftVerdict.rating} />
                   </div>
-                  {craftVerdict.bestWindow ? (
-                    <div>
-                      <div className="muted">Best window</div>
-                      <div className="best-window">{craftVerdict.bestWindow}</div>
-                    </div>
-                  ) : null}
                   <p>{craftVerdict.note}</p>
                 </article>
               );

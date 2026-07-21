@@ -1,8 +1,8 @@
 import type { ForecastHour, PressureTrend, Spot } from "../types";
 import { fetchOpenMeteoForecast } from "./openMeteo";
 
-export async function fetchForecastSnapshot(spot: Spot) {
-  return fetchOpenMeteoForecast(spot);
+export async function fetchForecastSnapshot(spot: Spot, opts: { fresh?: boolean } = {}) {
+  return fetchOpenMeteoForecast(spot, opts);
 }
 
 export function hoursForDate(hours: ForecastHour[], validFor: string) {

@@ -1,15 +1,29 @@
+import { revalidatePath, revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 import { spots } from "@/lib/spots";
 import { refreshSnapshot } from "@/lib/snapshot";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+// Refreshing every lake's forecast can take longer than the default budget; Hobby
+// allows up to 60s.
+export const maxDuration = 60;
 
+// Once-daily job (Vercel Cron, ~00:01 America/Toronto). Two steps, in order:
+//   1. Pull fresh forecasts into KV for every lake (server-side; no per-user calls).
+//   2. Revalidate the static conditions pages so they regenerate ONCE from the new
+//      KV data and are then served static from the CDN for the rest of the day.
+// Naturally idempotent: refreshSnapshot overwrites the day's KV key, so re-running
+// is safe.
 export async function GET(request: Request) {
   const authHeader = request.headers.get("authorization");
   if (process.env.CRON_SECRET && authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
+
+  // Bust the cached forecast data so any fall-through page render after this run also
+  // pulls fresh (refreshSnapshot itself already bypasses the cache via fresh: true).
+  revalidateTag("forecast");
 
   const results = [];
 
@@ -30,8 +44,16 @@ export async function GET(request: Request) {
     }
   }
 
+  // Purge the statically-cached conditions pages. Passing the dynamic route pattern
+  // with "page" revalidates every instance of that route (all lakes / all species).
+  const revalidated = ["/fishing", "/[waterbody]/fishing", "/[waterbody]/fishing/[species]"];
+  revalidatePath("/fishing");
+  revalidatePath("/[waterbody]/fishing", "page");
+  revalidatePath("/[waterbody]/fishing/[species]", "page");
+
   return NextResponse.json({
     generatedAt: new Date().toISOString(),
+    revalidated,
     results
   });
 }

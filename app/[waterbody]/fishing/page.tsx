@@ -21,7 +21,8 @@ type PageProps = {
   params: Promise<{ waterbody: string }>;
 };
 
-export const revalidate = 21600;
+// Fully static; regenerated once daily by the /api/cron/fishing job (revalidatePath).
+export const revalidate = false;
 
 const crafts: Craft[] = ["powerboat", "kayak", "canoe"];
 

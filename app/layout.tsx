@@ -1,14 +1,28 @@
 import type { Metadata } from "next";
 import { ContactCta } from "@/app/components/ContactCta";
+import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Bite Club",
     template: "%s | Bite Club"
   },
   description:
-    "Bite Club gives Southern Ontario anglers on-water fishing condition verdicts by powerboat, kayak, and canoe."
+    "Bite Club gives Southern Ontario anglers on-water fishing condition verdicts by powerboat, kayak, and canoe.",
+  applicationName: SITE_NAME,
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    locale: "en_CA",
+    url: SITE_URL,
+    images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: SITE_NAME }]
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [DEFAULT_OG_IMAGE]
+  }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

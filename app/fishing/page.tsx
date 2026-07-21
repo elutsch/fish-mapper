@@ -10,9 +10,10 @@ import type { MapSpotStatus } from "@/lib/spots";
 import type { Spot, Verdict } from "@/lib/types";
 
 export const metadata: Metadata = {
-  title: "Hot Lakes Today",
+  title: "Today's Fishing Conditions for Southern Ontario Lakes",
   description:
-    "Weekend fishing condition pages for powerboat, kayak, and canoe anglers on selected Southern Ontario waterbodies."
+    "Today's fishing and boating conditions for 20 Southern Ontario lakes and rivers — Prime, Marginal, or Tough calls with separate powerboat, kayak, and canoe launch verdicts from wind, fetch, and pressure.",
+  alternates: { canonical: "/fishing" }
 };
 
 export const revalidate = 21600;
@@ -40,9 +41,9 @@ export default async function FishingIndexPage() {
           <span className="alert">What We Do</span>
           <h2 id="what-we-do-title">Find the best bite window before you launch.</h2>
           <p>
-            Bite Club turns lake profiles and today&apos;s forecast into plain-language fishing calls
-            for Southern Ontario launches. Start with the map, pick a waterbody, then open the lake
-            page for the conditions behind the call.
+            Bite Club turns lake profiles and today&apos;s forecast into plain-language fishing and
+            boating condition calls for Southern Ontario launches. Start with the map, pick a
+            waterbody, then open the lake page for the conditions behind the call.
           </p>
         </div>
         <div className="what-we-do-grid">

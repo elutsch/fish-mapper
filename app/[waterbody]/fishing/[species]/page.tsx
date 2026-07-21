@@ -4,6 +4,7 @@ import { getSpeciesCard } from "@/app/components/SpeciesCards";
 import { getLakeProfile, lakeProfiles } from "@/lib/lakeProfiles";
 import type { LakeProfile, LakeProfileSpecies } from "@/lib/lakeProfiles/types";
 import { regsSummary } from "@/lib/format";
+import { absoluteUrl, speciesIsIndexable } from "@/lib/seo";
 import { formatSpeciesName, speciesPathSegment } from "@/lib/species";
 
 type PageProps = {
@@ -30,11 +31,26 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!profile || !species) return {};
 
   const speciesName = formatSpeciesName(species.displayName);
+  const canonical = `/${profile.slug}/fishing/${speciesPathSegment(species.displayName)}`;
+  const title = `${speciesName} Fishing at ${profile.lake}`;
+  const description = truncateForMeta(
+    species.lede ?? species.bodyCopy ?? `${speciesName} fishing profile for ${profile.lake}.`,
+    200
+  );
+  // Thin (present-tier) species pages render noindex,follow to keep them out of the
+  // index while still passing link equity; destination/strong pages stay indexable.
+  const indexable = speciesIsIndexable(species.tier);
 
   return {
-    title: `${speciesName} at ${profile.lake}`,
-    description:
-      species.lede ?? species.bodyCopy ?? `${speciesName} fishing profile for ${profile.lake}.`
+    title,
+    description,
+    alternates: { canonical },
+    robots: indexable ? undefined : { index: false, follow: true },
+    openGraph: {
+      title: `${title} | Bite Club`,
+      description,
+      url: canonical
+    }
   };
 }
 
@@ -125,8 +141,27 @@ export default async function LakeSpeciesPage({ params }: PageProps) {
     });
   }
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Fishing Conditions", item: absoluteUrl("/fishing") },
+      { "@type": "ListItem", position: 2, name: profile.lake, item: absoluteUrl(`/${profile.slug}/fishing`) },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: `${speciesName} Fishing`,
+        item: absoluteUrl(`/${profile.slug}/fishing/${speciesPathSegment(species.displayName)}`)
+      }
+    ]
+  };
+
   return (
     <main className="screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <section className="lake-profile profile-front" aria-label={`${speciesName} at ${profile.lake}`}>
         <div className="profile-hero profile-hero-front">
           <div>
@@ -185,6 +220,15 @@ function FactPill({ label, value }: { label: string; value: string }) {
 
 function findSpecies(profile: LakeProfile, slug: string) {
   return profile.species.find((species) => speciesPathSegment(species.displayName) === slug);
+}
+
+// Trim species copy to a meta-description-friendly length at a word boundary.
+function truncateForMeta(text: string, max: number) {
+  const clean = text.trim();
+  if (clean.length <= max) return clean;
+  const cut = clean.slice(0, max);
+  const lastSpace = cut.lastIndexOf(" ");
+  return `${cut.slice(0, lastSpace > 0 ? lastSpace : max).replace(/[\s,.—-]+$/, "")}…`;
 }
 
 function rankLabel(tier: LakeProfileSpecies["tier"]) {

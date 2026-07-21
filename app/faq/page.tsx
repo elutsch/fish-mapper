@@ -4,8 +4,21 @@ import type { ReactNode } from "react";
 export const metadata: Metadata = {
   title: "Frequently Asked Questions",
   description:
-    "Straight answers about Bite Club fishing forecasts, lake coverage, craft safety, access, and Ontario fishing regulations."
+    "Straight answers about Bite Club fishing forecasts, lake coverage, craft safety, access, and Ontario fishing regulations.",
+  alternates: { canonical: "/faq" }
 };
+
+// Flatten a JSX answer into plain text so the FAQPage schema stays a single source
+// of truth with the rendered content (recurses through <p>, <strong>, <a>, etc.).
+function nodeToText(node: ReactNode): string {
+  if (node == null || typeof node === "boolean") return "";
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(nodeToText).join("");
+  if (typeof node === "object" && "props" in node) {
+    return nodeToText((node as { props?: { children?: ReactNode } }).props?.children);
+  }
+  return "";
+}
 
 type FaqSection = {
   id: string;
@@ -283,8 +296,24 @@ const sections: FaqSection[] = [
 ];
 
 export default function FaqPage() {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: sections.flatMap((section) =>
+      section.items.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: nodeToText(item.answer).replace(/\s+/g, " ").trim()
+        }
+      }))
+    )
+  };
+
   return (
     <main className="screen methodology-page faq-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <section className="hero poster-hero methodology-hero faq-hero">
         <span className="alert">FAQ</span>
         <h1>Straight Answers</h1>

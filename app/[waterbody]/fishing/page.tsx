@@ -1,16 +1,20 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { LakeImage } from "@/app/components/LakeImage";
+import { LaunchMap } from "@/app/components/LaunchMap";
 import { RatingBadge } from "@/app/components/RatingBadge";
 import { getSpeciesCard, SpeciesCards } from "@/app/components/SpeciesCards";
 import { buildConditionsDashboard } from "@/lib/conditions";
-import { craftLabels, formatDate, formatHour, regsSummary } from "@/lib/format";
+import { compass, craftLabels, formatCoords, formatDate, formatHour, regsSummary } from "@/lib/format";
 import { getLakeProfile } from "@/lib/lakeProfiles";
 import type { LakeProfile } from "@/lib/lakeProfiles/types";
+import { fishActivity, launchRead } from "@/lib/rating";
 import { formatSpeciesName, speciesPathSegment } from "@/lib/species";
 import { getOrCreateSnapshot } from "@/lib/snapshot";
 import { getSpot, spots } from "@/lib/spots";
-import type { Craft, ForecastHour } from "@/lib/types";
+import type { Craft, ForecastHour, PressureTrend, Spot } from "@/lib/types";
+import { fetchPenaltyFor } from "@/lib/verdict/rules";
+import type { WeekDay } from "@/lib/week";
 
 type PageProps = {
   params: Promise<{ waterbody: string }>;
@@ -44,14 +48,15 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
   if (!spot) notFound();
 
   const profile = getLakeProfile(spot.id);
-  const { forecast, pressureTrend, verdict } = await getOrCreateSnapshot(spot);
+  const { forecast, pressureTrend, verdict, week } = await getOrCreateSnapshot(spot);
   const conditionRows = forecast
     .filter((hour) => {
       const localHour = Number(hour.time.slice(11, 13));
       return localHour >= 5 && localHour <= 21;
     })
     .filter((_, index) => index % 2 === 0);
-  const dashboard = buildConditionsDashboard({ hours: forecast, verdict, pressureTrend });
+  const dashboard = buildConditionsDashboard({ hours: forecast, verdict, pressureTrend, spot });
+  const fetchPenalty = fetchPenaltyFor(spot);
   const quickSummary = dashboard.summary;
   const publicCaveats = publicFacingCaveats(verdict.caveats);
 
@@ -106,7 +111,6 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
                 <span>Quick Summary</span>
                 <p>{quickSummary}</p>
               </div>
-              <div className="condition-alert">Heads up — {dashboard.alert}</div>
             </div>
             <div className="conditions-grid">
               <DashboardMetric label="Air Temp" value={dashboard.temp.value} detail={dashboard.temp.detail} />
@@ -128,10 +132,6 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
             <div>
               <span>{dashboard.grade.detail}</span>
               <p>{dashboard.grade.note}</p>
-            </div>
-            <div className="grade-callout">
-              <span>The Edge</span>
-              <p>{dashboard.callout}</p>
             </div>
             <div className="grade-actions" aria-label="Fishing dashboard actions">
               <a href="#conditions">Hour by Hour</a>
@@ -161,12 +161,6 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
                     <h3>{craftLabels[craft]}</h3>
                     <RatingBadge rating={craftVerdict.rating} />
                   </div>
-                  {craftVerdict.bestWindow ? (
-                    <div>
-                      <div className="muted">Best window</div>
-                      <div className="best-window">{craftVerdict.bestWindow}</div>
-                    </div>
-                  ) : null}
                   <p>{craftVerdict.note}</p>
                 </article>
               );
@@ -181,13 +175,20 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
           </div>
           <div className="hourly-grid">
             {conditionRows.map((hour) => (
-              <HourlyConditionCard key={hour.time} hour={hour} hours={conditionRows} verdict={verdict} />
+              <HourlyConditionCard
+                key={hour.time}
+                hour={hour}
+                pressure={pressureTrend.label}
+                fetchPenalty={fetchPenalty}
+              />
             ))}
           </div>
         </section>
 
+        <WeeklyForecast days={week} />
+
         {profile ? (
-          <LakeProfileSections profile={profile} caveats={publicCaveats} />
+          <LakeProfileSections profile={profile} spot={spot} caveats={publicCaveats} />
         ) : (
           <section className="section lake-card detail-card">
             <LakeImage spotId={spot.id}>
@@ -247,26 +248,38 @@ function DashboardMetric({
 
 function HourlyConditionCard({
   hour,
-  hours,
-  verdict
+  pressure,
+  fetchPenalty
 }: {
   hour: ForecastHour;
-  hours: ForecastHour[];
-  verdict: { byCraft: Record<Craft, { rating: string; bestWindow?: string }> };
+  pressure: PressureTrend["label"];
+  fetchPenalty: number;
 }) {
-  const potential = bitePotential(hour);
-  const fishability = hourFishability(hour, hours, verdict);
-  const hasStormRisk = hour.precipMm >= 8 || hour.gustKmh >= 50;
-  const isStorm = hour.precipMm >= 8;
-  const isFishOn = potential.level === "maximum" && fishability.level === "go";
+  const activity = fishActivity(hour, pressure);
+  const launch = launchRead(hour, fetchPenalty);
+
+  const storm = hour.precipMm >= 8;
+  const windy = launch.severity === 3;
+  const fishOn = launch.severity === 0 && activity.level === "maximum";
+  // One badge per card, highest hazard first: Storm > Windy > Fish On.
+  const callout = storm
+    ? { kind: "storm", label: "Storm!" }
+    : windy
+      ? { kind: "windy", label: "Windy!" }
+      : fishOn
+        ? { kind: "fishon", label: "Fish On!" }
+        : null;
+
   const tone =
-    fishability.level === "no-go"
+    storm || launch.severity === 3
       ? "storm"
-      : potential.level === "maximum"
+      : activity.level === "maximum"
         ? "prime"
-        : potential.level === "high"
+        : activity.level === "high"
           ? "active"
           : "base";
+
+  const pressureWord = pressure === "falling" ? "Falling" : pressure === "rising" ? "Rising" : "Steady";
 
   return (
     <article className={`hour-card hour-card-${tone}`}>
@@ -277,33 +290,88 @@ function HourlyConditionCard({
           <span>Temp</span>
         </div>
       </div>
+      <div className="hour-card-metrics hour-card-metrics-three">
+        <div>
+          <span>UV</span>
+          <b>{hour.uvIndex === undefined ? "n/a" : Math.round(hour.uvIndex)}</b>
+        </div>
+        <div>
+          <span>Precip</span>
+          <b>{hour.precipMm.toFixed(1)}mm</b>
+        </div>
+        <div>
+          <span>Pressure</span>
+          <b>{pressureWord}</b>
+        </div>
+      </div>
+      <div className={`bite-meter activity-${activity.level}`}>
+        <span>Fish Activity</span>
+        <b>{activity.label}</b>
+      </div>
       <div className="hour-card-metrics">
         <div>
-          <span>{hasStormRisk ? "Precip" : "UV"}</span>
-          <b>
-            {hasStormRisk
-              ? `${hour.precipMm.toFixed(1)}mm`
-              : hour.uvIndex === undefined
-                ? "n/a"
-                : Math.round(hour.uvIndex)}
-          </b>
+          <span>Wind · {compass(hour.windDirDeg)}</span>
+          <b>{Math.round(hour.windKmh)}kph</b>
         </div>
         <div>
-          <span>{hour.gustKmh >= 45 ? "Gust" : "Wind"}</span>
-          <b>{Math.round(hour.gustKmh >= 45 ? hour.gustKmh : hour.windKmh)}kph</b>
+          <span>Gust</span>
+          <b>{Math.round(hour.gustKmh)}kph</b>
         </div>
       </div>
-      <div className="bite-meter">
-        <span>Fish Activity</span>
-        <b>{potential.label}</b>
-      </div>
-      <div className={`fishability-meter fishability-${fishability.level}`}>
+      <div className={`fishability-meter launch-${launch.level}`}>
         <span>Launch Read</span>
-        <b>{fishability.label}</b>
+        <b>{launch.label}</b>
       </div>
-      {isStorm ? <em>Storm!</em> : null}
-      {isFishOn ? <i>Fish On!</i> : null}
+      {callout ? <b className={`hour-callout hour-callout-${callout.kind}`}>{callout.label}</b> : null}
     </article>
+  );
+}
+
+function WeeklyForecast({ days }: { days: WeekDay[] }) {
+  if (days.length === 0) return null;
+
+  const tierLabel = { prime: "Prime", marginal: "Marginal", tough: "Tough" } as const;
+  const launchLabel = {
+    "all-clear": "All Clear",
+    fishable: "Fishable",
+    caution: "Caution",
+    "do-not-launch": "Do Not Launch"
+  } as const;
+  const activityLabel = { low: "Low", fair: "Fair", high: "High", maximum: "Maximum" } as const;
+  const weekday = (date: string, part: "weekday" | "monthDay") =>
+    new Intl.DateTimeFormat("en-CA", {
+      timeZone: "America/Toronto",
+      ...(part === "weekday" ? { weekday: "short" } : { month: "short", day: "numeric" })
+    }).format(new Date(`${date}T12:00:00-04:00`));
+
+  return (
+    <section className="week-section" aria-label="Seven-day fishing outlook">
+      <div className="hourly-title">
+        <h2>Weekly Outlook</h2>
+        <span />
+      </div>
+      <div className="week-grid">
+        {days.map((day, index) => (
+          <article key={day.date} className={`week-day week-day-${day.tier}`}>
+            <span className="week-date">
+              <b>{index === 0 ? "Today" : weekday(day.date, "weekday")}</b>
+              <em>{weekday(day.date, "monthDay")}</em>
+            </span>
+            <b className="week-tier">{tierLabel[day.tier]}</b>
+            <div className="week-breakdown">
+              <div>
+                <span>Launch</span>
+                <strong>{launchLabel[day.launch]}</strong>
+              </div>
+              <div>
+                <span>Bite</span>
+                <strong>{activityLabel[day.activity]}</strong>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -355,7 +423,24 @@ function LakeProfileIntro({
   );
 }
 
-function LakeProfileSections({ profile, caveats }: { profile: LakeProfile; caveats: string[] }) {
+function LakeProfileSections({
+  profile,
+  spot,
+  caveats
+}: {
+  profile: LakeProfile;
+  spot: Spot;
+  caveats: string[];
+}) {
+  // Pin the mapped access facility (spot.lat/lng), not the profile's lake point.
+  const { lat, lng } = spot;
+  // Prefer the access point's name/address for the label; coordinates always show.
+  const primaryLaunch = profile.launches[0];
+  const dash = primaryLaunch?.name.match(/^(.*?)\s+[—–]\s+(.+)$/);
+  const launchPlace = dash ? dash[1] : (primaryLaunch?.name ?? null);
+  const launchAddress = dash ? dash[2] : null;
+  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+
   return (
     <section className="lake-profile" aria-label={`${profile.lake} supporting profile details`}>
       <section className="profile-panel">
@@ -412,6 +497,20 @@ function LakeProfileSections({ profile, caveats }: { profile: LakeProfile; cavea
         <div className="profile-section-title">
           <span>03</span>
           <h3>Access notes</h3>
+        </div>
+        <div className="launch-map-block">
+          <LaunchMap lat={lat} lng={lng} label={`Approximate launch access for ${profile.lake}`} />
+          <div className="launch-map-meta">
+            {launchPlace ? <strong>{launchPlace}</strong> : null}
+            {launchAddress ? <p className="access-address">{launchAddress}</p> : null}
+            <p className="launch-map-coords">{formatCoords(lat, lng)}</p>
+            <p className="launch-map-caption">
+              Approximate access area — confirm launchability and hours before you go.
+            </p>
+            <a className="button launch-directions" href={directionsUrl} target="_blank" rel="noreferrer">
+              Get Directions
+            </a>
+          </div>
         </div>
         <div className="access-grid">
           {profile.launches.map((launch) => {
@@ -530,55 +629,6 @@ function clarityLabel(clarity: string | null) {
   if (clarity === "stained") return "Stained";
   if (clarity === "turbid") return "Murky";
   return "Unverified";
-}
-
-function bitePotential(hour: ForecastHour) {
-  const uv = hour.uvIndex ?? 0;
-  const windScore = hour.windKmh <= 20 ? 2 : hour.windKmh <= 28 ? 1 : 0;
-  const gustPenalty = hour.gustKmh >= 52 ? 2 : hour.gustKmh >= 40 ? 1 : 0;
-  const precipPenalty = hour.precipMm >= 8 ? 2 : hour.precipMm >= 2 ? 1 : 0;
-  const uvBonus = uv >= 2 && uv <= 7 ? 1 : 0;
-  const score = windScore + uvBonus - gustPenalty - precipPenalty;
-
-  if (score >= 3) return { label: "Maximum", level: "maximum" };
-  if (score === 2) return { label: "High", level: "high" };
-  if (score === 1) return { label: "Fair", level: "fair" };
-  if (score === 0) return { label: "Low", level: "low" };
-  return { label: "Risky", level: "risky" };
-}
-
-function hourFishability(
-  hour: ForecastHour,
-  hours: ForecastHour[] = [],
-  verdict?: { byCraft: Record<Craft, { rating: string; bestWindow?: string }> }
-) {
-  if (hour.precipMm >= 8 || hour.gustKmh >= 50) {
-    return { label: "Do Not Launch", level: "no-go" as const };
-  }
-  const highImpactDay = hours.some((entry) => entry.precipMm >= 8 || entry.gustKmh >= 50);
-  const powerboatWindow = verdict?.byCraft.powerboat.bestWindow;
-  const powerboatCanLaunch = verdict?.byCraft.powerboat.rating !== "no-go";
-  if (highImpactDay && powerboatWindow && !isInWindow(hour.time, powerboatWindow)) {
-    return {
-      label: powerboatCanLaunch ? "After Window" : "Do Not Launch",
-      level: powerboatCanLaunch ? ("marginal" as const) : ("no-go" as const)
-    };
-  }
-  if (hour.gustKmh >= 42 || hour.windKmh >= 24 || hour.precipMm >= 3) {
-    return { label: "Sheltered Only", level: "marginal" as const };
-  }
-  return { label: "Fishable", level: "go" as const };
-}
-
-function isInWindow(time: string, window: string) {
-  const match = /^(\d{2}):(\d{2})-(\d{2}):(\d{2})$/.exec(window);
-  if (!match) return true;
-  const hour = Number(time.slice(11, 13));
-  const minute = Number(time.slice(14, 16));
-  const current = hour * 60 + minute;
-  const start = Number(match[1]) * 60 + Number(match[2]);
-  const end = Number(match[3]) * 60 + Number(match[4]);
-  return current >= start && current <= end;
 }
 
 function publicFacingCaveats(caveats: string[]) {

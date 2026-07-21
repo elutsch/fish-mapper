@@ -34,7 +34,7 @@ export async function fetchOpenMeteoForecast(spot: Spot): Promise<ForecastHour[]
     models: "gem_seamless",
     wind_speed_unit: "kmh",
     timezone: "America/Toronto",
-    forecast_days: "3",
+    forecast_days: "7",
     past_days: "2"
   });
 
@@ -89,7 +89,7 @@ async function fetchUvForecast(spot: Spot) {
     hourly: "uv_index",
     daily: "uv_index_max",
     timezone: "America/Toronto",
-    forecast_days: "3"
+    forecast_days: "7"
   });
 
   const response = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {

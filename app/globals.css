@@ -1236,6 +1236,15 @@ h3 {
   line-height: 1.05;
 }
 
+.hour-card-metrics-three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.hour-card-metrics-three b {
+  font-size: clamp(17px, 2vw, 24px);
+}
+
 .bite-meter {
   min-height: 56px;
   padding: 16px 18px;
@@ -1271,25 +1280,16 @@ h3 {
   text-align: right;
 }
 
-.fishability-marginal b {
+.launch-fishable b {
+  background: #2f737c;
+}
+
+.launch-caution b {
   background: var(--marginal);
 }
 
-.fishability-no-go b {
+.launch-do-not-launch b {
   background: var(--no-go);
-}
-
-.hour-card-storm .bite-meter,
-.hour-card-prime .bite-meter {
-  color: #fff;
-  background:
-    radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1.35px),
-    var(--ink);
-}
-
-.hour-card-storm .bite-meter span,
-.hour-card-prime .bite-meter span {
-  color: #fff;
 }
 
 .bite-meter b {
@@ -1301,22 +1301,25 @@ h3 {
   text-transform: uppercase;
 }
 
-.hour-card-base .bite-meter b {
+/* Fish Activity badge colored by level, low → maximum. */
+.activity-low b {
+  background: #6b726e;
+}
+
+.activity-fair b {
   background: #a94c00;
 }
 
-.hour-card-prime .bite-meter b,
-.hour-card-active i {
+.activity-high b {
+  background: var(--teal);
+}
+
+.activity-maximum b {
   background: #527e17;
 }
 
-.hour-card-storm .bite-meter b,
-.hour-card-storm em {
-  background: #d9261d;
-}
-
-.hour-card em,
-.hour-card i {
+/* One rotated corner badge; kind sets the colour. */
+.hour-callout {
   position: absolute;
   right: -8px;
   bottom: -2px;
@@ -1324,17 +1327,21 @@ h3 {
   color: #fff;
   border: 3px solid var(--ink);
   box-shadow: 3px 3px 0 var(--ink);
+  font-family: "Courier New", monospace;
   font-size: 18px;
-  font-style: normal;
   text-transform: uppercase;
   transform: rotate(-24deg);
 }
 
-.hour-card em {
+.hour-callout-storm {
   background: #d9261d;
 }
 
-.hour-card i {
+.hour-callout-windy {
+  background: #2563a8;
+}
+
+.hour-callout-fishon {
   background: #527e17;
 }
 
@@ -1406,6 +1413,166 @@ h3 {
   overflow: hidden;
   background: #dfe9e3;
   box-shadow: 4px 4px 0 var(--ink);
+}
+
+.week-section {
+  display: grid;
+  gap: clamp(14px, 2vw, 22px);
+}
+
+.week-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.week-day {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 14px 12px;
+  border: 3px solid var(--ink);
+  box-shadow: 4px 5px 0 var(--ink);
+  background: #fff;
+}
+
+.week-date {
+  display: grid;
+  gap: 3px;
+}
+
+.week-date b {
+  font-size: 17px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.week-date em {
+  font-family: "Courier New", monospace;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 700;
+  color: #596361;
+  text-transform: uppercase;
+}
+
+.week-tier {
+  justify-self: start;
+  padding: 6px 10px;
+  color: #fff;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.week-day-prime .week-tier {
+  background: #527e17;
+}
+
+.week-day-marginal .week-tier {
+  background: #a94c00;
+}
+
+.week-day-tough .week-tier {
+  background: var(--no-go);
+}
+
+.week-breakdown {
+  display: grid;
+  gap: 8px;
+}
+
+.week-breakdown div {
+  display: grid;
+  gap: 2px;
+}
+
+.week-breakdown span {
+  font-family: "Courier New", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: #596361;
+  text-transform: uppercase;
+}
+
+.week-breakdown strong {
+  font-size: 13px;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .week-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .week-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.launch-map-block {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.6fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.launch-map {
+  min-height: 260px;
+  border: 3px solid var(--ink);
+  box-shadow: 5px 6px 0 var(--ink);
+  overflow: hidden;
+  background: #dfe9e3;
+}
+
+.launch-map-pin {
+  cursor: default;
+}
+
+.launch-map-meta {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+}
+
+.launch-map-meta strong {
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.launch-map-coords {
+  margin: 0;
+  color: #596361;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.launch-map-caption {
+  margin: 2px 0 6px;
+  color: #6b726e;
+  font-family: "Comic Neue", "Comic Sans MS", cursive;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.launch-directions {
+  justify-self: start;
+  text-decoration: none;
+  background: var(--lime);
+}
+
+@media (max-width: 720px) {
+  .launch-map-block {
+    grid-template-columns: 1fr;
+  }
 }
 
 .boat-launch-marker {

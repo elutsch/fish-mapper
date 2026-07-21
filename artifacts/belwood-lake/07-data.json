@@ -4,7 +4,7 @@
   "province": "Ontario",
   "fmz": 16,
   "waterbodyType": "reservoir",
-  "coordinates": { "lat": 43.768, "lng": -80.336 },
+  "coordinates": { "lat": 43.7351716, "lng": -80.3329366 },
   "morphology": {
     "surfaceArea": "~593 ha (~1,466 acres)",
     "maxDepth": "20.7 m (~68 ft) at the dam",

@@ -17,32 +17,55 @@ export function buildConditionsDashboard({ hours, verdict, pressureTrend }: Dash
   const uvIndex =
     firstNumber(daylight.map((hour) => hour.uvIndexMax)) ??
     Math.max(...daylight.map((hour) => hour.uvIndex ?? 0), 0);
-  const tempNow = representative?.tempC;
   const tempHigh = firstNumber(daylight.map((hour) => hour.tempMaxC));
   const tempLow = firstNumber(daylight.map((hour) => hour.tempMinC));
   const sunrise = representative?.sunrise;
   const sunset = representative?.sunset;
+  const precipByHour = daylight.map((hour) => hour.precipMm ?? 0);
+  const precipTotal = precipByHour.reduce((sum, mm) => sum + mm, 0);
+  const precipPeak = Math.max(...precipByHour, 0);
+  const wetHours = precipByHour.filter((mm) => mm >= 0.2).length;
+  const cloudByHour = daylight.map((hour) => hour.cloudPct ?? 0);
+  const cloudAvg = cloudByHour.length ? cloudByHour.reduce((sum, pct) => sum + pct, 0) / cloudByHour.length : 0;
   const grade = fishingGrade(verdict);
   const alert = conditionsAlert(peakWind, peakGust, uvIndex, pressureTrend.label);
   const callout = gradeCallout(grade.value, pressureTrend.label);
+  const summary = conditionsSummary({
+    tempHigh,
+    tempLow,
+    peakGust,
+    precipTotal,
+    cloudAvg,
+    pressure: pressureTrend.label
+  });
 
   return {
     alert,
     callout,
+    summary,
     temp: {
-      value: typeof tempNow === "number" ? `${Math.round(tempNow)}°` : "n/a",
+      // Daily high/low — the once-a-day values, not an hourly "current" reading.
+      value:
+        typeof tempHigh === "number" && typeof tempLow === "number"
+          ? `${Math.round(tempHigh)}°\n${Math.round(tempLow)}°`
+          : typeof tempHigh === "number"
+            ? `${Math.round(tempHigh)}°`
+            : "n/a",
       detail:
         typeof tempHigh === "number" && typeof tempLow === "number"
-          ? `H ${Math.round(tempHigh)}° · L ${Math.round(tempLow)}°`
-          : "Forecast air temperature"
+          ? "High · Low"
+          : "Daily air temperature"
     },
     uv: {
+      // Daily maximum UV (uvIndexMax), not the current hour.
       value: Number.isFinite(uvIndex) ? `${Math.round(uvIndex)}` : "n/a",
-      detail: "Scale 0-11"
+      detail: "Daily max · 0-11"
     },
     wind: {
+      // Daily maximum sustained wind and gust — the once-a-day peaks, not an
+      // hourly reading. Direction is a point-in-time value, so it's dropped.
       value: `${Math.round(peakWind)}\nkm/h`,
-      detail: `${windDirection(representative?.windDirDeg ?? 0)} · gust ${Math.round(peakGust)} km/h`
+      detail: `Daily max · gust ${Math.round(peakGust)} km/h`
     },
     pressure: {
       value: representative ? `${Math.round(representative.pressureHpa)}\nhPa` : "n/a",
@@ -56,8 +79,86 @@ export function buildConditionsDashboard({ hours, verdict, pressureTrend }: Dash
       value: moonPhase(verdict.validFor),
       detail: "Lunar phase"
     },
+    precip: {
+      value:
+        precipPeak < 0.1
+          ? "0 mm"
+          : `${precipTotal < 1 ? precipTotal.toFixed(1) : Math.round(precipTotal)} mm`,
+      detail:
+        precipPeak < 0.1
+          ? "Dry through the launch window"
+          : `Peak ${precipPeak.toFixed(1)} mm/h · ${wetHours} wet hr${wetHours === 1 ? "" : "s"}`
+    },
     grade
   };
+}
+
+// A plain-English read of the day's overall conditions — sky, temperature,
+// wind, and what the pressure story means for the bite. Deliberately NOT about
+// launch windows or craft: this describes the weather, not when to be on it.
+function conditionsSummary(input: {
+  tempHigh?: number;
+  tempLow?: number;
+  peakGust: number;
+  precipTotal: number;
+  cloudAvg: number;
+  pressure: PressureTrend["label"];
+}) {
+  const { tempHigh, tempLow, peakGust, precipTotal, cloudAvg, pressure } = input;
+
+  const sky =
+    precipTotal >= 5
+      ? "Rainy"
+      : precipTotal >= 1
+        ? "Showery"
+        : cloudAvg < 30
+          ? "Clear"
+          : cloudAvg < 70
+            ? "Part sun"
+            : "Overcast";
+
+  const warmth =
+    typeof tempHigh !== "number"
+      ? null
+      : tempHigh <= 5
+        ? "cold"
+        : tempHigh <= 14
+          ? "cool"
+          : tempHigh <= 24
+            ? "mild"
+            : tempHigh <= 29
+              ? "warm"
+              : "hot";
+
+  const tempTail =
+    typeof tempHigh === "number"
+      ? `, with a high of ${Math.round(tempHigh)}°${
+          typeof tempLow === "number" ? ` and a low of ${Math.round(tempLow)}°` : ""
+        }`
+      : "";
+
+  const skyAndTemp = warmth
+    ? `${sky} and ${warmth}${tempTail}.`
+    : `${sky} conditions today${tempTail}.`;
+
+  const gust = Math.round(peakGust);
+  const windClause =
+    peakGust < 20
+      ? "Winds stay light"
+      : peakGust < 35
+        ? `A moderate breeze, gusts to ${gust} km/h`
+        : peakGust < 50
+          ? `Breezy, gusts to ${gust} km/h`
+          : `Windy, gusts to ${gust} km/h`;
+
+  const pressureClause =
+    pressure === "falling"
+      ? "falling pressure often fires up the bite"
+      : pressure === "rising"
+        ? "rising pressure can make for a slower, pickier bite"
+        : "steady pressure should keep the bite consistent";
+
+  return `${skyAndTemp} ${windClause} — ${pressureClause}.`;
 }
 
 // The single most relevant watch-out for the day, framed as a caution. Ordered
@@ -137,11 +238,6 @@ function daylightDuration(sunrise: string, sunset: string) {
   const hours = Math.floor(minutes / 60);
   const mins = minutes % 60;
   return `${hours}h ${String(mins).padStart(2, "0")}m`;
-}
-
-function windDirection(degrees: number) {
-  const directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
-  return directions[Math.round((((degrees % 360) + 360) % 360) / 45) % 8];
 }
 
 function moonPhase(dateString: string) {

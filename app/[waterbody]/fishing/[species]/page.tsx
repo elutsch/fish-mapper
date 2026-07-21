@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getSpeciesCard } from "@/app/components/SpeciesCards";
 import { getLakeProfile, lakeProfiles } from "@/lib/lakeProfiles";
 import type { LakeProfile, LakeProfileSpecies } from "@/lib/lakeProfiles/types";
+import { regsSummary } from "@/lib/format";
 import { formatSpeciesName, speciesPathSegment } from "@/lib/species";
 
 type PageProps = {
@@ -48,117 +49,137 @@ export default async function LakeSpeciesPage({ params }: PageProps) {
   const card = getSpeciesCard(species.displayName);
   const speciesName = formatSpeciesName(species.displayName);
   const primaryStructure = species.structureDetails?.[0] ?? null;
-  const secondaryStructure = species.structureDetails?.[1] ?? null;
-  const tacticalNote = species.lede ?? species.bodyCopy ?? `${speciesName} is present in the ${profile.lake} research profile.`;
+  const lede =
+    species.lede ??
+    (species.bodyCopy ? firstSentences(species.bodyCopy, 2) : null) ??
+    `${speciesName} is confirmed present in the ${profile.lake} research profile.`;
+  const howItFishes = species.howItFishes ?? species.bodyCopy ?? null;
+  const howItFishesParagraphs = howItFishes ? toParagraphs(howItFishes) : null;
+
+  // Numbered panels are built in order and only when they carry content, so the
+  // 01/02/03 eyebrows stay contiguous the way the waterbody profile page reads.
+  const panels: { title: string; body: React.ReactNode }[] = [];
+
+  panels.push({
+    title: "How it fishes",
+    body: howItFishesParagraphs ? (
+      <>
+        {howItFishesParagraphs.map((paragraph, index) => (
+          <p key={index}>{paragraph}</p>
+        ))}
+      </>
+    ) : (
+      <p>
+        This species is present in the research profile, but there is not enough lake-specific
+        evidence yet for a detailed tactical guide.
+      </p>
+    )
+  });
+
+  if (species.structureDetails?.length) {
+    panels.push({
+      title: "Structure",
+      body: (
+        <div className="structure-list">
+          {species.structureDetails.map((structure) => (
+            <div key={structure.name}>
+              <strong>{structure.name}</strong>
+              <p>{structure.detail}</p>
+            </div>
+          ))}
+        </div>
+      )
+    });
+  }
+
+  if (species.speciesRules?.length) {
+    panels.push({
+      title: "Regulations",
+      body: (
+        <>
+          <p className="profile-disclaimer">{regsSummary(profile.regsDisclaimer)}</p>
+          <div className="species-rules">
+            {species.speciesRules.map((rule) => (
+              <a key={rule.rule} href={rule.sourceUrl} target="_blank" rel="noreferrer">
+                {rule.rule}
+              </a>
+            ))}
+          </div>
+        </>
+      )
+    });
+  }
+
+  if (species.sources.length) {
+    panels.push({
+      title: "Sources",
+      body: (
+        <div className="resource-list">
+          {species.sources.map((source) => (
+            <a key={source} href={source} target="_blank" rel="noreferrer">
+              {source}
+            </a>
+          ))}
+        </div>
+      )
+    });
+  }
 
   return (
-    <main className="screen species-page">
-      <section className="species-dossier">
-        <div className="species-dossier-top">
-          <a className="species-back" href={`/${profile.slug}/fishing`}>
-            Back to lake
-          </a>
-          <span>Reel Action</span>
-          <a className="species-back" href="/fishing">
-            Map
-          </a>
-        </div>
-
-        <section className="species-cover-card">
-          <div className="species-cover-media">
-            <span>Species #01</span>
+    <main className="screen">
+      <section className="lake-profile profile-front" aria-label={`${speciesName} at ${profile.lake}`}>
+        <div className="profile-hero profile-hero-front">
+          <div>
+            <span className="profile-kicker">
+              {rankLabel(species.tier)} / {profile.lake}
+            </span>
+            <h1>{speciesName}</h1>
+            <p>{lede}</p>
+            <a className="species-back-link" href={`/${profile.slug}/fishing`}>
+              ← Back to {profile.lake} conditions
+            </a>
+          </div>
+          <aside className="species-hero-card" aria-hidden="true">
             {card ? (
               <img src={card.image} alt={`${card.label} species card`} />
             ) : (
-              <div>{speciesName}</div>
+              <div className="species-hero-fallback">{speciesName}</div>
             )}
-          </div>
-          <h1>{speciesName}</h1>
-          <div className="species-tier">{species.tier}</div>
-        </section>
+          </aside>
+        </div>
 
-        <section className="species-quick-grid">
-          <article className="species-quick-card habitat-card">
-            <span>Habitat</span>
-            <p>{primaryStructure?.detail ?? species.structure[0] ?? "Lake-specific habitat notes are not available yet."}</p>
-          </article>
-          <article className="species-quick-card rank-card">
-            <span>Rank</span>
-            <strong>{rankLabel(species.tier)}</strong>
-            <p>{profile.lake} / FMZ {profile.fmz}</p>
-          </article>
-        </section>
+        <aside className="profile-facts species-facts" aria-label={`${speciesName} facts`}>
+          <FactPill label="Rank" value={rankLabel(species.tier)} />
+          <FactPill label="Best Season" value={stripIceSeason(species.bestSeason ?? profile.bestSeason)} />
+          <FactPill
+            label="Primary Structure"
+            value={primaryStructure?.name ?? species.structure[0] ?? "Not published"}
+          />
+          <FactPill label="Fishery Zone" value={`FMZ ${profile.fmz}`} />
+        </aside>
+      </section>
 
-        <section className="tactical-log">
-          <h2>Tactical log</h2>
-          <div className="tactical-row">
-            <b>01</b>
-            <div>
-              <span>Primary structure</span>
-              <strong>{primaryStructure?.name ?? species.structure[0] ?? "Confirmed presence"}</strong>
+      <section className="lake-profile" aria-label={`${speciesName} guide`}>
+        {panels.map((panel, index) => (
+          <section key={panel.title} className="profile-panel">
+            <div className="profile-section-title">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{panel.title}</h3>
             </div>
-          </div>
-          <div className="tactical-row">
-            <b>02</b>
-            <div>
-              <span>Peak activity</span>
-              <strong>{species.bestSeason ?? profile.bestSeason}</strong>
-            </div>
-          </div>
-          <blockquote>{firstSentence(tacticalNote)}</blockquote>
-        </section>
-
-        <section className="species-detail-panel">
-          <h2>How it fishes</h2>
-          {species.howItFishes || species.bodyCopy ? (
-            <p>{species.howItFishes ?? species.bodyCopy}</p>
-          ) : (
-            <p>
-              This species is present in the research profile, but there is not enough lake-specific evidence yet for a
-              detailed tactical guide.
-            </p>
-          )}
-        </section>
-
-        {(primaryStructure || secondaryStructure) ? (
-          <section className="species-detail-panel">
-            <h2>Structure</h2>
-            <div className="structure-list">
-              {species.structureDetails?.map((structure) => (
-                <div key={structure.name}>
-                  <strong>{structure.name}</strong>
-                  <p>{structure.detail}</p>
-                </div>
-              ))}
-            </div>
+            {panel.body}
           </section>
-        ) : null}
-
-        {species.speciesRules?.length ? (
-          <section className="species-detail-panel">
-            <h2>Rules</h2>
-            <div className="species-rules">
-              {species.speciesRules.map((rule) => (
-                <a key={rule.rule} href={rule.sourceUrl} target="_blank" rel="noreferrer">
-                  {rule.rule}
-                </a>
-              ))}
-            </div>
-          </section>
-        ) : null}
-
-        {species.sources.length ? (
-          <section className="species-detail-panel species-sources">
-            <h2>Sources</h2>
-            {species.sources.map((source) => (
-              <a key={source} href={source} target="_blank" rel="noreferrer">
-                {source}
-              </a>
-            ))}
-          </section>
-        ) : null}
+        ))}
       </section>
     </main>
+  );
+}
+
+function FactPill({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <span>{label}</span>
+      <strong>{value}</strong>
+    </div>
   );
 }
 
@@ -173,8 +194,39 @@ function rankLabel(tier: LakeProfileSpecies["tier"]) {
   return "Not established";
 }
 
-function firstSentence(text: string) {
-  const trimmed = text.trim();
-  const periodIndex = trimmed.indexOf(".");
-  return periodIndex === -1 ? trimmed : trimmed.slice(0, periodIndex + 1);
+// Drop ice-fishing mentions from the Best Season fact, keeping the open-water
+// season and any non-ice tactical qualifiers (e.g. "low light"). Removes an
+// ice/winter clause whether it trails, leads, or hangs off an "and".
+function stripIceSeason(text: string) {
+  const out = text
+    .replace(/[;,]\s*(?:also |plus |and )?[^;,]*\b(?:winter|ice|freeze-?up|hard-?water)\b[^;,]*/gi, "")
+    .replace(/\s+and\s+[^;,]*\b(?:winter|ice|freeze-?up|hard-?water)\b[^;,]*/gi, "")
+    .replace(/^[^;,]*\b(?:winter|ice|freeze-?up|hard-?water)\b[^;,]*[;,]\s*/i, "")
+    .replace(/\s+/g, " ")
+    .replace(/^[\s;,–—-]+|[\s;,–—-]+$/g, "")
+    .trim();
+  return out.charAt(0).toUpperCase() + out.slice(1);
+}
+
+// Break a long "How it fishes" block into shorter paragraphs (~2 sentences
+// each) so it reads as scannable prose instead of one dense wall of text.
+function toParagraphs(text: string, perParagraph = 2) {
+  const sentences = text.match(/[^.!?]+[.!?]+(?:\s|$)/g) ?? [text];
+  const paragraphs: string[] = [];
+  for (let i = 0; i < sentences.length; i += perParagraph) {
+    paragraphs.push(
+      sentences
+        .slice(i, i + perParagraph)
+        .join(" ")
+        .replace(/\s+/g, " ")
+        .trim()
+    );
+  }
+  return paragraphs;
+}
+
+function firstSentences(text: string, count: number) {
+  const matches = text.match(/[^.!?]+[.!?]+/g);
+  const sentences = matches?.slice(0, count).join(" ").trim() ?? text.trim();
+  return sentences || text;
 }

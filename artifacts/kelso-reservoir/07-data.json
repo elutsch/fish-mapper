@@ -4,7 +4,7 @@
   "province": "Ontario",
   "fmz": 16,
   "waterbodyType": "reservoir",
-  "coordinates": { "lat": 43.5101, "lng": -79.9467 },
+  "coordinates": { "lat": 43.5062, "lng": -79.9492 },
   "morphology": {
     "surfaceArea": "30.4 ha (~75 acres)",
     "maxDepth": null,

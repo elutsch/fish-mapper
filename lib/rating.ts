@@ -92,12 +92,14 @@ export function dayActivity(hours: ForecastHour[], pressure: PressureTrend["labe
 export type GradeTier = "prime" | "marginal" | "tough";
 
 export function dayGrade(hours: ForecastHour[], pressure: PressureTrend["label"], fetchPenalty: number) {
-  const hourly = hours.map((hour) => {
-    const activityRank = ACTIVITY_RANK[fishActivity(hour, pressure).level];
-    const launchRank = 4 - launchRead(hour, fetchPenalty).severity;
-    return (activityRank + launchRank) / 2;
-  });
-  const rating = hourly.length ? hourly.reduce((sum, value) => sum + value, 0) / hourly.length : 1;
+  const mean = (values: number[]) => (values.length ? values.reduce((a, b) => a + b, 0) / values.length : 0);
+  // Launch from the day's AVERAGE wind/gust — a brief gust shouldn't tank the
+  // grade. Weighted toward launch (70/30) so lakes differentiate by exposure.
+  const launchRank = 4 - launchFromWind(mean(hours.map((h) => h.windKmh)), mean(hours.map((h) => h.gustKmh)), fetchPenalty).severity;
+  const activityRank = hours.length
+    ? mean(hours.map((hour) => ACTIVITY_RANK[fishActivity(hour, pressure).level]))
+    : 1;
+  const rating = 0.7 * launchRank + 0.3 * activityRank;
   const tier: GradeTier = rating < 2 ? "tough" : rating < 3 ? "marginal" : "prime";
   const value = tier === "prime" ? "A+" : tier === "marginal" ? "C+" : "F+";
   const detail = tier === "prime" ? "Prime today" : tier === "marginal" ? "Marginal today" : "Tough today";

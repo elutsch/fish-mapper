@@ -15,6 +15,9 @@ export function fallbackVerdict(
   caveat?: string
 ): Verdict {
   const daylight = fishingHours(hours);
+  const mean = (values: number[]) => (values.length ? values.reduce((a, b) => a + b, 0) / values.length : 0);
+  const avgWind = mean(daylight.map((hour) => hour.windKmh));
+  const avgGust = mean(daylight.map((hour) => hour.gustKmh));
   const peakWind = Math.max(...daylight.map((hour) => hour.windKmh), 0);
   const peakGust = Math.max(...daylight.map((hour) => hour.gustKmh), 0);
   const fetchPenalty = fetchPenaltyFor(spot);
@@ -24,9 +27,9 @@ export function fallbackVerdict(
   const window = bestWindow(daylight);
 
   const byCraft = {
-    powerboat: craftVerdictFor("powerboat", spot, peakWind, peakGust, fetchPenalty, lee, dir, window),
-    kayak: craftVerdictFor("kayak", spot, peakWind, peakGust, fetchPenalty, lee, dir, window),
-    canoe: craftVerdictFor("canoe", spot, peakWind, peakGust, fetchPenalty, lee, dir, window)
+    powerboat: craftVerdictFor("powerboat", spot, avgWind, avgGust, peakGust, fetchPenalty, lee, dir, window),
+    kayak: craftVerdictFor("kayak", spot, avgWind, avgGust, peakGust, fetchPenalty, lee, dir, window),
+    canoe: craftVerdictFor("canoe", spot, avgWind, avgGust, peakGust, fetchPenalty, lee, dir, window)
   };
   const craftSummary = summaryForCraftSplit(byCraft, peakGust, window, lee);
 
@@ -49,12 +52,14 @@ export function fallbackVerdict(
   };
 }
 
-// Launch-only verdict per craft: the rating bakes in wind, gust, fetch and
-// access; the note describes launching and boat control — never the bite.
+// Launch-only verdict per craft: the rating bakes in the day's average wind,
+// gust, fetch and access; the note describes launching and boat control — never
+// the bite — and flags gust variability so anglers can time their launch.
 function craftVerdictFor(
   craft: Craft,
   spot: Spot,
-  peakWind: number,
+  avgWind: number,
+  avgGust: number,
   peakGust: number,
   fetchPenalty: number,
   lee: string,
@@ -73,8 +78,8 @@ function craftVerdictFor(
   }
 
   const thresholds = craftThresholds[craft];
-  const adjustedWind = peakWind + fetchPenalty;
-  const adjustedGust = peakGust + fetchPenalty * 1.4;
+  const adjustedWind = avgWind + fetchPenalty;
+  const adjustedGust = avgGust + fetchPenalty * 1.4;
   const rating: Rating =
     adjustedWind <= thresholds.goWind && adjustedGust <= thresholds.goGust
       ? "go"
@@ -88,20 +93,22 @@ function craftVerdictFor(
     canoe: "an open canoe's shallow draft"
   }[craft];
   const fetch = spot.maxFetchKm ? `${spot.maxFetchKm.toFixed(1)} km` : "open water";
-  const wind = Math.round(peakWind);
-  const gust = Math.round(peakGust);
+  const wind = Math.round(avgWind);
+  const meanGust = Math.round(avgGust);
 
   const note =
     rating === "go"
-      ? `Clear to launch — ${wind} km/h from the ${dir} over ${fetch} of fetch stays well within ${trait}; easy to hold position.`
+      ? `Clear to launch — a ${wind} km/h ${dir} average over ${fetch} of fetch stays well within ${trait}; easy to hold position.`
       : rating === "marginal"
-        ? `Launchable but exposed — gusts to ${gust} km/h and ${fetch} of fetch will test ${trait}; put in on the ${lee} shore and stay tight to it.`
-        : `Too rough — ${gust} km/h gusts over ${fetch} of fetch overwhelm ${trait}; not a safe launch today.`;
+        ? `Launchable but exposed — a ${meanGust} km/h average gust and ${fetch} of fetch will test ${trait}; put in on the ${lee} shore and stay tight to it.`
+        : `Too rough — a ${meanGust} km/h average gust over ${fetch} of fetch overwhelms ${trait}; not a safe launch today.`;
+  const swing =
+    peakGust - avgGust >= 15 ? ` Gusts spike to ${Math.round(peakGust)} km/h at times — time your launch.` : "";
 
   return {
     rating,
     bestWindow: window,
-    note
+    note: note + swing
   };
 }
 
@@ -138,9 +145,9 @@ function fishingHours(hours: ForecastHour[]) {
 
 export function fetchPenaltyFor(spot: Spot) {
   const fetch = spot.maxFetchKm ?? 1;
-  if (fetch >= 6) return 8;
-  if (fetch >= 3) return 5;
-  if (fetch >= 1.5) return 2;
+  if (fetch >= 6) return 14;
+  if (fetch >= 3) return 9;
+  if (fetch >= 1.5) return 4;
   return 0;
 }
 

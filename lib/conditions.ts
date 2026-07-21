@@ -17,7 +17,9 @@ export function buildConditionsDashboard({ hours, verdict, pressureTrend, spot }
     return localHour >= 5 && localHour <= 21;
   });
   const representative = nearestHour(daylight, 12) ?? daylight[0] ?? hours[0];
-  const peakWind = Math.max(...daylight.map((hour) => hour.windKmh), 0);
+  const mean = (values: number[]) => (values.length ? values.reduce((a, b) => a + b, 0) / values.length : 0);
+  const avgWind = mean(daylight.map((hour) => hour.windKmh));
+  const avgGust = mean(daylight.map((hour) => hour.gustKmh));
   const peakGust = Math.max(...daylight.map((hour) => hour.gustKmh), 0);
   const peakWindHour = daylight.reduce<ForecastHour | undefined>(
     (best, hour) => (best && best.windKmh >= hour.windKmh ? best : hour),
@@ -38,13 +40,14 @@ export function buildConditionsDashboard({ hours, verdict, pressureTrend, spot }
   const fetchPenalty = fetchPenaltyFor(spot);
   const leeShore = peakWindHour ? leewardShore(peakWindHour.windDirDeg) : "lee";
   const note = gradeNarrative({
-    launch: launchFromWind(peakWind, peakGust, fetchPenalty).level,
+    launch: launchFromWind(avgWind, avgGust, fetchPenalty).level,
     activity: dayActivity(daylight, pressureTrend.label),
     pressure: pressureTrend.label,
     fetchKm: spot.maxFetchKm ?? null,
     windDir,
     lee: leeShore,
-    peakWind,
+    avgWind,
+    avgGust,
     peakGust,
     uv: uvIndex
   });
@@ -78,9 +81,9 @@ export function buildConditionsDashboard({ hours, verdict, pressureTrend, spot }
       detail: "Daily max · 0-11"
     },
     wind: {
-      // Daily maximum sustained wind and gust, with the direction at the windiest hour.
-      value: `${Math.round(peakWind)}\nkm/h`,
-      detail: `${windDir ? `${windDir} · ` : ""}daily max · gust ${Math.round(peakGust)} km/h`
+      // Typical daytime wind (average) with the direction, and the peak gust in the detail.
+      value: `${Math.round(avgWind)}\nkm/h`,
+      detail: `Avg${windDir ? ` · ${windDir}` : ""} · gusts to ${Math.round(peakGust)} km/h`
     },
     pressure: {
       value: representative ? `${Math.round(representative.pressureHpa)}\nhPa` : "n/a",
@@ -173,9 +176,9 @@ function conditionsSummary(input: {
 }
 
 // The grade narrative, in a fixed order: (1) boating conditions from the day's
-// worst-case launch read, naming fetch/wind/direction; (2) fishing conditions
-// from the typical fish activity + the pressure driver; (3) one concluding
-// tactic for how to fish the lake.
+// typical (average) launch read, naming fetch/wind/direction, plus a variability
+// note when gusts spike; (2) fishing conditions from the typical fish activity +
+// the pressure driver; (3) one concluding tactic for how to fish the lake.
 function gradeNarrative(input: {
   launch: LaunchLevel;
   activity: ActivityLevel;
@@ -183,24 +186,28 @@ function gradeNarrative(input: {
   fetchKm: number | null;
   windDir: string | null;
   lee: string;
-  peakWind: number;
+  avgWind: number;
+  avgGust: number;
   peakGust: number;
   uv: number;
 }) {
-  const { launch, activity, pressure, fetchKm, windDir, lee, peakWind, peakGust, uv } = input;
+  const { launch, activity, pressure, fetchKm, windDir, lee, avgWind, avgGust, peakGust, uv } = input;
   const fetch = fetchKm ? `${fetchKm.toFixed(1)} km` : "open water";
-  const wind = Math.round(peakWind);
+  const wind = Math.round(avgWind);
   const gust = Math.round(peakGust);
   const dir = windDir ?? "the prevailing wind";
 
   const boating =
     launch === "all-clear"
-      ? `Easy water — light ${dir} winds keep ${fetch} of fetch calm and controllable.`
+      ? `Easy water — a light ${wind} km/h ${dir} average keeps ${fetch} of fetch calm and controllable.`
       : launch === "fishable"
-        ? `Boatable but breezy — ${wind} km/h from the ${dir} over ${fetch} of fetch builds some chop; the ${lee} shore stays cleanest.`
+        ? `Boatable but breezy — a ${wind} km/h ${dir} average over ${fetch} of fetch builds some chop; the ${lee} shore stays cleanest.`
         : launch === "caution"
-          ? `Choppy — gusts to ${gust} km/h drive ${fetch} of fetch, so shelter on the ${lee} shore and keep runs short.`
-          : `Too rough to launch — ${gust} km/h gusts across ${fetch} of fetch push the whole lake past a safe margin.`;
+          ? `Choppy — a ${wind} km/h average over ${fetch} of fetch keeps you on the ${lee} shore with short runs.`
+          : `Too rough — sustained wind over ${fetch} of fetch pushes the whole lake past a safe margin.`;
+  // Variability note when gusts run well above the average.
+  const swing =
+    peakGust - avgGust >= 15 ? ` Gusts spike to ${gust} km/h at times — check the hourly and time your launch.` : "";
 
   const driver =
     pressure === "falling"
@@ -226,7 +233,7 @@ function gradeNarrative(input: {
         ? "Get out early and fish hard before the front."
         : "Work the shoreline edges and lean on the low-light hours.";
 
-  return `${boating} ${fishing} ${tactic}`;
+  return `${boating}${swing} ${fishing} ${tactic}`;
 }
 
 function nearestHour(hours: ForecastHour[], targetHour: number) {

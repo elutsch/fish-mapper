@@ -4,8 +4,21 @@ import type { ReactNode } from "react";
 export const metadata: Metadata = {
   title: "Frequently Asked Questions",
   description:
-    "Straight answers about Bite Club fishing forecasts, lake coverage, craft safety, access, and Ontario fishing regulations."
+    "Straight answers about Bite Club fishing forecasts, lake coverage, craft safety, access, and Ontario fishing regulations.",
+  alternates: { canonical: "/faq" }
 };
+
+// Flatten a JSX answer into plain text so the FAQPage schema stays a single source
+// of truth with the rendered content (recurses through <p>, <strong>, <a>, etc.).
+function nodeToText(node: ReactNode): string {
+  if (node == null || typeof node === "boolean") return "";
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(nodeToText).join("");
+  if (typeof node === "object" && "props" in node) {
+    return nodeToText((node as { props?: { children?: ReactNode } }).props?.children);
+  }
+  return "";
+}
 
 type FaqSection = {
   id: string;
@@ -53,10 +66,13 @@ const sections: FaqSection[] = [
         question: "How does Bite Club predict the fishing bite?",
         answer: (
           <p>
-            The daily grade combines craft verdicts, peak wind and gusts, lake fetch, launch access,
-            and the recent pressure trend. Hourly fish-activity labels use wind, gusts,
-            precipitation, and UV as practical signals. The result is a deterministic planning
-            heuristic, not a catch-probability model or an AI-generated forecast.
+            Each lake&apos;s daily grade blends two scores. <strong>Launch conditions</strong> rate
+            how boatable the water is from the day&apos;s average wind and gusts, adjusted for the
+            lake&apos;s fetch, so bigger, more exposed lakes read rougher. <strong>Fish Activity</strong>{" "}
+            rates the likely bite from air temperature, light (UV), and the pressure trend. The grade
+            leans toward launch conditions and combines the two into a single Prime, Marginal, or
+            Tough call. It is a deterministic planning heuristic, not a catch-probability model or an
+            AI-generated forecast.
           </p>
         )
       },
@@ -64,10 +80,26 @@ const sections: FaqSection[] = [
         question: "What do Prime, Marginal, and Tough mean?",
         answer: (
           <p>
-            Prime means at least one supported craft has a clear go window. Marginal means no craft
-            has a full go, but at least one retains a limited, sheltered window. Tough means every
-            supported craft is rated no-go. Always check the craft-specific verdict because a Prime
-            powerboat day can still be a Tough canoe day.
+            They summarize the combined launch-and-bite score for the day. <strong>Prime</strong> is
+            a genuinely good day: controllable water and an active bite. <strong>Tough</strong> means
+            the day works against you, whether that is water too rough to launch, a slow bite, or
+            both. <strong>Marginal</strong> sits in between: fishable, but with a real tradeoff.
+            Because a big, exposed lake can rate Tough while a sheltered one nearby is Marginal, use
+            the map to compare lakes, and always check the per-craft launch verdict, since the same
+            wind is fine in a powerboat and dangerous in a canoe.
+          </p>
+        )
+      },
+      {
+        question: "What do the hourly Fish Activity and Launch Read ratings mean?",
+        answer: (
+          <p>
+            Each hourly card carries two ratings. <strong>Fish Activity</strong> (Low, Fair, High, or
+            Maximum) reflects the likely bite that hour from air temperature, light, and the pressure
+            trend. <strong>Launch Read</strong> (All Clear, Fishable, Caution, or Do Not Launch)
+            reflects how safely you can be on the water, from that hour&apos;s wind and gusts against
+            your craft&apos;s limits and the lake&apos;s fetch. A day can have a strong bite but rough
+            launch windows, so the two ratings together let you time your trip.
           </p>
         )
       },
@@ -86,9 +118,10 @@ const sections: FaqSection[] = [
         question: "Does Bite Club measure water temperature?",
         answer: (
           <p>
-            No. The dashboard currently shows forecast air temperature. It does not measure or
-            estimate lake-water temperature, because most covered inland lakes do not have a live
-            public temperature sensor.
+            No. The dashboard shows the day&apos;s forecast air temperature (high and low), which
+            also feeds the Fish Activity score. It does not measure or estimate lake-water
+            temperature, because most covered inland lakes do not have a live public temperature
+            sensor.
           </p>
         )
       },
@@ -114,8 +147,9 @@ const sections: FaqSection[] = [
           <p>
             Pressure trend is generally more useful than the absolute number. Falling pressure
             ahead of changing weather can coincide with a stronger feeding window, while rapidly
-            rising pressure after a front can make fishing slower. Bite Club uses a recent
-            pressure-change rate as one modest adjustment to the daily grade.
+            rising pressure after a front can make fishing slower. Bite Club uses the recent
+            pressure trend as one of the three inputs to its Fish Activity score, alongside air
+            temperature and light.
           </p>
         )
       },
@@ -136,8 +170,9 @@ const sections: FaqSection[] = [
           <p>
             Light to moderate wind can reduce glare and push bait toward windward structure. Strong
             wind becomes a boat-control and safety problem, especially when it blows over a long
-            stretch of open water. Bite Club therefore evaluates wind together with gusts, craft,
-            and each waterbody&apos;s estimated fetch.
+            stretch of open water. Bite Club scores the day&apos;s average wind together with peak
+            gusts, craft limits, and each waterbody&apos;s estimated fetch, and it flags when gusts
+            spike so you can time your launch to the calmer stretches.
           </p>
         )
       },
@@ -146,9 +181,10 @@ const sections: FaqSection[] = [
         answer: (
           <p>
             Dawn and dusk are dependable starting points because lower light often gives predators
-            an advantage. Overcast skies can extend that window, while bright days can concentrate
-            activity near low light and cover. The hourly table also prioritizes periods with
-            manageable wind, gusts, and precipitation.
+            an advantage, and overcast skies can extend that window. On each lake&apos;s hourly
+            cards, the Fish Activity rating shifts with light and temperature through the day, while
+            the Launch Read flags the calmer stretches, so you can time your launch to the cleanest
+            water.
           </p>
         )
       },
@@ -260,8 +296,24 @@ const sections: FaqSection[] = [
 ];
 
 export default function FaqPage() {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: sections.flatMap((section) =>
+      section.items.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: nodeToText(item.answer).replace(/\s+/g, " ").trim()
+        }
+      }))
+    )
+  };
+
   return (
     <main className="screen methodology-page faq-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <section className="hero poster-hero methodology-hero faq-hero">
         <span className="alert">FAQ</span>
         <h1>Straight Answers</h1>

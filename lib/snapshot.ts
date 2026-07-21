@@ -3,6 +3,7 @@ import { getSnapshot, saveSnapshot } from "./storage";
 import type { ForecastHour, Spot } from "./types";
 import { generateVerdict } from "./verdict";
 import { fallbackVerdict } from "./verdict/rules";
+import { buildWeek } from "./week";
 
 export async function getOrCreateSnapshot(spot: Spot, validFor = defaultValidFor()) {
   const stored = await getSnapshot(spot.id, validFor);
@@ -10,37 +11,42 @@ export async function getOrCreateSnapshot(spot: Spot, validFor = defaultValidFor
     return stored;
   }
 
-  const { targetHours, pressureTrend, fetchCaveat } = await snapshotInputs(spot, validFor);
+  const { targetHours, pressureTrend, week, fetchCaveat } = await snapshotInputs(spot, validFor);
   const verdict = fetchCaveat
     ? fallbackVerdict(spot, targetHours, pressureTrend, validFor, fetchCaveat)
     : await generateVerdict(spot, targetHours, pressureTrend, validFor);
-  const snapshot = { forecast: targetHours, pressureTrend, verdict };
+  const snapshot = { forecast: targetHours, pressureTrend, verdict, week };
   await saveSnapshot(spot.id, validFor, snapshot);
   return snapshot;
 }
 
 export async function refreshSnapshot(spot: Spot, validFor = defaultValidFor()) {
-  const { targetHours, pressureTrend, fetchCaveat } = await snapshotInputs(spot, validFor);
+  // The daily cron pulls live data (bypasses the cached "forecast" tag).
+  const { targetHours, pressureTrend, week, fetchCaveat } = await snapshotInputs(spot, validFor, {
+    fresh: true
+  });
   const verdict = fetchCaveat
     ? fallbackVerdict(spot, targetHours, pressureTrend, validFor, fetchCaveat)
     : await generateVerdict(spot, targetHours, pressureTrend, validFor);
-  const snapshot = { forecast: targetHours, pressureTrend, verdict };
+  const snapshot = { forecast: targetHours, pressureTrend, verdict, week };
   await saveSnapshot(spot.id, validFor, snapshot);
   return snapshot;
 }
 
-async function snapshotInputs(spot: Spot, validFor: string) {
+async function snapshotInputs(spot: Spot, validFor: string, opts: { fresh?: boolean } = {}) {
   try {
-    const forecast = await fetchForecastSnapshot(spot);
+    const forecast = await fetchForecastSnapshot(spot, opts);
     return {
       targetHours: hoursForDate(forecast, validFor),
       pressureTrend: computePressureTrend(forecast, validFor),
+      week: buildWeek(forecast, spot, validFor),
       fetchCaveat: null
     };
   } catch (error) {
     return {
       targetHours: fallbackForecast(validFor),
       pressureTrend: { label: "steady" as const, rateHpaPer24h: 0 },
+      week: [],
       fetchCaveat: `Forecast fetch failed during render: ${error instanceof Error ? error.message : "unknown error"}. Showing conservative fallback conditions until cron refresh succeeds.`
     };
   }

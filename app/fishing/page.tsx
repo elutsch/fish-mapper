@@ -7,15 +7,18 @@ import { getOrCreateSnapshot } from "@/lib/snapshot";
 import { spots, spotsAsGeoJson } from "@/lib/spots";
 import { formatSpeciesName } from "@/lib/species";
 import type { MapSpotStatus } from "@/lib/spots";
-import type { Rating, Spot, Verdict } from "@/lib/types";
+import type { Spot, Verdict } from "@/lib/types";
 
 export const metadata: Metadata = {
-  title: "Hot Lakes Today",
+  title: "Today's Fishing Conditions for Southern Ontario Lakes",
   description:
-    "Weekend fishing condition pages for powerboat, kayak, and canoe anglers on selected Southern Ontario waterbodies."
+    "Today's fishing and boating conditions for 20 Southern Ontario lakes and rivers — Prime, Marginal, or Tough calls with separate powerboat, kayak, and canoe launch verdicts from wind, fetch, and pressure.",
+  alternates: { canonical: "/fishing" }
 };
 
-export const revalidate = 21600;
+// Fully static after generation; regenerated once daily by the /api/cron/fishing job
+// (revalidatePath), so pages stay static from the CDN for the rest of the day.
+export const revalidate = false;
 
 export default async function FishingIndexPage() {
   const statuses = await mapStatuses();
@@ -40,9 +43,9 @@ export default async function FishingIndexPage() {
           <span className="alert">What We Do</span>
           <h2 id="what-we-do-title">Find the best bite window before you launch.</h2>
           <p>
-            Bite Club turns lake profiles and today&apos;s forecast into plain-language fishing calls
-            for Southern Ontario launches. Start with the map, pick a waterbody, then open the lake
-            page for the conditions behind the call.
+            Bite Club turns lake profiles and today&apos;s forecast into plain-language fishing and
+            boating condition calls for Southern Ontario launches. Start with the map, pick a
+            waterbody, then open the lake page for the conditions behind the call.
           </p>
         </div>
         <div className="what-we-do-grid">
@@ -119,8 +122,8 @@ async function mapStatuses() {
     spots.map(async (spot) => {
       try {
         const { forecast, pressureTrend, verdict } = await getOrCreateSnapshot(spot);
-        const dashboard = buildConditionsDashboard({ hours: forecast, pressureTrend, verdict });
-        return [spot.id, statusForSpot(spot, verdict, dashboard.grade.value)] as const;
+        const dashboard = buildConditionsDashboard({ hours: forecast, pressureTrend, verdict, spot });
+        return [spot.id, statusForSpot(spot, verdict, dashboard.grade.status, dashboard.grade.value)] as const;
       } catch (error) {
         return [
           spot.id,
@@ -137,9 +140,14 @@ async function mapStatuses() {
   return Object.fromEntries(entries);
 }
 
-function statusForSpot(spot: Spot, verdict: Verdict, grade: string): MapSpotStatus {
-  const ratings = Object.values(verdict.byCraft).map((craft) => craft.rating);
-  const status = statusFromRatings(ratings);
+// The map dot uses the same day grade as the dashboard badge — single source,
+// so they can never disagree. Craft breakdown is kept for the tooltip detail.
+function statusForSpot(
+  spot: Spot,
+  verdict: Verdict,
+  status: MapSpotStatus["status"],
+  grade: string
+): MapSpotStatus {
   const label =
     status === "prime" ? "Prime today" : status === "marginal" ? "Marginal today" : "Tough today";
   const detail = `Grade ${grade}. Powerboat ${verdict.byCraft.powerboat.rating}; kayak ${verdict.byCraft.kayak.rating}; canoe ${verdict.byCraft.canoe.rating}.`;
@@ -149,10 +157,4 @@ function statusForSpot(spot: Spot, verdict: Verdict, grade: string): MapSpotStat
     label,
     detail: `${spot.name}: ${detail}`
   };
-}
-
-function statusFromRatings(ratings: Rating[]): MapSpotStatus["status"] {
-  if (ratings.includes("go")) return "prime";
-  if (ratings.includes("marginal")) return "marginal";
-  return "tough";
 }

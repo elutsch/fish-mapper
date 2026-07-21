@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import posthog from "posthog-js";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -14,6 +15,7 @@ export function ContactCta() {
     setStatus("idle");
     setError(null);
     dialogRef.current?.showModal();
+    posthog.capture("contact_dialog_opened", { source: "site_footer" });
   }
 
   function closeDialog() {
@@ -38,7 +40,11 @@ export function ContactCta() {
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "X-POSTHOG-DISTINCT-ID": posthog.get_distinct_id(),
+          "X-POSTHOG-SESSION-ID": posthog.get_session_id()
+        },
         body: JSON.stringify(payload)
       });
 
@@ -50,6 +56,7 @@ export function ContactCta() {
       form.reset();
       setStatus("success");
     } catch (err) {
+      posthog.captureException(err);
       setStatus("error");
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     }

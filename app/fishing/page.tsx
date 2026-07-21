@@ -16,7 +16,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/fishing" }
 };
 
-export const revalidate = 21600;
+// Fully static after generation; regenerated once daily by the /api/cron/fishing job
+// (revalidatePath), so pages stay static from the CDN for the rest of the day.
+export const revalidate = false;
 
 export default async function FishingIndexPage() {
   const statuses = await mapStatuses();

@@ -21,7 +21,10 @@ export async function getOrCreateSnapshot(spot: Spot, validFor = defaultValidFor
 }
 
 export async function refreshSnapshot(spot: Spot, validFor = defaultValidFor()) {
-  const { targetHours, pressureTrend, week, fetchCaveat } = await snapshotInputs(spot, validFor);
+  // The daily cron pulls live data (bypasses the cached "forecast" tag).
+  const { targetHours, pressureTrend, week, fetchCaveat } = await snapshotInputs(spot, validFor, {
+    fresh: true
+  });
   const verdict = fetchCaveat
     ? fallbackVerdict(spot, targetHours, pressureTrend, validFor, fetchCaveat)
     : await generateVerdict(spot, targetHours, pressureTrend, validFor);
@@ -30,9 +33,9 @@ export async function refreshSnapshot(spot: Spot, validFor = defaultValidFor()) 
   return snapshot;
 }
 
-async function snapshotInputs(spot: Spot, validFor: string) {
+async function snapshotInputs(spot: Spot, validFor: string, opts: { fresh?: boolean } = {}) {
   try {
-    const forecast = await fetchForecastSnapshot(spot);
+    const forecast = await fetchForecastSnapshot(spot, opts);
     return {
       targetHours: hoursForDate(forecast, validFor),
       pressureTrend: computePressureTrend(forecast, validFor),

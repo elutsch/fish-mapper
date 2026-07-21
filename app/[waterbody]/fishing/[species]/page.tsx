@@ -11,7 +11,8 @@ type PageProps = {
   params: Promise<{ waterbody: string; species: string }>;
 };
 
-export const revalidate = 21600;
+// Fully static; regenerated once daily by the /api/cron/fishing job (revalidatePath).
+export const revalidate = false;
 
 export function generateStaticParams() {
   return Object.values(lakeProfiles).flatMap((profile) =>

@@ -24,7 +24,22 @@ type OpenMeteoResponse = {
   };
 };
 
-export async function fetchOpenMeteoForecast(spot: Spot): Promise<ForecastHour[]> {
+// `fresh: true` (used by the daily cron) bypasses the cache for a live pull.
+// Otherwise the response is cached indefinitely under the "forecast" tag, so page
+// renders never impose a time-based revalidate — pages stay fully static until the
+// cron busts the tag once a day.
+type ForecastFetchOptions = { fresh?: boolean };
+
+function forecastFetchInit(opts: ForecastFetchOptions): RequestInit {
+  return opts.fresh
+    ? { cache: "no-store" }
+    : { next: { revalidate: false, tags: ["forecast"] } };
+}
+
+export async function fetchOpenMeteoForecast(
+  spot: Spot,
+  opts: ForecastFetchOptions = {}
+): Promise<ForecastHour[]> {
   const params = new URLSearchParams({
     latitude: String(spot.lat),
     longitude: String(spot.lng),
@@ -38,9 +53,10 @@ export async function fetchOpenMeteoForecast(spot: Spot): Promise<ForecastHour[]
     past_days: "2"
   });
 
-  const response = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
-    next: { revalidate: 21600 }
-  });
+  const response = await fetch(
+    `https://api.open-meteo.com/v1/forecast?${params}`,
+    forecastFetchInit(opts)
+  );
 
   if (!response.ok) {
     throw new Error(`Open-Meteo request failed for ${spot.id}: ${response.status}`);
@@ -52,7 +68,7 @@ export async function fetchOpenMeteoForecast(spot: Spot): Promise<ForecastHour[]
     throw new Error(`Open-Meteo returned no hourly data for ${spot.id}`);
   }
 
-  const uv = await fetchUvForecast(spot).catch(
+  const uv = await fetchUvForecast(spot, opts).catch(
     () => new Map<string, { hourly?: number; max?: number }>()
   );
   const dailyByDate = dailyValuesByDate(json);
@@ -82,7 +98,7 @@ export async function fetchOpenMeteoForecast(spot: Spot): Promise<ForecastHour[]
   });
 }
 
-async function fetchUvForecast(spot: Spot) {
+async function fetchUvForecast(spot: Spot, opts: ForecastFetchOptions = {}) {
   const params = new URLSearchParams({
     latitude: String(spot.lat),
     longitude: String(spot.lng),
@@ -92,9 +108,10 @@ async function fetchUvForecast(spot: Spot) {
     forecast_days: "7"
   });
 
-  const response = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
-    next: { revalidate: 21600 }
-  });
+  const response = await fetch(
+    `https://api.open-meteo.com/v1/forecast?${params}`,
+    forecastFetchInit(opts)
+  );
   if (!response.ok) {
     return new Map<string, { hourly?: number; max?: number }>();
   }

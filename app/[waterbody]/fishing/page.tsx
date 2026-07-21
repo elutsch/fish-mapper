@@ -4,6 +4,7 @@ import { LakeImage } from "@/app/components/LakeImage";
 import { LaunchMap } from "@/app/components/LaunchMap";
 import { RatingBadge } from "@/app/components/RatingBadge";
 import { getSpeciesCard, SpeciesCards } from "@/app/components/SpeciesCards";
+import { TrackedDirectionsLink } from "@/app/components/TrackedDirectionsLink";
 import { buildConditionsDashboard } from "@/lib/conditions";
 import { compass, craftLabels, formatCoords, formatDate, formatHour, regsSummary } from "@/lib/format";
 import { getLakeProfile } from "@/lib/lakeProfiles";
@@ -21,7 +22,8 @@ type PageProps = {
   params: Promise<{ waterbody: string }>;
 };
 
-export const revalidate = 21600;
+// Fully static; regenerated once daily by the /api/cron/fishing job (revalidatePath).
+export const revalidate = false;
 
 const crafts: Craft[] = ["powerboat", "kayak", "canoe"];
 
@@ -542,9 +544,7 @@ function LakeProfileSections({
             <p className="launch-map-caption">
               Approximate access area — confirm launchability and hours before you go.
             </p>
-            <a className="button launch-directions" href={directionsUrl} target="_blank" rel="noreferrer">
-              Get Directions
-            </a>
+            <TrackedDirectionsLink href={directionsUrl} waterbodyId={spot.id} />
           </div>
         </div>
         <div className="access-grid">

@@ -1,10 +1,12 @@
 import { kv } from "@vercel/kv";
 import type { ForecastHour, PressureTrend, Verdict } from "./types";
+import type { WeekDay } from "./week";
 
 type Snapshot = {
   forecast: ForecastHour[];
   pressureTrend: PressureTrend;
   verdict: Verdict;
+  week: WeekDay[];
 };
 
 const memoryStore = new Map<string, Snapshot>();

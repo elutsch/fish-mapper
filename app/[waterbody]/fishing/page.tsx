@@ -14,6 +14,7 @@ import { getOrCreateSnapshot } from "@/lib/snapshot";
 import { getSpot, spots } from "@/lib/spots";
 import type { Craft, ForecastHour, PressureTrend, Spot } from "@/lib/types";
 import { fetchPenaltyFor } from "@/lib/verdict/rules";
+import type { WeekDay } from "@/lib/week";
 
 type PageProps = {
   params: Promise<{ waterbody: string }>;
@@ -47,7 +48,7 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
   if (!spot) notFound();
 
   const profile = getLakeProfile(spot.id);
-  const { forecast, pressureTrend, verdict } = await getOrCreateSnapshot(spot);
+  const { forecast, pressureTrend, verdict, week } = await getOrCreateSnapshot(spot);
   const conditionRows = forecast
     .filter((hour) => {
       const localHour = Number(hour.time.slice(11, 13));
@@ -183,6 +184,8 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
             ))}
           </div>
         </section>
+
+        <WeeklyForecast days={week} />
 
         {profile ? (
           <LakeProfileSections profile={profile} spot={spot} caveats={publicCaveats} />
@@ -321,6 +324,54 @@ function HourlyConditionCard({
       </div>
       {callout ? <b className={`hour-callout hour-callout-${callout.kind}`}>{callout.label}</b> : null}
     </article>
+  );
+}
+
+function WeeklyForecast({ days }: { days: WeekDay[] }) {
+  if (days.length === 0) return null;
+
+  const tierLabel = { prime: "Prime", marginal: "Marginal", tough: "Tough" } as const;
+  const launchLabel = {
+    "all-clear": "All Clear",
+    fishable: "Fishable",
+    caution: "Caution",
+    "do-not-launch": "Do Not Launch"
+  } as const;
+  const activityLabel = { low: "Low", fair: "Fair", high: "High", maximum: "Maximum" } as const;
+  const weekday = (date: string, part: "weekday" | "monthDay") =>
+    new Intl.DateTimeFormat("en-CA", {
+      timeZone: "America/Toronto",
+      ...(part === "weekday" ? { weekday: "short" } : { month: "short", day: "numeric" })
+    }).format(new Date(`${date}T12:00:00-04:00`));
+
+  return (
+    <section className="week-section" aria-label="Seven-day fishing outlook">
+      <div className="hourly-title">
+        <h2>Weekly Outlook</h2>
+        <span />
+      </div>
+      <div className="week-grid">
+        {days.map((day, index) => (
+          <article key={day.date} className={`week-day week-day-${day.tier}`}>
+            <span className="week-date">
+              <b>{index === 0 ? "Today" : weekday(day.date, "weekday")}</b>
+              <em>{weekday(day.date, "monthDay")}</em>
+            </span>
+            <b className="week-tier">{tierLabel[day.tier]}</b>
+            <div className="week-breakdown">
+              <div>
+                <span>Launch</span>
+                <strong>{launchLabel[day.launch]}</strong>
+              </div>
+              <div>
+                <span>Bite</span>
+                <strong>{activityLabel[day.activity]}</strong>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
   );
 }
 

@@ -1691,7 +1691,6 @@ h3 {
   overflow-x: auto;
   overflow-y: hidden;
   padding: 6px 8px 16px 0;
-  margin-right: calc(clamp(15px, 2.6vw, 34px) * -1);
   scroll-padding-left: 0;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
@@ -2289,6 +2288,28 @@ a.lake-card:active {
 .access-card {
   display: grid;
   gap: 13px;
+}
+
+/* Access cards stack as a flex column so the "Access source" link can pin to
+   the bottom — that lines the two cards' text up despite different body lengths. */
+.access-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.access-card a {
+  margin-top: auto;
+}
+
+/* Street address / access detail below the title, in the eyebrow typewriter style. */
+.access-card .access-address {
+  margin: 0;
+  color: #596361;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
 
 .resource-list {

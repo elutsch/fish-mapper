@@ -414,16 +414,24 @@ function LakeProfileSections({ profile, caveats }: { profile: LakeProfile; cavea
           <h3>Access notes</h3>
         </div>
         <div className="access-grid">
-          {profile.launches.map((launch) => (
-            <article key={launch.name} className="access-card">
-              <span>{launch.type.replaceAll("-", " ")}</span>
-              <h4>{launch.name}</h4>
-              {launch.notes ? <p>{launch.notes}</p> : null}
-              <a href={launch.sourceUrl} target="_blank" rel="noreferrer">
-                Access source
-              </a>
-            </article>
-          ))}
+          {profile.launches.map((launch) => {
+            // Split "<place> — <address>" so the address sits below the title
+            // in the typewriter line, matching the eyebrow style.
+            const dash = launch.name.match(/^(.*?)\s+[—–]\s+(.+)$/);
+            const launchName = dash ? dash[1] : launch.name;
+            const address = dash ? dash[2] : null;
+            return (
+              <article key={launch.name} className="access-card">
+                <span>{launch.type.replaceAll("-", " ")}</span>
+                <h4>{launchName}</h4>
+                {address ? <p className="access-address">{address}</p> : null}
+                {launch.notes ? <p>{launch.notes}</p> : null}
+                <a href={launch.sourceUrl} target="_blank" rel="noreferrer">
+                  Access source
+                </a>
+              </article>
+            );
+          })}
         </div>
         {caveats.length ? (
           <div className="caveat-box profile-caveats">

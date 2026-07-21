@@ -24,6 +24,7 @@ Southern Ontario. 20 waterbodies are live today.
 - [The content layer](#the-content-layer) — lake profiles & the research pipeline
 - [SEO & AEO](#seo--aeo)
 - [Contact CTA & Discord webhook](#contact-cta--discord-webhook)
+- [Analytics (PostHog)](#analytics-posthog)
 - [Environment variables](#environment-variables)
 - [Commands, scripts & tests](#commands-scripts--tests)
 - [Deployment](#deployment)
@@ -328,6 +329,23 @@ which Zod-validates and forwards the submission to a **Discord channel** as an e
 
 ---
 
+## Analytics (PostHog)
+
+Product analytics via **PostHog** — `posthog-js` for the browser (initialized in
+`instrumentation-client.ts`, with exception autocapture) and `posthog-node` for server events
+(`lib/posthog-server.ts`). It no-ops cleanly when the `NEXT_PUBLIC_POSTHOG_*` env vars are unset.
+No PII (names, emails, comments, coordinates) is ever sent in event properties; client and server
+contact events are correlated via PostHog distinct/session IDs.
+
+| Event | Where |
+|---|---|
+| `contact_dialog_opened` | Contact CTA opened (`ContactCta.tsx`) |
+| `contact_form_submitted` | Server accepted a valid contact request (`api/contact`) |
+| `lake_map_marker_selected` | Lake marker clicked on the map (`SpotMap.tsx`) |
+| `lake_map_location_requested` | "Locate me" on the map (`SpotMap.tsx`) |
+| `lake_directions_opened` | "Get Directions" on a lake page (`TrackedDirectionsLink.tsx`) |
+| `forecast_refresh_completed` | Daily cron finished, with success/failure counts (`api/cron/fishing`) |
+
 ## Environment variables
 
 | Variable | Required | Purpose |
@@ -336,6 +354,8 @@ which Zod-validates and forwards the submission to a **Discord channel** as an e
 | `CRON_SECRET` | **Yes (prod)** | Authenticates `/api/cron/fishing`. Vercel Cron sends it automatically; the route is open to anyone if it's unset. |
 | `CONTACT_WEBHOOK_URL` | Optional | Discord webhook that receives contact-form submissions. |
 | `NEXT_PUBLIC_SITE_URL` | Optional | Overrides the canonical origin (defaults to `https://biteclub.ca`). Useful for preview deploys. |
+| `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` | Analytics | PostHog project token (publishable `phc_…`). Enables product analytics; analytics no-op if unset. |
+| `NEXT_PUBLIC_POSTHOG_HOST` | Analytics | PostHog ingestion host (e.g. `https://us.i.posthog.com`). |
 
 Local dev works with none set (in-memory snapshots, deterministic scoring). Put secrets in `.env.local`
 (gitignored).

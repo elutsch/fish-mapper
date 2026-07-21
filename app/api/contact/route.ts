@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { getPostHogClient } from "@/lib/posthog-server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -64,6 +65,19 @@ export async function POST(request: Request) {
       console.error("Contact webhook forwarding failed:", error);
     }
   }
+
+  const distinctId = request.headers.get("x-posthog-distinct-id") ?? "anonymous_contact";
+  const posthog = getPostHogClient();
+  posthog.capture({
+    distinctId,
+    event: "contact_form_submitted",
+    properties: {
+      source: "contact_form",
+      webhook_configured: Boolean(webhookUrl),
+      $session_id: request.headers.get("x-posthog-session-id") ?? undefined
+    }
+  });
+  await posthog.flush();
 
   return NextResponse.json({ ok: true });
 }

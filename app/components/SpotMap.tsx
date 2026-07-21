@@ -2,6 +2,7 @@
 
 import "maplibre-gl/dist/maplibre-gl.css";
 import maplibregl from "maplibre-gl";
+import posthog from "posthog-js";
 import { useEffect, useRef } from "react";
 
 type SpotFeatureCollection = GeoJSON.FeatureCollection<
@@ -204,7 +205,13 @@ function showLaunchPopup(
   const openLakePage = (event: Event) => {
     const card = event.currentTarget as HTMLElement;
     const href = card.dataset.href;
-    if (href) window.location.href = href;
+    if (href) {
+      posthog.capture("lake_map_marker_selected", {
+        waterbody_id: id,
+        forecast_status: status
+      });
+      window.location.href = href;
+    }
   };
 
   popup.on("open", () => {
@@ -256,6 +263,10 @@ class CurrentLocationControl implements maplibregl.IControl {
   }
 
   private locate(button: HTMLButtonElement) {
+    posthog.capture("lake_map_location_requested", {
+      geolocation_supported: Boolean(navigator.geolocation)
+    });
+
     if (!this.map || !navigator.geolocation) {
       button.dataset.state = "error";
       button.title = "Location is not available in this browser";

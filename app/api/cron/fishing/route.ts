@@ -2,6 +2,7 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 import { spots } from "@/lib/spots";
 import { refreshSnapshot } from "@/lib/snapshot";
+import { getPostHogClient } from "@/lib/posthog-server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -50,6 +51,18 @@ export async function GET(request: Request) {
   revalidatePath("/fishing");
   revalidatePath("/[waterbody]/fishing", "page");
   revalidatePath("/[waterbody]/fishing/[species]", "page");
+
+  const posthog = getPostHogClient();
+  posthog.capture({
+    distinctId: "forecast_refresh_job",
+    event: "forecast_refresh_completed",
+    properties: {
+      total_waterbodies: results.length,
+      successful_waterbodies: results.filter((result) => result.ok).length,
+      failed_waterbodies: results.filter((result) => !result.ok).length
+    }
+  });
+  await posthog.flush();
 
   return NextResponse.json({
     generatedAt: new Date().toISOString(),

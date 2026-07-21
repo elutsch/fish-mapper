@@ -79,7 +79,7 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
     <>
       <main className="screen">
         {profile ? (
-          <LakeProfileIntro profile={profile} />
+          <LakeProfileIntro profile={profile} status={dashboard.grade.status} />
         ) : (
           <section className="hero poster-hero">
             <span className="alert">Forecast Alert</span>
@@ -307,9 +307,17 @@ function HourlyConditionCard({
   );
 }
 
-function LakeProfileIntro({ profile }: { profile: LakeProfile }) {
+function LakeProfileIntro({
+  profile,
+  status
+}: {
+  profile: LakeProfile;
+  status: "prime" | "marginal" | "tough";
+}) {
   const cardedSpecies = profile.species.filter((species) => species.tier === "destination" || species.tier === "strong");
   const presentSpecies = profile.species.filter((species) => species.tier === "present");
+  const statusLabel =
+    status === "prime" ? "Prime today" : status === "marginal" ? "Marginal today" : "Tough today";
 
   return (
     <section className="lake-profile profile-front" aria-label={`${profile.lake} fishing profile`}>
@@ -318,8 +326,10 @@ function LakeProfileIntro({ profile }: { profile: LakeProfile }) {
           <LakeImage
             spotId={profile.slug}
             className="profile-lake-image"
-            label={`Illustrated view of ${profile.lake}`}
-          />
+            label={`Illustrated view of ${profile.lake} — ${statusLabel}`}
+          >
+            <span className={`lake-status-callout launch-status-${status}`}>{statusLabel}</span>
+          </LakeImage>
           <span className="profile-kicker">
             {profile.waterbodyType} / FMZ {profile.fmz}
           </span>

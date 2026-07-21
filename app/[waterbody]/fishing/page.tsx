@@ -79,7 +79,7 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
     <>
       <main className="screen">
         {profile ? (
-          <LakeProfileIntro profile={profile} status={dashboard.grade.status} />
+          <LakeProfileIntro profile={profile} status={dashboard.grade.status} verified={verdict.validFor} />
         ) : (
           <section className="hero poster-hero">
             <span className="alert">Forecast Alert</span>
@@ -309,13 +309,13 @@ function HourlyConditionCard({
 
 function LakeProfileIntro({
   profile,
-  status
+  status,
+  verified
 }: {
   profile: LakeProfile;
   status: "prime" | "marginal" | "tough";
+  verified: string;
 }) {
-  const cardedSpecies = profile.species.filter((species) => species.tier === "destination" || species.tier === "strong");
-  const presentSpecies = profile.species.filter((species) => species.tier === "present");
   const statusLabel =
     status === "prime" ? "Prime today" : status === "marginal" ? "Marginal today" : "Tough today";
 
@@ -337,17 +337,17 @@ function LakeProfileIntro({
           <p>{firstSentences(profile.overview, 2)}</p>
         </div>
         <aside className="profile-facts" aria-label="Lake facts">
-          <FactPill label="Best Season" value={profile.bestSeason} />
-          <FactPill label="Surface Area" value={profile.morphology.surfaceArea ?? "Not published"} />
-          <FactPill label="Water" value={profile.morphology.clarity ?? "Unknown"} />
-          <FactPill label="Verified" value={profile.lastVerified} />
+          <FactPill label="Best Season" value={seasonOnly(profile.bestSeason)} />
+          <FactPill label="Surface Area" value={acresOnly(profile.morphology.surfaceArea)} />
+          <FactPill label="Water Clarity" value={clarityLabel(profile.morphology.clarity)} />
+          <FactPill label="Verified" value={verified} />
         </aside>
       </div>
 
       <div className="profile-strip profile-strip-large">
-        <div>
-          <h3>Species at a glance</h3>
-          <p>{[...cardedSpecies, ...presentSpecies].map((species) => formatSpeciesName(species.displayName)).join(", ")}</p>
+        <div className="title-row">
+          <h3>Target Species</h3>
+          <span className="button">Scroll</span>
         </div>
         <ProfileSpeciesCards profile={profile} />
       </div>
@@ -483,6 +483,45 @@ function FactPill({ label, value }: { label: string; value: string }) {
       <strong>{value}</strong>
     </div>
   );
+}
+
+// Reduce the researched bestSeason string to just the season range for the hero
+// fact — drop appended clauses (ice-fishing notes, species specifics) that come
+// after a delimiter or a "for <species>" qualifier.
+function seasonOnly(text: string) {
+  let season = text.split(/[;—–,]/)[0];
+  const forMatch = season.match(/\sfor\s/i);
+  if (forMatch?.index !== undefined) season = season.slice(0, forMatch.index);
+  season = season
+    .replace(/\bbass opener\b/gi, "")
+    .replace(/^open water\s+/i, "")
+    .replace(/fourth saturday in june/gi, "Late June")
+    .replace(/\s+/g, " ")
+    .trim();
+  return season.charAt(0).toUpperCase() + season.slice(1);
+}
+
+// Surface area, acres only. Prefer an explicit acres figure from the research;
+// otherwise convert the leading hectare value (1 ha ≈ 2.47105 acres).
+function acresOnly(area: string | null) {
+  if (!area) return "Not published";
+  const acres = area.match(/([~≈]?\s*[\d,]+(?:\.\d+)?)\s*acres/i);
+  if (acres) return `${acres[1].replace(/\s+/g, "")} acres`;
+  const hectares = area.match(/([\d,]+(?:\.\d+)?)\s*ha\b/i);
+  if (hectares) {
+    const value = Math.round((parseFloat(hectares[1].replace(/,/g, "")) * 2.47105) / 10) * 10;
+    return `~${value.toLocaleString("en-US")} acres`;
+  }
+  return "Not published";
+}
+
+// Four clarity buckets for the hero fact. Research uses "turbid"; the UI calls
+// it "murky", and a missing value reads as "unverified".
+function clarityLabel(clarity: string | null) {
+  if (clarity === "clear") return "Clear";
+  if (clarity === "stained") return "Stained";
+  if (clarity === "turbid") return "Murky";
+  return "Unverified";
 }
 
 function bitePotential(hour: ForecastHour) {

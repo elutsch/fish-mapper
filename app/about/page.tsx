@@ -72,9 +72,10 @@ export default function AboutPage() {
           <article>
             <h3>Honest About What It Knows</h3>
             <p>
-              We flag where the science is solid and where it is an estimate. Fish-activity ratings
-              shift your odds rather than guarantee a catch. Every verdict is built from documented
-              weather inputs and deterministic rules.
+              We flag where the science is solid and where it is an estimate. Each daily call blends
+              two honest scores - how safely you can launch, and how active the bite is likely to be
+              - built from documented weather, the lake&apos;s fetch, and deterministic rules.
+              Fish-activity ratings shift your odds; they do not guarantee a catch.
             </p>
           </article>
           <article>

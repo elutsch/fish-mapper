@@ -53,6 +53,7 @@ export default async function LakeSpeciesPage({ params }: PageProps) {
     (species.bodyCopy ? firstSentences(species.bodyCopy, 2) : null) ??
     `${speciesName} is confirmed present in the ${profile.lake} research profile.`;
   const howItFishes = species.howItFishes ?? species.bodyCopy ?? null;
+  const howItFishesParagraphs = howItFishes ? toParagraphs(howItFishes) : null;
 
   // Numbered panels are built in order and only when they carry content, so the
   // 01/02/03 eyebrows stay contiguous the way the waterbody profile page reads.
@@ -60,8 +61,12 @@ export default async function LakeSpeciesPage({ params }: PageProps) {
 
   panels.push({
     title: "How it fishes",
-    body: howItFishes ? (
-      <p>{howItFishes}</p>
+    body: howItFishesParagraphs ? (
+      <>
+        {howItFishesParagraphs.map((paragraph, index) => (
+          <p key={index}>{paragraph}</p>
+        ))}
+      </>
     ) : (
       <p>
         This species is present in the research profile, but there is not enough lake-specific
@@ -144,7 +149,7 @@ export default async function LakeSpeciesPage({ params }: PageProps) {
 
         <aside className="profile-facts species-facts" aria-label={`${speciesName} facts`}>
           <FactPill label="Rank" value={rankLabel(species.tier)} />
-          <FactPill label="Best Season" value={species.bestSeason ?? profile.bestSeason} />
+          <FactPill label="Best Season" value={stripIceSeason(species.bestSeason ?? profile.bestSeason)} />
           <FactPill
             label="Primary Structure"
             value={primaryStructure?.name ?? species.structure[0] ?? "Not published"}
@@ -186,6 +191,37 @@ function rankLabel(tier: LakeProfileSpecies["tier"]) {
   if (tier === "strong") return "Strong pattern";
   if (tier === "present") return "Confirmed present";
   return "Not established";
+}
+
+// Drop ice-fishing mentions from the Best Season fact, keeping the open-water
+// season and any non-ice tactical qualifiers (e.g. "low light"). Removes an
+// ice/winter clause whether it trails, leads, or hangs off an "and".
+function stripIceSeason(text: string) {
+  const out = text
+    .replace(/[;,]\s*(?:also |plus |and )?[^;,]*\b(?:winter|ice|freeze-?up|hard-?water)\b[^;,]*/gi, "")
+    .replace(/\s+and\s+[^;,]*\b(?:winter|ice|freeze-?up|hard-?water)\b[^;,]*/gi, "")
+    .replace(/^[^;,]*\b(?:winter|ice|freeze-?up|hard-?water)\b[^;,]*[;,]\s*/i, "")
+    .replace(/\s+/g, " ")
+    .replace(/^[\s;,–—-]+|[\s;,–—-]+$/g, "")
+    .trim();
+  return out.charAt(0).toUpperCase() + out.slice(1);
+}
+
+// Break a long "How it fishes" block into shorter paragraphs (~2 sentences
+// each) so it reads as scannable prose instead of one dense wall of text.
+function toParagraphs(text: string, perParagraph = 2) {
+  const sentences = text.match(/[^.!?]+[.!?]+(?:\s|$)/g) ?? [text];
+  const paragraphs: string[] = [];
+  for (let i = 0; i < sentences.length; i += perParagraph) {
+    paragraphs.push(
+      sentences
+        .slice(i, i + perParagraph)
+        .join(" ")
+        .replace(/\s+/g, " ")
+        .trim()
+    );
+  }
+  return paragraphs;
 }
 
 function firstSentences(text: string, count: number) {

@@ -536,9 +536,9 @@ h3 {
   background:
     linear-gradient(
       to top right,
-      rgba(255, 252, 232, 0.94) 0%,
-      rgba(255, 252, 232, 0.72) 34%,
-      rgba(255, 252, 232, 0.3) 62%,
+      rgba(255, 252, 232, 0.98) 0%,
+      rgba(255, 252, 232, 0.94) 42%,
+      rgba(255, 252, 232, 0.52) 72%,
       rgba(255, 252, 232, 0) 100%
     ),
     url("/hero/whip-frog.png") center/cover;

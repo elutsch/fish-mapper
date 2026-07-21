@@ -25,7 +25,7 @@ export default async function FishingIndexPage() {
     <main className="screen">
       <section className="hero poster-hero index-hero" aria-labelledby="fishing-index-title">
         <div className="index-hero-copy" aria-label="Homepage forecast introduction">
-          <span className="alert">Lake Map</span>
+          <span className="alert">Fish On!</span>
           <h1 id="fishing-index-title">Hot Lakes Today</h1>
           <div className="slashes">
             <i />
@@ -83,7 +83,7 @@ export default async function FishingIndexPage() {
 
       <section className="lakes">
         <div className="title-row">
-          <h2>Waterbodies</h2>
+          <h2>Browse Lakes</h2>
           <span className="button">Scroll</span>
         </div>
         <div className="spot-list" aria-label="Scrollable waterbody carousel">

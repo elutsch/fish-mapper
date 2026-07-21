@@ -1236,6 +1236,15 @@ h3 {
   line-height: 1.05;
 }
 
+.hour-card-metrics-three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.hour-card-metrics-three b {
+  font-size: clamp(17px, 2vw, 24px);
+}
+
 .bite-meter {
   min-height: 56px;
   padding: 16px 18px;
@@ -1271,25 +1280,16 @@ h3 {
   text-align: right;
 }
 
-.fishability-marginal b {
+.launch-fishable b {
+  background: #2f737c;
+}
+
+.launch-caution b {
   background: var(--marginal);
 }
 
-.fishability-no-go b {
+.launch-do-not-launch b {
   background: var(--no-go);
-}
-
-.hour-card-storm .bite-meter,
-.hour-card-prime .bite-meter {
-  color: #fff;
-  background:
-    radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1.35px),
-    var(--ink);
-}
-
-.hour-card-storm .bite-meter span,
-.hour-card-prime .bite-meter span {
-  color: #fff;
 }
 
 .bite-meter b {
@@ -1301,22 +1301,25 @@ h3 {
   text-transform: uppercase;
 }
 
-.hour-card-base .bite-meter b {
+/* Fish Activity badge colored by level, low → maximum. */
+.activity-low b {
+  background: #6b726e;
+}
+
+.activity-fair b {
   background: #a94c00;
 }
 
-.hour-card-prime .bite-meter b,
-.hour-card-active i {
+.activity-high b {
+  background: var(--teal);
+}
+
+.activity-maximum b {
   background: #527e17;
 }
 
-.hour-card-storm .bite-meter b,
-.hour-card-storm em {
-  background: #d9261d;
-}
-
-.hour-card em,
-.hour-card i {
+/* One rotated corner badge; kind sets the colour. */
+.hour-callout {
   position: absolute;
   right: -8px;
   bottom: -2px;
@@ -1324,17 +1327,21 @@ h3 {
   color: #fff;
   border: 3px solid var(--ink);
   box-shadow: 3px 3px 0 var(--ink);
+  font-family: "Courier New", monospace;
   font-size: 18px;
-  font-style: normal;
   text-transform: uppercase;
   transform: rotate(-24deg);
 }
 
-.hour-card em {
+.hour-callout-storm {
   background: #d9261d;
 }
 
-.hour-card i {
+.hour-callout-windy {
+  background: #2563a8;
+}
+
+.hour-callout-fishon {
   background: #527e17;
 }
 

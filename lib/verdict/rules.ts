@@ -139,7 +139,7 @@ function fishingHours(hours: ForecastHour[]) {
   });
 }
 
-function fetchPenaltyFor(spot: Spot) {
+export function fetchPenaltyFor(spot: Spot) {
   const fetch = spot.maxFetchKm ?? 1;
   if (fetch >= 6) return 8;
   if (fetch >= 3) return 5;

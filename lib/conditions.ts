@@ -1,12 +1,15 @@
-import type { ForecastHour, PressureTrend, Rating, Verdict } from "./types";
+import { dayGrade } from "./rating";
+import type { ForecastHour, PressureTrend, Spot, Verdict } from "./types";
+import { fetchPenaltyFor } from "./verdict/rules";
 
 type DashboardInput = {
   hours: ForecastHour[];
   verdict: Verdict;
   pressureTrend: PressureTrend;
+  spot: Spot;
 };
 
-export function buildConditionsDashboard({ hours, verdict, pressureTrend }: DashboardInput) {
+export function buildConditionsDashboard({ hours, verdict, pressureTrend, spot }: DashboardInput) {
   const daylight = hours.filter((hour) => {
     const localHour = Number(hour.time.slice(11, 13));
     return localHour >= 5 && localHour <= 21;
@@ -27,7 +30,7 @@ export function buildConditionsDashboard({ hours, verdict, pressureTrend }: Dash
   const wetHours = precipByHour.filter((mm) => mm >= 0.2).length;
   const cloudByHour = daylight.map((hour) => hour.cloudPct ?? 0);
   const cloudAvg = cloudByHour.length ? cloudByHour.reduce((sum, pct) => sum + pct, 0) / cloudByHour.length : 0;
-  const grade = fishingGrade(verdict);
+  const grade = { ...dayGrade(daylight, pressureTrend.label, fetchPenaltyFor(spot)), note: verdict.summaryMd };
   const alert = conditionsAlert(peakWind, peakGust, uvIndex, pressureTrend.label);
   const callout = gradeCallout(grade.value, pressureTrend.label);
   const summary = conditionsSummary({
@@ -198,30 +201,6 @@ function nearestHour(hours: ForecastHour[], targetHour: number) {
 
 function firstNumber(values: Array<number | undefined>) {
   return values.find((value): value is number => typeof value === "number" && Number.isFinite(value));
-}
-
-// Three-tier grade tied directly to the day's Prime/Marginal/Tough call:
-// any craft with a clear go is Prime (A+), otherwise any craft with a limited
-// window is Marginal (C+), otherwise the day is Tough (F+). This mirrors the
-// map's statusFromRatings so the grade and the call never disagree.
-function fishingGrade(verdict: Verdict) {
-  const ratings: Rating[] = [
-    verdict.byCraft.powerboat.rating,
-    verdict.byCraft.kayak.rating,
-    verdict.byCraft.canoe.rating
-  ];
-  const { value, detail, status } = ratings.includes("go")
-    ? { value: "A+", detail: "Prime today", status: "prime" as const }
-    : ratings.includes("marginal")
-      ? { value: "C+", detail: "Marginal today", status: "marginal" as const }
-      : { value: "F+", detail: "Tough today", status: "tough" as const };
-
-  return {
-    value,
-    detail,
-    status,
-    note: verdict.summaryMd
-  };
 }
 
 function formatClock(iso: string) {

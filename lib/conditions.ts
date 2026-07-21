@@ -1,3 +1,4 @@
+import { compass } from "./format";
 import { dayGrade } from "./rating";
 import type { ForecastHour, PressureTrend, Spot, Verdict } from "./types";
 import { fetchPenaltyFor } from "./verdict/rules";
@@ -17,6 +18,11 @@ export function buildConditionsDashboard({ hours, verdict, pressureTrend, spot }
   const representative = nearestHour(daylight, 12) ?? daylight[0] ?? hours[0];
   const peakWind = Math.max(...daylight.map((hour) => hour.windKmh), 0);
   const peakGust = Math.max(...daylight.map((hour) => hour.gustKmh), 0);
+  const peakWindHour = daylight.reduce<ForecastHour | undefined>(
+    (best, hour) => (best && best.windKmh >= hour.windKmh ? best : hour),
+    undefined
+  );
+  const windDir = peakWindHour ? compass(peakWindHour.windDirDeg) : null;
   const uvIndex =
     firstNumber(daylight.map((hour) => hour.uvIndexMax)) ??
     Math.max(...daylight.map((hour) => hour.uvIndex ?? 0), 0);
@@ -65,10 +71,9 @@ export function buildConditionsDashboard({ hours, verdict, pressureTrend, spot }
       detail: "Daily max · 0-11"
     },
     wind: {
-      // Daily maximum sustained wind and gust — the once-a-day peaks, not an
-      // hourly reading. Direction is a point-in-time value, so it's dropped.
+      // Daily maximum sustained wind and gust, with the direction at the windiest hour.
       value: `${Math.round(peakWind)}\nkm/h`,
-      detail: `Daily max · gust ${Math.round(peakGust)} km/h`
+      detail: `${windDir ? `${windDir} · ` : ""}daily max · gust ${Math.round(peakGust)} km/h`
     },
     pressure: {
       value: representative ? `${Math.round(representative.pressureHpa)}\nhPa` : "n/a",

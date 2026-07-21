@@ -10,6 +10,12 @@ export function ratingLabel(rating: Rating) {
   return rating === "no-go" ? "No-go" : rating[0].toUpperCase() + rating.slice(1);
 }
 
+// 8-point compass label (N, NE, E, …) for a wind bearing in degrees.
+export function compass(degrees: number) {
+  const points = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
+  return points[Math.round((((degrees % 360) + 360) % 360) / 45) % 8];
+}
+
 export function formatHour(iso: string) {
   return new Intl.DateTimeFormat("en-CA", {
     hour: "numeric",

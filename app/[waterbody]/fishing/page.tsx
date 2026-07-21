@@ -4,7 +4,7 @@ import { LakeImage } from "@/app/components/LakeImage";
 import { RatingBadge } from "@/app/components/RatingBadge";
 import { getSpeciesCard, SpeciesCards } from "@/app/components/SpeciesCards";
 import { buildConditionsDashboard } from "@/lib/conditions";
-import { craftLabels, formatDate, formatHour, regsSummary } from "@/lib/format";
+import { compass, craftLabels, formatDate, formatHour, regsSummary } from "@/lib/format";
 import { getLakeProfile } from "@/lib/lakeProfiles";
 import type { LakeProfile } from "@/lib/lakeProfiles/types";
 import { fishActivity, launchRead } from "@/lib/rating";
@@ -286,7 +286,7 @@ function HourlyConditionCard({
           ? "active"
           : "base";
 
-  const pressureGlyph = pressure === "falling" ? "↓" : pressure === "rising" ? "↑" : "→";
+  const pressureWord = pressure === "falling" ? "Falling" : pressure === "rising" ? "Rising" : "Steady";
 
   return (
     <article className={`hour-card hour-card-${tone}`}>
@@ -308,7 +308,7 @@ function HourlyConditionCard({
         </div>
         <div>
           <span>Pressure</span>
-          <b>{pressureGlyph}</b>
+          <b>{pressureWord}</b>
         </div>
       </div>
       <div className={`bite-meter activity-${activity.level}`}>
@@ -317,7 +317,7 @@ function HourlyConditionCard({
       </div>
       <div className="hour-card-metrics">
         <div>
-          <span>Wind</span>
+          <span>Wind · {compass(hour.windDirDeg)}</span>
           <b>{Math.round(hour.windKmh)}kph</b>
         </div>
         <div>

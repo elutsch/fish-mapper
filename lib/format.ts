@@ -18,6 +18,12 @@ export function formatHour(iso: string) {
   }).format(new Date(iso));
 }
 
+// Drop the leading "Regulations effective <date>, FMZ <n>." sentence from a
+// regs disclaimer, leaving just the summary/caveat copy for the callout.
+export function regsSummary(disclaimer: string) {
+  return disclaimer.replace(/^Regulations effective[^.]*\.\s*/i, "").trim();
+}
+
 export function formatDate(isoDate: string) {
   return new Intl.DateTimeFormat("en-CA", {
     weekday: "long",

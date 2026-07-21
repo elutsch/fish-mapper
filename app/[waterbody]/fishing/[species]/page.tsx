@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getSpeciesCard } from "@/app/components/SpeciesCards";
 import { getLakeProfile, lakeProfiles } from "@/lib/lakeProfiles";
 import type { LakeProfile, LakeProfileSpecies } from "@/lib/lakeProfiles/types";
+import { regsSummary } from "@/lib/format";
 import { formatSpeciesName, speciesPathSegment } from "@/lib/species";
 
 type PageProps = {
@@ -96,7 +97,7 @@ export default async function LakeSpeciesPage({ params }: PageProps) {
       title: "Regulations",
       body: (
         <>
-          <p className="profile-disclaimer">{profile.regsDisclaimer}</p>
+          <p className="profile-disclaimer">{regsSummary(profile.regsDisclaimer)}</p>
           <div className="species-rules">
             {species.speciesRules.map((rule) => (
               <a key={rule.rule} href={rule.sourceUrl} target="_blank" rel="noreferrer">

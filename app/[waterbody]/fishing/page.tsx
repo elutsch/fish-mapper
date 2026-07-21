@@ -4,7 +4,7 @@ import { LakeImage } from "@/app/components/LakeImage";
 import { RatingBadge } from "@/app/components/RatingBadge";
 import { getSpeciesCard, SpeciesCards } from "@/app/components/SpeciesCards";
 import { buildConditionsDashboard } from "@/lib/conditions";
-import { craftLabels, formatDate, formatHour } from "@/lib/format";
+import { craftLabels, formatDate, formatHour, regsSummary } from "@/lib/format";
 import { getLakeProfile } from "@/lib/lakeProfiles";
 import type { LakeProfile } from "@/lib/lakeProfiles/types";
 import { formatSpeciesName, speciesPathSegment } from "@/lib/species";
@@ -378,7 +378,7 @@ function LakeProfileSections({ profile, caveats }: { profile: LakeProfile; cavea
           <span>02</span>
           <h3>Regulations snapshot</h3>
         </div>
-        <p className="profile-disclaimer">{profile.regsDisclaimer}</p>
+        <p className="profile-disclaimer">{regsSummary(profile.regsDisclaimer)}</p>
         <div className="reg-grid">
           {profile.regulations.map((regulation) => (
             <article key={regulation.species} className="reg-card">

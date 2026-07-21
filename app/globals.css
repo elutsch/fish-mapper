@@ -2264,10 +2264,25 @@ a.lake-card:active {
   text-transform: none;
 }
 
-.species-footnote,
-.profile-disclaimer,
-.profile-disclaimer {
+.species-footnote {
   background: #fff;
+}
+
+/* Regs disclaimer as a source-style callout — the resource-link box treatment
+   (bordered white card, hard shadow, Courier caps) minus the link underline. */
+.profile-panel .profile-disclaimer {
+  padding: 15px 18px;
+  background: #fff;
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  color: var(--ink);
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-decoration: none;
 }
 
 .reg-card,

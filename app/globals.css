@@ -1415,6 +1415,67 @@ h3 {
   box-shadow: 4px 4px 0 var(--ink);
 }
 
+.launch-map-block {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.6fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.launch-map {
+  min-height: 260px;
+  border: 3px solid var(--ink);
+  box-shadow: 5px 6px 0 var(--ink);
+  overflow: hidden;
+  background: #dfe9e3;
+}
+
+.launch-map-pin {
+  cursor: default;
+}
+
+.launch-map-meta {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+}
+
+.launch-map-meta strong {
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.launch-map-coords {
+  margin: 0;
+  color: #596361;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.launch-map-caption {
+  margin: 2px 0 6px;
+  color: #6b726e;
+  font-family: "Comic Neue", "Comic Sans MS", cursive;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.launch-directions {
+  justify-self: start;
+  text-decoration: none;
+  background: var(--lime);
+}
+
+@media (max-width: 720px) {
+  .launch-map-block {
+    grid-template-columns: 1fr;
+  }
+}
+
 .boat-launch-marker {
   display: block;
   width: 44px;

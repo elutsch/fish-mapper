@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { LakeImage } from "@/app/components/LakeImage";
+import { LaunchMap } from "@/app/components/LaunchMap";
 import { RatingBadge } from "@/app/components/RatingBadge";
 import { getSpeciesCard, SpeciesCards } from "@/app/components/SpeciesCards";
 import { buildConditionsDashboard } from "@/lib/conditions";
-import { compass, craftLabels, formatDate, formatHour, regsSummary } from "@/lib/format";
+import { compass, craftLabels, formatCoords, formatDate, formatHour, regsSummary } from "@/lib/format";
 import { getLakeProfile } from "@/lib/lakeProfiles";
 import type { LakeProfile } from "@/lib/lakeProfiles/types";
 import { fishActivity, launchRead } from "@/lib/rating";
 import { formatSpeciesName, speciesPathSegment } from "@/lib/species";
 import { getOrCreateSnapshot } from "@/lib/snapshot";
 import { getSpot, spots } from "@/lib/spots";
-import type { Craft, ForecastHour, PressureTrend } from "@/lib/types";
+import type { Craft, ForecastHour, PressureTrend, Spot } from "@/lib/types";
 import { fetchPenaltyFor } from "@/lib/verdict/rules";
 
 type PageProps = {
@@ -184,7 +185,7 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
         </section>
 
         {profile ? (
-          <LakeProfileSections profile={profile} caveats={publicCaveats} />
+          <LakeProfileSections profile={profile} spot={spot} caveats={publicCaveats} />
         ) : (
           <section className="section lake-card detail-card">
             <LakeImage spotId={spot.id}>
@@ -371,7 +372,24 @@ function LakeProfileIntro({
   );
 }
 
-function LakeProfileSections({ profile, caveats }: { profile: LakeProfile; caveats: string[] }) {
+function LakeProfileSections({
+  profile,
+  spot,
+  caveats
+}: {
+  profile: LakeProfile;
+  spot: Spot;
+  caveats: string[];
+}) {
+  // Pin the mapped access facility (spot.lat/lng), not the profile's lake point.
+  const { lat, lng } = spot;
+  // Prefer the access point's name/address for the label; coordinates always show.
+  const primaryLaunch = profile.launches[0];
+  const dash = primaryLaunch?.name.match(/^(.*?)\s+[—–]\s+(.+)$/);
+  const launchPlace = dash ? dash[1] : (primaryLaunch?.name ?? null);
+  const launchAddress = dash ? dash[2] : null;
+  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+
   return (
     <section className="lake-profile" aria-label={`${profile.lake} supporting profile details`}>
       <section className="profile-panel">
@@ -428,6 +446,20 @@ function LakeProfileSections({ profile, caveats }: { profile: LakeProfile; cavea
         <div className="profile-section-title">
           <span>03</span>
           <h3>Access notes</h3>
+        </div>
+        <div className="launch-map-block">
+          <LaunchMap lat={lat} lng={lng} label={`Approximate launch access for ${profile.lake}`} />
+          <div className="launch-map-meta">
+            {launchPlace ? <strong>{launchPlace}</strong> : null}
+            {launchAddress ? <p className="access-address">{launchAddress}</p> : null}
+            <p className="launch-map-coords">{formatCoords(lat, lng)}</p>
+            <p className="launch-map-caption">
+              Approximate access area — confirm launchability and hours before you go.
+            </p>
+            <a className="button launch-directions" href={directionsUrl} target="_blank" rel="noreferrer">
+              Get Directions
+            </a>
+          </div>
         </div>
         <div className="access-grid">
           {profile.launches.map((launch) => {

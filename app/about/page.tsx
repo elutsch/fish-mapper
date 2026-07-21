@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Why Bite Club exists and how it gives Ontario anglers honest lake-by-lake fishing condition calls."
+    "Why Bite Club exists and how it gives Ontario anglers honest lake-by-lake fishing condition calls.",
+  alternates: { canonical: "/about" }
 };
 
 export default function AboutPage() {

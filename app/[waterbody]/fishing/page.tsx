@@ -9,6 +9,7 @@ import { compass, craftLabels, formatCoords, formatDate, formatHour, regsSummary
 import { getLakeProfile } from "@/lib/lakeProfiles";
 import type { LakeProfile } from "@/lib/lakeProfiles/types";
 import { fishActivity, launchRead } from "@/lib/rating";
+import { absoluteUrl } from "@/lib/seo";
 import { formatSpeciesName, speciesPathSegment } from "@/lib/species";
 import { getOrCreateSnapshot } from "@/lib/snapshot";
 import { getSpot, spots } from "@/lib/spots";
@@ -35,10 +36,25 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return {};
   }
   const profile = getLakeProfile(spot.id);
+  const canonical = `/${spot.id}/fishing`;
+  const title = `Today's ${spot.name} Fishing Conditions`;
+  const description =
+    profile?.overview
+      ? truncateForMeta(profile.overview, 200)
+      : waterbodyMetaDescription(spot.name, Boolean(profile));
 
   return {
-    title: `${spot.name} Fishing Conditions`,
-    description: waterbodyMetaDescription(spot.name, Boolean(profile))
+    title,
+    description,
+    alternates: { canonical },
+    openGraph: {
+      title: `${title} | Bite Club`,
+      description,
+      url: canonical,
+      images: [
+        { url: `/waterbodies/${spot.id}.webp`, width: 800, height: 450, alt: `${spot.name} — Bite Club` }
+      ]
+    }
   };
 }
 
@@ -64,6 +80,12 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
     "@context": "https://schema.org",
     "@type": "Place",
     name: spot.name,
+    url: absoluteUrl(`/${spot.id}/fishing`),
+    address: {
+      "@type": "PostalAddress",
+      addressRegion: "Ontario",
+      addressCountry: "CA"
+    },
     geo: {
       "@type": "GeoCoordinates",
       latitude: spot.lat,
@@ -78,6 +100,15 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
         name: "Bite Club"
       }
     }
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Fishing Conditions", item: absoluteUrl("/fishing") },
+      { "@type": "ListItem", position: 2, name: spot.name, item: absoluteUrl(`/${spot.id}/fishing`) }
+    ]
   };
 
   return (
@@ -217,6 +248,10 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
       </main>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
     </>
   );
 }
@@ -642,6 +677,15 @@ function publicFacingCaveats(caveats: string[]) {
     /confirm .*before production/i
   ];
   return caveats.filter((caveat) => !devPatterns.some((pattern) => pattern.test(caveat)));
+}
+
+// Trim rich profile copy to a meta-description-friendly length at a word boundary.
+function truncateForMeta(text: string, max: number) {
+  const clean = text.trim();
+  if (clean.length <= max) return clean;
+  const cut = clean.slice(0, max);
+  const lastSpace = cut.lastIndexOf(" ");
+  return `${cut.slice(0, lastSpace > 0 ? lastSpace : max).replace(/[\s,.—-]+$/, "")}…`;
 }
 
 function waterbodyMetaDescription(name: string, hasProfile: boolean) {

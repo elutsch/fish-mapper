@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { LakeImage } from "@/app/components/LakeImage";
 import { SpotMap } from "@/app/components/SpotMap";
+import { TrackedLakeCard } from "@/app/components/TrackedLakeCard";
 import { buildConditionsDashboard } from "@/lib/conditions";
 import { formatLaunchType } from "@/lib/launch";
 import { getOrCreateSnapshot } from "@/lib/snapshot";
@@ -95,7 +96,12 @@ export default async function FishingIndexPage() {
             const statusLabel = statuses[spot.id]?.label ?? "Forecast pending";
 
             return (
-              <a key={spot.id} className="lake-card spot-card" href={`/${spot.id}/fishing`}>
+              <TrackedLakeCard
+                key={spot.id}
+                href={`/${spot.id}/fishing`}
+                waterbodyId={spot.id}
+                forecastStatus={status}
+              >
                 <LakeImage spotId={spot.id}>
                   <span className={`lake-status-callout launch-status-${status}`}>{statusLabel}</span>
                 </LakeImage>
@@ -108,7 +114,7 @@ export default async function FishingIndexPage() {
                   {spot.fmz ? <span className="pill">FMZ {spot.fmz}</span> : null}
                 </div>
                 <p className="species-list">{spot.species.map(formatSpeciesName).join(", ")}</p>
-              </a>
+              </TrackedLakeCard>
             );
           })}
         </div>

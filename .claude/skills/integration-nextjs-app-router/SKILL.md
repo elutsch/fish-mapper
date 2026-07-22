@@ -3,7 +3,7 @@ name: integration-nextjs-app-router
 description: PostHog integration for Next.js App Router applications
 metadata:
   author: PostHog
-  version: 1.32.0
+  version: 1.33.0
 ---
 
 # PostHog integration for Next.js App Router

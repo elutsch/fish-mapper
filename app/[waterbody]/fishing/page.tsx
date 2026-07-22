@@ -5,6 +5,7 @@ import { LaunchMap } from "@/app/components/LaunchMap";
 import { RatingBadge } from "@/app/components/RatingBadge";
 import { getSpeciesCard, SpeciesCards } from "@/app/components/SpeciesCards";
 import { TrackedDirectionsLink } from "@/app/components/TrackedDirectionsLink";
+import { TrackedSpeciesLink } from "@/app/components/TrackedSpeciesLink";
 import { buildConditionsDashboard } from "@/lib/conditions";
 import { compass, craftLabels, formatCoords, formatDate, formatHour, regsSummary } from "@/lib/format";
 import { getLakeProfile } from "@/lib/lakeProfiles";
@@ -605,13 +606,18 @@ function ProfileSpeciesCards({ profile }: { profile: LakeProfile }) {
         const card = getSpeciesCard(species.displayName);
         const href = `/${profile.slug}/fishing/${speciesPathSegment(species.displayName)}`;
         return (
-          <a key={species.parentSlug} className="profile-species-card" href={href}>
+          <TrackedSpeciesLink
+            key={species.parentSlug}
+            href={href}
+            waterbodyId={profile.slug}
+            speciesId={speciesPathSegment(species.displayName)}
+          >
             {card ? (
               <img src={card.image} alt={`${card.label} species card`} loading="lazy" />
             ) : (
               <span>{formatSpeciesName(species.displayName)}</span>
             )}
-          </a>
+          </TrackedSpeciesLink>
         );
       })}
     </div>

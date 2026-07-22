@@ -164,7 +164,7 @@ export default async function LakeSpeciesPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <section className="lake-profile profile-front" aria-label={`${speciesName} at ${profile.lake}`}>
-        <div className="profile-hero profile-hero-front">
+        <div className="profile-hero profile-hero-front species-profile-hero">
           <div>
             <span className="profile-kicker">
               {rankLabel(species.tier)} / {profile.lake}

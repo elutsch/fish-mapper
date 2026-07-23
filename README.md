@@ -296,7 +296,7 @@ The site is built to rank for queries like *today's fishing conditions*, *southe
 fully-rendered HTML with structured data, they're also ideal for **AEO** (AI answer engines that don't
 run JS get complete content).
 
-**Foundations** (`lib/seo.ts`): `SITE_URL` (from `NEXT_PUBLIC_SITE_URL`, default `https://biteclub.ca`),
+**Foundations** (`lib/seo.ts`): `SITE_URL` (from `NEXT_PUBLIC_SITE_URL`, default `https://www.biteclub.ca`),
 `absoluteUrl()`, `speciesIsIndexable(tier)`. `app/layout.tsx` sets `metadataBase` + default Open Graph /
 Twitter cards + a 1200×630 default OG image (`public/og/default.jpg`).
 
@@ -316,7 +316,7 @@ are thin/templated, so they render **`noindex, follow`** and are excluded from t
 site-level authority while keeping them crawlable so link equity still flows to the lake pages. The gate is
 `speciesIsIndexable(tier)`; it flips automatically if a species later gains real copy.
 
-**Post-deploy:** submit `https://biteclub.ca/sitemap.xml` in Google Search Console.
+**Post-deploy:** submit `https://www.biteclub.ca/sitemap.xml` in Google Search Console.
 
 ---
 
@@ -353,7 +353,7 @@ contact events are correlated via PostHog distinct/session IDs.
 | `KV_REST_API_URL` + `KV_REST_API_TOKEN` | **Yes (prod)** | Vercel KV — persists daily snapshots. Without them, snapshots use per-instance memory and won't survive/​share across invocations. |
 | `CRON_SECRET` | **Yes (prod)** | Authenticates `/api/cron/fishing`. Vercel Cron sends it automatically; the route is open to anyone if it's unset. |
 | `CONTACT_WEBHOOK_URL` | Optional | Discord webhook that receives contact-form submissions. |
-| `NEXT_PUBLIC_SITE_URL` | Optional | Overrides the canonical origin (defaults to `https://biteclub.ca`). Useful for preview deploys. |
+| `NEXT_PUBLIC_SITE_URL` | Optional | Overrides the canonical origin (defaults to `https://www.biteclub.ca`). Useful for preview deploys. |
 | `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` | Analytics | PostHog project token (publishable `phc_…`). Enables product analytics; analytics no-op if unset. |
 | `NEXT_PUBLIC_POSTHOG_HOST` | Analytics | PostHog ingestion host (e.g. `https://us.i.posthog.com`). |
 

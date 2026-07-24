@@ -35,7 +35,10 @@ export default async function FishingIndexPage() {
       <section className="hero poster-hero index-hero" aria-labelledby="fishing-index-title">
         <div className="index-hero-copy" aria-label="Homepage forecast introduction">
           <span className="alert">Fish On!</span>
-          <h1 id="fishing-index-title">Today&apos;s Fishability!</h1>
+          <h1 id="fishing-index-title">
+            <span>Today&apos;s</span>{" "}
+            <span>Fishability!</span>
+          </h1>
           <div className="slashes">
             <i />
             <i />
@@ -47,7 +50,10 @@ export default async function FishingIndexPage() {
       <section className="what-we-do" aria-labelledby="what-we-do-title">
         <div className="what-we-do-intro">
           <span className="alert">What We Do</span>
-          <h2 id="what-we-do-title">Bite + Launch Conditions!</h2>
+          <h2 id="what-we-do-title">
+            <span>Bite + Launch</span>{" "}
+            <span>Conditions!</span>
+          </h2>
         </div>
         <div className="what-we-do-actions" aria-label="Explore fishing conditions">
           <a className="what-we-do-button" href="#lake-map">

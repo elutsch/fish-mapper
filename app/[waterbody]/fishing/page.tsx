@@ -396,7 +396,7 @@ function WeeklyForecast({ days }: { days: WeekDay[] }) {
               <b>{index === 0 ? "Today" : weekday(day.date, "weekday")}</b>
               <em>{weekday(day.date, "monthDay")}</em>
             </span>
-            <FishabilityBadge status={day.tier} className="week-tier" />
+            <FishabilityBadge status={day.tier} className="week-tier" timeframe="day" />
             <div className="week-breakdown">
               <div>
                 <span>Launch</span>

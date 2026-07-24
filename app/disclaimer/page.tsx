@@ -17,7 +17,6 @@ export default function DisclaimerPage() {
           Please read this before relying on anything on this site. Fishing, boating, paddling, and
           being on or near water are inherently hazardous.
         </p>
-        <div className="burst">Read<br />First</div>
       </section>
 
       <section className="method-panel">

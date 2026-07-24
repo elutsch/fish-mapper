@@ -10,6 +10,7 @@ export const FISHABILITY_LABELS: Record<FishabilityStatus, string> = {
   unknown: "Forecast pending"
 };
 
-export function fishabilityLabel(status: FishabilityStatus) {
-  return FISHABILITY_LABELS[status];
+export function fishabilityLabel(status: FishabilityStatus, timeframe: "today" | "day" = "today") {
+  const label = FISHABILITY_LABELS[status];
+  return timeframe === "day" ? label.replace(/ today$/i, " day") : label;
 }

@@ -17,7 +17,6 @@ export default function AboutPage() {
           Bite Club reads the weather, the launch, and the shape of the lake itself, then gives
           Ontario anglers a straight answer before they leave the driveway.
         </p>
-        <div className="burst">No<br />Vibes</div>
       </section>
 
       <section className="method-panel">

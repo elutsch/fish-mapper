@@ -178,6 +178,19 @@ const sections: FaqSection[] = [
         )
       },
       {
+        question: "What is fetch?",
+        answer: (
+          <p>
+            Fetch is the uninterrupted distance wind travels across open water. The longer that
+            distance, the more room wind has to build waves and chop; a smaller or more sheltered
+            waterbody will usually stay calmer in the same forecast wind. Bite Club uses each
+            waterbody&apos;s estimated maximum fetch to adjust its general and craft-specific launch
+            reads. It is a planning estimate, not a live wave measurement, and actual conditions
+            still depend on wind direction, shoreline shelter, depth, and local weather.
+          </p>
+        )
+      },
+      {
         question: "What is the best time of day to fish?",
         answer: (
           <p>

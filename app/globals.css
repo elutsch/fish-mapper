@@ -349,7 +349,19 @@ a {
   align-items: end;
   justify-items: start;
   background:
-    linear-gradient(90deg, rgba(255, 252, 232, 0.92) 0%, rgba(255, 252, 232, 0.68) 34%, rgba(255, 252, 232, 0.22) 58%, rgba(255, 252, 232, 0) 100%),
+    radial-gradient(
+      circle at 100% 100%,
+      rgba(255, 252, 232, 0.72) 0%,
+      rgba(255, 252, 232, 0.4) 24%,
+      rgba(255, 252, 232, 0) 56%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 252, 232, 0.96) 0%,
+      rgba(255, 252, 232, 0.78) 34%,
+      rgba(255, 252, 232, 0.34) 62%,
+      rgba(255, 252, 232, 0.06) 100%
+    ),
     url("/hero/k-pow-bass.webp") center/cover;
   background-size: cover;
   text-align: left;
@@ -370,7 +382,7 @@ a {
 .index-hero-copy {
   max-width: min(660px, 100%);
   display: grid;
-  gap: 12px;
+  gap: 6px;
   align-content: end;
   justify-items: start;
   position: relative;
@@ -378,8 +390,7 @@ a {
 }
 
 .index-hero-copy h1 {
-  margin-left: 0;
-  margin-right: 0;
+  margin: 0;
   max-width: 620px;
   color: var(--ink);
   font-size: clamp(48px, 7vw, 104px);
@@ -559,65 +570,51 @@ h3 {
   margin-top: 0;
   max-width: 640px;
   font-size: clamp(42px, 5vw, 72px);
+  text-shadow: 4px 4px 0 #fff;
 }
 
-.what-we-do-intro p {
-  margin: 0;
-  max-width: 640px;
-  color: #263130;
-  font-family: "Comic Neue", "Comic Sans MS", cursive;
-  font-size: clamp(17px, 1.65vw, 22px);
-  font-weight: 700;
-  line-height: 1.32;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-}
-
-.what-we-do-grid {
+.what-we-do-actions {
   grid-column: 1 / -1;
+  width: max-content;
+  max-width: 100%;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(2, max-content);
+  gap: 14px;
+  justify-self: start;
+  justify-items: start;
+  padding: 4px;
 }
 
-.what-we-do-grid article {
-  min-width: 0;
-  padding: 16px;
+.what-we-do-button {
+  padding: 13px 26px;
+  display: grid;
+  place-items: center;
   border: 3px solid var(--ink);
-  background: #f7ffcf;
+  background: var(--gold);
   box-shadow: 4px 4px 0 var(--ink);
-}
-
-.what-we-do-grid article:nth-child(2) {
-  background: #d9fbff;
-}
-
-.what-we-do-grid article:nth-child(3) {
-  background: #fff;
-}
-
-.what-we-do-grid span {
-  display: inline-block;
-  margin-bottom: 12px;
-  padding: 5px 8px;
-  background: var(--ink);
-  color: #fff;
-  font-size: 12px;
-}
-
-.what-we-do-grid h3 {
-  margin-bottom: 8px;
-}
-
-.what-we-do-grid p {
-  margin: 0;
-  color: #4d5856;
-  font-family: "Comic Neue", "Comic Sans MS", cursive;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.35;
+  color: var(--ink);
+  font-size: clamp(16px, 1.5vw, 20px);
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  transition: transform 0.05s ease, box-shadow 0.05s ease;
+}
+
+.what-we-do-button:hover,
+.what-we-do-button:focus-visible {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+
+.what-we-do-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+#lake-map,
+#browse-lakes {
+  scroll-margin-top: 100px;
 }
 
 /* Global contact CTA banner — aligned to the same responsive content gutter
@@ -1632,10 +1629,6 @@ h3 {
   background: var(--no-go);
 }
 
-.legend-cluster {
-  background: var(--cyan);
-}
-
 .map-shell {
   height: 360px;
   min-height: 360px;
@@ -2071,6 +2064,11 @@ h3 {
   text-transform: uppercase;
 }
 
+.map-date-button {
+  justify-self: end;
+  white-space: nowrap;
+}
+
 .spot-list {
   display: flex;
   gap: 18px;
@@ -2152,6 +2150,11 @@ a.lake-card:active {
 
 .spot-card .facts {
   padding: 0 16px 16px;
+}
+
+.spot-card .lake-body .facts {
+  margin-top: 2px;
+  padding: 0;
 }
 
 .spot-card .pill {
@@ -3149,23 +3152,22 @@ a.lake-card:active {
     flex-direction: column;
   }
 
-  .what-we-do,
-  .what-we-do-grid {
+  .what-we-do {
     grid-template-columns: 1fr;
+  }
+
+  .what-we-do-actions {
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .what-we-do-button {
+    padding-inline: 14px;
   }
 
   .contact-cta {
     min-height: auto;
     padding: clamp(28px, 8vw, 42px) clamp(16px, 5vw, 26px);
-    background:
-      linear-gradient(
-        0deg,
-        rgba(255, 252, 232, 0.95) 0%,
-        rgba(255, 252, 232, 0.72) 46%,
-        rgba(255, 252, 232, 0.28) 78%,
-        rgba(255, 252, 232, 0) 100%
-      ),
-      url("/hero/contact-cta-bg.webp") center top/cover;
   }
 
   .screen {
@@ -3298,7 +3300,6 @@ a.lake-card:active {
   .craft-grid,
   .mini,
   .what-we-do,
-  .what-we-do-grid,
   .conditions-top,
   .conditions-grid,
   .hourly-grid,

@@ -1,19 +1,23 @@
 import type { Metadata } from "next";
+import { FishabilityBadge } from "@/app/components/FishabilityBadge";
 import { LakeImage } from "@/app/components/LakeImage";
 import { SpotMap } from "@/app/components/SpotMap";
 import { TrackedLakeCard } from "@/app/components/TrackedLakeCard";
 import { buildConditionsDashboard } from "@/lib/conditions";
+import { defaultValidFor } from "@/lib/forecast";
+import { formatDate } from "@/lib/format";
 import { formatLaunchType } from "@/lib/launch";
 import { getOrCreateSnapshot } from "@/lib/snapshot";
 import { spots, spotsAsGeoJson } from "@/lib/spots";
 import { formatSpeciesName } from "@/lib/species";
+import { fishabilityLabel } from "@/lib/fishability";
 import type { MapSpotStatus } from "@/lib/spots";
 import type { Spot, Verdict } from "@/lib/types";
 
 export const metadata: Metadata = {
   title: "Today's Fishing Conditions for Southern Ontario Lakes",
   description:
-    "Today's fishing and boating conditions for 20 Southern Ontario lakes and rivers — Prime, Marginal, or Tough calls with separate powerboat, kayak, and canoe launch verdicts from wind, fetch, and pressure.",
+    "Today's Fishability for 19 Southern Ontario lakes and rivers — Prime, Solid, Grind, or Tough calls with separate powerboat, kayak, and canoe launch verdicts.",
   alternates: { canonical: "/fishing" }
 };
 
@@ -22,7 +26,8 @@ export const metadata: Metadata = {
 export const revalidate = false;
 
 export default async function FishingIndexPage() {
-  const statuses = await mapStatuses();
+  const validFor = defaultValidFor();
+  const statuses = await mapStatuses(validFor);
   const geojson = spotsAsGeoJson(statuses);
 
   return (
@@ -30,7 +35,10 @@ export default async function FishingIndexPage() {
       <section className="hero poster-hero index-hero" aria-labelledby="fishing-index-title">
         <div className="index-hero-copy" aria-label="Homepage forecast introduction">
           <span className="alert">Fish On!</span>
-          <h1 id="fishing-index-title">Hot Lakes Today</h1>
+          <h1 id="fishing-index-title">
+            <span>Today&apos;s</span>{" "}
+            <span>Fishability!</span>
+          </h1>
           <div className="slashes">
             <i />
             <i />
@@ -42,58 +50,47 @@ export default async function FishingIndexPage() {
       <section className="what-we-do" aria-labelledby="what-we-do-title">
         <div className="what-we-do-intro">
           <span className="alert">What We Do</span>
-          <h2 id="what-we-do-title">Find the best bite window before you launch.</h2>
-          <p>
-            Bite Club turns lake profiles and today&apos;s forecast into plain-language fishing and
-            boating condition calls for Southern Ontario launches. Start with the map, pick a
-            waterbody, then open the lake page for the conditions behind the call.
-          </p>
+          <h2 id="what-we-do-title">
+            <span>Bite + Launch</span>{" "}
+            <span>Conditions!</span>
+          </h2>
         </div>
-        <div className="what-we-do-grid">
-          <article>
-            <span>01</span>
-            <h3>Today&apos;s Read</h3>
-            <p>Temperature, wind, pressure, sun, moon, and fetch roll into a simple fishing grade.</p>
-          </article>
-          <article>
-            <span>02</span>
-            <h3>Map Scan</h3>
-            <p>Color-coded launches show where conditions look prime, marginal, or tough today.</p>
-          </article>
-          <article>
-            <span>03</span>
-            <h3>Lake Pages</h3>
-            <p>Open a lake for craft verdicts, access context, species notes, and the full dashboard.</p>
-          </article>
+        <div className="what-we-do-actions" aria-label="Explore fishing conditions">
+          <a className="what-we-do-button" href="#lake-map">
+            Explore the Map
+          </a>
+          <a className="what-we-do-button" href="#browse-lakes">
+            Browse Lakes
+          </a>
         </div>
       </section>
 
-      <section className="map-card" aria-label="Lake map">
+      <section className="map-card" id="lake-map" aria-label="Lake map">
         <div className="title-row">
           <div>
             <h2>Lake Map</h2>
             <p className="section-subcopy">Today&apos;s on-water outlook for each launch. Clusters expand as you zoom.</p>
           </div>
-          <span className="button">Ontario</span>
+          <time className="button map-date-button" dateTime={validFor}>
+            {formatDate(validFor)}
+          </time>
         </div>
         <div className="map-legend" aria-label="Map color legend">
           <span><i className="legend-dot legend-prime" />Prime today</span>
-          <span><i className="legend-dot legend-marginal" />Marginal today</span>
+          <span><i className="legend-dot legend-solid" />Solid today</span>
+          <span><i className="legend-dot legend-grind" />Grind today</span>
           <span><i className="legend-dot legend-tough" />Tough today</span>
-          <span><i className="legend-dot legend-cluster" />Grouped launches</span>
         </div>
         <SpotMap geojson={geojson} />
       </section>
 
-      <section className="lakes">
+      <section className="lakes" id="browse-lakes">
         <div className="title-row">
           <h2>Browse Lakes</h2>
-          <span className="button">Scroll</span>
         </div>
         <div className="spot-list" aria-label="Scrollable waterbody carousel">
           {spots.map((spot) => {
             const status = statuses[spot.id]?.status ?? "unknown";
-            const statusLabel = statuses[spot.id]?.label ?? "Forecast pending";
 
             return (
               <TrackedLakeCard
@@ -103,15 +100,16 @@ export default async function FishingIndexPage() {
                 forecastStatus={status}
               >
                 <LakeImage spotId={spot.id}>
-                  <span className={`lake-status-callout launch-status-${status}`}>{statusLabel}</span>
+                  <FishabilityBadge status={status} className="lake-status-callout" />
                 </LakeImage>
                 <div className="lake-body">
                   <h3>{spot.name}</h3>
-                  <p className="muted">{formatLaunchType(spot.launch)}</p>
-                </div>
-                <div className="facts">
-                  <span className="pill">{spot.maxFetchKm?.toFixed(1)} km fetch</span>
-                  {spot.fmz ? <span className="pill">FMZ {spot.fmz}</span> : null}
+                  <p className="muted">
+                    {formatLaunchType(spot.launch)} · {spot.maxFetchKm?.toFixed(1)} km fetch
+                  </p>
+                  <div className="facts">
+                    <span className="pill">Target Species</span>
+                  </div>
                 </div>
                 <p className="species-list">{spot.species.map(formatSpeciesName).join(", ")}</p>
               </TrackedLakeCard>
@@ -123,13 +121,13 @@ export default async function FishingIndexPage() {
   );
 }
 
-async function mapStatuses() {
+async function mapStatuses(validFor: string) {
   const entries = await Promise.all(
     spots.map(async (spot) => {
       try {
-        const { forecast, pressureTrend, verdict } = await getOrCreateSnapshot(spot);
+        const { forecast, pressureTrend, verdict } = await getOrCreateSnapshot(spot, validFor);
         const dashboard = buildConditionsDashboard({ hours: forecast, pressureTrend, verdict, spot });
-        return [spot.id, statusForSpot(spot, verdict, dashboard.grade.status, dashboard.grade.value)] as const;
+        return [spot.id, statusForSpot(spot, verdict, dashboard.grade.status)] as const;
       } catch (error) {
         return [
           spot.id,
@@ -151,12 +149,10 @@ async function mapStatuses() {
 function statusForSpot(
   spot: Spot,
   verdict: Verdict,
-  status: MapSpotStatus["status"],
-  grade: string
+  status: MapSpotStatus["status"]
 ): MapSpotStatus {
-  const label =
-    status === "prime" ? "Prime today" : status === "marginal" ? "Marginal today" : "Tough today";
-  const detail = `Grade ${grade}. Powerboat ${verdict.byCraft.powerboat.rating}; kayak ${verdict.byCraft.kayak.rating}; canoe ${verdict.byCraft.canoe.rating}.`;
+  const label = fishabilityLabel(status);
+  const detail = `Fishability ${label.toLowerCase()}. Powerboat ${verdict.byCraft.powerboat.rating}; kayak ${verdict.byCraft.kayak.rating}; canoe ${verdict.byCraft.canoe.rating}.`;
 
   return {
     status,

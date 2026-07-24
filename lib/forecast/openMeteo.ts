@@ -7,7 +7,7 @@ type OpenMeteoHourly = {
   wind_speed_10m: number[];
   wind_gusts_10m: number[];
   wind_direction_10m: number[];
-  surface_pressure: number[];
+  pressure_msl: number[];
   precipitation: number[];
   cloud_cover: number[];
 };
@@ -44,7 +44,7 @@ export async function fetchOpenMeteoForecast(
     latitude: String(spot.lat),
     longitude: String(spot.lng),
     hourly:
-      "temperature_2m,wind_speed_10m,wind_gusts_10m,wind_direction_10m,surface_pressure,precipitation,cloud_cover",
+      "temperature_2m,wind_speed_10m,wind_gusts_10m,wind_direction_10m,pressure_msl,precipitation,cloud_cover",
     daily: "sunrise,sunset,temperature_2m_max,temperature_2m_min",
     models: "gem_seamless",
     wind_speed_unit: "kmh",
@@ -89,7 +89,7 @@ export async function fetchOpenMeteoForecast(
       windKmh: hourly.wind_speed_10m[index] ?? 0,
       gustKmh: hourly.wind_gusts_10m[index] ?? hourly.wind_speed_10m[index] ?? 0,
       windDirDeg: hourly.wind_direction_10m[index] ?? 0,
-      pressureHpa: hourly.surface_pressure[index] ?? 1013,
+      pressureHpa: hourly.pressure_msl[index] ?? 1013,
       precipMm: hourly.precipitation[index] ?? 0,
       cloudPct: hourly.cloud_cover[index] ?? 0,
       sunrise: daily?.sunrise,

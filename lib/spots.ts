@@ -1,4 +1,5 @@
 import rawSpots from "@/data/spots.json";
+import type { FishabilityStatus } from "./fishability";
 import { formatAccessFee, formatLaunchType } from "./launch";
 import { formatSpeciesName } from "./species";
 import type { Spot } from "./types";
@@ -6,7 +7,7 @@ import type { Spot } from "./types";
 export const spots = rawSpots as Spot[];
 
 export type MapSpotStatus = {
-  status: "prime" | "marginal" | "tough" | "unknown";
+  status: FishabilityStatus;
   label: string;
   detail: string;
 };

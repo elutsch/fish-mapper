@@ -26,13 +26,13 @@ export function GET() {
 
   const body = `# Bite Club
 
-> Bite Club gives Southern Ontario anglers today's on-water fishing and boating conditions, with a Prime/Marginal/Tough call and separate launch verdicts for powerboat, kayak, and canoe.
+> Bite Club gives Southern Ontario anglers today's Fishability, with a Prime/Solid/Grind/Tough call and separate launch verdicts for powerboat, kayak, and canoe.
 
-Bite Club reads the weather, the launch, and the shape of the lake itself, then hands anglers a straight answer before they leave the driveway: is the bite on, which shore fishes clean, and can you safely put a boat, kayak, or canoe on it today. Each grade blends launch conditions (wind and gusts adjusted for the lake's open-water fetch) with fish activity (air temperature, light, and pressure trend). It is a transparent, deterministic heuristic built on named government lake surveys, real weather models, and each lake's geometry — not an AI catch-probability guess. The tool also says when to stay home.
+Bite Club reads the weather, the launch, and the shape of the lake itself, then hands anglers a straight answer before they leave the driveway: is the bite on, which shore fishes clean, and can you safely put a boat, kayak, or canoe on it today. Fishability blends fish activity (air temperature, light, pressure trend, and a secondary lunar adjustment) at 60% with general water conditions (wind and gusts adjusted for the lake's open-water fetch) at 40%. It is a transparent, deterministic heuristic built on named government lake surveys, real weather models, and each lake's geometry — not an AI catch-probability guess. The tool also says when to stay home.
 
 ## Coverage
 
-Southern Ontario, Fisheries Management Zone (FMZ) 16. Coverage starts in the Kitchener-Waterloo and Grand River watershed (Grand River Conservation Authority reservoirs) and expands outward across Southern Ontario — plus Conservation Halton lakes, Credit Valley (Island Lake), Grey County (Lake Eugenia, Saugeen River), and three reaches of the Grand River. Twenty waterbodies are live; a lake goes live only when there is real data behind it.
+Southern Ontario, Fisheries Management Zone (FMZ) 16. Coverage starts in the Kitchener-Waterloo and Grand River watershed (Grand River Conservation Authority reservoirs) and expands outward across Southern Ontario — plus Conservation Halton lakes, Credit Valley (Island Lake), Grey County (Lake Eugenia, Saugeen River), and three reaches of the Grand River. Nineteen waterbodies are live; a lake goes live only when there is real data behind it.
 
 ## Lakes & Rivers
 

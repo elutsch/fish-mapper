@@ -1,6 +1,7 @@
 "use client";
 
 import posthog from "posthog-js";
+import type { FishabilityStatus } from "@/lib/fishability";
 
 export function TrackedLakeCard({
   href,
@@ -10,7 +11,7 @@ export function TrackedLakeCard({
 }: {
   href: string;
   waterbodyId: string;
-  forecastStatus: "prime" | "marginal" | "tough" | "unknown";
+  forecastStatus: FishabilityStatus;
   children: React.ReactNode;
 }) {
   return (

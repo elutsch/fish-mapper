@@ -5,7 +5,7 @@
 Bite Club reads the weather, the launch, and the shape of each lake, then gives anglers a
 straight answer before they leave the driveway: is the bite on, which shore fishes clean, and
 can you safely put a powerboat, kayak, or canoe on the water today. Every waterbody gets a
-plain-language **Prime / Marginal / Tough** call, an hourly conditions table, a 7‑day outlook,
+plain-language **Prime / Solid / Grind / Tough** Fishability call, an hourly conditions table, a 7‑day outlook,
 and **separate launch verdicts per craft** — plus researched lake pages with access, species,
 structure, and regulation guidance.
 
@@ -115,7 +115,7 @@ data/spots.json ─► forecast (Open-Meteo) ─► snapshot (Vercel KV) ─► 
 `fetchOpenMeteoForecast()` (`lib/forecast/openMeteo.ts`) calls Open-Meteo with:
 
 - **Model:** `gem_seamless`; **timezone:** `America/Toronto`; `forecast_days=7`, `past_days=2`.
-- **Hourly:** temperature, wind speed/gusts/direction, surface pressure, precipitation, cloud cover.
+- **Hourly:** temperature, wind speed/gusts/direction, mean sea-level pressure (MSLP), precipitation, cloud cover.
 - **Daily:** sunrise/sunset, temperature max/min. A second call pulls **UV index** (hourly + daily max).
 
 Helpers in `lib/forecast/index.ts`:
@@ -129,29 +129,36 @@ All scoring uses the **daylight window** (local hours 5–21).
 
 ### 2. Snapshot + storage — `lib/snapshot.ts`, `lib/storage.ts`
 
-A **snapshot** = `{ forecast, pressureTrend, verdict, week }` for one lake on one Toronto day.
+A **snapshot** = `{ version, forecast, pressureTrend, verdict, week }` for one lake on one Toronto day.
 
 - `getOrCreateSnapshot(spot)` — read the day's snapshot from KV; if missing, build and save it.
 - `refreshSnapshot(spot)` — always rebuild from a **live** forecast pull (used by the daily cron).
 - Stored in **Vercel KV** under `fishing:{spotId}:{YYYY-MM-DD}` (`lib/storage.ts`), **no TTL** — once a
-  day's snapshot exists it's frozen for that day. Without KV env vars, an in-memory `Map` is used
-  (fine for local dev; not shared across serverless instances).
+  day's current-version snapshot exists it's frozen for that day. A version mismatch is treated as a
+  cache miss and regenerated. Without KV env vars, an in-memory `Map` is used (fine for local dev;
+  not shared across serverless instances).
 - If a forecast fetch fails, `snapshotInputs()` returns a conservative **fallback** forecast + caveat
   rather than erroring.
 
 ### 3. Scoring — `lib/rating.ts`, `lib/verdict/`
 
-Two independent scores combine into the daily grade.
+Two continuous 0–100 scores combine into the daily Fishability grade.
 
-**Fish Activity** (`fishActivity`) ranks three signals 1–4 and averages them → `low / fair / high / maximum`:
+**Fish Activity** (`fishActivity`) starts with one shared baseline for the day:
 
-| Signal | 4 | 3 | 2 | 1 |
-|---|---|---|---|---|
-| Air temp (°C) | ≥22 | ≥15 | ≥8 | <8 |
-| UV (inverse — fish feed in low light) | ≤1 | ≤4 | ≤7 | >7 |
-| Pressure trend | falling | — | steady | rising |
+```text
+baseline = 60% daily average-temperature score + 40% pressure-trend score
+```
 
-**Launch Read** (`launchFromWind`) bands wind and gusts; **severity = the worse of the two** →
+Falling pressure scores highest, steady pressure is neutral, and rising pressure scores lowest.
+Temperature and UV/light use continuous, piecewise-linear curves; light can move the baseline from
+`+15` in the lowest light to `−15` at UV 10+. This creates distinct low-light windows instead of
+letting temperature and UV cancel each other at every hour. A continuous lunar modifier adds up to
+6 points near new/full moons and subtracts up to 6 near quarter moons. The day's activity score is
+its best sustained three-hour window.
+
+**General Launch Read** (`launchFromWind`) is craft-agnostic and bands wind and gusts;
+**severity = the worse of the two** →
 `0 All Clear · 1 Fishable · 2 Caution · 3 Do Not Launch`:
 
 | | 3 | 2 | 1 | 0 |
@@ -161,24 +168,29 @@ Two independent scores combine into the daily grade.
 
 **Fetch penalty** (`fetchPenaltyFor`) makes bigger, more exposed water read rougher for the same wind.
 "Fetch" is the open-water distance wind travels before hitting the launch (`spot.maxFetchKm`). The
-penalty is **added to wind** (and ×1.4 to gusts) before banding:
+penalty is **added to wind** (and ×1.4 to gusts) before banding. It follows a
+continuous square-root curve, calibrated in km/h:
 
-| Max fetch | Penalty (km/h added to wind) |
-|---|---|
-| ≥ 6 km | +14 |
-| ≥ 3 km | +9 |
-| ≥ 1.5 km | +4 |
-| < 1.5 km | 0 |
-
-**Daily grade** (`dayGrade`) uses the day's **average** wind/gust (a brief gust shouldn't tank the day),
-converts Launch severity to a 1–4 rank (All Clear = 4), and blends **70% launch / 30% activity**:
-
-```
-rating = 0.7 · (4 − launchSeverity) + 0.3 · avgFishActivityRank
-tier   = rating < 2 → Tough (F+) · < 3 → Marginal (C+) · else Prime (A+)
+```text
+fetchPenalty = 2.9 × √(maxFetchKm)
 ```
 
-Weighting toward launch is deliberate: it lets lakes differentiate by size/exposure.
+The hourly read does not apply craft thresholds. The separate powerboat, kayak,
+and canoe cards below are authoritative for craft-specific launch decisions.
+
+**Fishability grade** (`dayGrade`) scores water conditions continuously from the day's average wind and a
+gust measure made from **75% average gust + 25% peak gust**. Wind and gust are normalized against
+the existing craft-agnostic 30 / 48 km/h boundaries after applying fetch:
+
+```text
+waterRisk   = max(adjustedAvgWind / 30, adjustedEffectiveGust / 48)
+waterScore  = clamp(100 − 75 · waterRisk, 0, 100)
+rating      = 60% bestThreeHourActivityScore + 40% waterScore
+tier        = ≥80 Prime (A+) · ≥65 Solid (B+) · ≥45 Grind (C+) · else Tough (F+)
+```
+
+A general `Do Not Launch` day is always `Tough`; other tiers follow the weighted score. Per-craft
+thresholds remain separate and authoritative.
 
 **Per-craft verdicts** (`lib/verdict/rules.ts`) grade each craft against its own tolerances
 (`adjustedWind = avgWind + fetchPenalty`, `adjustedGust = avgGust + fetchPenalty·1.4`) → `go / marginal / no-go`:
@@ -186,8 +198,8 @@ Weighting toward launch is deliberate: it lets lakes differentiate by size/expos
 | Craft | go (wind / gust) | marginal (wind / gust) | Access required |
 |---|---|---|---|
 | Powerboat | ≤30 / ≤48 | ≤44 / ≤66 | trailer ramp |
-| Kayak | ≤18 / ≤30 | ≤30 / ≤48 | carry-in |
-| Canoe | ≤12 / ≤22 | ≤18 / ≤30 | carry-in |
+| Kayak | ≤20 / ≤34 | ≤32 / ≤52 | carry-in |
+| Canoe | ≤14 / ≤25 | ≤20 / ≤34 | carry-in |
 
 A craft with no matching launch type at that lake is a hard **no-go**. The verdict also names the
 **leeward shore** (`leewardShore`) — the edge wind pushes the cleanest water toward — and a `bestWindow`.

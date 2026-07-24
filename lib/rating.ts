@@ -1,48 +1,71 @@
 import type { ForecastHour, PressureTrend } from "./types";
+import { lunarActivityModifier } from "./lunar";
 
-// Fish Activity: rank air temp, UV (inverse — fish feed in low light), and the
-// day's pressure trend 1–4, average, and round to a level. Precip is shown on
-// the card but deliberately not part of this score.
+// Fish Activity: daily temperature and pressure set a shared baseline, then
+// each hour's light moves around it. This keeps temperature and UV from
+// cancelling one another hour after hour and creates real low-light windows.
+// Precip is shown on the card but deliberately not part of this score.
 export type ActivityLevel = "low" | "fair" | "high" | "maximum";
 
-const ACTIVITY_RANK: Record<ActivityLevel, number> = { low: 1, fair: 2, high: 3, maximum: 4 };
+const clampScore = (value: number) => Math.min(100, Math.max(0, value));
+const mean = (values: number[]) =>
+  values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : 0;
 
-function tempRank(tempC?: number) {
-  if (tempC === undefined) return null;
-  if (tempC >= 22) return 4;
-  if (tempC >= 15) return 3;
-  if (tempC >= 8) return 2;
-  return 1;
+function dailyTemperatureScore(hours: ForecastHour[]) {
+  const temperatures = hours
+    .map((hour) => hour.tempC)
+    .filter((temperature): temperature is number => Number.isFinite(temperature));
+  if (!temperatures.length) return 50;
+
+  const average = mean(temperatures);
+  if (average <= 8) return clampScore(35 + (average / 8) * 20);
+  if (average <= 15) return 55 + ((average - 8) / 7) * 20;
+  if (average <= 22) return 75 + ((average - 15) / 7) * 15;
+  return 90;
 }
 
-function uvRank(uv?: number) {
-  if (uv === undefined) return null;
-  if (uv <= 1) return 4;
-  if (uv <= 4) return 3;
-  if (uv <= 7) return 2;
-  return 1;
+function pressureScore(trend: PressureTrend["label"]) {
+  if (trend === "falling") return 90;
+  if (trend === "steady") return 60;
+  return 35;
 }
 
-function pressureRank(trend: PressureTrend["label"]) {
-  if (trend === "falling") return 4;
-  if (trend === "steady") return 2;
-  return 1; // rising
+function lightModifier(uv?: number) {
+  if (uv === undefined) return 0;
+  const normalizedUv = Math.min(10, Math.max(0, uv));
+  if (normalizedUv <= 1) return 15;
+  if (normalizedUv <= 4) return 15 - ((normalizedUv - 1) / 3) * 9;
+  if (normalizedUv <= 7) return 6 - ((normalizedUv - 4) / 3) * 11;
+  return -5 - ((normalizedUv - 7) / 3) * 10;
 }
 
-export function fishActivity(hour: ForecastHour, pressure: PressureTrend["label"]) {
-  const ranks = [tempRank(hour.tempC), uvRank(hour.uvIndex), pressureRank(pressure)].filter(
-    (rank): rank is number => rank !== null
-  );
-  const average = ranks.reduce((sum, rank) => sum + rank, 0) / ranks.length;
-  const level: ActivityLevel =
-    average < 1.5 ? "low" : average < 2.5 ? "fair" : average < 3.5 ? "high" : "maximum";
+function activityLevel(score: number): ActivityLevel {
+  if (score < 40) return "low";
+  if (score < 60) return "fair";
+  if (score < 80) return "high";
+  return "maximum";
+}
+
+export function fishActivity(
+  hour: ForecastHour,
+  pressure: PressureTrend["label"],
+  dayHours: ForecastHour[] = [hour]
+) {
+  const date = hour.time.slice(0, 10);
+  const baseline =
+    0.6 * dailyTemperatureScore(dayHours) +
+    0.4 * pressureScore(pressure) +
+    lunarActivityModifier(date);
+  const score = clampScore(baseline + lightModifier(hour.uvIndex));
+  const level = activityLevel(score);
   const label = { low: "Low", fair: "Fair", high: "High", maximum: "Maximum" }[level];
-  return { level, label };
+  return { level, label, score };
 }
 
-// Launch Read: wind & gust banded against the craft tolerances, first bumped by
-// the lake's fetch penalty so bigger, more exposed water reads rougher for the
-// same wind. Severity is the worse of the two bands (gusts can only downgrade).
+// General Launch Read: wind & gust banded against craft-agnostic thresholds,
+// first bumped by the lake's fetch penalty so bigger, more exposed water reads
+// rougher for the same wind. Severity is the worse of the two bands (gusts can
+// only downgrade).
 // 0 All Clear · 1 Fishable · 2 Caution · 3 Do Not Launch.
 export type LaunchLevel = "all-clear" | "fishable" | "caution" | "do-not-launch";
 
@@ -78,30 +101,80 @@ export function launchRead(hour: ForecastHour, fetchPenalty = 0) {
   return launchFromWind(hour.windKmh, hour.gustKmh, fetchPenalty);
 }
 
-// Typical fish activity over the day — the average hourly rank mapped to a level.
-export function dayActivity(hours: ForecastHour[], pressure: PressureTrend["label"]): ActivityLevel {
-  const ranks = hours.map((hour) => ACTIVITY_RANK[fishActivity(hour, pressure).level]);
-  const average = ranks.length ? ranks.reduce((sum, rank) => sum + rank, 0) / ranks.length : 1;
-  return average < 1.5 ? "low" : average < 2.5 ? "fair" : average < 3.5 ? "high" : "maximum";
+function dayWindSummary(hours: ForecastHour[]) {
+  const averageWind = mean(hours.map((hour) => hour.windKmh));
+  const averageGust = mean(hours.map((hour) => hour.gustKmh));
+  const peakGust = Math.max(...hours.map((hour) => hour.gustKmh), 0);
+  return {
+    averageWind,
+    effectiveGust: 0.75 * averageGust + 0.25 * peakGust
+  };
 }
 
-// Day grade: per daylight hour, average the Fish Activity rank (1–4) with the
-// Launch rank (1–4, inverted so All Clear = 4), average those over the day, and
-// map the 1–4 result to a tier. Fetch feeds in through the Launch rank, so the
-// combined score inherently accounts for lake size/exposure.
-export type GradeTier = "prime" | "marginal" | "tough";
+export function dayLaunchRead(hours: ForecastHour[], fetchPenalty = 0) {
+  if (!hours.length) return { severity: 3, ...LAUNCH_LEVELS[3] };
+  const { averageWind, effectiveGust } = dayWindSummary(hours);
+  return launchFromWind(averageWind, effectiveGust, fetchPenalty);
+}
+
+function bestWindowScore(scores: number[], windowSize = 3) {
+  if (!scores.length) return 0;
+  if (scores.length <= windowSize) return mean(scores);
+
+  let best = 0;
+  for (let index = 0; index <= scores.length - windowSize; index += 1) {
+    best = Math.max(best, mean(scores.slice(index, index + windowSize)));
+  }
+  return best;
+}
+
+function dayActivityScore(hours: ForecastHour[], pressure: PressureTrend["label"]) {
+  return bestWindowScore(hours.map((hour) => fishActivity(hour, pressure, hours).score));
+}
+
+// The day's Fish Activity represents its best sustained three-hour window.
+export function dayActivity(hours: ForecastHour[], pressure: PressureTrend["label"]): ActivityLevel {
+  return activityLevel(dayActivityScore(hours, pressure));
+}
+
+function dayLaunchScore(hours: ForecastHour[], fetchPenalty: number) {
+  if (!hours.length) return { score: 0, severity: 3 };
+
+  const { averageWind, effectiveGust } = dayWindSummary(hours);
+  const adjustedWind = averageWind + fetchPenalty;
+  const adjustedGust = effectiveGust + fetchPenalty * 1.4;
+
+  // Normalize continuously against the existing craft-agnostic Caution /
+  // Do Not Launch boundaries (30 km/h sustained, 48 km/h gusts).
+  const risk = Math.max(adjustedWind / 30, adjustedGust / 48);
+  const score = clampScore(100 - 75 * risk);
+  const severity = dayLaunchRead(hours, fetchPenalty).severity;
+  return { score, severity };
+}
+
+// Fishability: best sustained Fish Activity (60%) plus continuous whole-day
+// water conditions (40%). A general Do Not Launch read always forces Tough.
+export type GradeTier = "prime" | "solid" | "grind" | "tough";
+
+export function fishabilityTier(rating: number, launchSeverity: number): GradeTier {
+  if (launchSeverity >= 3) return "tough";
+  if (rating >= 80) return "prime";
+  if (rating >= 65) return "solid";
+  if (rating >= 45) return "grind";
+  return "tough";
+}
 
 export function dayGrade(hours: ForecastHour[], pressure: PressureTrend["label"], fetchPenalty: number) {
-  const mean = (values: number[]) => (values.length ? values.reduce((a, b) => a + b, 0) / values.length : 0);
-  // Launch from the day's AVERAGE wind/gust — a brief gust shouldn't tank the
-  // grade. Weighted toward launch (70/30) so lakes differentiate by exposure.
-  const launchRank = 4 - launchFromWind(mean(hours.map((h) => h.windKmh)), mean(hours.map((h) => h.gustKmh)), fetchPenalty).severity;
-  const activityRank = hours.length
-    ? mean(hours.map((hour) => ACTIVITY_RANK[fishActivity(hour, pressure).level]))
-    : 1;
-  const rating = 0.7 * launchRank + 0.3 * activityRank;
-  const tier: GradeTier = rating < 2 ? "tough" : rating < 3 ? "marginal" : "prime";
-  const value = tier === "prime" ? "A+" : tier === "marginal" ? "C+" : "F+";
-  const detail = tier === "prime" ? "Prime today" : tier === "marginal" ? "Marginal today" : "Tough today";
+  const launch = dayLaunchScore(hours, fetchPenalty);
+  const activity = dayActivityScore(hours, pressure);
+  const rating = 0.6 * activity + 0.4 * launch.score;
+  const tier = fishabilityTier(rating, launch.severity);
+  const value = { prime: "A+", solid: "B+", grind: "C+", tough: "F+" }[tier];
+  const detail = {
+    prime: "Prime today",
+    solid: "Solid today",
+    grind: "Grind today",
+    tough: "Tough today"
+  }[tier];
   return { rating, tier, value, detail, status: tier };
 }

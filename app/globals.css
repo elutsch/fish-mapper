@@ -15,6 +15,8 @@
   --go: #168f4d;
   --marginal: #a94c00;
   --no-go: #a83f37;
+  --solid: #78b957;
+  --grind: #f87500;
   --content-gutter: clamp(15px, 2.6vw, 34px);
   --section-gap: clamp(18px, 2.4vw, 30px);
 }
@@ -1062,8 +1064,12 @@ h3 {
   background: var(--lime);
 }
 
-.fishing-grade > strong.grade-badge-marginal {
-  background: var(--orange);
+.fishing-grade > strong.grade-badge-solid {
+  background: var(--solid);
+}
+
+.fishing-grade > strong.grade-badge-grind {
+  background: var(--grind);
 }
 
 .fishing-grade > strong.grade-badge-tough {
@@ -1614,8 +1620,12 @@ h3 {
   background: var(--lime);
 }
 
-.legend-marginal {
-  background: var(--orange);
+.legend-solid {
+  background: var(--solid);
+}
+
+.legend-grind {
+  background: var(--grind);
 }
 
 .legend-tough {
@@ -1679,23 +1689,7 @@ h3 {
 .week-tier {
   justify-self: start;
   padding: 6px 10px;
-  color: #fff;
-  font-family: "Courier New", monospace;
   font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.week-day-prime .week-tier {
-  background: #527e17;
-}
-
-.week-day-marginal .week-tier {
-  background: #a94c00;
-}
-
-.week-day-tough .week-tier {
-  background: var(--no-go);
 }
 
 .week-breakdown {
@@ -1930,8 +1924,8 @@ h3 {
   padding: 6px 9px 5px;
 }
 
-.launch-status-callout,
-.lake-status-callout {
+.fishability-badge {
+  display: inline-block;
   border: 3px solid var(--ink);
   color: var(--ink);
   font-family: "Comic Neue", "Comic Sans MS", cursive;
@@ -1959,12 +1953,17 @@ h3 {
   background: var(--lime);
 }
 
-.launch-status-marginal {
-  background: var(--orange);
+.launch-status-solid {
+  background: var(--solid);
+}
+
+.launch-status-grind {
+  background: var(--grind);
 }
 
 .launch-status-tough {
   background: var(--no-go);
+  color: #fff;
 }
 
 .launch-status-unknown {

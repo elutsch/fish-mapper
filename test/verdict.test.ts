@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { fallbackVerdict } from "@/lib/verdict/rules";
+import { fallbackVerdict, fetchPenaltyFor } from "@/lib/verdict/rules";
 import type { ForecastHour, Spot } from "@/lib/types";
 
 const longFetchSpot: Spot = {
@@ -101,5 +101,101 @@ describe("fallback verdict gates", () => {
 
     expect(southwest.summaryMd).toContain("northeast");
     expect(east.summaryMd).toContain("west");
+  });
+});
+
+describe("fetch penalty", () => {
+  function penalty(maxFetchKm: number) {
+    return fetchPenaltyFor({ ...longFetchSpot, maxFetchKm });
+  }
+
+  it("grows continuously across the former tier boundaries", () => {
+    expect(penalty(1.5) - penalty(1.4)).toBeLessThan(0.2);
+    expect(penalty(3.1) - penalty(2.9)).toBeLessThan(0.2);
+    expect(penalty(6.2) - penalty(5.7)).toBeLessThan(0.4);
+  });
+
+  it("uses the calibrated square-root curve", () => {
+    expect(penalty(2.6)).toBeCloseTo(4.68, 2);
+    expect(penalty(5.7)).toBeCloseTo(6.92, 2);
+    expect(penalty(7.9) / penalty(5.7)).toBeCloseTo(Math.sqrt(7.9 / 5.7), 5);
+  });
+});
+
+describe("paddlecraft thresholds", () => {
+  const shelteredSpot = { ...longFetchSpot, maxFetchKm: 0 };
+
+  it("uses the relaxed kayak boundaries", () => {
+    expect(
+      fallbackVerdict(
+        shelteredSpot,
+        hours(20, 34),
+        { label: "steady", rateHpaPer24h: 0 },
+        "2026-07-18"
+      ).byCraft.kayak.rating
+    ).toBe("go");
+    expect(
+      fallbackVerdict(
+        shelteredSpot,
+        hours(32, 52),
+        { label: "steady", rateHpaPer24h: 0 },
+        "2026-07-18"
+      ).byCraft.kayak.rating
+    ).toBe("marginal");
+    expect(
+      fallbackVerdict(
+        shelteredSpot,
+        hours(32.1, 52),
+        { label: "steady", rateHpaPer24h: 0 },
+        "2026-07-18"
+      ).byCraft.kayak.rating
+    ).toBe("no-go");
+  });
+
+  it("uses the relaxed canoe boundaries", () => {
+    expect(
+      fallbackVerdict(
+        shelteredSpot,
+        hours(14, 25),
+        { label: "steady", rateHpaPer24h: 0 },
+        "2026-07-18"
+      ).byCraft.canoe.rating
+    ).toBe("go");
+    expect(
+      fallbackVerdict(
+        shelteredSpot,
+        hours(20, 34),
+        { label: "steady", rateHpaPer24h: 0 },
+        "2026-07-18"
+      ).byCraft.canoe.rating
+    ).toBe("marginal");
+    expect(
+      fallbackVerdict(
+        shelteredSpot,
+        hours(20.1, 34),
+        { label: "steady", rateHpaPer24h: 0 },
+        "2026-07-18"
+      ).byCraft.canoe.rating
+    ).toBe("no-go");
+  });
+
+  it("still applies fetch before evaluating the new boundaries", () => {
+    const oneKmFetch = { ...longFetchSpot, maxFetchKm: 1 };
+    expect(
+      fallbackVerdict(
+        oneKmFetch,
+        hours(17, 29),
+        { label: "steady", rateHpaPer24h: 0 },
+        "2026-07-18"
+      ).byCraft.kayak.rating
+    ).toBe("go");
+    expect(
+      fallbackVerdict(
+        oneKmFetch,
+        hours(18, 30),
+        { label: "steady", rateHpaPer24h: 0 },
+        "2026-07-18"
+      ).byCraft.kayak.rating
+    ).toBe("marginal");
   });
 });

@@ -3,8 +3,8 @@ import type { Craft, ForecastHour, PressureTrend, Rating, Spot, Verdict } from "
 
 const craftThresholds: Record<Craft, { goWind: number; marginalWind: number; goGust: number; marginalGust: number }> = {
   powerboat: { goWind: 30, marginalWind: 44, goGust: 48, marginalGust: 66 },
-  kayak: { goWind: 18, marginalWind: 30, goGust: 30, marginalGust: 48 },
-  canoe: { goWind: 12, marginalWind: 18, goGust: 22, marginalGust: 30 }
+  kayak: { goWind: 20, marginalWind: 32, goGust: 34, marginalGust: 52 },
+  canoe: { goWind: 14, marginalWind: 20, goGust: 25, marginalGust: 34 }
 };
 
 export function fallbackVerdict(
@@ -144,11 +144,8 @@ function fishingHours(hours: ForecastHour[]) {
 }
 
 export function fetchPenaltyFor(spot: Spot) {
-  const fetch = spot.maxFetchKm ?? 1;
-  if (fetch >= 6) return 14;
-  if (fetch >= 3) return 9;
-  if (fetch >= 1.5) return 4;
-  return 0;
+  const fetch = Math.max(spot.maxFetchKm ?? 0, 0);
+  return 2.9 * Math.sqrt(fetch);
 }
 
 function dominantWind(hours: ForecastHour[]) {

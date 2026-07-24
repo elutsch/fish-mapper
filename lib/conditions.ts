@@ -1,6 +1,7 @@
 import { compass } from "./format";
+import { lunarPhaseName } from "./lunar";
 import type { ActivityLevel, LaunchLevel } from "./rating";
-import { dayActivity, dayGrade, launchFromWind } from "./rating";
+import { dayActivity, dayGrade, dayLaunchRead } from "./rating";
 import type { ForecastHour, PressureTrend, Spot, Verdict } from "./types";
 import { fetchPenaltyFor, leewardShore } from "./verdict/rules";
 
@@ -40,7 +41,7 @@ export function buildConditionsDashboard({ hours, verdict, pressureTrend, spot }
   const fetchPenalty = fetchPenaltyFor(spot);
   const leeShore = peakWindHour ? leewardShore(peakWindHour.windDirDeg) : "lee";
   const note = gradeNarrative({
-    launch: launchFromWind(avgWind, avgGust, fetchPenalty).level,
+    launch: dayLaunchRead(daylight, fetchPenalty).level,
     activity: dayActivity(daylight, pressureTrend.label),
     pressure: pressureTrend.label,
     fetchKm: spot.maxFetchKm ?? null,
@@ -94,7 +95,7 @@ export function buildConditionsDashboard({ hours, verdict, pressureTrend, spot }
       detail: sunrise && sunset ? `${daylightDuration(sunrise, sunset)} daylight` : "Sun times unavailable"
     },
     moon: {
-      value: moonPhase(verdict.validFor),
+      value: lunarPhaseName(verdict.validFor),
       detail: "Lunar phase"
     },
     precip: {
@@ -262,21 +263,4 @@ function daylightDuration(sunrise: string, sunset: string) {
   const hours = Math.floor(minutes / 60);
   const mins = minutes % 60;
   return `${hours}h ${String(mins).padStart(2, "0")}m`;
-}
-
-function moonPhase(dateString: string) {
-  const date = new Date(`${dateString}T12:00:00-04:00`);
-  const knownNewMoon = new Date("2000-01-06T18:14:00Z").getTime();
-  const lunarCycleMs = 29.530588853 * 24 * 60 * 60 * 1000;
-  const age = (((date.getTime() - knownNewMoon) % lunarCycleMs) + lunarCycleMs) % lunarCycleMs;
-  const phase = age / lunarCycleMs;
-
-  if (phase < 0.03 || phase > 0.97) return "New";
-  if (phase < 0.22) return "Waxing crescent";
-  if (phase < 0.28) return "First quarter";
-  if (phase < 0.47) return "Waxing gibbous";
-  if (phase < 0.53) return "Full";
-  if (phase < 0.72) return "Waning gibbous";
-  if (phase < 0.78) return "Last quarter";
-  return "Waning crescent";
 }

@@ -4,6 +4,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import maplibregl from "maplibre-gl";
 import posthog from "posthog-js";
 import { useEffect, useRef } from "react";
+import { fishabilityLabel, type FishabilityStatus } from "@/lib/fishability";
 
 type SpotFeatureCollection = GeoJSON.FeatureCollection<
   GeoJSON.Point,
@@ -18,13 +19,13 @@ type SpotFeatureCollection = GeoJSON.FeatureCollection<
     sourceAccessPointId: string | null;
     species: string[];
     speciesLabel: string;
-    status: "prime" | "marginal" | "tough" | "unknown";
+    status: FishabilityStatus;
     statusLabel: string;
     statusDetail: string;
   }
 >;
 
-const statusLayers = ["prime", "marginal", "tough", "unknown"] as const;
+const statusLayers = ["prime", "solid", "grind", "tough", "unknown"] as const;
 
 export function SpotMap({ geojson }: { geojson: SpotFeatureCollection }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -178,14 +179,7 @@ function showLaunchPopup(
 ) {
   const [lng, lat] = feature.geometry.coordinates;
   const { id, name, launchTypeLabel, accessFeeLabel, speciesLabel, status, statusLabel } = feature.properties;
-  const statusCallout =
-    status === "prime"
-      ? "Prime Today"
-      : status === "marginal"
-        ? "Marginal Today"
-        : status === "tough"
-          ? "Tough Today"
-          : "Forecast Pending";
+  const statusCallout = fishabilityLabel(status as FishabilityStatus);
   const popup = new maplibregl.Popup({
     closeButton: false,
     closeOnClick: true,
@@ -194,7 +188,7 @@ function showLaunchPopup(
     offset: 16
   }).setHTML(
     `<article class="launch-card launch-card-link" role="link" tabindex="0" data-href="/${escapeHtml(id)}/fishing">
-      <b class="launch-status-callout launch-status-${status}" aria-label="${escapeHtml(statusLabel)}">${statusCallout}</b>
+      <b class="fishability-badge launch-status-callout launch-status-${status}" aria-label="${escapeHtml(statusLabel)}">${statusCallout}</b>
       <strong>${escapeHtml(name)}</strong>
       <span>${escapeHtml(launchTypeLabel)}</span>
       <em>${escapeHtml(accessFeeLabel)}</em>
@@ -298,7 +292,8 @@ class CurrentLocationControl implements maplibregl.IControl {
 function addLaunchImages(map: maplibregl.Map) {
   const colors = {
     prime: "#9cff13",
-    marginal: "#f87500",
+    solid: "#78b957",
+    grind: "#f87500",
     tough: "#a83f37",
     unknown: "#d8d8d8"
   };

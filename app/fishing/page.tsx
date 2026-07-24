@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { FishabilityBadge } from "@/app/components/FishabilityBadge";
 import { LakeImage } from "@/app/components/LakeImage";
 import { SpotMap } from "@/app/components/SpotMap";
 import { TrackedLakeCard } from "@/app/components/TrackedLakeCard";
@@ -7,13 +8,14 @@ import { formatLaunchType } from "@/lib/launch";
 import { getOrCreateSnapshot } from "@/lib/snapshot";
 import { spots, spotsAsGeoJson } from "@/lib/spots";
 import { formatSpeciesName } from "@/lib/species";
+import { fishabilityLabel } from "@/lib/fishability";
 import type { MapSpotStatus } from "@/lib/spots";
 import type { Spot, Verdict } from "@/lib/types";
 
 export const metadata: Metadata = {
   title: "Today's Fishing Conditions for Southern Ontario Lakes",
   description:
-    "Today's fishing and boating conditions for 20 Southern Ontario lakes and rivers — Prime, Marginal, or Tough calls with separate powerboat, kayak, and canoe launch verdicts from wind, fetch, and pressure.",
+    "Today's Fishability for 20 Southern Ontario lakes and rivers — Prime, Solid, Grind, or Tough calls with separate powerboat, kayak, and canoe launch verdicts.",
   alternates: { canonical: "/fishing" }
 };
 
@@ -53,12 +55,12 @@ export default async function FishingIndexPage() {
           <article>
             <span>01</span>
             <h3>Today&apos;s Read</h3>
-            <p>Temperature, wind, pressure, sun, moon, and fetch roll into a simple fishing grade.</p>
+            <p>Temperature, wind, pressure, light, moon, and fetch roll into a simple Fishability grade.</p>
           </article>
           <article>
             <span>02</span>
             <h3>Map Scan</h3>
-            <p>Color-coded launches show where conditions look prime, marginal, or tough today.</p>
+            <p>Color-coded launches show where conditions look Prime, Solid, Grind, or Tough today.</p>
           </article>
           <article>
             <span>03</span>
@@ -78,7 +80,8 @@ export default async function FishingIndexPage() {
         </div>
         <div className="map-legend" aria-label="Map color legend">
           <span><i className="legend-dot legend-prime" />Prime today</span>
-          <span><i className="legend-dot legend-marginal" />Marginal today</span>
+          <span><i className="legend-dot legend-solid" />Solid today</span>
+          <span><i className="legend-dot legend-grind" />Grind today</span>
           <span><i className="legend-dot legend-tough" />Tough today</span>
           <span><i className="legend-dot legend-cluster" />Grouped launches</span>
         </div>
@@ -93,7 +96,6 @@ export default async function FishingIndexPage() {
         <div className="spot-list" aria-label="Scrollable waterbody carousel">
           {spots.map((spot) => {
             const status = statuses[spot.id]?.status ?? "unknown";
-            const statusLabel = statuses[spot.id]?.label ?? "Forecast pending";
 
             return (
               <TrackedLakeCard
@@ -103,7 +105,7 @@ export default async function FishingIndexPage() {
                 forecastStatus={status}
               >
                 <LakeImage spotId={spot.id}>
-                  <span className={`lake-status-callout launch-status-${status}`}>{statusLabel}</span>
+                  <FishabilityBadge status={status} className="lake-status-callout" />
                 </LakeImage>
                 <div className="lake-body">
                   <h3>{spot.name}</h3>
@@ -129,7 +131,7 @@ async function mapStatuses() {
       try {
         const { forecast, pressureTrend, verdict } = await getOrCreateSnapshot(spot);
         const dashboard = buildConditionsDashboard({ hours: forecast, pressureTrend, verdict, spot });
-        return [spot.id, statusForSpot(spot, verdict, dashboard.grade.status, dashboard.grade.value)] as const;
+        return [spot.id, statusForSpot(spot, verdict, dashboard.grade.status)] as const;
       } catch (error) {
         return [
           spot.id,
@@ -151,12 +153,10 @@ async function mapStatuses() {
 function statusForSpot(
   spot: Spot,
   verdict: Verdict,
-  status: MapSpotStatus["status"],
-  grade: string
+  status: MapSpotStatus["status"]
 ): MapSpotStatus {
-  const label =
-    status === "prime" ? "Prime today" : status === "marginal" ? "Marginal today" : "Tough today";
-  const detail = `Grade ${grade}. Powerboat ${verdict.byCraft.powerboat.rating}; kayak ${verdict.byCraft.kayak.rating}; canoe ${verdict.byCraft.canoe.rating}.`;
+  const label = fishabilityLabel(status);
+  const detail = `Fishability ${label.toLowerCase()}. Powerboat ${verdict.byCraft.powerboat.rating}; kayak ${verdict.byCraft.kayak.rating}; canoe ${verdict.byCraft.canoe.rating}.`;
 
   return {
     status,

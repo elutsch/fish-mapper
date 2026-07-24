@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { LakeImage } from "@/app/components/LakeImage";
+import { FishabilityBadge } from "@/app/components/FishabilityBadge";
 import { LaunchMap } from "@/app/components/LaunchMap";
 import { RatingBadge } from "@/app/components/RatingBadge";
 import { getSpeciesCard, SpeciesCards } from "@/app/components/SpeciesCards";
@@ -10,7 +11,7 @@ import { buildConditionsDashboard } from "@/lib/conditions";
 import { compass, craftLabels, formatCoords, formatDate, formatHour, regsSummary } from "@/lib/format";
 import { getLakeProfile } from "@/lib/lakeProfiles";
 import type { LakeProfile } from "@/lib/lakeProfiles/types";
-import { fishActivity, launchRead } from "@/lib/rating";
+import { fishActivity, launchRead, type GradeTier } from "@/lib/rating";
 import { absoluteUrl } from "@/lib/seo";
 import { formatSpeciesName, speciesPathSegment } from "@/lib/species";
 import { getOrCreateSnapshot } from "@/lib/snapshot";
@@ -68,12 +69,11 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
 
   const profile = getLakeProfile(spot.id);
   const { forecast, pressureTrend, verdict, week } = await getOrCreateSnapshot(spot);
-  const conditionRows = forecast
-    .filter((hour) => {
-      const localHour = Number(hour.time.slice(11, 13));
-      return localHour >= 5 && localHour <= 21;
-    })
-    .filter((_, index) => index % 2 === 0);
+  const daylightHours = forecast.filter((hour) => {
+    const localHour = Number(hour.time.slice(11, 13));
+    return localHour >= 5 && localHour <= 21;
+  });
+  const conditionRows = daylightHours.filter((_, index) => index % 2 === 0);
   const dashboard = buildConditionsDashboard({ hours: forecast, verdict, pressureTrend, spot });
   const fetchPenalty = fetchPenaltyFor(spot);
   const quickSummary = dashboard.summary;
@@ -150,7 +150,7 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
               <DashboardMetric label="Air Temp" value={dashboard.temp.value} detail={dashboard.temp.detail} />
               <DashboardMetric label="UV Index" value={dashboard.uv.value} detail={dashboard.uv.detail} />
               <DashboardMetric label="Wind" value={dashboard.wind.value} detail={dashboard.wind.detail} />
-              <DashboardMetric label="Pressure" value={dashboard.pressure.value} detail={dashboard.pressure.detail} />
+              <DashboardMetric label="MSLP" value={dashboard.pressure.value} detail={dashboard.pressure.detail} />
               <DashboardMetric label="Sunrise/Sunset" value={dashboard.sun.value} detail={dashboard.sun.detail} />
               <DashboardMetric label="Moon Phase" value={dashboard.moon.value} detail={dashboard.moon.detail} emphasis />
               <DashboardMetric label="Precip" value={dashboard.precip.value} detail={dashboard.precip.detail} wide />
@@ -159,7 +159,7 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
           <div className="fishing-grade">
             <strong
               className={`grade-badge-${dashboard.grade.status}`}
-              aria-label={`Fishing grade ${dashboard.grade.value}`}
+              aria-label={`Fishability grade ${dashboard.grade.value}`}
             >
               {dashboard.grade.value}
             </strong>
@@ -183,7 +183,7 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
             <span className="pill">{spot.launch.carryIn ? "Carry-in launch" : "No carry-in"}</span>
             <span className="pill">{spot.maxFetchKm?.toFixed(1)} km max fetch</span>
             <span className="pill">
-              Pressure {pressureTrend.label} ({pressureTrend.rateHpaPer24h} hPa/24h)
+              MSLP {pressureTrend.label} ({pressureTrend.rateHpaPer24h} hPa/24h)
             </span>
           </div>
           <div className="craft-grid">
@@ -212,6 +212,7 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
               <HourlyConditionCard
                 key={hour.time}
                 hour={hour}
+                dayHours={daylightHours}
                 pressure={pressureTrend.label}
                 fetchPenalty={fetchPenalty}
               />
@@ -286,14 +287,16 @@ function DashboardMetric({
 
 function HourlyConditionCard({
   hour,
+  dayHours,
   pressure,
   fetchPenalty
 }: {
   hour: ForecastHour;
+  dayHours: ForecastHour[];
   pressure: PressureTrend["label"];
   fetchPenalty: number;
 }) {
-  const activity = fishActivity(hour, pressure);
+  const activity = fishActivity(hour, pressure, dayHours);
   const launch = launchRead(hour, fetchPenalty);
 
   const storm = hour.precipMm >= 8;
@@ -338,7 +341,7 @@ function HourlyConditionCard({
           <b>{hour.precipMm.toFixed(1)}mm</b>
         </div>
         <div>
-          <span>Pressure</span>
+          <span>MSLP Trend</span>
           <b>{pressureWord}</b>
         </div>
       </div>
@@ -357,7 +360,7 @@ function HourlyConditionCard({
         </div>
       </div>
       <div className={`fishability-meter launch-${launch.level}`}>
-        <span>Launch Read</span>
+        <span>General Launch Read</span>
         <b>{launch.label}</b>
       </div>
       {callout ? <b className={`hour-callout hour-callout-${callout.kind}`}>{callout.label}</b> : null}
@@ -368,7 +371,6 @@ function HourlyConditionCard({
 function WeeklyForecast({ days }: { days: WeekDay[] }) {
   if (days.length === 0) return null;
 
-  const tierLabel = { prime: "Prime", marginal: "Marginal", tough: "Tough" } as const;
   const launchLabel = {
     "all-clear": "All Clear",
     fishable: "Fishable",
@@ -395,7 +397,7 @@ function WeeklyForecast({ days }: { days: WeekDay[] }) {
               <b>{index === 0 ? "Today" : weekday(day.date, "weekday")}</b>
               <em>{weekday(day.date, "monthDay")}</em>
             </span>
-            <b className="week-tier">{tierLabel[day.tier]}</b>
+            <FishabilityBadge status={day.tier} className="week-tier" />
             <div className="week-breakdown">
               <div>
                 <span>Launch</span>
@@ -419,12 +421,9 @@ function LakeProfileIntro({
   verified
 }: {
   profile: LakeProfile;
-  status: "prime" | "marginal" | "tough";
+  status: GradeTier;
   verified: string;
 }) {
-  const statusLabel =
-    status === "prime" ? "Prime today" : status === "marginal" ? "Marginal today" : "Tough today";
-
   return (
     <section className="lake-profile profile-front" aria-label={`${profile.lake} fishing profile`}>
       <div className="profile-hero profile-hero-front">
@@ -432,9 +431,9 @@ function LakeProfileIntro({
           <LakeImage
             spotId={profile.slug}
             className="profile-lake-image"
-            label={`Illustrated view of ${profile.lake} — ${statusLabel}`}
+            label={`Illustrated view of ${profile.lake}`}
           >
-            <span className={`lake-status-callout launch-status-${status}`}>{statusLabel}</span>
+            <FishabilityBadge status={status} className="lake-status-callout" />
           </LakeImage>
           <span className="profile-kicker">
             {profile.waterbodyType} / FMZ {profile.fmz}

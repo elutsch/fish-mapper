@@ -75,7 +75,8 @@ export default function AboutPage() {
             <p>
               We flag where the science is solid and where it is an estimate. Each daily call blends
               two honest scores - how safely you can launch, and how active the bite is likely to be
-              - built from documented weather, the lake&apos;s fetch, and deterministic rules.
+              - built from documented weather, the lake&apos;s fetch, a secondary lunar adjustment,
+              and deterministic rules.
               Fish-activity ratings shift your odds; they do not guarantee a catch.
             </p>
           </article>

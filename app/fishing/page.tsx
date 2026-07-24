@@ -17,7 +17,7 @@ import type { Spot, Verdict } from "@/lib/types";
 export const metadata: Metadata = {
   title: "Today's Fishing Conditions for Southern Ontario Lakes",
   description:
-    "Today's Fishability for 20 Southern Ontario lakes and rivers — Prime, Solid, Grind, or Tough calls with separate powerboat, kayak, and canoe launch verdicts.",
+    "Today's Fishability for 19 Southern Ontario lakes and rivers — Prime, Solid, Grind, or Tough calls with separate powerboat, kayak, and canoe launch verdicts.",
   alternates: { canonical: "/fishing" }
 };
 

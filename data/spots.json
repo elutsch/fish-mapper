@@ -57,20 +57,6 @@
     "reviewNotes": ["Public launch status should be checked against current municipal/private access."]
   },
   {
-    "id": "laurel-creek-reservoir",
-    "name": "Laurel Creek Reservoir",
-    "waterbody": "Laurel Creek Reservoir",
-    "lat": 43.48642,
-    "lng": -80.57513,
-    "launch": { "trailer": false, "carryIn": true, "name": "Laurel Creek Reservoir boat launch", "electricOnly": true, "accessFee": "paid" },
-    "shorelineFetch": [105, 285],
-    "maxFetchKm": 1.7,
-    "species": ["largemouth bass", "northern pike", "black crappie"],
-    "fmz": "16",
-    "sourceAccessPointName": "Laurel Creek boat launch area",
-    "reviewNotes": ["Carry-in only for MVP; coordinate is tied to the documented Laurel Creek boat-launch area and should be field-checked with GRCA."]
-  },
-  {
     "id": "shades-mills-reservoir",
     "name": "Shades Mills Reservoir",
     "waterbody": "Shades Mills Reservoir",

@@ -10,7 +10,7 @@ and **separate launch verdicts per craft** — plus researched lake pages with a
 structure, and regulation guidance.
 
 Coverage starts in the Kitchener–Waterloo and Grand River watershed (FMZ 16) and expands across
-Southern Ontario. 20 waterbodies are live today.
+Southern Ontario. 19 waterbodies are live today.
 
 ---
 
@@ -68,15 +68,15 @@ app/
     contact/route.ts             Contact form → Discord webhook
   components/                     SpotMap, LaunchMap, SpeciesCards, RatingBadge, LakeImage, ContactCta
 lib/
-  spots.ts  types.ts             The 20-waterbody seed loader + core types
+  spots.ts  types.ts             The 19-waterbody seed loader + core types
   seo.ts                         SITE_URL, absoluteUrl(), speciesIsIndexable(tier)
   forecast/                      Open-Meteo client + forecast helpers
   snapshot.ts  storage.ts        Snapshot build/read + Vercel KV persistence
   verdict/                       Per-craft verdict rules + Zod schema
   rating.ts  conditions.ts  week.ts   Grade math, dashboard assembly, 7-day outlook
-  lakeProfiles/                  20 evergreen lake profiles (+ types, index)
+  lakeProfiles/                  19 evergreen lake profiles (+ types, index)
   species.ts  launch.ts  format.ts   Display/format helpers
-data/spots.json                  The 20-waterbody launch seed (source data)
+data/spots.json                  The 19-waterbody launch seed (source data)
 artifacts/                       Per-lake research audit trail (Stages 0–7) → lakeProfiles
 agents/                          Per-stage research agent prompts
 taxonomy/                        Editorial standards (voice, gold-standard, templates)
@@ -243,7 +243,7 @@ the hour, once/day — fine here, since anywhere in that window is still after m
 
 Each run, in order:
 1. `revalidateTag("forecast")` — invalidate the cached forecast data.
-2. For all 20 lakes: `refreshSnapshot()` — a **live** Open-Meteo pull → write the day's snapshot to KV.
+2. For all 19 lakes: `refreshSnapshot()` — a **live** Open-Meteo pull → write the day's snapshot to KV.
 3. `revalidatePath()` on `/fishing`, `/[waterbody]/fishing`, and `/[waterbody]/fishing/[species]` — the
    static conditions pages regenerate **once** from the fresh KV data.
 
@@ -314,7 +314,7 @@ Twitter cards + a 1200×630 default OG image (`public/og/default.jpg`).
 
 **Generated routes:**
 - `app/robots.ts` — allow all, disallow `/api/`, link the sitemap.
-- `app/sitemap.ts` — **indexable URLs only** (73): 4 core + 20 lakes + 49 destination/strong species.
+- `app/sitemap.ts` — **indexable URLs only** (71): 4 core + 19 lakes + 48 destination/strong species.
 - `app/llms.txt/route.ts` — a curated, data-driven map for LLMs (value prop, coverage, lake links).
 
 **Per-page metadata:** keyword-optimized titles/descriptions, `canonical`, and Open Graph on every page.
@@ -412,7 +412,7 @@ npm run validate:spots   # validate the launch seed (data/spots.json)
 
 ## Data status & caveats
 
-- `data/spots.json` is a 20-waterbody launch-candidate seed with manual fetch fields. Before scaling,
+- `data/spots.json` is a 19-waterbody launch-candidate seed with manual fetch fields. Before scaling,
   confirm launchability against Ontario Fishing Access Points / conservation-authority rules and replace
   manual fetch values with polygon-derived bearings/chords.
 - Regulations shown are **dated convenience summaries** of Government of Ontario FMZ 16 rules, not the

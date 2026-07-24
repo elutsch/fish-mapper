@@ -32,7 +32,7 @@ Bite Club reads the weather, the launch, and the shape of the lake itself, then 
 
 ## Coverage
 
-Southern Ontario, Fisheries Management Zone (FMZ) 16. Coverage starts in the Kitchener-Waterloo and Grand River watershed (Grand River Conservation Authority reservoirs) and expands outward across Southern Ontario — plus Conservation Halton lakes, Credit Valley (Island Lake), Grey County (Lake Eugenia, Saugeen River), and three reaches of the Grand River. Twenty waterbodies are live; a lake goes live only when there is real data behind it.
+Southern Ontario, Fisheries Management Zone (FMZ) 16. Coverage starts in the Kitchener-Waterloo and Grand River watershed (Grand River Conservation Authority reservoirs) and expands outward across Southern Ontario — plus Conservation Halton lakes, Credit Valley (Island Lake), Grey County (Lake Eugenia, Saugeen River), and three reaches of the Grand River. Nineteen waterbodies are live; a lake goes live only when there is real data behind it.
 
 ## Lakes & Rivers
 

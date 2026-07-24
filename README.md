@@ -115,7 +115,7 @@ data/spots.json ─► forecast (Open-Meteo) ─► snapshot (Vercel KV) ─► 
 `fetchOpenMeteoForecast()` (`lib/forecast/openMeteo.ts`) calls Open-Meteo with:
 
 - **Model:** `gem_seamless`; **timezone:** `America/Toronto`; `forecast_days=7`, `past_days=2`.
-- **Hourly:** temperature, wind speed/gusts/direction, mean sea-level pressure (MSLP), precipitation, cloud cover.
+- **Hourly:** temperature, wind speed/gusts/direction, pressure, precipitation, cloud cover.
 - **Daily:** sunrise/sunset, temperature max/min. A second call pulls **UV index** (hourly + daily max).
 
 Helpers in `lib/forecast/index.ts`:
@@ -157,7 +157,7 @@ letting temperature and UV cancel each other at every hour. A continuous lunar m
 6 points near new/full moons and subtracts up to 6 near quarter moons. The day's activity score is
 its best sustained three-hour window.
 
-**General Launch Read** (`launchFromWind`) is craft-agnostic and bands wind and gusts;
+**Launch Read** (`launchFromWind`) is craft-agnostic and bands wind and gusts;
 **severity = the worse of the two** →
 `0 All Clear · 1 Fishable · 2 Caution · 3 Do Not Launch`:
 

@@ -89,12 +89,12 @@ const sections: FaqSection[] = [
         )
       },
       {
-        question: "What do the hourly Fish Activity and General Launch Read ratings mean?",
+        question: "What do the hourly Fish Activity and Launch Read ratings mean?",
         answer: (
           <p>
             Each hourly card carries two ratings. <strong>Fish Activity</strong> (Low, Fair, High, or
             Maximum) reflects the likely bite that hour from air temperature, light, and the pressure
-            trend. <strong>General Launch Read</strong> (All Clear, Fishable, Caution, or Do Not
+            trend. <strong>Launch Read</strong> (All Clear, Fishable, Caution, or Do Not
             Launch) is a craft-agnostic comparison of that hour&apos;s wind and gusts against the
             lake&apos;s fetch. It does not know which craft you are using. The separate powerboat,
             kayak, and canoe cards are the authoritative launch verdicts because they apply each

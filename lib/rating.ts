@@ -62,7 +62,7 @@ export function fishActivity(
   return { level, label, score };
 }
 
-// General Launch Read: wind & gust banded against craft-agnostic thresholds,
+// Launch Read: wind & gust banded against craft-agnostic thresholds,
 // first bumped by the lake's fetch penalty so bigger, more exposed water reads
 // rougher for the same wind. Severity is the worse of the two bands (gusts can
 // only downgrade).

@@ -139,7 +139,6 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
         <section className="conditions-dashboard poster-dashboard" aria-label="Fishing conditions dashboard">
           <div className="conditions-top">
             <div className="conditions-heading">
-              <span>02 - Conditions</span>
               <h2>Today's read.</h2>
               <div className="quick-summary">
                 <span>Quick Summary</span>
@@ -150,7 +149,7 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
               <DashboardMetric label="Air Temp" value={dashboard.temp.value} detail={dashboard.temp.detail} />
               <DashboardMetric label="UV Index" value={dashboard.uv.value} detail={dashboard.uv.detail} />
               <DashboardMetric label="Wind" value={dashboard.wind.value} detail={dashboard.wind.detail} />
-              <DashboardMetric label="MSLP" value={dashboard.pressure.value} detail={dashboard.pressure.detail} />
+              <DashboardMetric label="Pressure" value={dashboard.pressure.value} detail={dashboard.pressure.detail} />
               <DashboardMetric label="Sunrise/Sunset" value={dashboard.sun.value} detail={dashboard.sun.detail} />
               <DashboardMetric label="Moon Phase" value={dashboard.moon.value} detail={dashboard.moon.detail} emphasis />
               <DashboardMetric label="Precip" value={dashboard.precip.value} detail={dashboard.precip.detail} wide />
@@ -169,7 +168,7 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
             </div>
             <div className="grade-actions" aria-label="Fishing dashboard actions">
               <a href="#conditions">Hour by Hour</a>
-              <a href="/fishing">Map View</a>
+              <a href="#weekly-outlook">Weekly Outlook</a>
             </div>
           </div>
         </section>
@@ -183,7 +182,7 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
             <span className="pill">{spot.launch.carryIn ? "Carry-in launch" : "No carry-in"}</span>
             <span className="pill">{spot.maxFetchKm?.toFixed(1)} km max fetch</span>
             <span className="pill">
-              MSLP {pressureTrend.label} ({pressureTrend.rateHpaPer24h} hPa/24h)
+              Pressure {pressureTrend.label} ({pressureTrend.rateHpaPer24h} hPa/24h)
             </span>
           </div>
           <div className="craft-grid">
@@ -341,7 +340,7 @@ function HourlyConditionCard({
           <b>{hour.precipMm.toFixed(1)}mm</b>
         </div>
         <div>
-          <span>MSLP Trend</span>
+          <span>Pressure</span>
           <b>{pressureWord}</b>
         </div>
       </div>
@@ -360,7 +359,7 @@ function HourlyConditionCard({
         </div>
       </div>
       <div className={`fishability-meter launch-${launch.level}`}>
-        <span>General Launch Read</span>
+        <span>Launch Read</span>
         <b>{launch.label}</b>
       </div>
       {callout ? <b className={`hour-callout hour-callout-${callout.kind}`}>{callout.label}</b> : null}
@@ -385,7 +384,7 @@ function WeeklyForecast({ days }: { days: WeekDay[] }) {
     }).format(new Date(`${date}T12:00:00-04:00`));
 
   return (
-    <section className="week-section" aria-label="Seven-day fishing outlook">
+    <section id="weekly-outlook" className="week-section" aria-label="Seven-day fishing outlook">
       <div className="hourly-title">
         <h2>Weekly Outlook</h2>
         <span />
@@ -452,7 +451,6 @@ function LakeProfileIntro({
       <div className="profile-strip profile-strip-large">
         <div className="title-row">
           <h3>Target Species</h3>
-          <span className="button">Scroll</span>
         </div>
         <ProfileSpeciesCards profile={profile} />
       </div>

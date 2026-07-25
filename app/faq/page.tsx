@@ -36,9 +36,9 @@ const sections: FaqSection[] = [
         answer: (
           <p>
             Bite Club is a fishing conditions tool for Southern Ontario waterbodies. Each location
-            gets a Prime, Marginal, or Tough call, an hourly conditions table, and separate launch
-            verdicts for powerboat, kayak, and canoe. Researched lake pages also include access,
-            species, structure, and regulation guidance.
+            gets a Prime, Solid, Grind, or Tough Fishability call, an hourly conditions table, and
+            separate launch verdicts for powerboat, kayak, and canoe. Researched lake pages also
+            include access, species, structure, and regulation guidance.
           </p>
         )
       },
@@ -66,27 +66,25 @@ const sections: FaqSection[] = [
         question: "How does Bite Club predict the fishing bite?",
         answer: (
           <p>
-            Each lake&apos;s daily grade blends two scores. <strong>Launch conditions</strong> rate
-            how boatable the water is from the day&apos;s average wind and gusts, adjusted for the
-            lake&apos;s fetch, so bigger, more exposed lakes read rougher. <strong>Fish Activity</strong>{" "}
-            rates the likely bite from air temperature, light (UV), and the pressure trend. The grade
-            leans toward launch conditions and combines the two into a single Prime, Marginal, or
-            Tough call. It is a deterministic planning heuristic, not a catch-probability model or an
-            AI-generated forecast.
+            Each lake&apos;s Fishability grade blends two scores. <strong>Fish Activity</strong>{" "}
+            contributes 60% from air temperature, light, pressure trend, and a secondary lunar-phase
+            adjustment. <strong>General water conditions</strong> contribute 40% from the day&apos;s
+            wind and gusts, adjusted for the lake&apos;s fetch, so bigger, more exposed lakes read
+            rougher. The result is a Prime, Solid, Grind, or Tough call. It is a deterministic
+            planning heuristic, not a catch-probability model or an AI-generated forecast.
           </p>
         )
       },
       {
-        question: "What do Prime, Marginal, and Tough mean?",
+        question: "What do Prime, Solid, Grind, and Tough mean?",
         answer: (
           <p>
-            They summarize the combined launch-and-bite score for the day. <strong>Prime</strong> is
-            a genuinely good day: controllable water and an active bite. <strong>Tough</strong> means
-            the day works against you, whether that is water too rough to launch, a slow bite, or
-            both. <strong>Marginal</strong> sits in between: fishable, but with a real tradeoff.
-            Because a big, exposed lake can rate Tough while a sheltered one nearby is Marginal, use
-            the map to compare lakes, and always check the per-craft launch verdict, since the same
-            wind is fine in a powerboat and dangerous in a canoe.
+            They summarize Fish Activity and general water conditions for the day.{" "}
+            <strong>Prime</strong> means the bite and water both line up. <strong>Solid</strong> is a
+            worthwhile day with manageable tradeoffs. <strong>Grind</strong> means success takes a
+            narrower window or more work. <strong>Tough</strong> means the day is working against
+            you; a general Do Not Launch read always lands here. Always check the per-craft verdict,
+            since the same wind can be manageable in a powerboat and dangerous in a canoe.
           </p>
         )
       },
@@ -96,10 +94,12 @@ const sections: FaqSection[] = [
           <p>
             Each hourly card carries two ratings. <strong>Fish Activity</strong> (Low, Fair, High, or
             Maximum) reflects the likely bite that hour from air temperature, light, and the pressure
-            trend. <strong>Launch Read</strong> (All Clear, Fishable, Caution, or Do Not Launch)
-            reflects how safely you can be on the water, from that hour&apos;s wind and gusts against
-            your craft&apos;s limits and the lake&apos;s fetch. A day can have a strong bite but rough
-            launch windows, so the two ratings together let you time your trip.
+            trend. <strong>Launch Read</strong> (All Clear, Fishable, Caution, or Do Not
+            Launch) is a craft-agnostic comparison of that hour&apos;s wind and gusts against the
+            lake&apos;s fetch. It does not know which craft you are using. The separate powerboat,
+            kayak, and canoe cards are the authoritative launch verdicts because they apply each
+            craft&apos;s limits and access requirements. Always use those cards for your launch
+            decision.
           </p>
         )
       },
@@ -170,9 +170,23 @@ const sections: FaqSection[] = [
           <p>
             Light to moderate wind can reduce glare and push bait toward windward structure. Strong
             wind becomes a boat-control and safety problem, especially when it blows over a long
-            stretch of open water. Bite Club scores the day&apos;s average wind together with peak
-            gusts, craft limits, and each waterbody&apos;s estimated fetch, and it flags when gusts
-            spike so you can time your launch to the calmer stretches.
+            stretch of open water. The general hourly and daily reads combine wind, gusts, and each
+            waterbody&apos;s estimated fetch. The separate craft cards then apply the powerboat,
+            kayak, and canoe limits, and flag gust spikes so you can time your launch to the calmer
+            stretches.
+          </p>
+        )
+      },
+      {
+        question: "What is fetch?",
+        answer: (
+          <p>
+            Fetch is the uninterrupted distance wind travels across open water. The longer that
+            distance, the more room wind has to build waves and chop; a smaller or more sheltered
+            waterbody will usually stay calmer in the same forecast wind. Bite Club uses each
+            waterbody&apos;s estimated maximum fetch to adjust its general and craft-specific launch
+            reads. It is a planning estimate, not a live wave measurement, and actual conditions
+            still depend on wind direction, shoreline shelter, depth, and local weather.
           </p>
         )
       },
@@ -182,9 +196,9 @@ const sections: FaqSection[] = [
           <p>
             Dawn and dusk are dependable starting points because lower light often gives predators
             an advantage, and overcast skies can extend that window. On each lake&apos;s hourly
-            cards, the Fish Activity rating shifts with light and temperature through the day, while
-            the Launch Read flags the calmer stretches, so you can time your launch to the cleanest
-            water.
+            cards, the day&apos;s temperature and pressure set the Fish Activity baseline, then light
+            shifts it hour by hour. The general Launch Read flags the calmer stretches. Confirm any
+            candidate window against your craft&apos;s authoritative launch card.
           </p>
         )
       },
@@ -192,9 +206,10 @@ const sections: FaqSection[] = [
         question: "Does moon phase or solunar theory affect the forecast?",
         answer: (
           <p>
-            The dashboard displays the lunar phase for context, but moon phase and solunar periods
-            are not currently scoring inputs. Their evidence is less dependable than the wind,
-            pressure, precipitation, and light-related conditions used by the current model.
+            Yes, but only as a secondary Fish Activity input. A continuous lunar curve adds up to six
+            activity points near new and full moons and subtracts up to six near quarter moons. The
+            effect is deliberately smaller than temperature, pressure, and light because lunar
+            evidence varies by species and waterbody.
           </p>
         )
       },

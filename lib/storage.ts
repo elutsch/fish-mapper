@@ -2,7 +2,10 @@ import { kv } from "@vercel/kv";
 import type { ForecastHour, PressureTrend, Verdict } from "./types";
 import type { WeekDay } from "./week";
 
-type Snapshot = {
+export const SNAPSHOT_VERSION = 4 as const;
+
+export type Snapshot = {
+  version: typeof SNAPSHOT_VERSION;
   forecast: ForecastHour[];
   pressureTrend: PressureTrend;
   verdict: Verdict;
@@ -18,9 +21,11 @@ export function snapshotKey(spotId: string, validFor: string) {
 export async function getSnapshot(spotId: string, validFor: string) {
   const key = snapshotKey(spotId, validFor);
   if (hasKvConfig()) {
-    return kv.get<Snapshot>(key);
+    const stored = await kv.get<unknown>(key);
+    return isCurrentSnapshot(stored) ? stored : null;
   }
-  return memoryStore.get(key) ?? null;
+  const stored = memoryStore.get(key);
+  return isCurrentSnapshot(stored) ? stored : null;
 }
 
 export async function saveSnapshot(spotId: string, validFor: string, snapshot: Snapshot) {
@@ -34,4 +39,13 @@ export async function saveSnapshot(spotId: string, validFor: string, snapshot: S
 
 function hasKvConfig() {
   return Boolean(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
+}
+
+export function isCurrentSnapshot(value: unknown): value is Snapshot {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "version" in value &&
+    value.version === SNAPSHOT_VERSION
+  );
 }

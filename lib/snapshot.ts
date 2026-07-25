@@ -1,5 +1,5 @@
 import { computePressureTrend, defaultValidFor, fetchForecastSnapshot, hoursForDate } from "./forecast";
-import { getSnapshot, saveSnapshot } from "./storage";
+import { getSnapshot, saveSnapshot, SNAPSHOT_VERSION } from "./storage";
 import type { ForecastHour, Spot } from "./types";
 import { generateVerdict } from "./verdict";
 import { fallbackVerdict } from "./verdict/rules";
@@ -15,7 +15,7 @@ export async function getOrCreateSnapshot(spot: Spot, validFor = defaultValidFor
   const verdict = fetchCaveat
     ? fallbackVerdict(spot, targetHours, pressureTrend, validFor, fetchCaveat)
     : await generateVerdict(spot, targetHours, pressureTrend, validFor);
-  const snapshot = { forecast: targetHours, pressureTrend, verdict, week };
+  const snapshot = { version: SNAPSHOT_VERSION, forecast: targetHours, pressureTrend, verdict, week };
   await saveSnapshot(spot.id, validFor, snapshot);
   return snapshot;
 }
@@ -28,7 +28,7 @@ export async function refreshSnapshot(spot: Spot, validFor = defaultValidFor()) 
   const verdict = fetchCaveat
     ? fallbackVerdict(spot, targetHours, pressureTrend, validFor, fetchCaveat)
     : await generateVerdict(spot, targetHours, pressureTrend, validFor);
-  const snapshot = { forecast: targetHours, pressureTrend, verdict, week };
+  const snapshot = { version: SNAPSHOT_VERSION, forecast: targetHours, pressureTrend, verdict, week };
   await saveSnapshot(spot.id, validFor, snapshot);
   return snapshot;
 }

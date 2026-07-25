@@ -5,12 +5,12 @@
 Bite Club reads the weather, the launch, and the shape of each lake, then gives anglers a
 straight answer before they leave the driveway: is the bite on, which shore fishes clean, and
 can you safely put a powerboat, kayak, or canoe on the water today. Every waterbody gets a
-plain-language **Prime / Marginal / Tough** call, an hourly conditions table, a 7‑day outlook,
+plain-language **Prime / Solid / Grind / Tough** Fishability call, an hourly conditions table, a 7‑day outlook,
 and **separate launch verdicts per craft** — plus researched lake pages with access, species,
 structure, and regulation guidance.
 
 Coverage starts in the Kitchener–Waterloo and Grand River watershed (FMZ 16) and expands across
-Southern Ontario. 20 waterbodies are live today.
+Southern Ontario. 19 waterbodies are live today.
 
 ---
 
@@ -68,15 +68,15 @@ app/
     contact/route.ts             Contact form → Discord webhook
   components/                     SpotMap, LaunchMap, SpeciesCards, RatingBadge, LakeImage, ContactCta
 lib/
-  spots.ts  types.ts             The 20-waterbody seed loader + core types
+  spots.ts  types.ts             The 19-waterbody seed loader + core types
   seo.ts                         SITE_URL, absoluteUrl(), speciesIsIndexable(tier)
   forecast/                      Open-Meteo client + forecast helpers
   snapshot.ts  storage.ts        Snapshot build/read + Vercel KV persistence
   verdict/                       Per-craft verdict rules + Zod schema
   rating.ts  conditions.ts  week.ts   Grade math, dashboard assembly, 7-day outlook
-  lakeProfiles/                  20 evergreen lake profiles (+ types, index)
+  lakeProfiles/                  19 evergreen lake profiles (+ types, index)
   species.ts  launch.ts  format.ts   Display/format helpers
-data/spots.json                  The 20-waterbody launch seed (source data)
+data/spots.json                  The 19-waterbody launch seed (source data)
 artifacts/                       Per-lake research audit trail (Stages 0–7) → lakeProfiles
 agents/                          Per-stage research agent prompts
 taxonomy/                        Editorial standards (voice, gold-standard, templates)
@@ -115,7 +115,7 @@ data/spots.json ─► forecast (Open-Meteo) ─► snapshot (Vercel KV) ─► 
 `fetchOpenMeteoForecast()` (`lib/forecast/openMeteo.ts`) calls Open-Meteo with:
 
 - **Model:** `gem_seamless`; **timezone:** `America/Toronto`; `forecast_days=7`, `past_days=2`.
-- **Hourly:** temperature, wind speed/gusts/direction, surface pressure, precipitation, cloud cover.
+- **Hourly:** temperature, wind speed/gusts/direction, pressure, precipitation, cloud cover.
 - **Daily:** sunrise/sunset, temperature max/min. A second call pulls **UV index** (hourly + daily max).
 
 Helpers in `lib/forecast/index.ts`:
@@ -129,29 +129,36 @@ All scoring uses the **daylight window** (local hours 5–21).
 
 ### 2. Snapshot + storage — `lib/snapshot.ts`, `lib/storage.ts`
 
-A **snapshot** = `{ forecast, pressureTrend, verdict, week }` for one lake on one Toronto day.
+A **snapshot** = `{ version, forecast, pressureTrend, verdict, week }` for one lake on one Toronto day.
 
 - `getOrCreateSnapshot(spot)` — read the day's snapshot from KV; if missing, build and save it.
 - `refreshSnapshot(spot)` — always rebuild from a **live** forecast pull (used by the daily cron).
 - Stored in **Vercel KV** under `fishing:{spotId}:{YYYY-MM-DD}` (`lib/storage.ts`), **no TTL** — once a
-  day's snapshot exists it's frozen for that day. Without KV env vars, an in-memory `Map` is used
-  (fine for local dev; not shared across serverless instances).
+  day's current-version snapshot exists it's frozen for that day. A version mismatch is treated as a
+  cache miss and regenerated. Without KV env vars, an in-memory `Map` is used (fine for local dev;
+  not shared across serverless instances).
 - If a forecast fetch fails, `snapshotInputs()` returns a conservative **fallback** forecast + caveat
   rather than erroring.
 
 ### 3. Scoring — `lib/rating.ts`, `lib/verdict/`
 
-Two independent scores combine into the daily grade.
+Two continuous 0–100 scores combine into the daily Fishability grade.
 
-**Fish Activity** (`fishActivity`) ranks three signals 1–4 and averages them → `low / fair / high / maximum`:
+**Fish Activity** (`fishActivity`) starts with one shared baseline for the day:
 
-| Signal | 4 | 3 | 2 | 1 |
-|---|---|---|---|---|
-| Air temp (°C) | ≥22 | ≥15 | ≥8 | <8 |
-| UV (inverse — fish feed in low light) | ≤1 | ≤4 | ≤7 | >7 |
-| Pressure trend | falling | — | steady | rising |
+```text
+baseline = 60% daily average-temperature score + 40% pressure-trend score
+```
 
-**Launch Read** (`launchFromWind`) bands wind and gusts; **severity = the worse of the two** →
+Falling pressure scores highest, steady pressure is neutral, and rising pressure scores lowest.
+Temperature and UV/light use continuous, piecewise-linear curves; light can move the baseline from
+`+15` in the lowest light to `−15` at UV 10+. This creates distinct low-light windows instead of
+letting temperature and UV cancel each other at every hour. A continuous lunar modifier adds up to
+6 points near new/full moons and subtracts up to 6 near quarter moons. The day's activity score is
+its best sustained three-hour window.
+
+**Launch Read** (`launchFromWind`) is craft-agnostic and bands wind and gusts;
+**severity = the worse of the two** →
 `0 All Clear · 1 Fishable · 2 Caution · 3 Do Not Launch`:
 
 | | 3 | 2 | 1 | 0 |
@@ -161,24 +168,29 @@ Two independent scores combine into the daily grade.
 
 **Fetch penalty** (`fetchPenaltyFor`) makes bigger, more exposed water read rougher for the same wind.
 "Fetch" is the open-water distance wind travels before hitting the launch (`spot.maxFetchKm`). The
-penalty is **added to wind** (and ×1.4 to gusts) before banding:
+penalty is **added to wind** (and ×1.4 to gusts) before banding. It follows a
+continuous square-root curve, calibrated in km/h:
 
-| Max fetch | Penalty (km/h added to wind) |
-|---|---|
-| ≥ 6 km | +14 |
-| ≥ 3 km | +9 |
-| ≥ 1.5 km | +4 |
-| < 1.5 km | 0 |
-
-**Daily grade** (`dayGrade`) uses the day's **average** wind/gust (a brief gust shouldn't tank the day),
-converts Launch severity to a 1–4 rank (All Clear = 4), and blends **70% launch / 30% activity**:
-
-```
-rating = 0.7 · (4 − launchSeverity) + 0.3 · avgFishActivityRank
-tier   = rating < 2 → Tough (F+) · < 3 → Marginal (C+) · else Prime (A+)
+```text
+fetchPenalty = 2.9 × √(maxFetchKm)
 ```
 
-Weighting toward launch is deliberate: it lets lakes differentiate by size/exposure.
+The hourly read does not apply craft thresholds. The separate powerboat, kayak,
+and canoe cards below are authoritative for craft-specific launch decisions.
+
+**Fishability grade** (`dayGrade`) scores water conditions continuously from the day's average wind and a
+gust measure made from **75% average gust + 25% peak gust**. Wind and gust are normalized against
+the existing craft-agnostic 30 / 48 km/h boundaries after applying fetch:
+
+```text
+waterRisk   = max(adjustedAvgWind / 30, adjustedEffectiveGust / 48)
+waterScore  = clamp(100 − 75 · waterRisk, 0, 100)
+rating      = 60% bestThreeHourActivityScore + 40% waterScore
+tier        = ≥80 Prime (A+) · ≥65 Solid (B+) · ≥45 Grind (C+) · else Tough (F+)
+```
+
+A general `Do Not Launch` day is always `Tough`; other tiers follow the weighted score. Per-craft
+thresholds remain separate and authoritative.
 
 **Per-craft verdicts** (`lib/verdict/rules.ts`) grade each craft against its own tolerances
 (`adjustedWind = avgWind + fetchPenalty`, `adjustedGust = avgGust + fetchPenalty·1.4`) → `go / marginal / no-go`:
@@ -186,8 +198,8 @@ Weighting toward launch is deliberate: it lets lakes differentiate by size/expos
 | Craft | go (wind / gust) | marginal (wind / gust) | Access required |
 |---|---|---|---|
 | Powerboat | ≤30 / ≤48 | ≤44 / ≤66 | trailer ramp |
-| Kayak | ≤18 / ≤30 | ≤30 / ≤48 | carry-in |
-| Canoe | ≤12 / ≤22 | ≤18 / ≤30 | carry-in |
+| Kayak | ≤20 / ≤34 | ≤32 / ≤52 | carry-in |
+| Canoe | ≤14 / ≤25 | ≤20 / ≤34 | carry-in |
 
 A craft with no matching launch type at that lake is a hard **no-go**. The verdict also names the
 **leeward shore** (`leewardShore`) — the edge wind pushes the cleanest water toward — and a `bestWindow`.
@@ -231,7 +243,7 @@ the hour, once/day — fine here, since anywhere in that window is still after m
 
 Each run, in order:
 1. `revalidateTag("forecast")` — invalidate the cached forecast data.
-2. For all 20 lakes: `refreshSnapshot()` — a **live** Open-Meteo pull → write the day's snapshot to KV.
+2. For all 19 lakes: `refreshSnapshot()` — a **live** Open-Meteo pull → write the day's snapshot to KV.
 3. `revalidatePath()` on `/fishing`, `/[waterbody]/fishing`, and `/[waterbody]/fishing/[species]` — the
    static conditions pages regenerate **once** from the fresh KV data.
 
@@ -296,13 +308,13 @@ The site is built to rank for queries like *today's fishing conditions*, *southe
 fully-rendered HTML with structured data, they're also ideal for **AEO** (AI answer engines that don't
 run JS get complete content).
 
-**Foundations** (`lib/seo.ts`): `SITE_URL` (from `NEXT_PUBLIC_SITE_URL`, default `https://biteclub.ca`),
+**Foundations** (`lib/seo.ts`): `SITE_URL` (from `NEXT_PUBLIC_SITE_URL`, default `https://www.biteclub.ca`),
 `absoluteUrl()`, `speciesIsIndexable(tier)`. `app/layout.tsx` sets `metadataBase` + default Open Graph /
 Twitter cards + a 1200×630 default OG image (`public/og/default.jpg`).
 
 **Generated routes:**
 - `app/robots.ts` — allow all, disallow `/api/`, link the sitemap.
-- `app/sitemap.ts` — **indexable URLs only** (73): 4 core + 20 lakes + 49 destination/strong species.
+- `app/sitemap.ts` — **indexable URLs only** (71): 4 core + 19 lakes + 48 destination/strong species.
 - `app/llms.txt/route.ts` — a curated, data-driven map for LLMs (value prop, coverage, lake links).
 
 **Per-page metadata:** keyword-optimized titles/descriptions, `canonical`, and Open Graph on every page.
@@ -316,7 +328,7 @@ are thin/templated, so they render **`noindex, follow`** and are excluded from t
 site-level authority while keeping them crawlable so link equity still flows to the lake pages. The gate is
 `speciesIsIndexable(tier)`; it flips automatically if a species later gains real copy.
 
-**Post-deploy:** submit `https://biteclub.ca/sitemap.xml` in Google Search Console.
+**Post-deploy:** submit `https://www.biteclub.ca/sitemap.xml` in Google Search Console.
 
 ---
 
@@ -353,7 +365,7 @@ contact events are correlated via PostHog distinct/session IDs.
 | `KV_REST_API_URL` + `KV_REST_API_TOKEN` | **Yes (prod)** | Vercel KV — persists daily snapshots. Without them, snapshots use per-instance memory and won't survive/​share across invocations. |
 | `CRON_SECRET` | **Yes (prod)** | Authenticates `/api/cron/fishing`. Vercel Cron sends it automatically; the route is open to anyone if it's unset. |
 | `CONTACT_WEBHOOK_URL` | Optional | Discord webhook that receives contact-form submissions. |
-| `NEXT_PUBLIC_SITE_URL` | Optional | Overrides the canonical origin (defaults to `https://biteclub.ca`). Useful for preview deploys. |
+| `NEXT_PUBLIC_SITE_URL` | Optional | Overrides the canonical origin (defaults to `https://www.biteclub.ca`). Useful for preview deploys. |
 | `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` | Analytics | PostHog project token (publishable `phc_…`). Enables product analytics; analytics no-op if unset. |
 | `NEXT_PUBLIC_POSTHOG_HOST` | Analytics | PostHog ingestion host (e.g. `https://us.i.posthog.com`). |
 
@@ -400,7 +412,7 @@ npm run validate:spots   # validate the launch seed (data/spots.json)
 
 ## Data status & caveats
 
-- `data/spots.json` is a 20-waterbody launch-candidate seed with manual fetch fields. Before scaling,
+- `data/spots.json` is a 19-waterbody launch-candidate seed with manual fetch fields. Before scaling,
   confirm launchability against Ontario Fishing Access Points / conservation-authority rules and replace
   manual fetch values with polygon-derived bearings/chords.
 - Regulations shown are **dated convenience summaries** of Government of Ontario FMZ 16 rules, not the

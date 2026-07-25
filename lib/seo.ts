@@ -2,7 +2,7 @@ import type { SpeciesTier } from "@/lib/lakeProfiles/types";
 
 // Single source of truth for the production origin. Override per-environment with
 // NEXT_PUBLIC_SITE_URL (e.g. a Vercel preview URL); falls back to the canonical domain.
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://biteclub.ca").replace(
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.biteclub.ca").replace(
   /\/+$/,
   ""
 );
@@ -14,7 +14,15 @@ export const DEFAULT_OG_IMAGE = "/og/default.jpg";
 
 /** Build an absolute URL from a site-root-relative path. */
 export function absoluteUrl(path = "/"): string {
-  return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
+  const url = new URL(path.startsWith("/") ? path : `/${path}`, `${SITE_URL}/`);
+
+  // Keep the origin root as "/" while canonicalizing every other pathname
+  // without a trailing slash.
+  if (url.pathname !== "/") {
+    url.pathname = url.pathname.replace(/\/+$/, "");
+  }
+
+  return url.toString();
 }
 
 // Only species with genuine, unique tactical copy (destination/strong tiers) are

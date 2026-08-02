@@ -303,5 +303,20 @@
     "fmz": "16",
     "sourceAccessPointName": "Ken Whillans Resource Management Area (Orchard Pond) carry-in launch",
     "reviewNotes": ["Ken Whillans Resource Management Area (Credit Valley Conservation), Caledon — two small stocked ponds (Kidd, Orchard); carry-in paddlecraft only on Orchard Pond, CVC does not document motor rules, ice fishing not permitted. FMZ 16 confirmed by Stage 1a. Primary draw is a stocked put-and-take rainbow-trout fishery (out of the six-gamefish pipeline scope). Waterbody type is an imperfect 'reservoir' (small ponds; no 'pond' enum). Coordinate from published sources off Highway 10 (no Ontario Fishing Access Points record exists); field-check exact pond-launch coordinate before production. shorelineFetch/maxFetchKm hand-estimated from small-pond geometry."]
+  },
+  {
+    "id": "pinehurst-lake",
+    "name": "Pinehurst Lake",
+    "location": "Ayr",
+    "waterbody": "Pinehurst Lake",
+    "lat": 43.26741,
+    "lng": -80.39394,
+    "launch": { "trailer": false, "carryIn": true, "name": "Pinehurst Lake Conservation Area canoe/kayak launch", "accessFee": "paid" },
+    "shorelineFetch": [40, 220],
+    "maxFetchKm": 0.4,
+    "species": ["largemouth bass", "black crappie"],
+    "fmz": "16",
+    "sourceAccessPointName": "Pinehurst Lake Conservation Area canoe/kayak launch",
+    "reviewNotes": ["Pinehurst Lake (Grand River Conservation Authority), North Dumfries near Ayr — ~9 ha natural kettle lake; non-motorized only (no gas or electric motors), paddlecraft rentals on site. Largemouth bass and black crappie fishery plus sunfish (out of scope). No pike. FMZ 16 to be confirmed by Stage 1a. Coordinate from published GRCA/park sources (no Ontario Fishing Access Points record exists); field-check exact launch coordinate before production. shorelineFetch/maxFetchKm hand-estimated from small-kettle-lake geometry."]
   }
 ]

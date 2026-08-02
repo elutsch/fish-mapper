@@ -23,6 +23,7 @@ All waterbodies below are in **Ontario, FMZ 16** (Grand River region and adjacen
 | `lake-eugenia` | Lake Eugenia | 16 | reservoir | Hydro reservoir near Flesherton, Grey Highlands. |
 | `lake-niapenco` | Lake Niapenco | 16 | reservoir | Niagara Peninsula Conservation Authority reservoir (Binbrook Reservoir / Binbrook Conservation Area), Binbrook; FMZ to be confirmed by Stage 1a. |
 | `ken-whillans` | Ken Whillans | 16 | reservoir | Credit Valley Conservation stocked ponds (Kidd, Orchard) at Ken Whillans Resource Management Area, Caledon (off Hwy 10); FMZ 16 confirmed. Type is a best-fit `reservoir` (small ponds; no `pond` enum). Primary fishery is put-and-take rainbow trout (out of six-gamefish scope). |
+| `pinehurst-lake` | Pinehurst Lake | 16 | natural-lake | GRCA Pinehurst Lake Conservation Area, North Dumfries near Ayr — ~9 ha natural kettle lake, non-motorized only; largemouth bass + black crappie (no pike). FMZ to be confirmed by Stage 1a. |
 | `grand-river-west-montrose` | Grand River at West Montrose | 16 | river | River reach at the West Montrose covered bridge. |
 | `grand-river-paris` | Grand River at Paris | 16 | river | River reach at Paris, ON. |
 | `grand-river-brantford` | Grand River at Brantford | 16 | river | River reach at Brantford. |

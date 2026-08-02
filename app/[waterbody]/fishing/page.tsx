@@ -8,6 +8,7 @@ import { getSpeciesCard, SpeciesCards } from "@/app/components/SpeciesCards";
 import { TrackedDirectionsLink } from "@/app/components/TrackedDirectionsLink";
 import { TrackedSpeciesLink } from "@/app/components/TrackedSpeciesLink";
 import { buildConditionsDashboard } from "@/lib/conditions";
+import { fishabilityLabel } from "@/lib/fishability";
 import { compass, craftLabels, formatCoords, formatDate, formatHour, regsSummary } from "@/lib/format";
 import { getLakeProfile } from "@/lib/lakeProfiles";
 import type { LakeProfile } from "@/lib/lakeProfiles/types";
@@ -424,6 +425,8 @@ function LakeProfileIntro({
   status: GradeTier;
   verified: string;
 }) {
+  const statusLabel = fishabilityLabel(status);
+
   return (
     <section className="lake-profile profile-front" aria-label={`${profile.lake} fishing profile`}>
       <div className="profile-hero profile-hero-front">

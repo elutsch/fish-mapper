@@ -12,7 +12,6 @@ import islandLakeOrangeville from "./island-lake-orangeville";
 import kelsoReservoir from "./kelso-reservoir";
 import lakeEugenia from "./lake-eugenia";
 import lakeNiapenco from "./lake-niapenco";
-import laurelCreekReservoir from "./laurel-creek-reservoir";
 import mountsbergReservoir from "./mountsberg-reservoir";
 import pittockLake from "./pittock-lake";
 import puslinchLake from "./puslinch-lake";
@@ -36,7 +35,6 @@ export const lakeProfiles: Record<string, LakeProfile> = {
   "kelso-reservoir": kelsoReservoir,
   "lake-eugenia": lakeEugenia,
   "lake-niapenco": lakeNiapenco,
-  "laurel-creek-reservoir": laurelCreekReservoir,
   "mountsberg-reservoir": mountsbergReservoir,
   "pittock-lake": pittockLake,
   "puslinch-lake": puslinchLake,

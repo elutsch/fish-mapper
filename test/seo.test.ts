@@ -35,3 +35,25 @@ describe("canonical site URLs", () => {
     expect(absoluteUrl("/fishing///")).toBe("https://preview.example.com/fishing");
   });
 });
+
+describe("species guide indexing", () => {
+  it("sets thin present-tier species pages to noindex,follow", async () => {
+    const { generateMetadata } = await import("@/app/[waterbody]/fishing/[species]/page");
+
+    const metadata = await generateMetadata({
+      params: Promise.resolve({ waterbody: "conestogo-lake", species: "black-crappie" })
+    });
+
+    expect(metadata.robots).toEqual({ index: false, follow: true });
+  });
+
+  it("leaves researched strong-tier species pages indexable", async () => {
+    const { generateMetadata } = await import("@/app/[waterbody]/fishing/[species]/page");
+
+    const metadata = await generateMetadata({
+      params: Promise.resolve({ waterbody: "conestogo-lake", species: "smallmouth-bass" })
+    });
+
+    expect(metadata.robots).toBeUndefined();
+  });
+});

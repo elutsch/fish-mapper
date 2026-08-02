@@ -1,5 +1,5 @@
 const waterbodyHeroImages: Record<string, string> = {
-  "lake-niapenco": "/waterbody-heroes/lake-niapenco.webp"
+  "lake-niapenco": "/waterbodies/lake-niapenco.webp"
 };
 
 export function waterbodyHeroImage(spotId: string) {

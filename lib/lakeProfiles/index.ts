@@ -14,6 +14,7 @@ import kenWhillans from "./ken-whillans";
 import lakeEugenia from "./lake-eugenia";
 import lakeNiapenco from "./lake-niapenco";
 import mountsbergReservoir from "./mountsberg-reservoir";
+import pinehurstLake from "./pinehurst-lake";
 import pittockLake from "./pittock-lake";
 import puslinchLake from "./puslinch-lake";
 import saugeenRiverDurham from "./saugeen-river-durham";
@@ -38,6 +39,7 @@ export const lakeProfiles: Record<string, LakeProfile> = {
   "lake-eugenia": lakeEugenia,
   "lake-niapenco": lakeNiapenco,
   "mountsberg-reservoir": mountsbergReservoir,
+  "pinehurst-lake": pinehurstLake,
   "pittock-lake": pittockLake,
   "puslinch-lake": puslinchLake,
   "saugeen-river-durham": saugeenRiverDurham,

@@ -120,7 +120,12 @@ export default async function WaterbodyFishingPage({ params }: PageProps) {
     <>
       <main className="screen">
         {profile ? (
-          <LakeProfileIntro profile={profile} status={dashboard.grade.status} verified={verdict.validFor} />
+          <LakeProfileIntro
+            profile={profile}
+            location={spot.location}
+            status={dashboard.grade.status}
+            verified={verdict.validFor}
+          />
         ) : (
           <section className="hero poster-hero">
             <span className="alert">Forecast Alert</span>
@@ -418,10 +423,12 @@ function WeeklyForecast({ days }: { days: WeekDay[] }) {
 
 function LakeProfileIntro({
   profile,
+  location,
   status,
   verified
 }: {
   profile: LakeProfile;
+  location: string;
   status: GradeTier;
   verified: string;
 }) {
@@ -440,7 +447,7 @@ function LakeProfileIntro({
             <FishabilityBadge status={status} className="lake-status-callout" />
           </LakeImage>
           <span className="profile-kicker">
-            {profile.waterbodyType} / FMZ {profile.fmz}
+            {profile.waterbodyType} / {location}, ON / FMZ {profile.fmz}
           </span>
           <h1>{profile.lake}</h1>
           <p>{firstSentences(profile.overview, 2)}</p>

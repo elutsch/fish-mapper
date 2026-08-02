@@ -2,6 +2,7 @@
   {
     "id": "conestogo-lake",
     "name": "Conestogo Lake",
+    "location": "Drayton",
     "waterbody": "Conestogo Lake",
     "lat": 43.7078767,
     "lng": -80.7707069,
@@ -16,6 +17,7 @@
   {
     "id": "belwood-lake",
     "name": "Belwood Lake",
+    "location": "Belwood",
     "waterbody": "Belwood Lake",
     "lat": 43.7351716,
     "lng": -80.3329366,
@@ -31,6 +33,7 @@
   {
     "id": "guelph-lake",
     "name": "Guelph Lake",
+    "location": "Guelph",
     "waterbody": "Guelph Lake",
     "lat": 43.6123454,
     "lng": -80.2508237,
@@ -46,6 +49,7 @@
   {
     "id": "puslinch-lake",
     "name": "Puslinch Lake",
+    "location": "Puslinch",
     "waterbody": "Puslinch Lake",
     "lat": 43.452,
     "lng": -80.2854,
@@ -59,6 +63,7 @@
   {
     "id": "shades-mills-reservoir",
     "name": "Shades Mills Reservoir",
+    "location": "Cambridge",
     "waterbody": "Shades Mills Reservoir",
     "lat": 43.377629,
     "lng": -80.2836082,
@@ -74,6 +79,7 @@
   {
     "id": "valens-lake",
     "name": "Valens Lake",
+    "location": "Flamborough",
     "waterbody": "Valens Lake",
     "lat": 43.3739,
     "lng": -80.1472,
@@ -87,6 +93,7 @@
   {
     "id": "fairy-lake-acton",
     "name": "Fairy Lake",
+    "location": "Acton",
     "waterbody": "Fairy Lake",
     "lat": 43.6321,
     "lng": -80.0407,
@@ -100,6 +107,7 @@
   {
     "id": "mountsberg-reservoir",
     "name": "Mountsberg Reservoir",
+    "location": "Campbellville",
     "waterbody": "Mountsberg Reservoir",
     "lat": 43.4535,
     "lng": -80.1072,
@@ -113,6 +121,7 @@
   {
     "id": "christie-lake",
     "name": "Christie Lake",
+    "location": "Dundas",
     "waterbody": "Christie Lake",
     "lat": 43.281,
     "lng": -80.0304,
@@ -126,6 +135,7 @@
   {
     "id": "kelso-reservoir",
     "name": "Kelso Reservoir",
+    "location": "Milton",
     "waterbody": "Kelso Reservoir",
     "lat": 43.5062,
     "lng": -79.9492,
@@ -139,6 +149,7 @@
   {
     "id": "island-lake-orangeville",
     "name": "Island Lake",
+    "location": "Orangeville",
     "waterbody": "Island Lake",
     "lat": 43.9273,
     "lng": -80.0751,
@@ -152,6 +163,7 @@
   {
     "id": "wildwood-reservoir",
     "name": "Wildwood Reservoir",
+    "location": "St. Marys",
     "waterbody": "Wildwood Reservoir",
     "lat": 43.2776,
     "lng": -81.0467,
@@ -165,6 +177,7 @@
   {
     "id": "pittock-lake",
     "name": "Pittock Lake",
+    "location": "Woodstock",
     "waterbody": "Pittock Lake",
     "lat": 43.1606,
     "lng": -80.7295,
@@ -178,6 +191,7 @@
   {
     "id": "fanshawe-lake",
     "name": "Fanshawe Lake",
+    "location": "London",
     "waterbody": "Fanshawe Lake",
     "lat": 43.0406,
     "lng": -81.1848,
@@ -191,6 +205,7 @@
   {
     "id": "lake-eugenia",
     "name": "Lake Eugenia",
+    "location": "Flesherton",
     "waterbody": "Lake Eugenia",
     "lat": 44.313609,
     "lng": -80.5127808,
@@ -206,6 +221,7 @@
   {
     "id": "grand-river-west-montrose",
     "name": "Grand River at West Montrose",
+    "location": "West Montrose",
     "waterbody": "Grand River",
     "lat": 43.5866,
     "lng": -80.4824,
@@ -219,6 +235,7 @@
   {
     "id": "grand-river-paris",
     "name": "Grand River at Paris",
+    "location": "Paris",
     "waterbody": "Grand River",
     "lat": 43.1946,
     "lng": -80.3849,
@@ -232,6 +249,7 @@
   {
     "id": "grand-river-brantford",
     "name": "Grand River at Brantford",
+    "location": "Brantford",
     "waterbody": "Grand River",
     "lat": 43.1391,
     "lng": -80.2707,
@@ -245,6 +263,7 @@
   {
     "id": "saugeen-river-durham",
     "name": "Saugeen River at Durham",
+    "location": "Durham",
     "waterbody": "Saugeen River",
     "lat": 44.1746,
     "lng": -80.8184,
@@ -258,6 +277,7 @@
   {
     "id": "lake-niapenco",
     "name": "Lake Niapenco",
+    "location": "Binbrook",
     "waterbody": "Lake Niapenco",
     "lat": 43.101435,
     "lng": -79.835263,
@@ -272,15 +292,16 @@
   {
     "id": "ken-whillans",
     "name": "Ken Whillans",
+    "location": "Caledon",
     "waterbody": "Ken Whillans Pond",
     "lat": 43.812677,
     "lng": -79.931809,
-    "launch": { "trailer": false, "carryIn": true, "name": "Ken Whillans Resource Management Area pond launch", "electricOnly": true, "accessFee": "paid" },
+    "launch": { "trailer": false, "carryIn": true, "name": "Ken Whillans Resource Management Area (Orchard Pond) carry-in launch", "accessFee": "paid" },
     "shorelineFetch": [45, 225],
     "maxFetchKm": 0.4,
-    "species": ["largemouth bass", "yellow perch", "smallmouth bass"],
+    "species": ["largemouth bass", "northern pike", "yellow perch"],
     "fmz": "16",
-    "sourceAccessPointName": "Ken Whillans Resource Management Area pond launch",
-    "reviewNotes": ["Ken Whillans Resource Management Area (Credit Valley Conservation), Caledon — two ponds; car-top/rental launch, electric only. Primary draw is a stocked put-and-take rainbow-trout fishery (out of the six-gamefish pipeline scope). Coordinate is the RMA off Highway 10 from published sources (no Ontario Fishing Access Points record exists); field-check exact pond-launch coordinate, motor rules, and FMZ before production. shorelineFetch/maxFetchKm hand-estimated from small-pond geometry."]
+    "sourceAccessPointName": "Ken Whillans Resource Management Area (Orchard Pond) carry-in launch",
+    "reviewNotes": ["Ken Whillans Resource Management Area (Credit Valley Conservation), Caledon — two small stocked ponds (Kidd, Orchard); carry-in paddlecraft only on Orchard Pond, CVC does not document motor rules, ice fishing not permitted. FMZ 16 confirmed by Stage 1a. Primary draw is a stocked put-and-take rainbow-trout fishery (out of the six-gamefish pipeline scope). Waterbody type is an imperfect 'reservoir' (small ponds; no 'pond' enum). Coordinate from published sources off Highway 10 (no Ontario Fishing Access Points record exists); field-check exact pond-launch coordinate before production. shorelineFetch/maxFetchKm hand-estimated from small-pond geometry."]
   }
 ]

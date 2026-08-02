@@ -10,6 +10,7 @@ import grandRiverWestMontrose from "./grand-river-west-montrose";
 import guelphLake from "./guelph-lake";
 import islandLakeOrangeville from "./island-lake-orangeville";
 import kelsoReservoir from "./kelso-reservoir";
+import kenWhillans from "./ken-whillans";
 import lakeEugenia from "./lake-eugenia";
 import lakeNiapenco from "./lake-niapenco";
 import mountsbergReservoir from "./mountsberg-reservoir";
@@ -33,6 +34,7 @@ export const lakeProfiles: Record<string, LakeProfile> = {
   "guelph-lake": guelphLake,
   "island-lake-orangeville": islandLakeOrangeville,
   "kelso-reservoir": kelsoReservoir,
+  "ken-whillans": kenWhillans,
   "lake-eugenia": lakeEugenia,
   "lake-niapenco": lakeNiapenco,
   "mountsberg-reservoir": mountsbergReservoir,

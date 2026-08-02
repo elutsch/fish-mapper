@@ -105,7 +105,7 @@ export default async function FishingIndexPage() {
                 <div className="lake-body">
                   <h3>{spot.name}</h3>
                   <p className="muted">
-                    {formatLaunchType(spot.launch)} · {spot.maxFetchKm?.toFixed(1)} km fetch
+                    {spot.location}, ON — {formatLaunchType(spot.launch)}
                   </p>
                   <div className="facts">
                     <span className="pill">Target Species</span>

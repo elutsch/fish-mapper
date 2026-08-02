@@ -9,8 +9,8 @@ function safeDate(value: string, fallback: Date): Date {
   return Number.isNaN(parsed.getTime()) ? fallback : parsed;
 }
 
-// Sitemap lists ONLY indexable URLs: the four core pages, all 19 lake pages, and
-// the destination/strong species pages. Thin (present-tier) species pages are
+// Sitemap lists ONLY indexable URLs: core pages, all waterbody pages, and
+// destination/strong species pages. Thin (present-tier) species pages are
 // noindex,follow and deliberately excluded — a sitemap should advertise only the
 // pages we want indexed.
 export default function sitemap(): MetadataRoute.Sitemap {

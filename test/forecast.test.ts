@@ -5,6 +5,7 @@ import type { Spot } from "@/lib/types";
 const spot: Spot = {
   id: "test-lake",
   name: "Test Lake",
+  location: "Testville",
   waterbody: "Test Lake",
   lat: 43.5,
   lng: -80.5,

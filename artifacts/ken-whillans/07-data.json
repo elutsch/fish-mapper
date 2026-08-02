@@ -1,0 +1,222 @@
+{
+  "slug": "ken-whillans",
+  "lake": "Ken Whillans",
+  "province": "Ontario",
+  "fmz": 16,
+  "waterbodyType": "reservoir",
+  "coordinates": {
+    "lat": 43.812677,
+    "lng": -79.931809
+  },
+  "morphology": {
+    "surfaceArea": null,
+    "maxDepth": null,
+    "meanDepth": null,
+    "clarity": null,
+    "trophicStatus": null,
+    "thermalBehaviour": null
+  },
+  "bestSeason": "Late spring through fall; no winter fishery (ice fishing not permitted)",
+  "overview": "Ken Whillans is a two-pond fishing park off Highway 10 in Caledon, run by Credit Valley Conservation on the old Kidd property. The headline here is the family stuff: Credit Valley stocks Orchard Pond with rainbow trout every spring for a put-and-take season, and that's what most people come for. But two warmwater fish live here year to year. Kidd Pond is the largemouth pond — a small pier, calm water, and bass you have to put back, because all bass fishing on the property is catch-and-release. Orchard Pond holds northern pike alongside the trout, and it's the only pond you can paddle: carry a canoe or kayak down from the lot, or work it off the pier. A stream links the two ponds at the west end, where the Credit River clips the property. It's small, it's shallow, and there's no ice season — CVC doesn't allow ice fishing here.",
+  "notableFacts": [
+    {
+      "fact": "Ken Whillans Resource Management Area is a 215-acre Credit Valley Conservation park in Caledon, on the former Kidd property, a conservation area since 1954; it is named for Ken Whillans, the 46th mayor of Brampton.",
+      "sourceUrl": "https://ontarioconservationareas.ca/conservation-areas/ken-whillans-r-m-a/"
+    },
+    {
+      "fact": "The property holds two ponds — Kidd Pond, named for the original landowner, and Orchard Pond, named for the homestead orchard — connected by a small stream at the west end, with the Credit River running through the west side.",
+      "sourceUrl": "https://hikingthegta.com/2016/11/17/ken-whillans-resource-management-area/"
+    },
+    {
+      "fact": "The headline fishery is a spring-stocked, put-and-take rainbow trout program in Orchard Pond; the in-scope warmwater fish are largemouth bass in Kidd Pond and northern pike in Orchard Pond.",
+      "sourceUrl": "https://ourroutes.ca/fishing-adventures-in-our-backyard/"
+    },
+    {
+      "fact": "All bass fishing on the property is catch-and-release under CVC property rules, and ice fishing is not permitted.",
+      "sourceUrl": "https://cvc.ca/fishing-regulations/"
+    },
+    {
+      "fact": "Both ponds have small fishing piers; Orchard Pond also allows carry-in canoe/kayak fishing, and the park runs the TackleShare rod-loan program.",
+      "sourceUrl": "https://cvc.ca/enjoy-the-outdoors/conservation-areas/ken-whillans-resource-management-area/"
+    }
+  ],
+  "regulations": [
+    {
+      "species": "Largemouth & Smallmouth Bass (combined)",
+      "season": "fourth Saturday in June to November 30",
+      "limit": "S-6 / C-2",
+      "sizeLimit": "no size limit",
+      "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      "effectiveDate": "2025-12-08",
+      "verified": true
+    },
+    {
+      "species": "Northern Pike",
+      "season": "January 1 to March 31 and second Saturday in May to December 31",
+      "limit": "S-6 / C-2",
+      "sizeLimit": "no size limit",
+      "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+      "effectiveDate": "2025-12-08",
+      "verified": true
+    }
+  ],
+  "regsDisclaimer": "Regulations effective 2025-12-08, FMZ 16. This is a summary, not the legal regulation — confirm current rules with the official source before fishing.",
+  "launches": [
+    {
+      "name": "Ken Whillans Resource Management Area — Orchard Pond carry-in (canoe/kayak) access",
+      "type": "carry-in",
+      "notes": "Carry-in only: visitors must be able to walk their boat from the parking lot to the Orchard Pond shoreline. Boating/paddling is on Orchard Pond only; Kidd Pond is shore/pier fishing. Canoes, kayaks and fishing kayaks available for rent (lifejacket, safety kit and paddles included). Paid park admission; open roughly May–Oct, 7 a.m.–9 p.m. Electric-motor rule for privately launched boats is not explicitly documented by CVC.",
+      "sourceUrl": "https://cvc.ca/explore-activities/canoeing-kayaking-boating/"
+    }
+  ],
+  "species": [
+    {
+      "parentSlug": "smallmouth-bass",
+      "displayName": "Smallmouth Bass",
+      "tier": "absent",
+      "structure": [],
+      "bestSeason": null,
+      "bodyCopy": null,
+      "qualitySignal": null,
+      "lede": null,
+      "howItFishes": null,
+      "structureDetails": null,
+      "speciesRules": null,
+      "sources": []
+    },
+    {
+      "parentSlug": "largemouth-bass",
+      "displayName": "Largemouth Bass",
+      "tier": "strong",
+      "structure": [
+        "Kidd Pond — the designated largemouth pond, with a small fishing pier"
+      ],
+      "bestSeason": "Summer through fall, from the fourth-Saturday-of-June opener",
+      "bodyCopy": "Kidd Pond is the bass pond, full stop. It's small, warm and calm — the kind of water largemouth settle into — and it's set aside for them, pier and all. From the late-June opener through fall they hold in the shallow, weedy cover a pond like this grows, chasing panfish and whatever else fits in a bucket mouth. One rule you can't skip: every bass here goes back. CVC runs the whole property as catch-and-release for bass, so bring a camera, not a stringer, and fish it for the fight.",
+      "qualitySignal": null,
+      "lede": "Kidd Pond is the largemouth's pond — the smaller, quieter of the two, set aside for bass and rigged with a little fishing pier to work it from. It's warm, calm, shallow water, and the fish that suits it best is a largemouth. One thing sets the tone before you cast: every bass at Ken Whillans is catch-and-release, so this is a fish-for-the-fight pond, not a fill-the-cooler one.",
+      "howItFishes": "This is small-pond largemouth fishing, and the season sets the rhythm. The bass season opens the fourth Saturday in June and runs to November 30, so summer through fall is your window on Kidd Pond. Largemouth hold in the shallow, weedy cover a warm pond grows, sliding into shade and edges to ambush panfish and anything else that fits a wide mouth. Fish the pier and the reachable shoreline; there's no boating on Kidd Pond, so it's a bank game. And because CVC runs bass as catch-and-release across the property, plan every fish to go back — barbless and a quick release keep the pond's bass healthy for the next angler.",
+      "structureDetails": [
+        {
+          "name": "Kidd Pond",
+          "detail": "The RMA's designated largemouth pond — small, warm and weedy, with a fishing pier for shore access. It's the pond to fish for bass; boating is not offered here, so cover the pier and the bank."
+        }
+      ],
+      "speciesRules": [
+        {
+          "rule": "Season: fourth Saturday in June to November 30 — Limit: S-6 / C-2 — Size: no size limit (FMZ 16 provincial regulation)",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2025-12-08"
+        },
+        {
+          "rule": "CVC property rule (not provincial law): all bass fishing at Ken Whillans is catch-and-release. Worms are permitted in the ponds only (not in the streams); no outside baitfish",
+          "sourceUrl": "https://cvc.ca/fishing-regulations/",
+          "effectiveDate": "2025-12-08"
+        }
+      ],
+      "sources": [
+        "https://ourroutes.ca/fishing-adventures-in-our-backyard/",
+        "https://cvc.ca/fishing-regulations/"
+      ]
+    },
+    {
+      "parentSlug": "northern-pike",
+      "displayName": "Northern Pike",
+      "tier": "strong",
+      "structure": [
+        "Orchard Pond — pike water with a small pier, and the only pond you can paddle"
+      ],
+      "bestSeason": "Spring through fall; no winter season (ice fishing not permitted)",
+      "bodyCopy": "Orchard Pond does double duty. It's where Credit Valley drops the spring rainbow trout, and it's where the northerns live the rest of the year — which makes early season interesting, with fresh stockers and resident pike sharing the same skinny water. It's also the only pond open to boats, so you can carry a canoe or kayak down from the lot and cover the shoreline instead of casting from the pier. Work the weedy edges where a pike can sit and ambush. No ice option, though: the season closes when the park does for winter.",
+      "qualitySignal": null,
+      "lede": "Orchard Pond is the pike pond — and the busy one. It's where Credit Valley drops rainbow trout each spring for the put-and-take season, and it's where the resident northerns live all year. It's also the only water here you can paddle: carry a canoe or kayak down from the lot, or fish the pier. That mix of stocked trout and standing pike gives early season its edge.",
+      "howItFishes": "Pike at Ken Whillans are an Orchard Pond fish, and the pond's dual role shapes the year. When the spring trout go in, resident pike are sharing the same skinny water — an early-season overlap worth knowing. Through spring, summer and fall, work the weedy edges and shoreline where a pike can hang and ambush; the shallow, warm pond gives them cover and forage in the same places. The real advantage over the bass pond is access: Orchard Pond takes carry-in canoes and kayaks, so you can leave the pier and cover the shoreline a cast at a time. Don't plan a winter trip, though — ice fishing is not permitted at Ken Whillans, so the pike season effectively ends when the park closes for the year.",
+      "structureDetails": [
+        {
+          "name": "Orchard Pond",
+          "detail": "The RMA's pike water, and the only pond open to boats — carry a canoe or kayak in from the parking lot, or fish the small pier. It doubles as the spring-stocked rainbow trout pond, so early-season anglers share the water."
+        }
+      ],
+      "speciesRules": [
+        {
+          "rule": "Season: January 1 to March 31 and second Saturday in May to December 31 — Limit: S-6 / C-2 — Size: no size limit (FMZ 16 provincial regulation)",
+          "sourceUrl": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16",
+          "effectiveDate": "2025-12-08"
+        },
+        {
+          "rule": "CVC property rule (not provincial law): ice fishing is not permitted at Ken Whillans, so there is no on-site winter pike season despite the January–March provincial window. Fishing only during hours of operation",
+          "sourceUrl": "https://cvc.ca/fishing-regulations/",
+          "effectiveDate": "2025-12-08"
+        }
+      ],
+      "sources": [
+        "https://ourroutes.ca/fishing-adventures-in-our-backyard/",
+        "https://cvc.ca/discover-our-parks/ken-whillans/"
+      ]
+    },
+    {
+      "parentSlug": "walleye",
+      "displayName": "Walleye",
+      "tier": "absent",
+      "structure": [],
+      "bestSeason": null,
+      "bodyCopy": null,
+      "qualitySignal": null,
+      "lede": null,
+      "howItFishes": null,
+      "structureDetails": null,
+      "speciesRules": null,
+      "sources": []
+    },
+    {
+      "parentSlug": "black-crappie",
+      "displayName": "Black Crappie",
+      "tier": "absent",
+      "structure": [],
+      "bestSeason": null,
+      "bodyCopy": null,
+      "qualitySignal": null,
+      "lede": null,
+      "howItFishes": null,
+      "structureDetails": null,
+      "speciesRules": null,
+      "sources": []
+    },
+    {
+      "parentSlug": "yellow-perch",
+      "displayName": "Yellow Perch",
+      "tier": "present",
+      "structure": [],
+      "bestSeason": null,
+      "bodyCopy": null,
+      "qualitySignal": null,
+      "lede": null,
+      "howItFishes": null,
+      "structureDetails": null,
+      "speciesRules": null,
+      "sources": []
+    }
+  ],
+  "keyResources": [
+    {
+      "label": "The actual regs, straight from the source — FMZ 16, Government of Ontario",
+      "url": "https://www.ontario.ca/document/ontario-fishing-regulations-summary/fisheries-management-zone-16"
+    },
+    {
+      "label": "Bass catch-and-release, bait rules and the trout-keep exception — CVC fishing regulations",
+      "url": "https://cvc.ca/fishing-regulations/"
+    },
+    {
+      "label": "Ponds, piers, hours and fees — Ken Whillans Resource Management Area, Credit Valley Conservation",
+      "url": "https://cvc.ca/enjoy-the-outdoors/conservation-areas/ken-whillans-resource-management-area/"
+    },
+    {
+      "label": "Canoe and kayak rentals and carry-in access — CVC canoeing, kayaking and boating",
+      "url": "https://cvc.ca/explore-activities/canoeing-kayaking-boating/"
+    }
+  ],
+  "speciesCount": 2,
+  "lastVerified": "2026-08-01",
+  "factCheckStatus": "passed",
+  "regsGate": "passed"
+}

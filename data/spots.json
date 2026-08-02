@@ -275,12 +275,12 @@
     "waterbody": "Ken Whillans Pond",
     "lat": 43.812677,
     "lng": -79.931809,
-    "launch": { "trailer": false, "carryIn": true, "name": "Ken Whillans Resource Management Area pond launch", "electricOnly": true, "accessFee": "paid" },
+    "launch": { "trailer": false, "carryIn": true, "name": "Ken Whillans Resource Management Area (Orchard Pond) carry-in launch", "accessFee": "paid" },
     "shorelineFetch": [45, 225],
     "maxFetchKm": 0.4,
-    "species": ["largemouth bass", "yellow perch", "smallmouth bass"],
+    "species": ["largemouth bass", "northern pike", "yellow perch"],
     "fmz": "16",
-    "sourceAccessPointName": "Ken Whillans Resource Management Area pond launch",
-    "reviewNotes": ["Ken Whillans Resource Management Area (Credit Valley Conservation), Caledon — two ponds; car-top/rental launch, electric only. Primary draw is a stocked put-and-take rainbow-trout fishery (out of the six-gamefish pipeline scope). Coordinate is the RMA off Highway 10 from published sources (no Ontario Fishing Access Points record exists); field-check exact pond-launch coordinate, motor rules, and FMZ before production. shorelineFetch/maxFetchKm hand-estimated from small-pond geometry."]
+    "sourceAccessPointName": "Ken Whillans Resource Management Area (Orchard Pond) carry-in launch",
+    "reviewNotes": ["Ken Whillans Resource Management Area (Credit Valley Conservation), Caledon — two small stocked ponds (Kidd, Orchard); carry-in paddlecraft only on Orchard Pond, CVC does not document motor rules, ice fishing not permitted. FMZ 16 confirmed by Stage 1a. Primary draw is a stocked put-and-take rainbow-trout fishery (out of the six-gamefish pipeline scope). Waterbody type is an imperfect 'reservoir' (small ponds; no 'pond' enum). Coordinate from published sources off Highway 10 (no Ontario Fishing Access Points record exists); field-check exact pond-launch coordinate before production. shorelineFetch/maxFetchKm hand-estimated from small-pond geometry."]
   }
 ]

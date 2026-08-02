@@ -5,6 +5,7 @@ export type Rating = "go" | "marginal" | "no-go";
 export type Spot = {
   id: string;
   name: string;
+  location: string;
   waterbody: string;
   lat: number;
   lng: number;

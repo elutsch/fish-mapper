@@ -9,6 +9,10 @@ for (const spot of spots) {
   }
   ids.add(spot.id);
 
+  if (!spot.location?.trim()) {
+    errors.push(`${spot.id} is missing location`);
+  }
+
   if (!spot.launch.trailer && !spot.launch.carryIn) {
     errors.push(`${spot.id} is not launch-capable`);
   }

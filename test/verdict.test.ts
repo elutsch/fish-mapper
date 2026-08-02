@@ -5,6 +5,7 @@ import type { ForecastHour, Spot } from "@/lib/types";
 const longFetchSpot: Spot = {
   id: "test-long-fetch",
   name: "Test Long Fetch Lake",
+  location: "Testville",
   waterbody: "Test Long Fetch Lake",
   lat: 43.5,
   lng: -80.5,
@@ -18,6 +19,7 @@ const longFetchSpot: Spot = {
 const conestogoLikeSpot: Spot = {
   id: "conestogo-like",
   name: "Conestogo Like Lake",
+  location: "Testville",
   waterbody: "Conestogo Like Lake",
   lat: 43.7,
   lng: -80.77,

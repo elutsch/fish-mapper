@@ -19,6 +19,7 @@ import { getSpot, spots } from "@/lib/spots";
 import type { Craft, ForecastHour, PressureTrend, Spot } from "@/lib/types";
 import { fetchPenaltyFor } from "@/lib/verdict/rules";
 import type { WeekDay } from "@/lib/week";
+import { waterbodyHeroImage } from "@/lib/waterbodyImages";
 
 type PageProps = {
   params: Promise<{ waterbody: string }>;
@@ -430,7 +431,8 @@ function LakeProfileIntro({
           <LakeImage
             spotId={profile.slug}
             className="profile-lake-image"
-            label={`Illustrated view of ${profile.lake}`}
+            label={`Illustrated view of ${profile.lake} — ${statusLabel}`}
+            imagePath={waterbodyHeroImage(profile.slug)}
           >
             <FishabilityBadge status={status} className="lake-status-callout" />
           </LakeImage>

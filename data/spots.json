@@ -254,5 +254,19 @@
     "species": ["smallmouth bass", "brown trout", "rainbow trout"],
     "fmz": "16",
     "reviewNotes": ["River reach outside the KW core; confirm owner wants it in the initial 20."]
+  },
+  {
+    "id": "lake-niapenco",
+    "name": "Lake Niapenco",
+    "waterbody": "Lake Niapenco",
+    "lat": 43.101435,
+    "lng": -79.835263,
+    "launch": { "trailer": true, "carryIn": true, "name": "Binbrook Conservation Area boat launch", "electricOnly": true, "accessFee": "paid" },
+    "shorelineFetch": [90, 270],
+    "maxFetchKm": 2.5,
+    "species": ["largemouth bass", "northern pike", "walleye", "black crappie", "yellow perch", "smallmouth bass"],
+    "fmz": "16",
+    "sourceAccessPointName": "Binbrook Conservation Area boat launch",
+    "reviewNotes": ["Lake Niapenco (Binbrook Reservoir), Niagara Peninsula Conservation Authority; FMZ 16 and electric/non-motorized-only launch confirmed by Stage 1a research. Coordinate is the Binbrook CA boat-launch area from published sources (no Ontario Fishing Access Points record exists); field-check exact ramp coordinate before production. shorelineFetch/maxFetchKm hand-estimated from reservoir geometry."]
   }
 ]

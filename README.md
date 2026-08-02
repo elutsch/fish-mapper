@@ -10,7 +10,7 @@ and **separate launch verdicts per craft** — plus researched lake pages with a
 structure, and regulation guidance.
 
 Coverage starts in the Kitchener–Waterloo and Grand River watershed (FMZ 16) and expands across
-Southern Ontario. 19 waterbodies are live today.
+Southern Ontario. Waterbodies go live only when there is real data behind them.
 
 ---
 
@@ -243,7 +243,7 @@ the hour, once/day — fine here, since anywhere in that window is still after m
 
 Each run, in order:
 1. `revalidateTag("forecast")` — invalidate the cached forecast data.
-2. For all 19 lakes: `refreshSnapshot()` — a **live** Open-Meteo pull → write the day's snapshot to KV.
+2. For each waterbody: `refreshSnapshot()` — a **live** Open-Meteo pull → write the day's snapshot to KV.
 3. `revalidatePath()` on `/fishing`, `/[waterbody]/fishing`, and `/[waterbody]/fishing/[species]` — the
    static conditions pages regenerate **once** from the fresh KV data.
 
@@ -314,7 +314,7 @@ Twitter cards + a 1200×630 default OG image (`public/og/default.jpg`).
 
 **Generated routes:**
 - `app/robots.ts` — allow all, disallow `/api/`, link the sitemap.
-- `app/sitemap.ts` — **indexable URLs only** (71): 4 core + 19 lakes + 48 destination/strong species.
+- `app/sitemap.ts` — indexable core, waterbody, and destination/strong-species URLs only.
 - `app/llms.txt/route.ts` — a curated, data-driven map for LLMs (value prop, coverage, lake links).
 
 **Per-page metadata:** keyword-optimized titles/descriptions, `canonical`, and Open Graph on every page.

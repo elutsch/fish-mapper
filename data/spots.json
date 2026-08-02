@@ -268,5 +268,19 @@
     "fmz": "16",
     "sourceAccessPointName": "Binbrook Conservation Area boat launch",
     "reviewNotes": ["Lake Niapenco (Binbrook Reservoir), Niagara Peninsula Conservation Authority; FMZ 16 and electric/non-motorized-only launch confirmed by Stage 1a research. Coordinate is the Binbrook CA boat-launch area from published sources (no Ontario Fishing Access Points record exists); field-check exact ramp coordinate before production. shorelineFetch/maxFetchKm hand-estimated from reservoir geometry."]
+  },
+  {
+    "id": "ken-whillans",
+    "name": "Ken Whillans",
+    "waterbody": "Ken Whillans Pond",
+    "lat": 43.812677,
+    "lng": -79.931809,
+    "launch": { "trailer": false, "carryIn": true, "name": "Ken Whillans Resource Management Area pond launch", "electricOnly": true, "accessFee": "paid" },
+    "shorelineFetch": [45, 225],
+    "maxFetchKm": 0.4,
+    "species": ["largemouth bass", "yellow perch", "smallmouth bass"],
+    "fmz": "16",
+    "sourceAccessPointName": "Ken Whillans Resource Management Area pond launch",
+    "reviewNotes": ["Ken Whillans Resource Management Area (Credit Valley Conservation), Caledon — two ponds; car-top/rental launch, electric only. Primary draw is a stocked put-and-take rainbow-trout fishery (out of the six-gamefish pipeline scope). Coordinate is the RMA off Highway 10 from published sources (no Ontario Fishing Access Points record exists); field-check exact pond-launch coordinate, motor rules, and FMZ before production. shorelineFetch/maxFetchKm hand-estimated from small-pond geometry."]
   }
 ]
